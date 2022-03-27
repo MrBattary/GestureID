@@ -20,7 +20,7 @@ public class GyroscopeListener implements SensorEventListener {
     public GyroscopeListener(SensorManager sensorManager, TextView outer) throws SensorNotFoundException {
         this.sensorManager = sensorManager;
         this.outer = outer;
-        gyroscopeSensor = this.sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        gyroscopeSensor = this.sensorManager.getDefaultSensor(Sensor.REPORTING_MODE_SPECIAL_TRIGGER);
         if (gyroscopeSensor == null) {
             throw new SensorNotFoundException("Gyroscope sensor not found!");
         }
