@@ -5,20 +5,17 @@ import android.hardware.SensorManager;
 
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.tag.category.Attitude;
-import michael.linker.gestrudeid.sensor.tag.type.Composite;
+import michael.linker.gestrudeid.sensor.types.CompositeSensor;
 
 /**
  * Returns a Rotation Vector sensor implementation
  */
 public class RotationVectorSensorFactory implements ISensorFactory {
-    @Composite(required = {"Accelerometer", "Magnetometer", "Gyroscope"})
-    @Attitude
     private final Sensor rotationVectorSensorImplementation;
 
     public RotationVectorSensorFactory(final SensorManager sensorManager) {
         rotationVectorSensorImplementation = sensorManager.getDefaultSensor(
-                Sensor.TYPE_MAGNETIC_FIELD);
+                CompositeSensor.ROTATION_VECTOR);
     }
 
     @Override

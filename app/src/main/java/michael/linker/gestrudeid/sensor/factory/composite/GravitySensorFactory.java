@@ -5,23 +5,17 @@ import android.hardware.SensorManager;
 
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.tag.category.Attitude;
-import michael.linker.gestrudeid.sensor.tag.type.Composite;
+import michael.linker.gestrudeid.sensor.types.CompositeSensor;
 
 /**
  * Returns a Gravity sensor implementation
  */
 public class GravitySensorFactory implements ISensorFactory {
-    @Composite(
-            required = "Accelerometer",
-            replaceable = "Gyroscope",
-            alternative = "Magnetometer"
-    )
-    @Attitude
+
     private final Sensor gravityImplementation;
 
     public GravitySensorFactory(final SensorManager sensorManager) {
-        gravityImplementation = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
+        gravityImplementation = sensorManager.getDefaultSensor(CompositeSensor.GRAVITY);
     }
 
     @Override

@@ -5,24 +5,17 @@ import android.hardware.SensorManager;
 
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.tag.category.Activity;
-import michael.linker.gestrudeid.sensor.tag.type.Composite;
+import michael.linker.gestrudeid.sensor.types.CompositeSensor;
 
 /**
  * Returns a Linear Acceleration sensor implementation
  */
 public class LinearAccelerationSensorFactory implements ISensorFactory {
-    @Composite(
-            required = "Accelerometer",
-            replaceable = "Gyroscope",
-            alternative = "Magnetometer"
-    )
-    @Activity
     private static Sensor linearAccelerationImplementation;
 
     public LinearAccelerationSensorFactory(final SensorManager sensorManager) {
         linearAccelerationImplementation = sensorManager.getDefaultSensor(
-                Sensor.TYPE_LINEAR_ACCELERATION);
+                CompositeSensor.LINEAR_ACCELERATION);
     }
 
     @Override
