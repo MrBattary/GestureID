@@ -5,7 +5,7 @@ import android.hardware.SensorManager;
 
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.types.CompositeSensor;
+import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
 
 /**
  * Returns a Geomagnetic Rotation Vector sensor implementation
@@ -15,7 +15,7 @@ public class GeomagneticRotationVectorFactory implements ISensorFactory {
 
     public GeomagneticRotationVectorFactory(final SensorManager sensorManager) {
         geomagneticRotationVectorSensorImplementation = sensorManager.getDefaultSensor(
-                CompositeSensor.GEOMAGNETIC_ROTATION_VECTOR);
+                CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR);
     }
 
     @Override

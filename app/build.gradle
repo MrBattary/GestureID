@@ -10,14 +10,31 @@ android {
         minSdk 29
         targetSdk 32
         versionCode 1
-        versionName "1.0"
+        versionName '0.1'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
+        debug {
+            buildConfigField "boolean", "ACTIVATE_ACCELEROMETER", "true"
+            buildConfigField "boolean", "ACTIVATE_GYROSCOPE", "true"
+            buildConfigField "boolean", "ACTIVATE_MAGNETOMETER", "true"
+            buildConfigField "boolean", "ACTIVATE_GRAVITY", "false"
+            buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
+            buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
+            buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
+        }
         release {
-            minifyEnabled false
+            buildConfigField "boolean", "ACTIVATE_ACCELEROMETER", "false"
+            buildConfigField "boolean", "ACTIVATE_GYROSCOPE", "false"
+            buildConfigField "boolean", "ACTIVATE_MAGNETOMETER", "false"
+            buildConfigField "boolean", "ACTIVATE_GRAVITY", "false"
+            buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
+            buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
+            buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
+
+            it.minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -28,10 +45,9 @@ android {
 }
 
 dependencies {
-
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

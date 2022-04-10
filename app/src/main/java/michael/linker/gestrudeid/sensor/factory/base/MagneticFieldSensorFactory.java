@@ -5,7 +5,7 @@ import android.hardware.SensorManager;
 
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.types.BaseSensor;
+import michael.linker.gestrudeid.sensor.types.BaseSensorType;
 
 /**
  * Returns a Magnetometer sensor implementation
@@ -14,7 +14,7 @@ public class MagneticFieldSensorFactory implements ISensorFactory {
     private final Sensor magnetometerImplementation;
 
     public MagneticFieldSensorFactory(final SensorManager sensorManager) {
-        magnetometerImplementation = sensorManager.getDefaultSensor(BaseSensor.MAGNETOMETER);
+        magnetometerImplementation = sensorManager.getDefaultSensor(BaseSensorType.MAGNETOMETER);
     }
 
     @Override

@@ -2,6 +2,9 @@ package michael.linker.gestrudeid.sensor.factory;
 
 import android.hardware.Sensor;
 
+/**
+ * Sensor singleton factory
+ */
 public interface ISensorFactory {
     /**
      * Get implementation from the device sensor manager

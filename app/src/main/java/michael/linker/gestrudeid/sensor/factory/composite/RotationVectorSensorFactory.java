@@ -5,7 +5,7 @@ import android.hardware.SensorManager;
 
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.types.CompositeSensor;
+import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
 
 /**
  * Returns a Rotation Vector sensor implementation
@@ -15,7 +15,7 @@ public class RotationVectorSensorFactory implements ISensorFactory {
 
     public RotationVectorSensorFactory(final SensorManager sensorManager) {
         rotationVectorSensorImplementation = sensorManager.getDefaultSensor(
-                CompositeSensor.ROTATION_VECTOR);
+                CompositeSensorType.ROTATION_VECTOR);
     }
 
     @Override

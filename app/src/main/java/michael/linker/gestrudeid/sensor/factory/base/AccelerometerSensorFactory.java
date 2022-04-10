@@ -5,7 +5,7 @@ import android.hardware.SensorManager;
 
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.types.BaseSensor;
+import michael.linker.gestrudeid.sensor.types.BaseSensorType;
 
 /**
  * Returns an Accelerometer implementation
@@ -15,7 +15,7 @@ public class AccelerometerSensorFactory implements ISensorFactory {
     private final Sensor accelerometerImplementation;
 
     public AccelerometerSensorFactory(final SensorManager sensorManager) {
-        accelerometerImplementation = sensorManager.getDefaultSensor(BaseSensor.ACCELEROMETER);
+        accelerometerImplementation = sensorManager.getDefaultSensor(BaseSensorType.ACCELEROMETER);
     }
 
     @Override

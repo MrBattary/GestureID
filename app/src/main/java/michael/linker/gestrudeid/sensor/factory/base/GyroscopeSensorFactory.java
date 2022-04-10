@@ -5,7 +5,7 @@ import android.hardware.SensorManager;
 
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.types.BaseSensor;
+import michael.linker.gestrudeid.sensor.types.BaseSensorType;
 
 /**
  * Returns a Gyroscope implementation
@@ -14,7 +14,7 @@ public class GyroscopeSensorFactory implements ISensorFactory {
     private final Sensor gyroscopeImplementation;
 
     public GyroscopeSensorFactory(final SensorManager sensorManager) {
-        gyroscopeImplementation = sensorManager.getDefaultSensor(BaseSensor.GYROSCOPE);
+        gyroscopeImplementation = sensorManager.getDefaultSensor(BaseSensorType.GYROSCOPE);
     }
 
     @Override

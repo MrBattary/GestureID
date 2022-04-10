@@ -9,7 +9,7 @@ import android.hardware.Sensor;
  *
  * @link https://source.android.com/devices/sensors/sensor-types#composite_sensor_types
  */
-public final class CompositeSensor {
+public final class CompositeSensorType {
     /**
      * Attitude sensor
      * Required sensors Accelerometer
@@ -46,7 +46,7 @@ public final class CompositeSensor {
 
     protected final int type;
 
-    private CompositeSensor(final int type) {
+    private CompositeSensorType(final int type) {
         this.type = type;
     }
 }

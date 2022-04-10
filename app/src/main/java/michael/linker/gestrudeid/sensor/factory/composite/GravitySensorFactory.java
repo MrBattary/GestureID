@@ -5,7 +5,7 @@ import android.hardware.SensorManager;
 
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.types.CompositeSensor;
+import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
 
 /**
  * Returns a Gravity sensor implementation
@@ -15,7 +15,7 @@ public class GravitySensorFactory implements ISensorFactory {
     private final Sensor gravityImplementation;
 
     public GravitySensorFactory(final SensorManager sensorManager) {
-        gravityImplementation = sensorManager.getDefaultSensor(CompositeSensor.GRAVITY);
+        gravityImplementation = sensorManager.getDefaultSensor(CompositeSensorType.GRAVITY);
     }
 
     @Override

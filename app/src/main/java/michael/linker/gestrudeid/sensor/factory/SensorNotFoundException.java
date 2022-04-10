@@ -1,5 +1,8 @@
 package michael.linker.gestrudeid.sensor.factory;
 
+/**
+ * If sensor was not found
+ */
 public class SensorNotFoundException extends RuntimeException {
     public SensorNotFoundException(final String message) {
         super(message);

@@ -5,7 +5,7 @@ import android.hardware.SensorManager;
 
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.types.CompositeSensor;
+import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
 
 /**
  * Returns a Linear Acceleration sensor implementation
@@ -15,7 +15,7 @@ public class LinearAccelerationSensorFactory implements ISensorFactory {
 
     public LinearAccelerationSensorFactory(final SensorManager sensorManager) {
         linearAccelerationImplementation = sensorManager.getDefaultSensor(
-                CompositeSensor.LINEAR_ACCELERATION);
+                CompositeSensorType.LINEAR_ACCELERATION);
     }
 
     @Override
