@@ -3,7 +3,9 @@ package michael.linker.gestrudeid.sensor.factory.composite;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 
+import michael.linker.gestrudeid.config.SensorsBuildConfiguration;
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
+import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
 import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
 
@@ -19,6 +21,17 @@ public class LinearAccelerationSensorFactory implements ISensorFactory {
     }
 
     @Override
+    public Sensor getActivatedImplementation()
+            throws SensorNotActivatedException, SensorNotFoundException {
+        if (SensorsBuildConfiguration.isLinearAccelerationActivated()) {
+            return this.getImplementation();
+        } else {
+            throw new SensorNotActivatedException(
+                    "The linear acceleration sensor is not activated");
+        }
+    }
+
+    @Override
     public Sensor getImplementation() throws SensorNotFoundException {
         if (linearAccelerationImplementation != null) {
             return linearAccelerationImplementation;
@@ -26,5 +39,10 @@ public class LinearAccelerationSensorFactory implements ISensorFactory {
             throw new SensorNotFoundException(
                     "An available linear acceleration sensor was not found!");
         }
+    }
+
+    @Override
+    public Integer getSensorType() {
+        return CompositeSensorType.LINEAR_ACCELERATION;
     }
 }

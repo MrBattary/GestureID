@@ -3,7 +3,9 @@ package michael.linker.gestrudeid.sensor.factory.base;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 
+import michael.linker.gestrudeid.config.SensorsBuildConfiguration;
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
+import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
 import michael.linker.gestrudeid.sensor.types.BaseSensorType;
 
@@ -11,10 +13,20 @@ import michael.linker.gestrudeid.sensor.types.BaseSensorType;
  * Returns a Gyroscope implementation
  */
 public class GyroscopeSensorFactory implements ISensorFactory {
-    private final Sensor gyroscopeImplementation;
+    private static Sensor gyroscopeImplementation;
 
     public GyroscopeSensorFactory(final SensorManager sensorManager) {
         gyroscopeImplementation = sensorManager.getDefaultSensor(BaseSensorType.GYROSCOPE);
+    }
+
+    @Override
+    public Sensor getActivatedImplementation()
+            throws SensorNotActivatedException, SensorNotFoundException {
+        if (SensorsBuildConfiguration.isGyroscopeActivated()) {
+            return this.getImplementation();
+        } else {
+            throw new SensorNotActivatedException("The gyroscope is not activated!");
+        }
     }
 
     @Override
@@ -24,5 +36,10 @@ public class GyroscopeSensorFactory implements ISensorFactory {
         } else {
             throw new SensorNotFoundException("An available gyroscope was not found!");
         }
+    }
+
+    @Override
+    public Integer getSensorType() {
+        return BaseSensorType.GYROSCOPE;
     }
 }

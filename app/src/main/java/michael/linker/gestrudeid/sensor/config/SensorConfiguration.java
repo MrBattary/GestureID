@@ -98,21 +98,21 @@ public class SensorConfiguration implements ISensorConfiguration {
 
     private void initializeRequiredBaseSensors() {
         requiredSensors.put(BaseSensorType.ACCELEROMETER,
-                SensorsBuildConfiguration.isAccelerometerRequired());
+                SensorsBuildConfiguration.isAccelerometerActivated());
         requiredSensors.put(BaseSensorType.GYROSCOPE,
-                SensorsBuildConfiguration.isGyroscopeRequired());
+                SensorsBuildConfiguration.isGyroscopeActivated());
         requiredSensors.put(BaseSensorType.MAGNETOMETER,
-                SensorsBuildConfiguration.isMagnetometerRequired());
+                SensorsBuildConfiguration.isMagnetometerActivated());
     }
 
     private void initializeRequiredCompositeSensors() {
         requiredSensors.put(CompositeSensorType.GRAVITY,
-                SensorsBuildConfiguration.isGravityRequired());
+                SensorsBuildConfiguration.isGravityActivated());
         requiredSensors.put(CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR,
-                SensorsBuildConfiguration.isGeomagneticRotationVectorRequired());
+                SensorsBuildConfiguration.isGeomagneticRotationVectorActivated());
         requiredSensors.put(CompositeSensorType.LINEAR_ACCELERATION,
-                SensorsBuildConfiguration.isLinearAccelerationRequired());
+                SensorsBuildConfiguration.isLinearAccelerationActivated());
         requiredSensors.put(CompositeSensorType.ROTATION_VECTOR,
-                SensorsBuildConfiguration.isRotationVectorRequired());
+                SensorsBuildConfiguration.isRotationVectorActivated());
     }
 }
