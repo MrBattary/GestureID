@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface ISensorConfiguration {
     /**
-     * Returns required sensor
+     * Returns sensor
      *
      * @param sensorType BaseSensorType or CompositeSensorType
      * @return Sensor implementation
@@ -19,12 +19,12 @@ public interface ISensorConfiguration {
 
     /**
      * Returns a List of sensors according to the
-     * list of required sensors from the configuration file
+     * list of activated sensors from the configuration file
      *
      * @return List of required sensors
      * @throws SensorConfigurationNotFoundException If any required sensor was not found
      */
-    List<Sensor> getRequiredSensors() throws SensorConfigurationNotFoundException;
+    List<Sensor> getActivatedSensors() throws SensorConfigurationNotFoundException;
 
     /**
      * Returns a List of all available sensors which are enabled on the device

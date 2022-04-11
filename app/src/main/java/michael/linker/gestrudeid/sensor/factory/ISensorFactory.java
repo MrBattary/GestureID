@@ -13,7 +13,7 @@ public interface ISensorFactory {
      * Get activated implementation from the device sensor manager
      *
      * @return Implementation of a specific sensor
-     * @throws SensorNotActivatedException If required sensor was not activated
+     * @throws SensorNotActivatedException If the required sensor was not activated
      * @throws SensorNotFoundException     If any implementation was not found
      */
     Sensor getActivatedImplementation() throws SensorNotActivatedException, SensorNotFoundException;

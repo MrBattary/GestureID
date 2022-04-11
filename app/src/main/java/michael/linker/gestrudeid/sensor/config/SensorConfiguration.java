@@ -9,9 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import michael.linker.gestrudeid.config.SensorsBuildConfiguration;
-import michael.linker.gestrudeid.sensor.factory.DefaultSensorFactory;
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
+import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
 import michael.linker.gestrudeid.sensor.factory.base.AccelerometerSensorFactory;
 import michael.linker.gestrudeid.sensor.factory.base.GyroscopeSensorFactory;
@@ -26,33 +25,37 @@ import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
 public class SensorConfiguration implements ISensorConfiguration {
     private final static String TAG = SensorConfiguration.class.getCanonicalName();
     private final Map<Integer, ISensorFactory> sensorFactories = new HashMap<>();
-    private final Map<Integer, Boolean> requiredSensors = new HashMap<>();
-    private final ISensorFactory defaultFactory = new DefaultSensorFactory();
 
     public SensorConfiguration(final SensorManager sensorManager) {
         initializeSensorFactories(sensorManager);
-        initializeRequiredSensors();
     }
 
     @Override
-    public Sensor getSensor(Integer sensorType) throws SensorConfigurationNotFoundException {
-        return null;
+    public Sensor getSensor(final Integer sensorType) throws SensorConfigurationNotFoundException {
+        try {
+            ISensorFactory sensorFactory = sensorFactories.get(sensorType);
+            if (sensorFactory != null) {
+                return sensorFactory.getImplementation();
+            } else {
+                throw new SensorConfigurationNotFoundException(
+                        "Not found sensor factory for sensor with ID: "
+                                + sensorType);
+            }
+        } catch (SensorNotFoundException e) {
+            Log.e(TAG, e.getMessage());
+            throw new SensorConfigurationNotFoundException("Required sensor was not found!", e);
+        }
     }
 
     @Override
-    public List<Sensor> getRequiredSensors() throws SensorConfigurationNotFoundException {
+    public List<Sensor> getActivatedSensors() throws SensorConfigurationNotFoundException {
         try {
             List<Sensor> sensorList = new ArrayList<>();
-            for (Map.Entry<Integer, Boolean> requiredSensor : requiredSensors.entrySet()) {
-                if (requiredSensor.getValue()) {
-                    ISensorFactory sensorFactory = sensorFactories.get(requiredSensor.getKey());
-                    if (sensorFactory != null) {
-                        sensorList.add(sensorFactory.getImplementation());
-                    } else {
-                        throw new SensorConfigurationNotFoundException(
-                                "Not found sensor factory for sensor with ID: "
-                                        + requiredSensor.getKey());
-                    }
+            for (ISensorFactory sensorFactory : sensorFactories.values()) {
+                try {
+                    sensorList.add(sensorFactory.getActivatedImplementation());
+                } catch (SensorNotActivatedException e) {
+                    Log.w(TAG, e.getMessage());
                 }
             }
             return sensorList;
@@ -64,18 +67,20 @@ public class SensorConfiguration implements ISensorConfiguration {
 
     @Override
     public List<Sensor> getAvailableSensors() {
-        return null;
+        List<Sensor> sensorList = new ArrayList<>();
+        for (ISensorFactory sensorFactory : sensorFactories.values()) {
+            try {
+                sensorList.add(sensorFactory.getImplementation());
+            } catch (SensorNotFoundException e) {
+                Log.w(TAG, e.getMessage());
+            }
+        }
+        return sensorList;
     }
 
     private void initializeSensorFactories(final SensorManager sensorManager) {
         initializeBaseSensorFactories(sensorManager);
         initializeCompositeSensorFactories(sensorManager);
-    }
-
-    private void initializeRequiredSensors() {
-        initializeRequiredBaseSensors();
-        initializeRequiredCompositeSensors();
-
     }
 
     private void initializeBaseSensorFactories(final SensorManager sensorManager) {
@@ -94,25 +99,5 @@ public class SensorConfiguration implements ISensorConfiguration {
                 new LinearAccelerationSensorFactory(sensorManager));
         sensorFactories.put(CompositeSensorType.ROTATION_VECTOR,
                 new RotationVectorSensorFactory(sensorManager));
-    }
-
-    private void initializeRequiredBaseSensors() {
-        requiredSensors.put(BaseSensorType.ACCELEROMETER,
-                SensorsBuildConfiguration.isAccelerometerActivated());
-        requiredSensors.put(BaseSensorType.GYROSCOPE,
-                SensorsBuildConfiguration.isGyroscopeActivated());
-        requiredSensors.put(BaseSensorType.MAGNETOMETER,
-                SensorsBuildConfiguration.isMagnetometerActivated());
-    }
-
-    private void initializeRequiredCompositeSensors() {
-        requiredSensors.put(CompositeSensorType.GRAVITY,
-                SensorsBuildConfiguration.isGravityActivated());
-        requiredSensors.put(CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR,
-                SensorsBuildConfiguration.isGeomagneticRotationVectorActivated());
-        requiredSensors.put(CompositeSensorType.LINEAR_ACCELERATION,
-                SensorsBuildConfiguration.isLinearAccelerationActivated());
-        requiredSensors.put(CompositeSensorType.ROTATION_VECTOR,
-                SensorsBuildConfiguration.isRotationVectorActivated());
     }
 }
