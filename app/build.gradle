@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
 }
 
+def SensorStreamType = 'michael.linker.gestrudeid.sensor.output.SensorStreamType'
+
 android {
     compileSdk 32
 
@@ -13,6 +15,16 @@ android {
         versionName '0.1'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "boolean", "ACTIVATE_ACCELEROMETER", "false"
+        buildConfigField "boolean", "ACTIVATE_GYROSCOPE", "false"
+        buildConfigField "boolean", "ACTIVATE_MAGNETOMETER", "false"
+        buildConfigField "boolean", "ACTIVATE_GRAVITY", "false"
+        buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
+        buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
+        buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
+        buildConfigField SensorStreamType, "OUTPUT_STREAM", "${SensorStreamType}.SCREEN"
+        buildConfigField SensorStreamType, "OUTPUT_STREAM_DEFAULT", "${SensorStreamType}.SCREEN"
     }
 
     buildTypes {
@@ -24,6 +36,8 @@ android {
             buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
             buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
             buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
+            buildConfigField SensorStreamType, "OUTPUT_STREAM", "${SensorStreamType}.SCREEN"
+            buildConfigField SensorStreamType, "OUTPUT_STREAM_DEFAULT", "${SensorStreamType}.SCREEN"
         }
         release {
             buildConfigField "boolean", "ACTIVATE_ACCELEROMETER", "false"
@@ -33,6 +47,8 @@ android {
             buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
             buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
             buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
+            buildConfigField SensorStreamType, "OUTPUT_STREAM", "${SensorStreamType}.DATABASE"
+            buildConfigField SensorStreamType, "OUTPUT_STREAM_DEFAULT", "${SensorStreamType}.FILE"
 
             it.minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
