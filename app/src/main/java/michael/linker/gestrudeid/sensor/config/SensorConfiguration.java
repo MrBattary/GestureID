@@ -66,7 +66,7 @@ public class SensorConfiguration implements ISensorConfiguration {
     }
 
     @Override
-    public List<Sensor> getAvailableSensors() {
+    public List<Sensor> getSensors() {
         List<Sensor> sensorList = new ArrayList<>();
         for (ISensorFactory sensorFactory : sensorFactories.values()) {
             try {

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface ISensorConfiguration {
     /**
-     * Returns sensor
+     * Returns a sensor
      *
      * @param sensorType BaseSensorType or CompositeSensorType
      * @return Sensor implementation
@@ -31,5 +31,5 @@ public interface ISensorConfiguration {
      *
      * @return List of all available sensors
      */
-    List<Sensor> getAvailableSensors();
+    List<Sensor> getSensors();
 }
