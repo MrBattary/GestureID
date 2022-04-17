@@ -11,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
-import michael.linker.gestrudeid.sensor.listener.GyroscopeListener;
+import michael.linker.gestrudeid.sensor.output.stream.ISensorStream;
+import michael.linker.gestrudeid.sensor.output.stream.LogSensorStream;
+import michael.linker.gestrudeid.sensor.output.stream.UiSensorStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,11 +26,15 @@ public class MainActivity extends AppCompatActivity {
         List<Sensor> sensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
         TextView textView = findViewById(R.id.main_text_view);
         textView.setMovementMethod(new ScrollingMovementMethod());
+        ISensorStream uiSensorStream = new UiSensorStream(textView);
+        ISensorStream logSensorStream = new LogSensorStream();
         for (Sensor sensor : sensors) {
-            textView.append(sensor.toString() + "\n\n");
+            uiSensorStream.write(sensor.toString());
+            logSensorStream.write(sensor.toString());
         }
 
-        GyroscopeListener gyroscopeListener = new GyroscopeListener(sensorManager, textView);
-        sensorManager.registerListener(gyroscopeListener,  sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE), SensorManager.SENSOR_DELAY_NORMAL);
+        // GyroscopeListener gyroscopeListener = new GyroscopeListener(sensorManager, textView);
+        // sensorManager.registerListener(gyroscopeListener,  sensorManager.getDefaultSensor
+        // (Sensor.TYPE_GYROSCOPE), SensorManager.SENSOR_DELAY_NORMAL);
     }
 }
