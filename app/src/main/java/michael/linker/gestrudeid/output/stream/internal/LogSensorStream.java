@@ -1,9 +1,11 @@
-package michael.linker.gestrudeid.sensor.output.stream;
+package michael.linker.gestrudeid.output.stream.internal;
 
 import android.util.Log;
 
+import michael.linker.gestrudeid.output.stream.ISensorStream;
+
 /**
- * This stream uses logs to write the data
+ * This stream uses internal logger to record data
  * Current log level - INFO
  */
 public class LogSensorStream implements ISensorStream {

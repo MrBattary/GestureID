@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
 }
 
-def SensorStreamType = 'michael.linker.gestrudeid.sensor.output.SensorStreamType'
+def SensorStreamType = 'michael.linker.gestrudeid.output.types.SensorStreamType'
 
 android {
     compileSdk 32
@@ -23,8 +23,8 @@ android {
         buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
         buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
         buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
-        buildConfigField SensorStreamType, "OUTPUT_STREAM", "${SensorStreamType}.SCREEN"
-        buildConfigField SensorStreamType, "OUTPUT_STREAM_DEFAULT", "${SensorStreamType}.SCREEN"
+        buildConfigField SensorStreamType, "MAIN_OUTPUT_STREAM_TYPE", "${SensorStreamType}.UI"
+        buildConfigField SensorStreamType, "BACKUP_OUTPUT_STREAM_TYPE", "${SensorStreamType}.LOGGER"
     }
 
     buildTypes {
@@ -36,8 +36,8 @@ android {
             buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
             buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
             buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
-            buildConfigField SensorStreamType, "OUTPUT_STREAM", "${SensorStreamType}.SCREEN"
-            buildConfigField SensorStreamType, "OUTPUT_STREAM_DEFAULT", "${SensorStreamType}.SCREEN"
+            buildConfigField SensorStreamType, "MAIN_OUTPUT_STREAM_TYPE", "${SensorStreamType}.UI"
+            buildConfigField SensorStreamType, "BACKUP_OUTPUT_STREAM_TYPE", "${SensorStreamType}.LOGGER"
         }
         release {
             buildConfigField "boolean", "ACTIVATE_ACCELEROMETER", "false"
@@ -47,8 +47,8 @@ android {
             buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
             buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
             buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
-            buildConfigField SensorStreamType, "OUTPUT_STREAM", "${SensorStreamType}.DATABASE"
-            buildConfigField SensorStreamType, "OUTPUT_STREAM_DEFAULT", "${SensorStreamType}.FILE"
+            buildConfigField SensorStreamType, "MAIN_OUTPUT_STREAM_TYPE", "${SensorStreamType}.DATABASE"
+            buildConfigField SensorStreamType, "BACKUP_OUTPUT_STREAM_TYPE", "${SensorStreamType}.FILE"
 
             it.minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

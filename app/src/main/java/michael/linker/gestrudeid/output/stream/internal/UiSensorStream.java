@@ -1,6 +1,8 @@
-package michael.linker.gestrudeid.sensor.output.stream;
+package michael.linker.gestrudeid.output.stream.internal;
 
 import android.widget.TextView;
+
+import michael.linker.gestrudeid.output.stream.ISensorStream;
 
 /**
  * This stream uses UI element to write the data into it

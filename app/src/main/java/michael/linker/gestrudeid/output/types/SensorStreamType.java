@@ -1,10 +1,10 @@
-package michael.linker.gestrudeid.sensor.output;
+package michael.linker.gestrudeid.output.types;
 
 /**
  * Types of the output streams
  */
 public enum SensorStreamType {
-    SCREEN,
+    UI,
     LOGGER,
     FILE,
     DATABASE
