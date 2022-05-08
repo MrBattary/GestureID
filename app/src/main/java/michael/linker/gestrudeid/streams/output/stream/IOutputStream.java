@@ -1,9 +1,9 @@
-package michael.linker.gestrudeid.output.stream;
+package michael.linker.gestrudeid.streams.output.stream;
 
 /**
  * The output stream of data read from the sensor
  */
-public interface ISensorStream {
+public interface IOutputStream {
 
     /**
      * Write text to the stream

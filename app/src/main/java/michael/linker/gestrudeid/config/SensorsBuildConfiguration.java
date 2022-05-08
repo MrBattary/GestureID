@@ -7,7 +7,9 @@ import michael.linker.gestrudeid.BuildConfig;
  * "build.gradle" file in the application main folder
  */
 public final class SensorsBuildConfiguration {
-    // Base
+    /**
+     * Base
+     */
     public static boolean isAccelerometerActivated() {
         return BuildConfig.ACTIVATE_ACCELEROMETER;
     }
@@ -20,7 +22,9 @@ public final class SensorsBuildConfiguration {
         return BuildConfig.ACTIVATE_MAGNETOMETER;
     }
 
-    // Composite
+    /**
+     * Composite
+     */
     public static boolean isGravityActivated() {
         return BuildConfig.ACTIVATE_GRAVITY;
     }
