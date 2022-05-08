@@ -1,7 +1,7 @@
 package michael.linker.gestrudeid.config;
 
 import michael.linker.gestrudeid.BuildConfig;
-import michael.linker.gestrudeid.streams.output.type.OutputStreamType;
+import michael.linker.gestrudeid.streams.output.types.OutputStreamType;
 
 /**
  * Wrapper for the streams build variables

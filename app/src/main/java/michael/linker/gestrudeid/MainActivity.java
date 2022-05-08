@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
-import michael.linker.gestrudeid.streams.provider.ISensorStreamProvider;
-import michael.linker.gestrudeid.streams.provider.SensorStreamProvider;
+import michael.linker.gestrudeid.streams.provider.IStreamsProvider;
+import michael.linker.gestrudeid.streams.provider.StreamsProvider;
 import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         List<Sensor> sensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
         TextView textView = findViewById(R.id.main_text_view);
         textView.setMovementMethod(new ScrollingMovementMethod());
-        ISensorStreamProvider outputConfiguration = new SensorStreamProvider(textView);
+        IStreamsProvider outputConfiguration = new StreamsProvider(textView);
         IOutputStream sensorStream = outputConfiguration.getOutputStream();
         for (Sensor sensor : sensors) {
             sensorStream.write(sensor.toString());
