@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
 }
 
-def SensorStreamType = 'michael.linker.gestrudeid.output.types.SensorStreamType'
+def OutputStreamType = 'michael.linker.gestrudeid.streams.output.types.OutputStreamType'
 
 android {
     compileSdk 32
@@ -12,7 +12,7 @@ android {
         minSdk 29
         targetSdk 32
         versionCode 1
-        versionName '0.1'
+        versionName '0.2'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -23,8 +23,8 @@ android {
         buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
         buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
         buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
-        buildConfigField SensorStreamType, "MAIN_OUTPUT_STREAM_TYPE", "${SensorStreamType}.UI"
-        buildConfigField SensorStreamType, "BACKUP_OUTPUT_STREAM_TYPE", "${SensorStreamType}.LOGGER"
+        buildConfigField OutputStreamType, "MAIN_OUTPUT_STREAM_TYPE", "${OutputStreamType}.UI"
+        buildConfigField OutputStreamType, "BACKUP_OUTPUT_STREAM_TYPE", "${OutputStreamType}.LOGGER"
     }
 
     buildTypes {
@@ -36,8 +36,8 @@ android {
             buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
             buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
             buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
-            buildConfigField SensorStreamType, "MAIN_OUTPUT_STREAM_TYPE", "${SensorStreamType}.UI"
-            buildConfigField SensorStreamType, "BACKUP_OUTPUT_STREAM_TYPE", "${SensorStreamType}.LOGGER"
+            buildConfigField OutputStreamType, "MAIN_OUTPUT_STREAM_TYPE", "${OutputStreamType}.UI"
+            buildConfigField OutputStreamType, "BACKUP_OUTPUT_STREAM_TYPE", "${OutputStreamType}.LOGGER"
         }
         release {
             buildConfigField "boolean", "ACTIVATE_ACCELEROMETER", "false"
@@ -47,8 +47,8 @@ android {
             buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
             buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
             buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
-            buildConfigField SensorStreamType, "MAIN_OUTPUT_STREAM_TYPE", "${SensorStreamType}.DATABASE"
-            buildConfigField SensorStreamType, "BACKUP_OUTPUT_STREAM_TYPE", "${SensorStreamType}.FILE"
+            buildConfigField OutputStreamType, "MAIN_OUTPUT_STREAM_TYPE", "${OutputStreamType}.DATABASE"
+            buildConfigField OutputStreamType, "BACKUP_OUTPUT_STREAM_TYPE", "${OutputStreamType}.FILE"
 
             it.minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -62,7 +62,7 @@ android {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
