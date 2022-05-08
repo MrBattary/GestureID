@@ -11,14 +11,14 @@ import michael.linker.gestrudeid.streams.output.stream.impl.UiOutputStream;
  * The UI stream factory
  */
 public class UiOutputStreamFactory implements IOutputStreamFactory {
-    private final TextView textView;
+    private final UiOutputStream uiOutputStream;
 
     public UiOutputStreamFactory(TextView textView) {
-        this.textView = textView;
+        uiOutputStream = new UiOutputStream(textView);
     }
 
     @Override
     public IOutputStream getOutputStream() throws OutputStreamFactoryFailedException {
-        return new UiOutputStream(this.textView);
+        return uiOutputStream;
     }
 }

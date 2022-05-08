@@ -5,7 +5,7 @@ import android.hardware.Sensor;
 import java.util.List;
 
 /**
- * Configurator for sensors
+ * Provider for sensors
  */
 public interface ISensorsProvider {
     /**
