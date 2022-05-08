@@ -22,33 +22,33 @@ import michael.linker.gestrudeid.sensor.factory.composite.RotationVectorSensorFa
 import michael.linker.gestrudeid.sensor.types.BaseSensorType;
 import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
 
-public class SensorsProvider implements ISensorsProvider {
-    private final static String TAG = SensorsProvider.class.getCanonicalName();
+public class SensorProvider implements ISensorProvider {
+    private final static String TAG = SensorProvider.class.getCanonicalName();
     private final Map<Integer, ISensorFactory> sensorFactories = new HashMap<>();
 
-    public SensorsProvider(final SensorManager sensorManager) {
+    public SensorProvider(final SensorManager sensorManager) {
         initializeSensorFactories(sensorManager);
     }
 
     @Override
-    public Sensor getSensor(final Integer sensorType) throws SensorsProviderNotFoundException {
+    public Sensor getSensor(final Integer sensorType) throws SensorProviderNotFoundException {
         try {
             ISensorFactory sensorFactory = sensorFactories.get(sensorType);
             if (sensorFactory != null) {
                 return sensorFactory.getImplementation();
             } else {
-                throw new SensorsProviderNotFoundException(
+                throw new SensorProviderNotFoundException(
                         "Not found sensor factory for sensor with ID: "
                                 + sensorType);
             }
         } catch (SensorNotFoundException e) {
             Log.e(TAG, e.getMessage());
-            throw new SensorsProviderNotFoundException("Required sensor was not found!", e);
+            throw new SensorProviderNotFoundException("Required sensor was not found!", e);
         }
     }
 
     @Override
-    public List<Sensor> getActivatedSensors() throws SensorsProviderNotFoundException {
+    public List<Sensor> getActivatedSensors() throws SensorProviderNotFoundException {
         try {
             List<Sensor> sensorList = new ArrayList<>();
             for (ISensorFactory sensorFactory : sensorFactories.values()) {
@@ -61,7 +61,7 @@ public class SensorsProvider implements ISensorsProvider {
             return sensorList;
         } catch (SensorNotFoundException e) {
             Log.e(TAG, e.getMessage());
-            throw new SensorsProviderNotFoundException("Required sensor was not found!", e);
+            throw new SensorProviderNotFoundException("Required sensor was not found!", e);
         }
     }
 

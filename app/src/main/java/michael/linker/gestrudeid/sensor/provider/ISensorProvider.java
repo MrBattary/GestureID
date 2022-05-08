@@ -7,24 +7,24 @@ import java.util.List;
 /**
  * Provider for sensors
  */
-public interface ISensorsProvider {
+public interface ISensorProvider {
     /**
      * Returns a sensor
      *
      * @param sensorType BaseSensorType or CompositeSensorType
      * @return Sensor implementation
-     * @throws SensorsProviderNotFoundException If required sensor was not found
+     * @throws SensorProviderNotFoundException If required sensor was not found
      */
-    Sensor getSensor(Integer sensorType) throws SensorsProviderNotFoundException;
+    Sensor getSensor(Integer sensorType) throws SensorProviderNotFoundException;
 
     /**
      * Returns a List of sensors according to the
      * list of activated sensors from the configuration file
      *
      * @return List of required sensors
-     * @throws SensorsProviderNotFoundException If any required sensor was not found
+     * @throws SensorProviderNotFoundException If any required sensor was not found
      */
-    List<Sensor> getActivatedSensors() throws SensorsProviderNotFoundException;
+    List<Sensor> getActivatedSensors() throws SensorProviderNotFoundException;
 
     /**
      * Returns a List of all available sensors which are enabled on the device

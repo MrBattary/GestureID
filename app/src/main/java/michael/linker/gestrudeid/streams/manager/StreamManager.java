@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.streams.provider;
+package michael.linker.gestrudeid.streams.manager;
 
 import android.util.Log;
 import android.widget.TextView;
@@ -16,8 +16,8 @@ import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
 import michael.linker.gestrudeid.streams.output.stream.impl.UiOutputStream;
 import michael.linker.gestrudeid.streams.output.types.OutputStreamType;
 
-public class StreamsProvider implements IStreamsProvider {
-    private final static String TAG = StreamsProvider.class.getCanonicalName();
+public class StreamManager implements IStreamManager {
+    private final static String TAG = StreamManager.class.getCanonicalName();
     private final Map<OutputStreamType, IOutputStreamFactory> sensorStreamFactories =
             new HashMap<>();
 
@@ -27,13 +27,13 @@ public class StreamsProvider implements IStreamsProvider {
      * @param textView UI element for the UiSensorOutputStream
      * @see UiOutputStream
      */
-    public StreamsProvider(final TextView textView) {
+    public StreamManager(final TextView textView) {
         sensorStreamFactories.put(OutputStreamType.LOGGER, new LogOutputStreamFactory());
         sensorStreamFactories.put(OutputStreamType.UI, new UiOutputStreamFactory(textView));
     }
 
     @Override
-    public IOutputStream getOutputStream() throws StreamsProviderNotFoundException {
+    public IOutputStream getOutputStream() throws StreamManagerNotFoundException {
         try {
             return getStreamByKey(StreamsBuildConfiguration.getMainOutputStreamType());
         } catch (OutputStreamFactoryFailedException e) {
@@ -44,13 +44,13 @@ public class StreamsProvider implements IStreamsProvider {
     }
 
     private IOutputStream getStreamByKey(final OutputStreamType streamType)
-            throws StreamsProviderNotFoundException {
+            throws StreamManagerNotFoundException {
         IOutputStreamFactory sensorStreamFactory = sensorStreamFactories.get(streamType);
         try {
             return Objects.requireNonNull(sensorStreamFactory).getOutputStream();
         } catch (OutputStreamFactoryFailedException e) {
             Log.e(TAG, e.getMessage());
-            throw new StreamsProviderNotFoundException(
+            throw new StreamManagerNotFoundException(
                     "Required output stream was not found!", e);
         }
     }
