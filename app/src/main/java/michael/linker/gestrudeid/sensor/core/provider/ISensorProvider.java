@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.sensor.provider;
+package michael.linker.gestrudeid.sensor.core.provider;
 
 import android.hardware.Sensor;
 

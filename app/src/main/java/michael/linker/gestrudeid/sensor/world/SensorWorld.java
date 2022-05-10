@@ -2,8 +2,8 @@ package michael.linker.gestrudeid.sensor.world;
 
 import android.hardware.SensorManager;
 
-import michael.linker.gestrudeid.sensor.provider.ISensorProvider;
-import michael.linker.gestrudeid.sensor.provider.SensorProvider;
+import michael.linker.gestrudeid.sensor.core.provider.ISensorProvider;
+import michael.linker.gestrudeid.sensor.core.provider.SensorProvider;
 
 public class SensorWorld implements ISensorWorld {
     private final SensorManager sensorManager;

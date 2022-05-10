@@ -1,12 +1,12 @@
-package michael.linker.gestrudeid.sensor.factory.composite;
+package michael.linker.gestrudeid.sensor.core.factory.composite;
 
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 
 import michael.linker.gestrudeid.config.SensorsBuildConfiguration;
-import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
-import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
-import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
+import michael.linker.gestrudeid.sensor.core.factory.ISensorFactory;
+import michael.linker.gestrudeid.sensor.core.factory.SensorNotActivatedException;
+import michael.linker.gestrudeid.sensor.core.factory.SensorNotFoundException;
 import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
 import michael.linker.gestrudeid.sensor.types.SensorType;
 

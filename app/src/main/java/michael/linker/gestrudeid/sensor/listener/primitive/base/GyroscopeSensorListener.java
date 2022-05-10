@@ -1,9 +1,9 @@
-package michael.linker.gestrudeid.sensor.listener.base;
+package michael.linker.gestrudeid.sensor.listener.primitive.base;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 
-import michael.linker.gestrudeid.sensor.listener.ISensorListener;
+import michael.linker.gestrudeid.sensor.listener.primitive.ISensorListener;
 import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
 
 public class GyroscopeSensorListener implements ISensorListener {

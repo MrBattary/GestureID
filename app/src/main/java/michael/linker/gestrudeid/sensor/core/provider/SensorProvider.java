@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.sensor.provider;
+package michael.linker.gestrudeid.sensor.core.provider;
 
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -9,16 +9,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
-import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
-import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.factory.base.AccelerometerSensorFactory;
-import michael.linker.gestrudeid.sensor.factory.base.GyroscopeSensorFactory;
-import michael.linker.gestrudeid.sensor.factory.base.MagneticFieldSensorFactory;
-import michael.linker.gestrudeid.sensor.factory.composite.GeomagneticRotationVectorFactory;
-import michael.linker.gestrudeid.sensor.factory.composite.GravitySensorFactory;
-import michael.linker.gestrudeid.sensor.factory.composite.LinearAccelerationSensorFactory;
-import michael.linker.gestrudeid.sensor.factory.composite.RotationVectorSensorFactory;
+import michael.linker.gestrudeid.sensor.core.factory.ISensorFactory;
+import michael.linker.gestrudeid.sensor.core.factory.SensorNotActivatedException;
+import michael.linker.gestrudeid.sensor.core.factory.SensorNotFoundException;
+import michael.linker.gestrudeid.sensor.core.factory.base.AccelerometerSensorFactory;
+import michael.linker.gestrudeid.sensor.core.factory.base.GyroscopeSensorFactory;
+import michael.linker.gestrudeid.sensor.core.factory.base.MagneticFieldSensorFactory;
+import michael.linker.gestrudeid.sensor.core.factory.composite.GeomagneticRotationVectorFactory;
+import michael.linker.gestrudeid.sensor.core.factory.composite.GravitySensorFactory;
+import michael.linker.gestrudeid.sensor.core.factory.composite.LinearAccelerationSensorFactory;
+import michael.linker.gestrudeid.sensor.core.factory.composite.RotationVectorSensorFactory;
 import michael.linker.gestrudeid.sensor.types.BaseSensorType;
 import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
 import michael.linker.gestrudeid.sensor.types.SensorType;

@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.sensor.factory;
+package michael.linker.gestrudeid.sensor.core.factory;
 
 /**
  * If sensor was disabled in the configuration file

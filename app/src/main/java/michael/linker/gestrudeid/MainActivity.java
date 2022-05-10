@@ -10,11 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.stream.Collectors;
 
-import michael.linker.gestrudeid.sensor.listener.base.AccelerometerSensorListener;
-import michael.linker.gestrudeid.sensor.listener.base.GyroscopeSensorListener;
-import michael.linker.gestrudeid.sensor.listener.base.MagneticFieldSensorListener;
-import michael.linker.gestrudeid.sensor.provider.ISensorProvider;
-import michael.linker.gestrudeid.sensor.provider.SensorProvider;
+import michael.linker.gestrudeid.sensor.listener.primitive.base.AccelerometerSensorListener;
+import michael.linker.gestrudeid.sensor.listener.primitive.base.GyroscopeSensorListener;
+import michael.linker.gestrudeid.sensor.listener.primitive.base.MagneticFieldSensorListener;
+import michael.linker.gestrudeid.sensor.core.provider.ISensorProvider;
+import michael.linker.gestrudeid.sensor.core.provider.SensorProvider;
 import michael.linker.gestrudeid.sensor.types.BaseSensorType;
 import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
 import michael.linker.gestrudeid.streams.manager.IStreamManager;

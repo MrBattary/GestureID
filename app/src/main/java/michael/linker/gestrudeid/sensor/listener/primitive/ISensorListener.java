@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.sensor.listener;
+package michael.linker.gestrudeid.sensor.listener.primitive;
 
 import android.hardware.SensorEventListener;
 

@@ -8,7 +8,7 @@ import michael.linker.gestrudeid.sensor.types.SensorType;
 public class SensorModel {
     protected SensorType sensorType;
 
-    public SensorModel(SensorType sensorType) {
+    protected SensorModel(SensorType sensorType) {
         this.sensorType = sensorType;
     }
 
