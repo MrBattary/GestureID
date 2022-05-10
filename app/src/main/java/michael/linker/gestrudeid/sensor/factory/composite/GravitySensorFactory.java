@@ -8,6 +8,7 @@ import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
 import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
+import michael.linker.gestrudeid.sensor.types.SensorType;
 
 /**
  * Returns a Gravity sensor implementation
@@ -16,7 +17,7 @@ public class GravitySensorFactory implements ISensorFactory {
     private static Sensor gravityImplementation;
 
     public GravitySensorFactory(final SensorManager sensorManager) {
-        gravityImplementation = sensorManager.getDefaultSensor(CompositeSensorType.GRAVITY);
+        gravityImplementation = sensorManager.getDefaultSensor(CompositeSensorType.GRAVITY.toInt());
     }
 
     @Override
@@ -39,7 +40,7 @@ public class GravitySensorFactory implements ISensorFactory {
     }
 
     @Override
-    public Integer getSensorType() {
+    public SensorType getSensorType() {
         return CompositeSensorType.GRAVITY;
     }
 }

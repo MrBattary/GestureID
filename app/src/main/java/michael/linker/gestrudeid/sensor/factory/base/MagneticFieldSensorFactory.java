@@ -8,6 +8,7 @@ import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
 import michael.linker.gestrudeid.sensor.types.BaseSensorType;
+import michael.linker.gestrudeid.sensor.types.SensorType;
 
 /**
  * Returns a Magnetometer sensor implementation
@@ -16,7 +17,8 @@ public class MagneticFieldSensorFactory implements ISensorFactory {
     private static Sensor magnetometerImplementation;
 
     public MagneticFieldSensorFactory(final SensorManager sensorManager) {
-        magnetometerImplementation = sensorManager.getDefaultSensor(BaseSensorType.MAGNETOMETER);
+        magnetometerImplementation
+                = sensorManager.getDefaultSensor(BaseSensorType.MAGNETOMETER.toInt());
     }
 
     @Override
@@ -40,7 +42,7 @@ public class MagneticFieldSensorFactory implements ISensorFactory {
     }
 
     @Override
-    public Integer getSensorType() {
+    public SensorType getSensorType() {
         return BaseSensorType.MAGNETOMETER;
     }
 }

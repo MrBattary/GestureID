@@ -4,6 +4,8 @@ import android.hardware.Sensor;
 
 import java.util.List;
 
+import michael.linker.gestrudeid.sensor.types.SensorType;
+
 /**
  * Provider for sensors
  */
@@ -15,7 +17,7 @@ public interface ISensorProvider {
      * @return Sensor implementation
      * @throws SensorProviderNotFoundException If required sensor was not found
      */
-    Sensor getSensor(Integer sensorType) throws SensorProviderNotFoundException;
+    Sensor getSensor(SensorType sensorType) throws SensorProviderNotFoundException;
 
     /**
      * Returns a List of sensors according to the

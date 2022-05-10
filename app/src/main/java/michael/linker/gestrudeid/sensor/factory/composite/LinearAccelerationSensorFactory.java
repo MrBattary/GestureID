@@ -8,6 +8,7 @@ import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
 import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
+import michael.linker.gestrudeid.sensor.types.SensorType;
 
 /**
  * Returns a Linear Acceleration sensor implementation
@@ -17,7 +18,7 @@ public class LinearAccelerationSensorFactory implements ISensorFactory {
 
     public LinearAccelerationSensorFactory(final SensorManager sensorManager) {
         linearAccelerationImplementation = sensorManager.getDefaultSensor(
-                CompositeSensorType.LINEAR_ACCELERATION);
+                CompositeSensorType.LINEAR_ACCELERATION.toInt());
     }
 
     @Override
@@ -42,7 +43,7 @@ public class LinearAccelerationSensorFactory implements ISensorFactory {
     }
 
     @Override
-    public Integer getSensorType() {
+    public SensorType getSensorType() {
         return CompositeSensorType.LINEAR_ACCELERATION;
     }
 }

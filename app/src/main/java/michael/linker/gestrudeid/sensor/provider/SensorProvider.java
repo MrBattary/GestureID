@@ -21,6 +21,7 @@ import michael.linker.gestrudeid.sensor.factory.composite.LinearAccelerationSens
 import michael.linker.gestrudeid.sensor.factory.composite.RotationVectorSensorFactory;
 import michael.linker.gestrudeid.sensor.types.BaseSensorType;
 import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
+import michael.linker.gestrudeid.sensor.types.SensorType;
 
 public class SensorProvider implements ISensorProvider {
     private final static String TAG = SensorProvider.class.getCanonicalName();
@@ -31,15 +32,15 @@ public class SensorProvider implements ISensorProvider {
     }
 
     @Override
-    public Sensor getSensor(final Integer sensorType) throws SensorProviderNotFoundException {
+    public Sensor getSensor(final SensorType sensorType) throws SensorProviderNotFoundException {
         try {
-            ISensorFactory sensorFactory = sensorFactories.get(sensorType);
+            ISensorFactory sensorFactory = sensorFactories.get(sensorType.toInt());
             if (sensorFactory != null) {
                 return sensorFactory.getImplementation();
             } else {
                 throw new SensorProviderNotFoundException(
                         "Not found sensor factory for sensor with ID: "
-                                + sensorType);
+                                + sensorType.toInt());
             }
         } catch (SensorNotFoundException e) {
             Log.e(TAG, e.getMessage());
@@ -84,20 +85,22 @@ public class SensorProvider implements ISensorProvider {
     }
 
     private void initializeBaseSensorFactories(final SensorManager sensorManager) {
-        sensorFactories.put(BaseSensorType.ACCELEROMETER,
+        sensorFactories.put(BaseSensorType.ACCELEROMETER.toInt(),
                 new AccelerometerSensorFactory(sensorManager));
-        sensorFactories.put(BaseSensorType.GYROSCOPE, new GyroscopeSensorFactory(sensorManager));
-        sensorFactories.put(BaseSensorType.MAGNETOMETER,
+        sensorFactories.put(BaseSensorType.GYROSCOPE.toInt(),
+                new GyroscopeSensorFactory(sensorManager));
+        sensorFactories.put(BaseSensorType.MAGNETOMETER.toInt(),
                 new MagneticFieldSensorFactory(sensorManager));
     }
 
     private void initializeCompositeSensorFactories(final SensorManager sensorManager) {
-        sensorFactories.put(CompositeSensorType.GRAVITY, new GravitySensorFactory(sensorManager));
-        sensorFactories.put(CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR,
+        sensorFactories.put(CompositeSensorType.GRAVITY.toInt(),
+                new GravitySensorFactory(sensorManager));
+        sensorFactories.put(CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR.toInt(),
                 new GeomagneticRotationVectorFactory(sensorManager));
-        sensorFactories.put(CompositeSensorType.LINEAR_ACCELERATION,
+        sensorFactories.put(CompositeSensorType.LINEAR_ACCELERATION.toInt(),
                 new LinearAccelerationSensorFactory(sensorManager));
-        sensorFactories.put(CompositeSensorType.ROTATION_VECTOR,
+        sensorFactories.put(CompositeSensorType.ROTATION_VECTOR.toInt(),
                 new RotationVectorSensorFactory(sensorManager));
     }
 }

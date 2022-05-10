@@ -16,37 +16,37 @@ public final class CompositeSensorType {
      * Replaceable sensors Gyroscope
      * Alternative sensor: Magnetometer
      */
-    final public static int GRAVITY;
+    final public static SensorType GRAVITY;
     /**
      * Activity sensor
      * Required sensors Accelerometer
      * Replaceable sensors Gyroscope
      * Alternative sensor: Magnetometer
      */
-    final public static int LINEAR_ACCELERATION;
+    final public static SensorType LINEAR_ACCELERATION;
     /**
      * Attitude sensor
      * Required sensors: Accelerometer, Magnetometer, Gyroscope
      */
-    final public static int ROTATION_VECTOR;
+    final public static SensorType ROTATION_VECTOR;
     /**
      * Simplified version of the ROTATION_VECTOR sensor
-     *
+     * <p>
      * Attitude sensor
      * Required sensors: Accelerometer, Magnetometer
      */
-    final public static int GEOMAGNETIC_ROTATION_VECTOR;
+    final public static SensorType GEOMAGNETIC_ROTATION_VECTOR;
 
     static {
-        GRAVITY = Sensor.TYPE_GRAVITY;
-        LINEAR_ACCELERATION = Sensor.TYPE_LINEAR_ACCELERATION;
-        ROTATION_VECTOR = Sensor.TYPE_ROTATION_VECTOR;
-        GEOMAGNETIC_ROTATION_VECTOR = Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR;
+        GRAVITY = new SensorType(Sensor.TYPE_GRAVITY);
+        LINEAR_ACCELERATION = new SensorType(Sensor.TYPE_LINEAR_ACCELERATION);
+        ROTATION_VECTOR = new SensorType(Sensor.TYPE_ROTATION_VECTOR);
+        GEOMAGNETIC_ROTATION_VECTOR = new SensorType(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR);
     }
 
-    protected final int type;
+    protected final SensorType type;
 
     private CompositeSensorType(final int type) {
-        this.type = type;
+        this.type = new SensorType(type);
     }
 }

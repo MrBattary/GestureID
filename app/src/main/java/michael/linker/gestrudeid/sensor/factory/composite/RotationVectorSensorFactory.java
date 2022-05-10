@@ -8,6 +8,7 @@ import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
 import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
+import michael.linker.gestrudeid.sensor.types.SensorType;
 
 /**
  * Returns a Rotation Vector sensor implementation
@@ -17,7 +18,7 @@ public class RotationVectorSensorFactory implements ISensorFactory {
 
     public RotationVectorSensorFactory(final SensorManager sensorManager) {
         rotationVectorSensorImplementation = sensorManager.getDefaultSensor(
-                CompositeSensorType.ROTATION_VECTOR);
+                CompositeSensorType.ROTATION_VECTOR.toInt());
     }
 
     @Override
@@ -40,7 +41,7 @@ public class RotationVectorSensorFactory implements ISensorFactory {
     }
 
     @Override
-    public Integer getSensorType() {
+    public SensorType getSensorType() {
         return CompositeSensorType.ROTATION_VECTOR;
     }
 }

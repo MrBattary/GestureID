@@ -8,6 +8,7 @@ import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
 import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
+import michael.linker.gestrudeid.sensor.types.SensorType;
 
 /**
  * Returns a Geomagnetic Rotation Vector sensor implementation
@@ -17,7 +18,7 @@ public class GeomagneticRotationVectorFactory implements ISensorFactory {
 
     public GeomagneticRotationVectorFactory(final SensorManager sensorManager) {
         geomagneticRotationVectorSensorImplementation = sensorManager.getDefaultSensor(
-                CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR);
+                CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR.toInt());
     }
 
     @Override
@@ -42,7 +43,7 @@ public class GeomagneticRotationVectorFactory implements ISensorFactory {
     }
 
     @Override
-    public Integer getSensorType() {
+    public SensorType getSensorType() {
         return CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR;
     }
 }

@@ -4,6 +4,7 @@ import android.hardware.Sensor;
 
 import michael.linker.gestrudeid.sensor.types.BaseSensorType;
 import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
+import michael.linker.gestrudeid.sensor.types.SensorType;
 
 /**
  * Sensor singleton factory
@@ -29,9 +30,9 @@ public interface ISensorFactory {
     /**
      * Get sensor type, it can be BaseSensorType or CompositeSensorType
      *
-     * @return Sensor type ID
+     * @return Sensor type
      * @see BaseSensorType
      * @see CompositeSensorType
      */
-    Integer getSensorType();
+    SensorType getSensorType();
 }

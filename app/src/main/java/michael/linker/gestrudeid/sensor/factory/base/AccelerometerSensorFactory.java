@@ -8,6 +8,7 @@ import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
 import michael.linker.gestrudeid.sensor.types.BaseSensorType;
+import michael.linker.gestrudeid.sensor.types.SensorType;
 
 /**
  * Returns an Accelerometer implementation
@@ -17,7 +18,8 @@ public class AccelerometerSensorFactory implements ISensorFactory {
     private static Sensor accelerometerImplementation;
 
     public AccelerometerSensorFactory(final SensorManager sensorManager) {
-        accelerometerImplementation = sensorManager.getDefaultSensor(BaseSensorType.ACCELEROMETER);
+        accelerometerImplementation =
+                sensorManager.getDefaultSensor(BaseSensorType.ACCELEROMETER.toInt());
     }
 
     @Override
@@ -40,7 +42,7 @@ public class AccelerometerSensorFactory implements ISensorFactory {
     }
 
     @Override
-    public Integer getSensorType() {
+    public SensorType getSensorType() {
         return BaseSensorType.ACCELEROMETER;
     }
 }

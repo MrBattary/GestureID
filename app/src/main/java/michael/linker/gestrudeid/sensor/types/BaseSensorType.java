@@ -10,19 +10,19 @@ import android.hardware.Sensor;
  * @link https://source.android.com/devices/sensors/sensor-types#base_sensors
  */
 public final class BaseSensorType {
-    final public static int ACCELEROMETER;
-    final public static int GYROSCOPE;
-    final public static int MAGNETOMETER;
+    final public static SensorType ACCELEROMETER;
+    final public static SensorType GYROSCOPE;
+    final public static SensorType MAGNETOMETER;
 
     static {
-        ACCELEROMETER = Sensor.TYPE_ACCELEROMETER;
-        GYROSCOPE = Sensor.TYPE_GYROSCOPE;
-        MAGNETOMETER = Sensor.TYPE_MAGNETIC_FIELD;
+        ACCELEROMETER = new SensorType(Sensor.TYPE_ACCELEROMETER);
+        GYROSCOPE = new SensorType(Sensor.TYPE_GYROSCOPE);
+        MAGNETOMETER = new SensorType(Sensor.TYPE_MAGNETIC_FIELD);
     }
 
-    final int type;
+    protected final SensorType type;
 
     private BaseSensorType(final int type) {
-        this.type = type;
+        this.type = new SensorType(type);
     }
 }
