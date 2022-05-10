@@ -11,14 +11,23 @@ import michael.linker.gestrudeid.streams.output.stream.impl.UiOutputStream;
  * The UI stream factory
  */
 public class UiOutputStreamFactory implements IOutputStreamFactory {
-    private final UiOutputStream uiOutputStream;
+    private final TextView textView;
+    private UiOutputStream uiOutputStream;
 
     public UiOutputStreamFactory(TextView textView) {
-        uiOutputStream = new UiOutputStream(textView);
+        this.textView = textView;
     }
 
     @Override
     public IOutputStream getOutputStream() throws OutputStreamFactoryFailedException {
+        if (uiOutputStream == null) {
+            if (textView == null) {
+                throw new OutputStreamFactoryFailedException(
+                        "Impossible to open an UI output stream, the UI element is not provided!");
+            } else {
+                uiOutputStream = new UiOutputStream(textView);
+            }
+        }
         return uiOutputStream;
     }
 }
