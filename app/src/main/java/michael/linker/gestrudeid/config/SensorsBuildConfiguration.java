@@ -5,6 +5,8 @@ import michael.linker.gestrudeid.BuildConfig;
 /**
  * Wrapper for the sensors build variables
  * "build.gradle" file in the application main folder
+ *
+ * @see michael.linker.gestrudeid.sensor
  */
 public final class SensorsBuildConfiguration {
     /**

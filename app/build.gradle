@@ -3,6 +3,7 @@ plugins {
 }
 
 def OutputStreamType = 'michael.linker.gestrudeid.streams.output.types.OutputStreamType'
+def FormatterMode = 'michael.linker.gestrudeid.formatter.types.FormatterMode'
 
 android {
     compileSdk 32
@@ -16,6 +17,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        /* User config */
+        /* Sensors */
         buildConfigField "boolean", "ACTIVATE_ACCELEROMETER", "false"
         buildConfigField "boolean", "ACTIVATE_GYROSCOPE", "false"
         buildConfigField "boolean", "ACTIVATE_MAGNETOMETER", "false"
@@ -23,12 +26,21 @@ android {
         buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
         buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
         buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
+        /* Streams */
         buildConfigField OutputStreamType, "MAIN_OUTPUT_STREAM_TYPE", "${OutputStreamType}.UI"
         buildConfigField OutputStreamType, "BACKUP_OUTPUT_STREAM_TYPE", "${OutputStreamType}.LOGGER"
+        /* Formatter */
+        buildConfigField FormatterMode, "MAIN_FORMATTER_MODE", "${FormatterMode}.TEXT"
+        buildConfigField FormatterMode, "BACKUP_FORMATTER_MODE", "${FormatterMode}.TEXT"
+        buildConfigField "String", "MODEL_VALUES_SEPARATOR", "\",\""
+        buildConfigField "String", "MODELS_SEPARATOR", "\";\""
+        buildConfigField "char", "EVENTS_SEPARATOR", "'\\n'"
     }
 
     buildTypes {
         debug {
+            /* User config */
+            /* Sensors */
             buildConfigField "boolean", "ACTIVATE_ACCELEROMETER", "true"
             buildConfigField "boolean", "ACTIVATE_GYROSCOPE", "true"
             buildConfigField "boolean", "ACTIVATE_MAGNETOMETER", "true"
@@ -36,10 +48,16 @@ android {
             buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
             buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
             buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
+            /* Streams */
             buildConfigField OutputStreamType, "MAIN_OUTPUT_STREAM_TYPE", "${OutputStreamType}.UI"
             buildConfigField OutputStreamType, "BACKUP_OUTPUT_STREAM_TYPE", "${OutputStreamType}.LOGGER"
+            /* Formatter */
+            buildConfigField FormatterMode, "MAIN_FORMATTER_MODE", "${FormatterMode}.TEXT"
+            buildConfigField FormatterMode, "BACKUP_FORMATTER_MODE", "${FormatterMode}.TEXT"
         }
         release {
+            /* User config */
+            /* Sensors */
             buildConfigField "boolean", "ACTIVATE_ACCELEROMETER", "false"
             buildConfigField "boolean", "ACTIVATE_GYROSCOPE", "false"
             buildConfigField "boolean", "ACTIVATE_MAGNETOMETER", "false"
@@ -47,8 +65,12 @@ android {
             buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
             buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
             buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
+            /* Streams */
             buildConfigField OutputStreamType, "MAIN_OUTPUT_STREAM_TYPE", "${OutputStreamType}.DATABASE"
             buildConfigField OutputStreamType, "BACKUP_OUTPUT_STREAM_TYPE", "${OutputStreamType}.FILE"
+            /* Formatter */
+            buildConfigField FormatterMode, "MAIN_FORMATTER_MODE", "${FormatterMode}.DB"
+            buildConfigField FormatterMode, "BACKUP_FORMATTER_MODE", "${FormatterMode}.TEXT"
 
             it.minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

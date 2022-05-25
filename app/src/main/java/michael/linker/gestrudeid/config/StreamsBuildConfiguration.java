@@ -6,6 +6,8 @@ import michael.linker.gestrudeid.streams.output.types.OutputStreamType;
 /**
  * Wrapper for the streams build variables
  * "build.gradle" file in the application main folder
+ *
+ * @see michael.linker.gestrudeid.streams
  */
 public final class StreamsBuildConfiguration {
     public static OutputStreamType getMainOutputStreamType() {

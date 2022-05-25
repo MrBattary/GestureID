@@ -1,6 +1,6 @@
 package michael.linker.gestrudeid.sensor.listener.provider;
 
-import michael.linker.gestrudeid.sensor.listener.primitive.ISensorListener;
+import michael.linker.gestrudeid.sensor.listener.ISensorListener;
 import michael.linker.gestrudeid.sensor.types.SensorType;
 
 /**

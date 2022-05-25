@@ -10,11 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.stream.Collectors;
 
-import michael.linker.gestrudeid.sensor.core.provider.ISensorProvider;
-import michael.linker.gestrudeid.sensor.core.provider.SensorProvider;
-import michael.linker.gestrudeid.sensor.listener.primitive.base.AccelerometerSensorListener;
-import michael.linker.gestrudeid.sensor.listener.primitive.base.GyroscopeSensorListener;
-import michael.linker.gestrudeid.sensor.listener.primitive.base.MagneticFieldSensorListener;
+import michael.linker.gestrudeid.sensor.provider.ISensorProvider;
+import michael.linker.gestrudeid.sensor.provider.SensorProvider;
+import michael.linker.gestrudeid.sensor.listener.provider.ISensorListenerProvider;
+import michael.linker.gestrudeid.sensor.listener.provider.SensorListenerProvider;
 import michael.linker.gestrudeid.sensor.types.BaseSensorType;
 import michael.linker.gestrudeid.streams.manager.IStreamManager;
 import michael.linker.gestrudeid.streams.manager.StreamManager;
@@ -46,12 +45,17 @@ public class MainActivity extends AppCompatActivity {
                 map(sensor -> sensor.getName() + "\n")
                 .collect(Collectors.joining()));
 
+        ISensorListenerProvider sensorListenerProvider = new SensorListenerProvider(outputStream);
+
         final int delay = SensorManager.SENSOR_DELAY_NORMAL;
-        sensorManager.registerListener(new AccelerometerSensorListener(outputStream),
+        sensorManager.registerListener(
+                sensorListenerProvider.getListener(BaseSensorType.ACCELEROMETER),
                 sensorProvider.getSensor(BaseSensorType.ACCELEROMETER), delay);
-        sensorManager.registerListener(new GyroscopeSensorListener(outputStream),
+        sensorManager.registerListener(
+                sensorListenerProvider.getListener(BaseSensorType.GYROSCOPE),
                 sensorProvider.getSensor(BaseSensorType.GYROSCOPE), delay);
-        sensorManager.registerListener(new MagneticFieldSensorListener(outputStream),
+        sensorManager.registerListener(
+                sensorListenerProvider.getListener(BaseSensorType.MAGNETOMETER),
                 sensorProvider.getSensor(BaseSensorType.MAGNETOMETER), delay);
 
         // GyroscopeListener gyroscopeListener = new GyroscopeListener(sensorManager, textView);

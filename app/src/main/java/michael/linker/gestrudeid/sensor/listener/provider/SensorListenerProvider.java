@@ -3,10 +3,10 @@ package michael.linker.gestrudeid.sensor.listener.provider;
 import java.util.HashMap;
 import java.util.Map;
 
-import michael.linker.gestrudeid.sensor.listener.primitive.ISensorListener;
-import michael.linker.gestrudeid.sensor.listener.primitive.base.AccelerometerSensorListener;
-import michael.linker.gestrudeid.sensor.listener.primitive.base.GyroscopeSensorListener;
-import michael.linker.gestrudeid.sensor.listener.primitive.base.MagneticFieldSensorListener;
+import michael.linker.gestrudeid.sensor.listener.ISensorListener;
+import michael.linker.gestrudeid.sensor.listener.base.AccelerometerSensorListener;
+import michael.linker.gestrudeid.sensor.listener.base.GyroscopeSensorListener;
+import michael.linker.gestrudeid.sensor.listener.base.MagneticFieldSensorListener;
 import michael.linker.gestrudeid.sensor.types.BaseSensorType;
 import michael.linker.gestrudeid.sensor.types.SensorType;
 import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
