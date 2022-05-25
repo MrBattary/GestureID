@@ -12,11 +12,11 @@ public class MagneticFieldSensorModel extends ASensorModel implements IThreeAxis
     private ThreeAxisSensorModel<Float> threeAxisSensorModel;
 
     public MagneticFieldSensorModel() {
-        super(BaseSensorType.GYROSCOPE);
+        super(BaseSensorType.MAGNETOMETER);
     }
 
     public MagneticFieldSensorModel(Float x, Float y, Float z) {
-        super(BaseSensorType.GYROSCOPE);
+        super(BaseSensorType.MAGNETOMETER);
         threeAxisSensorModel = new ThreeAxisSensorModel<>(x, y, z);
     }
 
