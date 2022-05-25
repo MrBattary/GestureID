@@ -46,6 +46,6 @@ public class SensorListenerProvider implements ISensorListenerProvider {
     }
 
     private void initializeCompositeSensorListeners(IOutputStream outputStream) {
-        // TODO Add composite listeners
+        // TODO: Add composite listeners
     }
 }
