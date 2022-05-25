@@ -2,7 +2,7 @@ package michael.linker.gestrudeid.sensor.synchronizer;
 
 import java.util.List;
 
-import michael.linker.gestrudeid.sensor.model.SensorModel;
+import michael.linker.gestrudeid.sensor.model.ASensorModel;
 import michael.linker.gestrudeid.sensor.types.SensorType;
 
 /**
@@ -16,7 +16,7 @@ public interface ISensorEventSynchronizer {
      * @throws SensorEventSynchronizerNotFoundException If no place was found to register the event
      * @throws SensorEventSynchronizerFailedException   If it is not possible to register the event
      */
-    void registerEvent(SensorModel sensorModel)
+    void registerEvent(ASensorModel sensorModel)
     throws SensorEventSynchronizerNotFoundException, SensorEventSynchronizerFailedException;
 
     /**

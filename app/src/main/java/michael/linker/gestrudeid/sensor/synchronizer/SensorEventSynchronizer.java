@@ -1,25 +1,35 @@
 package michael.linker.gestrudeid.sensor.synchronizer;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
-import michael.linker.gestrudeid.sensor.model.SensorModel;
+import michael.linker.gestrudeid.sensor.formatter.ISensorModelFormatter;
+import michael.linker.gestrudeid.sensor.model.ASensorModel;
 import michael.linker.gestrudeid.sensor.types.SensorType;
 
 public class SensorEventSynchronizer implements ISensorEventSynchronizer {
-    private final HashMap<Integer, SensorModel> models = new HashMap<>();
-    private final Set<Integer> attachedListeners = new HashSet<>();
+    private final ISensorModelFormatter sensorFormatter;
+
+    private final Map<Integer, ASensorModel> registeredModels = new TreeMap<>();
+    private final Set<Integer> attachedListeners = new TreeSet<>();
+
+    public SensorEventSynchronizer(ISensorModelFormatter sensorFormatter) {
+        this.sensorFormatter = sensorFormatter;
+    }
 
     @Override
-    public void registerEvent(SensorModel sensorModel) throws
+    public void registerEvent(ASensorModel sensorModel) throws
             SensorEventSynchronizerNotFoundException, SensorEventSynchronizerFailedException {
         final int sensorIdFromModel = sensorModel.getSensorType().toInt();
+        tryToSynchronize();
 
         if (attachedListeners.contains(sensorIdFromModel)) {
-            if (!models.containsKey(sensorIdFromModel)) {
-                models.put(sensorIdFromModel, sensorModel);
+            if (!registeredModels.containsKey(sensorIdFromModel)) {
+                registeredModels.put(sensorIdFromModel, sensorModel);
             } else {
                 throw new SensorEventSynchronizerFailedException(
                         "Event for the listener of the sensor with ID " + sensorIdFromModel +
@@ -31,27 +41,34 @@ public class SensorEventSynchronizer implements ISensorEventSynchronizer {
         }
     }
 
-    // TODO
+    /**
+     * Syncs if each listener has submitted their own model
+     */
     private void tryToSynchronize() {
-
+        if (registeredModels.keySet().equals(attachedListeners)) {
+            sensorFormatter.format(new ArrayList<>(registeredModels.values()));
+            registeredModels.clear();
+        }
     }
 
-    // TODO Handle 'changed' variable
     @Override
     public void attachOneListener(SensorType sensorType)
             throws SensorEventSynchronizerFailedException {
         if (!attachedListeners.contains(sensorType.toInt())) {
             attachedListeners.add(sensorType.toInt());
+            registeredModels.clear();
         } else {
             throw new SensorEventSynchronizerFailedException("A listener of the sensor with ID "
                     + sensorType.toInt() + " has already been attached!");
         }
     }
 
-    // TODO Handle 'changed' variable
     @Override
     public void detachOneListener(SensorType sensorType) {
-        attachedListeners.remove(sensorType.toInt());
+        if (attachedListeners.contains(sensorType.toInt())) {
+            attachedListeners.remove(sensorType.toInt());
+            registeredModels.clear();
+        }
     }
 
     @Override
