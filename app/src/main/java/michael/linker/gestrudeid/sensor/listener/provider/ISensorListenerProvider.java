@@ -12,6 +12,8 @@ public interface ISensorListenerProvider {
      *
      * @param sensorType [Base/Composite]SensorType
      * @return SensorListener
+     * @throws SensorListenerProviderNotFoundException If required listener was not found
      */
-    ISensorListener getListener(SensorType sensorType);
+    ISensorListener getListener(SensorType sensorType)
+            throws SensorListenerProviderNotFoundException;
 }
