@@ -15,11 +15,11 @@ public class TextFormatter implements IFormatter {
 
     @Override
     public void format(ASensorModel sensorModel) {
-
+        // TODO: finish it
     }
 
     @Override
     public void format(List<ASensorModel> sensorModels) {
-
+        // TODO: finish it
     }
 }

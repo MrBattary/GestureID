@@ -37,9 +37,16 @@ public class StreamManager implements IStreamManager {
         try {
             return getStreamByKey(StreamsBuildConfiguration.getMainOutputStreamType());
         } catch (OutputStreamFactoryFailedException e) {
-            Log.e(TAG, "The primary output stream is not available, "
+            Log.w(TAG, e.getMessage());
+            Log.w(TAG, "The main output stream is not available, "
                     + "switching to the backup is being performed");
-            return getStreamByKey(StreamsBuildConfiguration.getBackupOutputStreamType());
+            try {
+                return getStreamByKey(StreamsBuildConfiguration.getBackupOutputStreamType());
+            } catch (OutputStreamFactoryFailedException ee) {
+                Log.w(TAG, e.getMessage());
+                throw new StreamManagerFailedException(
+                        "The main and backup output streams are not available!");
+            }
         }
     }
 
@@ -50,8 +57,8 @@ public class StreamManager implements IStreamManager {
             return Objects.requireNonNull(sensorStreamFactory).getOutputStream();
         } catch (OutputStreamFactoryFailedException e) {
             Log.e(TAG, e.getMessage());
-            throw new StreamManagerNotFoundException(
-                    "Required output stream was not found!", e);
+            throw new StreamManagerNotFoundException("Required output stream with type: "
+                    + streamType.toString() + " was not found!", e);
         }
     }
 }

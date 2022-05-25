@@ -26,14 +26,14 @@ public class FormatterFactory implements IFormatterFactory {
             return getFormatterByKey(FormatterBuildConfiguration.getMainFormatterMode());
         } catch (FormatterFactoryNotFoundException e) {
             Log.w(TAG, e.getMessage());
-            Log.w(TAG, "The primary formatter is not available, "
+            Log.w(TAG, "The main formatter is not available, "
                     + "switching to the backup is being performed.");
             try {
                 return getFormatterByKey(FormatterBuildConfiguration.getBackupFormatterMode());
             } catch (FormatterFactoryNotFoundException ee) {
                 Log.w(TAG, ee.getMessage());
                 throw new FormatterFactoryFailedException(
-                        "The primary and backup formatters is not available!");
+                        "The main and backup formatters are not available!");
             }
         }
     }
