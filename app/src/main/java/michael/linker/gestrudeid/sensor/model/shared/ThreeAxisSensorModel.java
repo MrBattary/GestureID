@@ -1,6 +1,6 @@
 package michael.linker.gestrudeid.sensor.model.shared;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +11,9 @@ import java.util.Map;
  * @param <T> Axis type
  */
 public class ThreeAxisSensorModel<T> implements IThreeAxisSensorModel<T> {
+    private static final String X = "x";
+    private static final String Y = "y";
+    private static final String Z = "z";
     private T x;
     private T y;
     private T z;
@@ -21,19 +24,19 @@ public class ThreeAxisSensorModel<T> implements IThreeAxisSensorModel<T> {
         this.z = z;
     }
 
+    public List<String> getNamesList() {
+        return Arrays.asList(X, Y, Z);
+    }
+
     public List<T> getValuesList() {
-        List<T> valuesList = new ArrayList<>();
-        valuesList.add(x);
-        valuesList.add(y);
-        valuesList.add(z);
-        return valuesList;
+        return Arrays.asList(x, y, z);
     }
 
     public Map<String, T> getNamesAndValuesMap() {
         Map<String, T> valuesMap = new HashMap<>();
-        valuesMap.put("x", x);
-        valuesMap.put("y", y);
-        valuesMap.put("z", z);
+        valuesMap.put(X, x);
+        valuesMap.put(Y, y);
+        valuesMap.put(Z, z);
         return valuesMap;
     }
 

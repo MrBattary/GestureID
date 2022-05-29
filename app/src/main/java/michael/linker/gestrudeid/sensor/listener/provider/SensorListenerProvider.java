@@ -7,8 +7,8 @@ import michael.linker.gestrudeid.sensor.listener.ISensorListener;
 import michael.linker.gestrudeid.sensor.listener.base.AccelerometerSensorListener;
 import michael.linker.gestrudeid.sensor.listener.base.GyroscopeSensorListener;
 import michael.linker.gestrudeid.sensor.listener.base.MagneticFieldSensorListener;
-import michael.linker.gestrudeid.sensor.types.BaseSensorType;
-import michael.linker.gestrudeid.sensor.types.SensorType;
+import michael.linker.gestrudeid.sensor.type.BaseSensorType;
+import michael.linker.gestrudeid.sensor.type.SensorType;
 import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
 
 public class SensorListenerProvider implements ISensorListenerProvider {

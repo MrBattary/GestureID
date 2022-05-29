@@ -19,9 +19,9 @@ import michael.linker.gestrudeid.sensor.factory.composite.GeomagneticRotationVec
 import michael.linker.gestrudeid.sensor.factory.composite.GravitySensorFactory;
 import michael.linker.gestrudeid.sensor.factory.composite.LinearAccelerationSensorFactory;
 import michael.linker.gestrudeid.sensor.factory.composite.RotationVectorSensorFactory;
-import michael.linker.gestrudeid.sensor.types.BaseSensorType;
-import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
-import michael.linker.gestrudeid.sensor.types.SensorType;
+import michael.linker.gestrudeid.sensor.type.BaseSensorType;
+import michael.linker.gestrudeid.sensor.type.CompositeSensorType;
+import michael.linker.gestrudeid.sensor.type.SensorType;
 
 public class SensorProvider implements ISensorProvider {
     private final static String TAG = SensorProvider.class.getCanonicalName();

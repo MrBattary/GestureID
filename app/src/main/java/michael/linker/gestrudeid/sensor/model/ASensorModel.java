@@ -3,7 +3,7 @@ package michael.linker.gestrudeid.sensor.model;
 import java.util.List;
 import java.util.Map;
 
-import michael.linker.gestrudeid.sensor.types.SensorType;
+import michael.linker.gestrudeid.sensor.type.SensorType;
 
 /**
  * Basic sensor model for other sensor models
@@ -18,6 +18,13 @@ public abstract class ASensorModel {
     public SensorType getSensorType() {
         return sensorType;
     }
+
+    /**
+     * Get names from model as list of names
+     *
+     * @return List of names
+     */
+    abstract public List<String> getNamesList();
 
     /**
      * Get values from model as list of values

@@ -2,9 +2,9 @@ package michael.linker.gestrudeid.sensor.factory;
 
 import android.hardware.Sensor;
 
-import michael.linker.gestrudeid.sensor.types.BaseSensorType;
-import michael.linker.gestrudeid.sensor.types.CompositeSensorType;
-import michael.linker.gestrudeid.sensor.types.SensorType;
+import michael.linker.gestrudeid.sensor.type.BaseSensorType;
+import michael.linker.gestrudeid.sensor.type.CompositeSensorType;
+import michael.linker.gestrudeid.sensor.type.SensorType;
 
 /**
  * Sensor singleton factory

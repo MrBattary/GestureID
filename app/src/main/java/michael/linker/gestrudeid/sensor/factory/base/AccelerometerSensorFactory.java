@@ -7,8 +7,8 @@ import michael.linker.gestrudeid.config.SensorsBuildConfiguration;
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.types.BaseSensorType;
-import michael.linker.gestrudeid.sensor.types.SensorType;
+import michael.linker.gestrudeid.sensor.type.BaseSensorType;
+import michael.linker.gestrudeid.sensor.type.SensorType;
 
 /**
  * Returns an Accelerometer implementation

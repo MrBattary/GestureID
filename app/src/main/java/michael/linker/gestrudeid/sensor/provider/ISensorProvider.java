@@ -4,7 +4,7 @@ import android.hardware.Sensor;
 
 import java.util.List;
 
-import michael.linker.gestrudeid.sensor.types.SensorType;
+import michael.linker.gestrudeid.sensor.type.SensorType;
 
 /**
  * Provider for sensors

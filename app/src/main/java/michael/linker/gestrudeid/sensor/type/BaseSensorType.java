@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.sensor.types;
+package michael.linker.gestrudeid.sensor.type;
 
 import android.hardware.Sensor;
 
@@ -15,14 +15,14 @@ public final class BaseSensorType {
     final public static SensorType MAGNETOMETER;
 
     static {
-        ACCELEROMETER = new SensorType(Sensor.TYPE_ACCELEROMETER);
-        GYROSCOPE = new SensorType(Sensor.TYPE_GYROSCOPE);
-        MAGNETOMETER = new SensorType(Sensor.TYPE_MAGNETIC_FIELD);
+        ACCELEROMETER = new SensorType(Sensor.TYPE_ACCELEROMETER, "ACCELEROMETER");
+        GYROSCOPE = new SensorType(Sensor.TYPE_GYROSCOPE, "GYROSCOPE");
+        MAGNETOMETER = new SensorType(Sensor.TYPE_MAGNETIC_FIELD, "MAGNETOMETER");
     }
 
-    protected final SensorType type;
+    final SensorType type;
 
-    private BaseSensorType(final int type) {
-        this.type = new SensorType(type);
+    private BaseSensorType(final int typeInt, final String type) {
+        this.type = new SensorType(typeInt, type);
     }
 }

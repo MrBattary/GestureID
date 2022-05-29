@@ -6,18 +6,21 @@ import android.hardware.SensorEvent;
 import java.util.Arrays;
 
 import michael.linker.gestrudeid.sensor.listener.ISensorListener;
-import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
+import michael.linker.gestrudeid.sensor.model.base.AccelerometerSensorModel;
+import michael.linker.gestrudeid.synchronizer.IEventSynchronizer;
 
 public class AccelerometerSensorListener implements ISensorListener {
-    private final IOutputStream outputStream;
+    private final IEventSynchronizer eventSynchronizer;
 
-    public AccelerometerSensorListener(IOutputStream outputStream) {
-        this.outputStream = outputStream;
+    public AccelerometerSensorListener(IEventSynchronizer eventSynchronizer) {
+        this.eventSynchronizer = eventSynchronizer;
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        outputStream.write(Arrays.toString(sensorEvent.values));
+        AccelerometerSensorModel sensorModel = new AccelerometerSensorModel();
+        eventSynchronizer.registerEvent();
+        eventSynchronizer.write(Arrays.toString(sensorEvent.values));
     }
 
     @Override

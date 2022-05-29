@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.sensor.types;
+package michael.linker.gestrudeid.sensor.type;
 
 import android.hardware.Sensor;
 
@@ -38,15 +38,17 @@ public final class CompositeSensorType {
     final public static SensorType GEOMAGNETIC_ROTATION_VECTOR;
 
     static {
-        GRAVITY = new SensorType(Sensor.TYPE_GRAVITY);
-        LINEAR_ACCELERATION = new SensorType(Sensor.TYPE_LINEAR_ACCELERATION);
-        ROTATION_VECTOR = new SensorType(Sensor.TYPE_ROTATION_VECTOR);
-        GEOMAGNETIC_ROTATION_VECTOR = new SensorType(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR);
+        GRAVITY = new SensorType(Sensor.TYPE_GRAVITY, "GRAVITY");
+        LINEAR_ACCELERATION = new SensorType(Sensor.TYPE_LINEAR_ACCELERATION,
+                "LINEAR_ACCELERATION");
+        ROTATION_VECTOR = new SensorType(Sensor.TYPE_ROTATION_VECTOR, "ROTATION_VECTOR");
+        GEOMAGNETIC_ROTATION_VECTOR = new SensorType(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR,
+                "GEOMAGNETIC_ROTATION_VECTOR");
     }
 
-    protected final SensorType type;
+    final SensorType type;
 
-    private CompositeSensorType(final int type) {
-        this.type = new SensorType(type);
+    private CompositeSensorType(final int typeInt, final String type) {
+        this.type = new SensorType(typeInt, type);
     }
 }

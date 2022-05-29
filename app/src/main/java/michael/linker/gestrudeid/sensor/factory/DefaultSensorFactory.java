@@ -2,7 +2,7 @@ package michael.linker.gestrudeid.sensor.factory;
 
 import android.hardware.Sensor;
 
-import michael.linker.gestrudeid.sensor.types.SensorType;
+import michael.linker.gestrudeid.sensor.type.SensorType;
 
 /**
  * Default/stub sensor factory
@@ -21,6 +21,6 @@ public class DefaultSensorFactory implements ISensorFactory {
 
     @Override
     public SensorType getSensorType() {
-        return new SensorType(-1);
+        return new SensorType(-1, "Error Type");
     }
 }

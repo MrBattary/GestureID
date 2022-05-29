@@ -6,7 +6,7 @@ import java.util.Map;
 import michael.linker.gestrudeid.sensor.model.ASensorModel;
 import michael.linker.gestrudeid.sensor.model.shared.IThreeAxisSensorModel;
 import michael.linker.gestrudeid.sensor.model.shared.ThreeAxisSensorModel;
-import michael.linker.gestrudeid.sensor.types.BaseSensorType;
+import michael.linker.gestrudeid.sensor.type.BaseSensorType;
 
 public class MagneticFieldSensorModel extends ASensorModel implements IThreeAxisSensorModel<Float> {
     private ThreeAxisSensorModel<Float> threeAxisSensorModel;
@@ -18,6 +18,11 @@ public class MagneticFieldSensorModel extends ASensorModel implements IThreeAxis
     public MagneticFieldSensorModel(Float x, Float y, Float z) {
         super(BaseSensorType.MAGNETOMETER);
         threeAxisSensorModel = new ThreeAxisSensorModel<>(x, y, z);
+    }
+
+    @Override
+    public List<String> getNamesList() {
+        return threeAxisSensorModel.getNamesList();
     }
 
     @Override
