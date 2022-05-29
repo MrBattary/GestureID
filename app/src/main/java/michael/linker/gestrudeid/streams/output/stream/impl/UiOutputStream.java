@@ -17,6 +17,6 @@ public class UiOutputStream implements IOutputStream {
 
     @Override
     public void write(String s) {
-        textView.append(s + "\n");
+        textView.append(s);
     }
 }
