@@ -9,16 +9,17 @@ import java.util.TreeSet;
 
 import michael.linker.gestrudeid.formatter.IFormatter;
 import michael.linker.gestrudeid.sensor.model.ASensorModel;
-import michael.linker.gestrudeid.sensor.types.SensorType;
+import michael.linker.gestrudeid.sensor.type.SensorType;
+import michael.linker.gestrudeid.synchronizer.model.SynchronizedEventListOfModels;
 
 public class EventSynchronizer implements IEventSynchronizer {
-    private final IFormatter sensorFormatter;
+    private final IFormatter formatter;
 
     private final Map<Integer, ASensorModel> registeredModels = new TreeMap<>();
     private final Set<Integer> attachedListeners = new TreeSet<>();
 
-    public EventSynchronizer(IFormatter sensorFormatter) {
-        this.sensorFormatter = sensorFormatter;
+    public EventSynchronizer(IFormatter formatter) {
+        this.formatter = formatter;
     }
 
     @Override
@@ -46,7 +47,12 @@ public class EventSynchronizer implements IEventSynchronizer {
      */
     private void tryToSynchronize() {
         if (registeredModels.keySet().equals(attachedListeners)) {
-            sensorFormatter.format(new ArrayList<>(registeredModels.values()));
+            SynchronizedEventListOfModels synchronizedEvent =
+                    new SynchronizedEventListOfModels(
+                            String.valueOf(System.currentTimeMillis()),
+                            new ArrayList<>(registeredModels.values())
+                    );
+            formatter.format(synchronizedEvent);
             registeredModels.clear();
         }
     }

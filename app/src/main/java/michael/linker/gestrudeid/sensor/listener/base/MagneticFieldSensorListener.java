@@ -2,22 +2,33 @@ package michael.linker.gestrudeid.sensor.listener.base;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
-
-import java.util.Arrays;
+import android.util.Log;
 
 import michael.linker.gestrudeid.sensor.listener.ISensorListener;
-import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
+import michael.linker.gestrudeid.sensor.model.base.MagneticFieldSensorModel;
+import michael.linker.gestrudeid.synchronizer.EventSynchronizerFailedException;
+import michael.linker.gestrudeid.synchronizer.IEventSynchronizer;
 
 public class MagneticFieldSensorListener implements ISensorListener {
-    private final IOutputStream outputStream;
+    private final static String TAG = MagneticFieldSensorListener.class.getCanonicalName();
+    private final IEventSynchronizer eventSynchronizer;
 
-    public MagneticFieldSensorListener(IOutputStream outputStream) {
-        this.outputStream = outputStream;
+    public MagneticFieldSensorListener(IEventSynchronizer eventSynchronizer) {
+        this.eventSynchronizer = eventSynchronizer;
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        outputStream.write(Arrays.toString(sensorEvent.values));
+        MagneticFieldSensorModel sensorModel = new MagneticFieldSensorModel();
+        sensorModel.setX(sensorEvent.values[0]);
+        sensorModel.setY(sensorEvent.values[1]);
+        sensorModel.setZ(sensorEvent.values[2]);
+        sensorModel.setTimestamp(sensorEvent.timestamp);
+        try {
+            eventSynchronizer.registerEvent(sensorModel);
+        } catch (EventSynchronizerFailedException e){
+            Log.w(TAG, e.getMessage());
+        }
     }
 
     @Override

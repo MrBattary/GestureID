@@ -1,7 +1,7 @@
 package michael.linker.gestrudeid.config;
 
 import michael.linker.gestrudeid.BuildConfig;
-import michael.linker.gestrudeid.formatter.types.FormatterMode;
+import michael.linker.gestrudeid.formatter.type.FormatterMode;
 
 /**
  * Wrapper for the formatter build variables

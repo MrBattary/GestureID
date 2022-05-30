@@ -18,6 +18,9 @@ public class ThreeAxisSensorModel<T> implements IThreeAxisSensorModel<T> {
     private T y;
     private T z;
 
+    public ThreeAxisSensorModel() {
+    }
+
     public ThreeAxisSensorModel(T x, T y, T z) {
         this.x = x;
         this.y = y;

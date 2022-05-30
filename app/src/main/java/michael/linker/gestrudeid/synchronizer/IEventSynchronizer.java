@@ -3,7 +3,7 @@ package michael.linker.gestrudeid.synchronizer;
 import java.util.List;
 
 import michael.linker.gestrudeid.sensor.model.ASensorModel;
-import michael.linker.gestrudeid.sensor.types.SensorType;
+import michael.linker.gestrudeid.sensor.type.SensorType;
 
 /**
  * Synchronizes sensor events from multiple SensorListeners

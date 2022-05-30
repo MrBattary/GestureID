@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.streams.manager;
+package michael.linker.gestrudeid.stream.manager;
 
 /**
  * If it is impossible to return any implementation due to an error

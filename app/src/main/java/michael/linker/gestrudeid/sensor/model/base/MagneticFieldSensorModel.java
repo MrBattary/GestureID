@@ -9,14 +9,15 @@ import michael.linker.gestrudeid.sensor.model.shared.ThreeAxisSensorModel;
 import michael.linker.gestrudeid.sensor.type.BaseSensorType;
 
 public class MagneticFieldSensorModel extends ASensorModel implements IThreeAxisSensorModel<Float> {
-    private ThreeAxisSensorModel<Float> threeAxisSensorModel;
+    private final ThreeAxisSensorModel<Float> threeAxisSensorModel;
 
     public MagneticFieldSensorModel() {
         super(BaseSensorType.MAGNETOMETER);
+        threeAxisSensorModel = new ThreeAxisSensorModel<>();
     }
 
-    public MagneticFieldSensorModel(Float x, Float y, Float z) {
-        super(BaseSensorType.MAGNETOMETER);
+    public MagneticFieldSensorModel(Long timestamp, Float x, Float y, Float z) {
+        super(BaseSensorType.MAGNETOMETER, timestamp);
         threeAxisSensorModel = new ThreeAxisSensorModel<>(x, y, z);
     }
 

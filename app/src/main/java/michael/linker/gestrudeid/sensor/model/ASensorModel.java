@@ -9,14 +9,28 @@ import michael.linker.gestrudeid.sensor.type.SensorType;
  * Basic sensor model for other sensor models
  */
 public abstract class ASensorModel {
-    protected SensorType sensorType;
+    protected final SensorType sensorType;
+    protected Long timestamp;
 
-    protected ASensorModel(SensorType sensorType) {
+    protected ASensorModel(final SensorType sensorType) {
         this.sensorType = sensorType;
+    }
+
+    protected ASensorModel(final SensorType sensorType, final Long timestamp) {
+        this.sensorType = sensorType;
+        this.timestamp = timestamp;
     }
 
     public SensorType getSensorType() {
         return sensorType;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(final Long timestamp) {
+        this.timestamp = timestamp;
     }
 
     /**

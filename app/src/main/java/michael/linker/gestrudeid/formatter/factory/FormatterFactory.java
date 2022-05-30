@@ -7,9 +7,9 @@ import java.util.Map;
 
 import michael.linker.gestrudeid.config.FormatterBuildConfiguration;
 import michael.linker.gestrudeid.formatter.IFormatter;
-import michael.linker.gestrudeid.formatter.impl.TextFormatter;
-import michael.linker.gestrudeid.formatter.types.FormatterMode;
-import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
+import michael.linker.gestrudeid.formatter.impl.text.TextFormatter;
+import michael.linker.gestrudeid.formatter.type.FormatterMode;
+import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
 
 public class FormatterFactory implements IFormatterFactory {
     private final static String TAG = FormatterFactory.class.getCanonicalName();

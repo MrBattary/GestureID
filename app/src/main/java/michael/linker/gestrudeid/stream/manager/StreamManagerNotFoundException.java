@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.streams.manager;
+package michael.linker.gestrudeid.stream.manager;
 
 /**
  * If required output/input stream was not found

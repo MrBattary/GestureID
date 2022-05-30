@@ -8,16 +8,23 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.stream.Collectors;
 
-import michael.linker.gestrudeid.sensor.provider.ISensorProvider;
-import michael.linker.gestrudeid.sensor.provider.SensorProvider;
+import michael.linker.gestrudeid.formatter.IFormatter;
+import michael.linker.gestrudeid.formatter.factory.FormatterFactory;
+import michael.linker.gestrudeid.formatter.factory.IFormatterFactory;
 import michael.linker.gestrudeid.sensor.listener.provider.ISensorListenerProvider;
 import michael.linker.gestrudeid.sensor.listener.provider.SensorListenerProvider;
-import michael.linker.gestrudeid.sensor.types.BaseSensorType;
-import michael.linker.gestrudeid.streams.manager.IStreamManager;
-import michael.linker.gestrudeid.streams.manager.StreamManager;
-import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
+import michael.linker.gestrudeid.sensor.provider.ISensorProvider;
+import michael.linker.gestrudeid.sensor.provider.SensorProvider;
+import michael.linker.gestrudeid.sensor.type.BaseSensorType;
+import michael.linker.gestrudeid.stream.manager.IStreamManager;
+import michael.linker.gestrudeid.stream.manager.StreamManager;
+import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
+import michael.linker.gestrudeid.synchronizer.EventSynchronizer;
+import michael.linker.gestrudeid.synchronizer.IEventSynchronizer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,7 +52,17 @@ public class MainActivity extends AppCompatActivity {
                 map(sensor -> sensor.getName() + "\n")
                 .collect(Collectors.joining()));
 
-        ISensorListenerProvider sensorListenerProvider = new SensorListenerProvider(outputStream);
+        IFormatterFactory formatterFactory = new FormatterFactory(outputStream);
+        IFormatter formatter = formatterFactory.getFormatter();
+
+        IEventSynchronizer eventSynchronizer = new EventSynchronizer(formatter);
+
+        ISensorListenerProvider sensorListenerProvider = new SensorListenerProvider(
+                eventSynchronizer);
+
+        eventSynchronizer.attachOneListener(BaseSensorType.ACCELEROMETER);
+        eventSynchronizer.attachOneListener(BaseSensorType.GYROSCOPE);
+        eventSynchronizer.attachOneListener(BaseSensorType.MAGNETOMETER);
 
         final int delay = SensorManager.SENSOR_DELAY_NORMAL;
         sensorManager.registerListener(
@@ -58,8 +75,17 @@ public class MainActivity extends AppCompatActivity {
                 sensorListenerProvider.getListener(BaseSensorType.MAGNETOMETER),
                 sensorProvider.getSensor(BaseSensorType.MAGNETOMETER), delay);
 
-        // GyroscopeListener gyroscopeListener = new GyroscopeListener(sensorManager, textView);
-        // sensorManager.registerListener(gyroscopeListener,  sensorManager.getDefaultSensor
-        // (Sensor.TYPE_GYROSCOPE), SensorManager.SENSOR_DELAY_NORMAL);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                sensorManager.unregisterListener(
+                        sensorListenerProvider.getListener(BaseSensorType.ACCELEROMETER));
+                sensorManager.unregisterListener(
+                        sensorListenerProvider.getListener(BaseSensorType.GYROSCOPE));
+                sensorManager.unregisterListener(
+                        sensorListenerProvider.getListener(BaseSensorType.MAGNETOMETER));
+
+            }
+        }, 4000);
     }
 }

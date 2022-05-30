@@ -1,6 +1,6 @@
-package michael.linker.gestrudeid.streams.output.factory;
+package michael.linker.gestrudeid.stream.output.factory;
 
-import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
+import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
 
 /**
  * Output stream factory

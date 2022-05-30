@@ -1,6 +1,6 @@
-package michael.linker.gestrudeid.streams.manager;
+package michael.linker.gestrudeid.stream.manager;
 
-import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
+import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
 
 /**
  * Manager for the output/input streams

@@ -1,8 +1,8 @@
-package michael.linker.gestrudeid.streams.output.stream.impl;
+package michael.linker.gestrudeid.stream.output.stream.impl;
 
 import android.util.Log;
 
-import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
+import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
 
 /**
  * This stream uses internal logger to record data

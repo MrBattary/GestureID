@@ -9,14 +9,15 @@ import michael.linker.gestrudeid.sensor.model.shared.ThreeAxisSensorModel;
 import michael.linker.gestrudeid.sensor.type.BaseSensorType;
 
 public class AccelerometerSensorModel extends ASensorModel implements IThreeAxisSensorModel<Float> {
-    private ThreeAxisSensorModel<Float> threeAxisSensorModel;
+    private final ThreeAxisSensorModel<Float> threeAxisSensorModel;
 
     public AccelerometerSensorModel() {
         super(BaseSensorType.ACCELEROMETER);
+        threeAxisSensorModel = new ThreeAxisSensorModel<>();
     }
 
-    public AccelerometerSensorModel(Float x, Float y, Float z) {
-        super(BaseSensorType.ACCELEROMETER);
+    public AccelerometerSensorModel(Long timestamp, Float x, Float y, Float z) {
+        super(BaseSensorType.ACCELEROMETER, timestamp);
         threeAxisSensorModel = new ThreeAxisSensorModel<>(x, y, z);
     }
 

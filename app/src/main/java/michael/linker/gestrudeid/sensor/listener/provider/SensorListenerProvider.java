@@ -9,19 +9,19 @@ import michael.linker.gestrudeid.sensor.listener.base.GyroscopeSensorListener;
 import michael.linker.gestrudeid.sensor.listener.base.MagneticFieldSensorListener;
 import michael.linker.gestrudeid.sensor.type.BaseSensorType;
 import michael.linker.gestrudeid.sensor.type.SensorType;
-import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
+import michael.linker.gestrudeid.synchronizer.IEventSynchronizer;
 
 public class SensorListenerProvider implements ISensorListenerProvider {
-    private final Map<Integer, ISensorListener> sensorListeners = new HashMap<>();
+    private static final Map<Integer, ISensorListener> SENSOR_LISTENERS = new HashMap<>();
 
-    public SensorListenerProvider(IOutputStream outputStream) {
-        initializeSensorListeners(outputStream);
+    public SensorListenerProvider(final IEventSynchronizer eventSynchronizer) {
+        initializeSensorListeners(eventSynchronizer);
     }
 
     @Override
     public ISensorListener getListener(SensorType sensorType)
             throws SensorListenerProviderNotFoundException {
-        ISensorListener sensorListener = sensorListeners.get(sensorType.toInt());
+        ISensorListener sensorListener = SENSOR_LISTENERS.get(sensorType.toInt());
         if (sensorListener != null) {
             return sensorListener;
         } else {
@@ -31,21 +31,21 @@ public class SensorListenerProvider implements ISensorListenerProvider {
         }
     }
 
-    private void initializeSensorListeners(IOutputStream outputStream) {
-        initializeBaseSensorListeners(outputStream);
-        initializeCompositeSensorListeners(outputStream);
+    private void initializeSensorListeners(final IEventSynchronizer  eventSynchronizer) {
+        initializeBaseSensorListeners(eventSynchronizer);
+        initializeCompositeSensorListeners(eventSynchronizer);
     }
 
-    private void initializeBaseSensorListeners(IOutputStream outputStream) {
-        sensorListeners.put(BaseSensorType.ACCELEROMETER.toInt(),
-                new AccelerometerSensorListener(outputStream));
-        sensorListeners.put(BaseSensorType.GYROSCOPE.toInt(),
-                new GyroscopeSensorListener(outputStream));
-        sensorListeners.put(BaseSensorType.MAGNETOMETER.toInt(),
-                new MagneticFieldSensorListener(outputStream));
+    private void initializeBaseSensorListeners(final IEventSynchronizer eventSynchronizer) {
+        SENSOR_LISTENERS.put(BaseSensorType.ACCELEROMETER.toInt(),
+                new AccelerometerSensorListener(eventSynchronizer));
+        SENSOR_LISTENERS.put(BaseSensorType.GYROSCOPE.toInt(),
+                new GyroscopeSensorListener(eventSynchronizer));
+        SENSOR_LISTENERS.put(BaseSensorType.MAGNETOMETER.toInt(),
+                new MagneticFieldSensorListener(eventSynchronizer));
     }
 
-    private void initializeCompositeSensorListeners(IOutputStream outputStream) {
+    private void initializeCompositeSensorListeners(final IEventSynchronizer  eventSynchronizer) {
         // TODO: Add composite listeners
     }
 }

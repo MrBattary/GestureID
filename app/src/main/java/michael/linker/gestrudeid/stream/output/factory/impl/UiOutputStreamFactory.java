@@ -1,11 +1,11 @@
-package michael.linker.gestrudeid.streams.output.factory.impl;
+package michael.linker.gestrudeid.stream.output.factory.impl;
 
 import android.widget.TextView;
 
-import michael.linker.gestrudeid.streams.output.factory.IOutputStreamFactory;
-import michael.linker.gestrudeid.streams.output.factory.OutputStreamFactoryFailedException;
-import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
-import michael.linker.gestrudeid.streams.output.stream.impl.UiOutputStream;
+import michael.linker.gestrudeid.stream.output.factory.IOutputStreamFactory;
+import michael.linker.gestrudeid.stream.output.factory.OutputStreamFactoryFailedException;
+import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
+import michael.linker.gestrudeid.stream.output.stream.impl.UiOutputStream;
 
 /**
  * The UI stream factory

@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.streams.output.types;
+package michael.linker.gestrudeid.stream.output.type;
 
 /**
  * Types of the output streams

@@ -1,13 +1,13 @@
 package michael.linker.gestrudeid.config;
 
 import michael.linker.gestrudeid.BuildConfig;
-import michael.linker.gestrudeid.streams.output.types.OutputStreamType;
+import michael.linker.gestrudeid.stream.output.type.OutputStreamType;
 
 /**
  * Wrapper for the streams build variables
  * "build.gradle" file in the application main folder
  *
- * @see michael.linker.gestrudeid.streams
+ * @see michael.linker.gestrudeid.stream
  */
 public final class StreamsBuildConfiguration {
     public static OutputStreamType getMainOutputStreamType() {

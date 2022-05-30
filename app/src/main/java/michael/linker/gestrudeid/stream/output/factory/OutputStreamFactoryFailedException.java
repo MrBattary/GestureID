@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.streams.output.factory;
+package michael.linker.gestrudeid.stream.output.factory;
 
 /**
  * If the factory cannot return the implementation due to an error

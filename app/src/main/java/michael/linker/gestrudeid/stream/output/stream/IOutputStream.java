@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.streams.output.stream;
+package michael.linker.gestrudeid.stream.output.stream;
 
 /**
  * The output stream of data read from the sensor

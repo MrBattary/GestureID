@@ -58,7 +58,7 @@ public class SensorRecognizer {
      * @return SensorType
      * @throws SensorTypeRecognizerFailedException If it cannot be recognized by the provided ID
      */
-    SensorType recognizeSensorById(final Integer typeId)
+    public static SensorType recognizeSensorById(final Integer typeId)
             throws SensorTypeRecognizerFailedException {
         SensorType sensorType = SENSOR_TYPE_MAP.get(typeId);
         if(sensorType == null) {

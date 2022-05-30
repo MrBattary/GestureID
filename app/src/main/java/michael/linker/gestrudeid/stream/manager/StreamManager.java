@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.streams.manager;
+package michael.linker.gestrudeid.stream.manager;
 
 import android.util.Log;
 import android.widget.TextView;
@@ -8,13 +8,13 @@ import java.util.Map;
 import java.util.Objects;
 
 import michael.linker.gestrudeid.config.StreamsBuildConfiguration;
-import michael.linker.gestrudeid.streams.output.factory.IOutputStreamFactory;
-import michael.linker.gestrudeid.streams.output.factory.OutputStreamFactoryFailedException;
-import michael.linker.gestrudeid.streams.output.factory.impl.LogOutputStreamFactory;
-import michael.linker.gestrudeid.streams.output.factory.impl.UiOutputStreamFactory;
-import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
-import michael.linker.gestrudeid.streams.output.stream.impl.UiOutputStream;
-import michael.linker.gestrudeid.streams.output.types.OutputStreamType;
+import michael.linker.gestrudeid.stream.output.factory.IOutputStreamFactory;
+import michael.linker.gestrudeid.stream.output.factory.OutputStreamFactoryFailedException;
+import michael.linker.gestrudeid.stream.output.factory.impl.LogOutputStreamFactory;
+import michael.linker.gestrudeid.stream.output.factory.impl.UiOutputStreamFactory;
+import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
+import michael.linker.gestrudeid.stream.output.stream.impl.UiOutputStream;
+import michael.linker.gestrudeid.stream.output.type.OutputStreamType;
 
 public class StreamManager implements IStreamManager {
     private final static String TAG = StreamManager.class.getCanonicalName();

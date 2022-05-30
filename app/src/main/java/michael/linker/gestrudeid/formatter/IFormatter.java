@@ -1,8 +1,7 @@
 package michael.linker.gestrudeid.formatter;
 
-import java.util.List;
-
-import michael.linker.gestrudeid.sensor.model.ASensorModel;
+import michael.linker.gestrudeid.synchronizer.model.SynchronizedEventOneModel;
+import michael.linker.gestrudeid.synchronizer.model.SynchronizedEventListOfModels;
 
 /**
  * Formats sensor event data according to the configuration file
@@ -12,14 +11,14 @@ public interface IFormatter {
     /**
      * Format data from a single model
      *
-     * @param sensorModel Model containing sensor event data
+     * @param synchronizedSensorModel Model containing timestamp and sensor event data
      */
-    void format(ASensorModel sensorModel);
+    void format(SynchronizedEventOneModel synchronizedSensorModel);
 
     /**
      * Format data from the list of the models
      *
-     * @param sensorModels List of models that containing sensor event data
+     * @param synchronizedSensorModels Model that containing timestamp and list of sensor event data
      */
-    void format(List<ASensorModel> sensorModels);
+    void format(SynchronizedEventListOfModels synchronizedSensorModels);
 }

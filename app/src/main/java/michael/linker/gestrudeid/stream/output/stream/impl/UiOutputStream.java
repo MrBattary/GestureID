@@ -1,8 +1,8 @@
-package michael.linker.gestrudeid.streams.output.stream.impl;
+package michael.linker.gestrudeid.stream.output.stream.impl;
 
 import android.widget.TextView;
 
-import michael.linker.gestrudeid.streams.output.stream.IOutputStream;
+import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
 
 /**
  * This stream uses UI element to write the data into it

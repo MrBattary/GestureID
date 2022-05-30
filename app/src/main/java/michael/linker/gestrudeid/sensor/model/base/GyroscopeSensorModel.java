@@ -9,14 +9,15 @@ import michael.linker.gestrudeid.sensor.model.shared.ThreeAxisSensorModel;
 import michael.linker.gestrudeid.sensor.type.BaseSensorType;
 
 public class GyroscopeSensorModel extends ASensorModel implements IThreeAxisSensorModel<Float> {
-    private ThreeAxisSensorModel<Float> threeAxisSensorModel;
+    private final ThreeAxisSensorModel<Float> threeAxisSensorModel;
 
     public GyroscopeSensorModel() {
         super(BaseSensorType.GYROSCOPE);
+        threeAxisSensorModel = new ThreeAxisSensorModel<>();
     }
 
-    public GyroscopeSensorModel(Float x, Float y, Float z) {
-        super(BaseSensorType.GYROSCOPE);
+    public GyroscopeSensorModel(Long timestamp, Float x, Float y, Float z) {
+        super(BaseSensorType.GYROSCOPE, timestamp);
         threeAxisSensorModel = new ThreeAxisSensorModel<>(x, y, z);
     }
 

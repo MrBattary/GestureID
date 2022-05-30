@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.formatter.types;
+package michael.linker.gestrudeid.formatter.type;
 
 /**
  * Types of the Formatter
