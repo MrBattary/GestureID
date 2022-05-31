@@ -17,6 +17,10 @@ import michael.linker.gestrudeid.formatter.factory.FormatterFactory;
 import michael.linker.gestrudeid.formatter.factory.IFormatterFactory;
 import michael.linker.gestrudeid.sensor.listener.provider.ISensorListenerProvider;
 import michael.linker.gestrudeid.sensor.listener.provider.SensorListenerProvider;
+import michael.linker.gestrudeid.sensor.listener.suppressor.ISensorListenerSuppressor;
+import michael.linker.gestrudeid.sensor.listener.suppressor.SensorListenerSuppressor;
+import michael.linker.gestrudeid.sensor.manager.ASensorManager;
+import michael.linker.gestrudeid.sensor.manager.SensorManagerWrapper;
 import michael.linker.gestrudeid.sensor.provider.ISensorProvider;
 import michael.linker.gestrudeid.sensor.provider.SensorProvider;
 import michael.linker.gestrudeid.sensor.type.BaseSensorType;
@@ -33,7 +37,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        SensorManager hardwareSensorManager = (SensorManager) getSystemService(
+                Context.SENSOR_SERVICE);
+        ASensorManager sensorManager = new SensorManagerWrapper(hardwareSensorManager);
+
         TextView textView = findViewById(R.id.main_text_view);
         textView.setMovementMethod(new ScrollingMovementMethod());
 
@@ -57,14 +64,15 @@ public class MainActivity extends AppCompatActivity {
 
         IEventSynchronizer eventSynchronizer = new EventSynchronizer(formatter);
 
+        ISensorListenerSuppressor sensorListenerSuppressor = new SensorListenerSuppressor();
         ISensorListenerProvider sensorListenerProvider = new SensorListenerProvider(
-                eventSynchronizer);
+                eventSynchronizer, sensorListenerSuppressor);
 
         eventSynchronizer.attachOneListener(BaseSensorType.ACCELEROMETER);
         eventSynchronizer.attachOneListener(BaseSensorType.GYROSCOPE);
         eventSynchronizer.attachOneListener(BaseSensorType.MAGNETOMETER);
 
-        final int delay = SensorManager.SENSOR_DELAY_NORMAL;
+        final int delay = ASensorManager.SENSOR_DELAY_NORMAL;
         sensorManager.registerListener(
                 sensorListenerProvider.getListener(BaseSensorType.ACCELEROMETER),
                 sensorProvider.getSensor(BaseSensorType.ACCELEROMETER), delay);
@@ -75,9 +83,20 @@ public class MainActivity extends AppCompatActivity {
                 sensorListenerProvider.getListener(BaseSensorType.MAGNETOMETER),
                 sensorProvider.getSensor(BaseSensorType.MAGNETOMETER), delay);
 
+        sensorListenerSuppressor.unsuppressListener(BaseSensorType.ACCELEROMETER);
+        sensorListenerSuppressor.unsuppressListener(BaseSensorType.GYROSCOPE);
+        sensorListenerSuppressor.unsuppressListener(BaseSensorType.MAGNETOMETER);
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
+                sensorListenerSuppressor.unsuppressAllListeners();
+            }
+        }, 5000);
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                sensorListenerSuppressor.suppressAllListeners();
                 sensorManager.unregisterListener(
                         sensorListenerProvider.getListener(BaseSensorType.ACCELEROMETER));
                 sensorManager.unregisterListener(
@@ -86,6 +105,6 @@ public class MainActivity extends AppCompatActivity {
                         sensorListenerProvider.getListener(BaseSensorType.MAGNETOMETER));
 
             }
-        }, 4000);
+        }, 10000);
     }
 }
