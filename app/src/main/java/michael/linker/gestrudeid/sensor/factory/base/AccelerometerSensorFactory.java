@@ -1,25 +1,24 @@
 package michael.linker.gestrudeid.sensor.factory.base;
 
 import android.hardware.Sensor;
-import android.hardware.SensorManager;
 
 import michael.linker.gestrudeid.config.SensorsBuildConfiguration;
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
+import michael.linker.gestrudeid.sensor.manager.ASensorManager;
 import michael.linker.gestrudeid.sensor.type.BaseSensorType;
 import michael.linker.gestrudeid.sensor.type.SensorType;
 
 /**
  * Returns an Accelerometer implementation
  */
-
 public class AccelerometerSensorFactory implements ISensorFactory {
+    private final static SensorType SENSOR_TYPE = BaseSensorType.ACCELEROMETER;
     private static Sensor accelerometerImplementation;
 
-    public AccelerometerSensorFactory(final SensorManager sensorManager) {
-        accelerometerImplementation =
-                sensorManager.getDefaultSensor(BaseSensorType.ACCELEROMETER.toInt());
+    public AccelerometerSensorFactory(final ASensorManager sensorManager) {
+        accelerometerImplementation = sensorManager.getDefaultSensor(SENSOR_TYPE);
     }
 
     @Override
@@ -43,6 +42,6 @@ public class AccelerometerSensorFactory implements ISensorFactory {
 
     @Override
     public SensorType getSensorType() {
-        return BaseSensorType.ACCELEROMETER;
+        return SENSOR_TYPE;
     }
 }

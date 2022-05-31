@@ -1,12 +1,12 @@
 package michael.linker.gestrudeid.sensor.factory.composite;
 
 import android.hardware.Sensor;
-import android.hardware.SensorManager;
 
 import michael.linker.gestrudeid.config.SensorsBuildConfiguration;
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
+import michael.linker.gestrudeid.sensor.manager.ASensorManager;
 import michael.linker.gestrudeid.sensor.type.CompositeSensorType;
 import michael.linker.gestrudeid.sensor.type.SensorType;
 
@@ -14,11 +14,11 @@ import michael.linker.gestrudeid.sensor.type.SensorType;
  * Returns a Linear Acceleration sensor implementation
  */
 public class LinearAccelerationSensorFactory implements ISensorFactory {
+    private final static SensorType SENSOR_TYPE = CompositeSensorType.LINEAR_ACCELERATION;
     private static Sensor linearAccelerationImplementation;
 
-    public LinearAccelerationSensorFactory(final SensorManager sensorManager) {
-        linearAccelerationImplementation = sensorManager.getDefaultSensor(
-                CompositeSensorType.LINEAR_ACCELERATION.toInt());
+    public LinearAccelerationSensorFactory(final ASensorManager sensorManager) {
+        linearAccelerationImplementation = sensorManager.getDefaultSensor(SENSOR_TYPE);
     }
 
     @Override
@@ -44,6 +44,6 @@ public class LinearAccelerationSensorFactory implements ISensorFactory {
 
     @Override
     public SensorType getSensorType() {
-        return CompositeSensorType.LINEAR_ACCELERATION;
+        return SENSOR_TYPE;
     }
 }

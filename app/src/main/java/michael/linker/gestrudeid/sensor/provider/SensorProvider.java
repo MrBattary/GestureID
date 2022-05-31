@@ -1,7 +1,6 @@
 package michael.linker.gestrudeid.sensor.provider;
 
 import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -19,6 +18,7 @@ import michael.linker.gestrudeid.sensor.factory.composite.GeomagneticRotationVec
 import michael.linker.gestrudeid.sensor.factory.composite.GravitySensorFactory;
 import michael.linker.gestrudeid.sensor.factory.composite.LinearAccelerationSensorFactory;
 import michael.linker.gestrudeid.sensor.factory.composite.RotationVectorSensorFactory;
+import michael.linker.gestrudeid.sensor.manager.ASensorManager;
 import michael.linker.gestrudeid.sensor.type.BaseSensorType;
 import michael.linker.gestrudeid.sensor.type.CompositeSensorType;
 import michael.linker.gestrudeid.sensor.type.SensorType;
@@ -27,7 +27,7 @@ public class SensorProvider implements ISensorProvider {
     private final static String TAG = SensorProvider.class.getCanonicalName();
     private final Map<Integer, ISensorFactory> sensorFactories = new HashMap<>();
 
-    public SensorProvider(final SensorManager sensorManager) {
+    public SensorProvider(final ASensorManager sensorManager) {
         initializeSensorFactories(sensorManager);
     }
 
@@ -79,12 +79,12 @@ public class SensorProvider implements ISensorProvider {
         return sensorList;
     }
 
-    private void initializeSensorFactories(final SensorManager sensorManager) {
+    private void initializeSensorFactories(final ASensorManager sensorManager) {
         initializeBaseSensorFactories(sensorManager);
         initializeCompositeSensorFactories(sensorManager);
     }
 
-    private void initializeBaseSensorFactories(final SensorManager sensorManager) {
+    private void initializeBaseSensorFactories(final ASensorManager sensorManager) {
         sensorFactories.put(BaseSensorType.ACCELEROMETER.toInt(),
                 new AccelerometerSensorFactory(sensorManager));
         sensorFactories.put(BaseSensorType.GYROSCOPE.toInt(),
@@ -93,7 +93,7 @@ public class SensorProvider implements ISensorProvider {
                 new MagneticFieldSensorFactory(sensorManager));
     }
 
-    private void initializeCompositeSensorFactories(final SensorManager sensorManager) {
+    private void initializeCompositeSensorFactories(final ASensorManager sensorManager) {
         sensorFactories.put(CompositeSensorType.GRAVITY.toInt(),
                 new GravitySensorFactory(sensorManager));
         sensorFactories.put(CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR.toInt(),

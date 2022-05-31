@@ -10,9 +10,9 @@ import android.hardware.Sensor;
  * @link https://source.android.com/devices/sensors/sensor-types#base_sensors
  */
 public final class BaseSensorType {
-    final public static SensorType ACCELEROMETER;
-    final public static SensorType GYROSCOPE;
-    final public static SensorType MAGNETOMETER;
+    public final static SensorType ACCELEROMETER;
+    public final static SensorType GYROSCOPE;
+    public final static SensorType MAGNETOMETER;
 
     static {
         ACCELEROMETER = new SensorType(Sensor.TYPE_ACCELEROMETER, "ACCELEROMETER");

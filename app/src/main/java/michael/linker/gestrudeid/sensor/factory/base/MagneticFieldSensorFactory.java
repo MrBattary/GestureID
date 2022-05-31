@@ -1,12 +1,12 @@
 package michael.linker.gestrudeid.sensor.factory.base;
 
 import android.hardware.Sensor;
-import android.hardware.SensorManager;
 
 import michael.linker.gestrudeid.config.SensorsBuildConfiguration;
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
+import michael.linker.gestrudeid.sensor.manager.ASensorManager;
 import michael.linker.gestrudeid.sensor.type.BaseSensorType;
 import michael.linker.gestrudeid.sensor.type.SensorType;
 
@@ -14,11 +14,12 @@ import michael.linker.gestrudeid.sensor.type.SensorType;
  * Returns a Magnetometer sensor implementation
  */
 public class MagneticFieldSensorFactory implements ISensorFactory {
+    private final static SensorType SENSOR_TYPE = BaseSensorType.MAGNETOMETER;
     private static Sensor magnetometerImplementation;
 
-    public MagneticFieldSensorFactory(final SensorManager sensorManager) {
+    public MagneticFieldSensorFactory(final ASensorManager sensorManager) {
         magnetometerImplementation
-                = sensorManager.getDefaultSensor(BaseSensorType.MAGNETOMETER.toInt());
+                = sensorManager.getDefaultSensor(SENSOR_TYPE);
     }
 
     @Override
@@ -43,6 +44,6 @@ public class MagneticFieldSensorFactory implements ISensorFactory {
 
     @Override
     public SensorType getSensorType() {
-        return BaseSensorType.MAGNETOMETER;
+        return SENSOR_TYPE;
     }
 }
