@@ -12,34 +12,34 @@ public final class SensorsBuildConfiguration {
     /**
      * Base
      */
-    public static boolean isAccelerometerActivated() {
-        return BuildConfig.ACTIVATE_ACCELEROMETER;
+    public static boolean isAccelerometerDeactivated() {
+        return BuildConfig.DEACTIVATE_ACCELEROMETER;
     }
 
-    public static boolean isGyroscopeActivated() {
-        return BuildConfig.ACTIVATE_GYROSCOPE;
+    public static boolean isGyroscopeDeactivated() {
+        return BuildConfig.DEACTIVATE_GYROSCOPE;
     }
 
-    public static boolean isMagnetometerActivated() {
-        return BuildConfig.ACTIVATE_MAGNETOMETER;
+    public static boolean isMagnetometerDeactivated() {
+        return BuildConfig.DEACTIVATE_MAGNETOMETER;
     }
 
     /**
      * Composite
      */
-    public static boolean isGravityActivated() {
-        return BuildConfig.ACTIVATE_GRAVITY;
+    public static boolean isGravityDeactivated() {
+        return BuildConfig.DEACTIVATE_GRAVITY;
     }
 
-    public static boolean isLinearAccelerationActivated() {
-        return BuildConfig.ACTIVATE_LINEAR_ACCELERATION;
+    public static boolean isLinearAccelerationDeactivated() {
+        return BuildConfig.DEACTIVATE_LINEAR_ACCELERATION;
     }
 
-    public static boolean isRotationVectorActivated() {
-        return BuildConfig.ACTIVATE_ROTATION_VECTOR;
+    public static boolean isRotationVectorDeactivated() {
+        return BuildConfig.DEACTIVATE_ROTATION_VECTOR;
     }
 
-    public static boolean isGeomagneticRotationVectorActivated() {
-        return BuildConfig.ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR;
+    public static boolean isGeomagneticRotationVectorDeactivated() {
+        return BuildConfig.DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR;
     }
 }

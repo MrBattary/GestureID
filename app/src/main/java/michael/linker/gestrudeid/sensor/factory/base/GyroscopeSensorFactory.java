@@ -16,24 +16,25 @@ import michael.linker.gestrudeid.sensor.type.SensorType;
 public class GyroscopeSensorFactory implements ISensorFactory {
     private final static SensorType SENSOR_TYPE = BaseSensorType.GYROSCOPE;
     private static Sensor gyroscopeImplementation;
+    private final ASensorManager sensorManager;
 
     public GyroscopeSensorFactory(final ASensorManager sensorManager) {
-        gyroscopeImplementation =
-                sensorManager.getDefaultSensor(SENSOR_TYPE);
+        this.sensorManager = sensorManager;
     }
 
     @Override
     public Sensor getActivatedImplementation()
             throws SensorNotActivatedException, SensorNotFoundException {
-        if (SensorsBuildConfiguration.isGyroscopeActivated()) {
-            return this.getImplementation();
-        } else {
+        if (SensorsBuildConfiguration.isGyroscopeDeactivated()) {
             throw new SensorNotActivatedException("The gyroscope is not activated!");
+        } else {
+            return getImplementation();
         }
     }
 
     @Override
     public Sensor getImplementation() throws SensorNotFoundException {
+        buildImplementation();
         if (gyroscopeImplementation != null) {
             return gyroscopeImplementation;
         } else {
@@ -44,5 +45,11 @@ public class GyroscopeSensorFactory implements ISensorFactory {
     @Override
     public SensorType getSensorType() {
         return SENSOR_TYPE;
+    }
+
+    private void buildImplementation() {
+        if (gyroscopeImplementation == null) {
+            gyroscopeImplementation = sensorManager.getDefaultSensor(SENSOR_TYPE);
+        }
     }
 }

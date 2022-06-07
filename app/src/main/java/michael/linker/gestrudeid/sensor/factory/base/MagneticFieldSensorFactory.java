@@ -16,24 +16,25 @@ import michael.linker.gestrudeid.sensor.type.SensorType;
 public class MagneticFieldSensorFactory implements ISensorFactory {
     private final static SensorType SENSOR_TYPE = BaseSensorType.MAGNETOMETER;
     private static Sensor magnetometerImplementation;
+    private final ASensorManager sensorManager;
 
     public MagneticFieldSensorFactory(final ASensorManager sensorManager) {
-        magnetometerImplementation
-                = sensorManager.getDefaultSensor(SENSOR_TYPE);
+        this.sensorManager = sensorManager;
     }
 
     @Override
     public Sensor getActivatedImplementation()
             throws SensorNotActivatedException, SensorNotFoundException {
-        if (SensorsBuildConfiguration.isMagnetometerActivated()) {
-            return this.getImplementation();
-        } else {
+        if (SensorsBuildConfiguration.isMagnetometerDeactivated()) {
             throw new SensorNotActivatedException("The magnetic field sensor is not activated");
+        } else {
+            return this.getImplementation();
         }
     }
 
     @Override
     public Sensor getImplementation() throws SensorNotFoundException {
+        buildImplementation();
         if (magnetometerImplementation != null) {
             return magnetometerImplementation;
         } else {
@@ -45,5 +46,12 @@ public class MagneticFieldSensorFactory implements ISensorFactory {
     @Override
     public SensorType getSensorType() {
         return SENSOR_TYPE;
+    }
+
+    private void buildImplementation() {
+        if (magnetometerImplementation == null) {
+            magnetometerImplementation = sensorManager.getDefaultSensor(SENSOR_TYPE);
+
+        }
     }
 }

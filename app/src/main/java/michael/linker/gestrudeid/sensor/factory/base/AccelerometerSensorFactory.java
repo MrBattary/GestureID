@@ -16,23 +16,25 @@ import michael.linker.gestrudeid.sensor.type.SensorType;
 public class AccelerometerSensorFactory implements ISensorFactory {
     private final static SensorType SENSOR_TYPE = BaseSensorType.ACCELEROMETER;
     private static Sensor accelerometerImplementation;
+    private final ASensorManager sensorManager;
 
     public AccelerometerSensorFactory(final ASensorManager sensorManager) {
-        accelerometerImplementation = sensorManager.getDefaultSensor(SENSOR_TYPE);
+        this.sensorManager = sensorManager;
     }
 
     @Override
     public Sensor getActivatedImplementation()
             throws SensorNotActivatedException, SensorNotFoundException {
-        if (SensorsBuildConfiguration.isAccelerometerActivated()) {
-            return this.getImplementation();
-        } else {
+        if (SensorsBuildConfiguration.isAccelerometerDeactivated()) {
             throw new SensorNotActivatedException("The accelerometer is not activated!");
+        } else {
+            return getImplementation();
         }
     }
 
     @Override
     public Sensor getImplementation() throws SensorNotFoundException {
+        buildImplementation();
         if (accelerometerImplementation != null) {
             return accelerometerImplementation;
         } else {
@@ -43,5 +45,11 @@ public class AccelerometerSensorFactory implements ISensorFactory {
     @Override
     public SensorType getSensorType() {
         return SENSOR_TYPE;
+    }
+
+    private void buildImplementation() {
+        if (accelerometerImplementation == null) {
+            accelerometerImplementation = sensorManager.getDefaultSensor(SENSOR_TYPE);
+        }
     }
 }

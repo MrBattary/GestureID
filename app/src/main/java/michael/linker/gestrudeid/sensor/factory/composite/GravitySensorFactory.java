@@ -16,23 +16,25 @@ import michael.linker.gestrudeid.sensor.type.SensorType;
 public class GravitySensorFactory implements ISensorFactory {
     private final static SensorType SENSOR_TYPE = CompositeSensorType.GRAVITY;
     private static Sensor gravityImplementation;
+    private final ASensorManager sensorManager;
 
     public GravitySensorFactory(final ASensorManager sensorManager) {
-        gravityImplementation = sensorManager.getDefaultSensor(SENSOR_TYPE);
+        this.sensorManager = sensorManager;
     }
 
     @Override
     public Sensor getActivatedImplementation()
             throws SensorNotActivatedException, SensorNotFoundException {
-        if (SensorsBuildConfiguration.isGravityActivated()) {
-            return this.getImplementation();
-        } else {
+        if (SensorsBuildConfiguration.isGravityDeactivated()) {
             throw new SensorNotActivatedException("The gravity sensor is not activated!");
+        } else {
+            return this.getImplementation();
         }
     }
 
     @Override
     public Sensor getImplementation() throws SensorNotFoundException {
+        buildImplementation();
         if (gravityImplementation != null) {
             return gravityImplementation;
         } else {
@@ -43,5 +45,11 @@ public class GravitySensorFactory implements ISensorFactory {
     @Override
     public SensorType getSensorType() {
         return SENSOR_TYPE;
+    }
+
+    private void buildImplementation() {
+        if (gravityImplementation == null) {
+            gravityImplementation = sensorManager.getDefaultSensor(SENSOR_TYPE);
+        }
     }
 }

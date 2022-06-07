@@ -13,19 +13,19 @@ android {
         minSdk 29
         targetSdk 32
         versionCode 1
-        versionName '0.2'
+        versionName '0.3'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         /* User config */
         /* Sensors */
-        buildConfigField "boolean", "ACTIVATE_ACCELEROMETER", "false"
-        buildConfigField "boolean", "ACTIVATE_GYROSCOPE", "false"
-        buildConfigField "boolean", "ACTIVATE_MAGNETOMETER", "false"
-        buildConfigField "boolean", "ACTIVATE_GRAVITY", "false"
-        buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
-        buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
-        buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
+        buildConfigField "boolean", "DEACTIVATE_ACCELEROMETER", "false"
+        buildConfigField "boolean", "DEACTIVATE_GYROSCOPE", "false"
+        buildConfigField "boolean", "DEACTIVATE_MAGNETOMETER", "false"
+        buildConfigField "boolean", "DEACTIVATE_GRAVITY", "true"
+        buildConfigField "boolean", "DEACTIVATE_LINEAR_ACCELERATION", "true"
+        buildConfigField "boolean", "DEACTIVATE_ROTATION_VECTOR", "true"
+        buildConfigField "boolean", "DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "true"
         /* Streams */
         buildConfigField OutputStreamType, "MAIN_OUTPUT_STREAM_TYPE", "${OutputStreamType}.UI"
         buildConfigField OutputStreamType, "BACKUP_OUTPUT_STREAM_TYPE", "${OutputStreamType}.LOGGER"
@@ -41,13 +41,13 @@ android {
         debug {
             /* User config */
             /* Sensors */
-            buildConfigField "boolean", "ACTIVATE_ACCELEROMETER", "true"
-            buildConfigField "boolean", "ACTIVATE_GYROSCOPE", "true"
-            buildConfigField "boolean", "ACTIVATE_MAGNETOMETER", "true"
-            buildConfigField "boolean", "ACTIVATE_GRAVITY", "false"
-            buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
-            buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
-            buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
+            buildConfigField "boolean", "DEACTIVATE_ACCELEROMETER", "false"
+            buildConfigField "boolean", "DEACTIVATE_GYROSCOPE", "false"
+            buildConfigField "boolean", "DEACTIVATE_MAGNETOMETER", "false"
+            buildConfigField "boolean", "DEACTIVATE_GRAVITY", "true"
+            buildConfigField "boolean", "DEACTIVATE_LINEAR_ACCELERATION", "true"
+            buildConfigField "boolean", "DEACTIVATE_ROTATION_VECTOR", "true"
+            buildConfigField "boolean", "DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "true"
             /* Streams */
             buildConfigField OutputStreamType, "MAIN_OUTPUT_STREAM_TYPE", "${OutputStreamType}.UI"
             buildConfigField OutputStreamType, "BACKUP_OUTPUT_STREAM_TYPE", "${OutputStreamType}.LOGGER"
@@ -58,13 +58,13 @@ android {
         release {
             /* User config */
             /* Sensors */
-            buildConfigField "boolean", "ACTIVATE_ACCELEROMETER", "false"
-            buildConfigField "boolean", "ACTIVATE_GYROSCOPE", "false"
-            buildConfigField "boolean", "ACTIVATE_MAGNETOMETER", "false"
-            buildConfigField "boolean", "ACTIVATE_GRAVITY", "false"
-            buildConfigField "boolean", "ACTIVATE_LINEAR_ACCELERATION", "false"
-            buildConfigField "boolean", "ACTIVATE_ROTATION_VECTOR", "false"
-            buildConfigField "boolean", "ACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
+            buildConfigField "boolean", "DEACTIVATE_ACCELEROMETER", "false"
+            buildConfigField "boolean", "DEACTIVATE_GYROSCOPE", "false"
+            buildConfigField "boolean", "DEACTIVATE_MAGNETOMETER", "false"
+            buildConfigField "boolean", "DEACTIVATE_GRAVITY", "false"
+            buildConfigField "boolean", "DEACTIVATE_LINEAR_ACCELERATION", "false"
+            buildConfigField "boolean", "DEACTIVATE_ROTATION_VECTOR", "false"
+            buildConfigField "boolean", "DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
             /* Streams */
             buildConfigField OutputStreamType, "MAIN_OUTPUT_STREAM_TYPE", "${OutputStreamType}.DATABASE"
             buildConfigField OutputStreamType, "BACKUP_OUTPUT_STREAM_TYPE", "${OutputStreamType}.FILE"

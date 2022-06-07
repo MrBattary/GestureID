@@ -16,23 +16,25 @@ import michael.linker.gestrudeid.sensor.type.SensorType;
 public class RotationVectorSensorFactory implements ISensorFactory {
     private final static SensorType SENSOR_TYPE = CompositeSensorType.ROTATION_VECTOR;
     private static Sensor rotationVectorSensorImplementation;
+    private final ASensorManager sensorManager;
 
     public RotationVectorSensorFactory(final ASensorManager sensorManager) {
-        rotationVectorSensorImplementation = sensorManager.getDefaultSensor(SENSOR_TYPE);
+        this.sensorManager = sensorManager;
     }
 
     @Override
     public Sensor getActivatedImplementation()
             throws SensorNotActivatedException, SensorNotFoundException {
-        if (SensorsBuildConfiguration.isRotationVectorActivated()) {
-            return this.getImplementation();
-        } else {
+        if (SensorsBuildConfiguration.isRotationVectorDeactivated()) {
             throw new SensorNotActivatedException("The rotation vector sensor is not activated!");
+        } else {
+            return this.getImplementation();
         }
     }
 
     @Override
     public Sensor getImplementation() throws SensorNotFoundException {
+        buildImplementation();
         if (rotationVectorSensorImplementation != null) {
             return rotationVectorSensorImplementation;
         } else {
@@ -43,5 +45,11 @@ public class RotationVectorSensorFactory implements ISensorFactory {
     @Override
     public SensorType getSensorType() {
         return SENSOR_TYPE;
+    }
+
+    private void buildImplementation() {
+        if (rotationVectorSensorImplementation == null) {
+            rotationVectorSensorImplementation = sensorManager.getDefaultSensor(SENSOR_TYPE);
+        }
     }
 }
