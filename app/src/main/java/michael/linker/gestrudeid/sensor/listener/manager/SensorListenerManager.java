@@ -2,6 +2,7 @@ package michael.linker.gestrudeid.sensor.listener.manager;
 
 import android.util.ArraySet;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import michael.linker.gestrudeid.sensor.listener.ISensorListener;
@@ -71,7 +72,8 @@ public class SensorListenerManager implements ISensorListenerManager {
 
     @Override
     public void unregisterAllListeners() {
-        for (SensorType sensorType : registeredListeners) {
+        Set<SensorType> tempSet = new HashSet<>(registeredListeners);
+        for (SensorType sensorType : tempSet) {
             unregisterOneListener(sensorType);
         }
     }
