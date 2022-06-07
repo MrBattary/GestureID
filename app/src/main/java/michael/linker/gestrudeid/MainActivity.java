@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.main_text_view);
         textView.setMovementMethod(new ScrollingMovementMethod());
 
-        IStreamManager streamManager = new StreamManager(textView);
+        IStreamManager streamManager = new StreamManager(textView, this, "First.txt");
         IOutputStream outputStream = streamManager.getOutputStream();
 
         ISensorProvider sensorProvider = new SensorProvider(sensorManager);

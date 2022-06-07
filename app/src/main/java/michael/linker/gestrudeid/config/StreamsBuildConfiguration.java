@@ -18,6 +18,10 @@ public final class StreamsBuildConfiguration {
         return BuildConfig.BACKUP_OUTPUT_STREAM_TYPE;
     }
 
+    public static String getFileOutputDirectory() {
+        return BuildConfig.FILE_OUTPUT_DIRECTORY;
+    }
+
     // TODO: Add file stream
 
     // TODO: Add db stream

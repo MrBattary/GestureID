@@ -9,14 +9,13 @@ import michael.linker.gestrudeid.stream.output.stream.impl.LogOutputStream;
  * The logger stream factory
  */
 public class LogOutputStreamFactory implements IOutputStreamFactory {
-    private static LogOutputStream logOutputStream;
-
-    public LogOutputStreamFactory() {
-        logOutputStream = new LogOutputStream();
-    }
+    private LogOutputStream logOutputStream;
 
     @Override
     public IOutputStream getOutputStream() throws OutputStreamFactoryFailedException {
+        if (logOutputStream == null) {
+            logOutputStream = new LogOutputStream();
+        }
         return logOutputStream;
     }
 }

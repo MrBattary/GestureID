@@ -1,5 +1,6 @@
 package michael.linker.gestrudeid.stream.manager;
 
+import android.content.Context;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import java.util.Objects;
 import michael.linker.gestrudeid.config.StreamsBuildConfiguration;
 import michael.linker.gestrudeid.stream.output.factory.IOutputStreamFactory;
 import michael.linker.gestrudeid.stream.output.factory.OutputStreamFactoryFailedException;
+import michael.linker.gestrudeid.stream.output.factory.impl.FileOutputStreamFactory;
 import michael.linker.gestrudeid.stream.output.factory.impl.LogOutputStreamFactory;
 import michael.linker.gestrudeid.stream.output.factory.impl.UiOutputStreamFactory;
 import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
@@ -25,11 +27,15 @@ public class StreamManager implements IStreamManager {
      * Default constructor
      *
      * @param textView UI element for the UiSensorOutputStream
+     * @param context Main context
+     * @param filename Filename for output data
      * @see UiOutputStream
      */
-    public StreamManager(final TextView textView) {
+    public StreamManager(final TextView textView, final Context context, final String filename) {
         sensorStreamFactories.put(OutputStreamType.LOGGER, new LogOutputStreamFactory());
         sensorStreamFactories.put(OutputStreamType.UI, new UiOutputStreamFactory(textView));
+        sensorStreamFactories.put(OutputStreamType.FILE,
+                new FileOutputStreamFactory(context, filename));
     }
 
     @Override
