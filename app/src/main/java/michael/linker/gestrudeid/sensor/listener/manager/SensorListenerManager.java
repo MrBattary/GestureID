@@ -14,11 +14,11 @@ import michael.linker.gestrudeid.sensor.type.SensorDelayType;
 import michael.linker.gestrudeid.sensor.type.SensorType;
 
 public class SensorListenerManager implements ISensorListenerManager {
-    private static SensorDelayType delay;
-    private static final Set<SensorType> registeredListeners = new ArraySet<>();
+    private final Set<SensorType> registeredListeners = new ArraySet<>();
     private final ISensorListenerProvider sensorListenerProvider;
     private final ASensorManager sensorManager;
     private final ISensorProvider sensorProvider;
+    private SensorDelayType delay;
 
     public SensorListenerManager(
             final ISensorListenerProvider sensorListenerProvider,
@@ -27,6 +27,7 @@ public class SensorListenerManager implements ISensorListenerManager {
         this.sensorListenerProvider = sensorListenerProvider;
         this.sensorManager = sensorManager;
         this.sensorProvider = sensorProvider;
+        delay = new SensorDelayType(SensorDelayType.NORMAL);
     }
 
     @Override

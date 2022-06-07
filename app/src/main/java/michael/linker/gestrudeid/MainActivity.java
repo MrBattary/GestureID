@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 import michael.linker.gestrudeid.formatter.IFormatter;
 import michael.linker.gestrudeid.formatter.factory.FormatterFactory;
 import michael.linker.gestrudeid.formatter.factory.IFormatterFactory;
+import michael.linker.gestrudeid.sensor.listener.manager.ISensorListenerManager;
+import michael.linker.gestrudeid.sensor.listener.manager.SensorListenerManager;
 import michael.linker.gestrudeid.sensor.listener.provider.ISensorListenerProvider;
 import michael.linker.gestrudeid.sensor.listener.provider.SensorListenerProvider;
 import michael.linker.gestrudeid.sensor.listener.suppressor.ISensorListenerSuppressor;
@@ -72,20 +74,16 @@ public class MainActivity extends AppCompatActivity {
         eventSynchronizer.attachOneListener(BaseSensorType.GYROSCOPE);
         eventSynchronizer.attachOneListener(BaseSensorType.MAGNETOMETER);
 
-        final int delay = ASensorManager.SENSOR_DELAY_NORMAL;
-        sensorManager.registerListener(
-                sensorListenerProvider.getListener(BaseSensorType.ACCELEROMETER),
-                sensorProvider.getSensor(BaseSensorType.ACCELEROMETER), delay);
-        sensorManager.registerListener(
-                sensorListenerProvider.getListener(BaseSensorType.GYROSCOPE),
-                sensorProvider.getSensor(BaseSensorType.GYROSCOPE), delay);
-        sensorManager.registerListener(
-                sensorListenerProvider.getListener(BaseSensorType.MAGNETOMETER),
-                sensorProvider.getSensor(BaseSensorType.MAGNETOMETER), delay);
+        ISensorListenerManager sensorListenerManager = new SensorListenerManager(
+                sensorListenerProvider, sensorManager, sensorProvider);
+        sensorListenerManager.registerListener(BaseSensorType.ACCELEROMETER);
+        sensorListenerManager.registerListener(BaseSensorType.GYROSCOPE);
+        sensorListenerManager.registerListener(BaseSensorType.MAGNETOMETER);
 
         sensorListenerSuppressor.unsuppressListener(BaseSensorType.ACCELEROMETER);
         sensorListenerSuppressor.unsuppressListener(BaseSensorType.GYROSCOPE);
         sensorListenerSuppressor.unsuppressListener(BaseSensorType.MAGNETOMETER);
+
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
@@ -97,13 +95,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 sensorListenerSuppressor.suppressAllListeners();
-                sensorManager.unregisterListener(
-                        sensorListenerProvider.getListener(BaseSensorType.ACCELEROMETER));
-                sensorManager.unregisterListener(
-                        sensorListenerProvider.getListener(BaseSensorType.GYROSCOPE));
-                sensorManager.unregisterListener(
-                        sensorListenerProvider.getListener(BaseSensorType.MAGNETOMETER));
-
+                sensorListenerManager.unregisterAllListeners();
             }
         }, 10000);
     }

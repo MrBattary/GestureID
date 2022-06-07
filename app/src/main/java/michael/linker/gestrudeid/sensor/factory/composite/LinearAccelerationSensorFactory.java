@@ -27,7 +27,7 @@ public class LinearAccelerationSensorFactory implements ISensorFactory {
             throws SensorNotActivatedException, SensorNotFoundException {
         if (SensorsBuildConfiguration.isLinearAccelerationDeactivated()) {
             throw new SensorNotActivatedException(
-                    "The linear acceleration sensor is not activated");
+                    "The linear acceleration sensor is not activated!");
         } else {
             return this.getImplementation();
         }

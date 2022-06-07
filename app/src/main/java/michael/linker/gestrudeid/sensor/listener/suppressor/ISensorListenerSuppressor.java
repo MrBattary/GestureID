@@ -65,5 +65,5 @@ public interface ISensorListenerSuppressor {
      *
      * @param sensorType Listener sensor type
      */
-    void suppressNewListener(SensorType sensorType);
+    void registerListener(SensorType sensorType);
 }

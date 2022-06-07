@@ -6,8 +6,8 @@ import java.util.Map;
 import michael.linker.gestrudeid.sensor.type.SensorType;
 
 public class SensorListenerSuppressor implements ISensorListenerSuppressor {
-    private static boolean suppressAllListeners = true;
-    private static final Map<SensorType, Boolean> listeners = new HashMap<>();
+    private boolean suppressAllListeners = true;
+    private final Map<SensorType, Boolean> listeners = new HashMap<>();
 
     @Override
     public void suppressAllListeners() {
@@ -55,7 +55,7 @@ public class SensorListenerSuppressor implements ISensorListenerSuppressor {
     }
 
     @Override
-    public void suppressNewListener(SensorType sensorType) {
+    public void registerListener(SensorType sensorType) {
         listeners.put(sensorType, true);
     }
 

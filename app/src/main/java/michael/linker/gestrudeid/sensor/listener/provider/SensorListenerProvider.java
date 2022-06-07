@@ -13,7 +13,7 @@ import michael.linker.gestrudeid.sensor.type.SensorType;
 import michael.linker.gestrudeid.synchronizer.IEventSynchronizer;
 
 public class SensorListenerProvider implements ISensorListenerProvider {
-    private static final Map<Integer, ISensorListener> SENSOR_LISTENERS = new HashMap<>();
+    private final Map<Integer, ISensorListener> sensorListeners = new HashMap<>();
 
     public SensorListenerProvider(final IEventSynchronizer eventSynchronizer,
             final ISensorListenerSuppressor listenerSuppressor) {
@@ -23,7 +23,7 @@ public class SensorListenerProvider implements ISensorListenerProvider {
     @Override
     public ISensorListener getListener(SensorType sensorType)
             throws SensorListenerProviderNotFoundException {
-        ISensorListener sensorListener = SENSOR_LISTENERS.get(sensorType.toInt());
+        ISensorListener sensorListener = sensorListeners.get(sensorType.toInt());
         if (sensorListener != null) {
             return sensorListener;
         } else {
@@ -41,14 +41,14 @@ public class SensorListenerProvider implements ISensorListenerProvider {
 
     private void initializeBaseSensorListeners(final IEventSynchronizer eventSynchronizer,
                                                final ISensorListenerSuppressor listenerSuppressor) {
-        listenerSuppressor.suppressNewListener(BaseSensorType.ACCELEROMETER);
-        SENSOR_LISTENERS.put(BaseSensorType.ACCELEROMETER.toInt(),
+        listenerSuppressor.registerListener(BaseSensorType.ACCELEROMETER);
+        sensorListeners.put(BaseSensorType.ACCELEROMETER.toInt(),
                 new AccelerometerSensorListener(eventSynchronizer, listenerSuppressor));
-        listenerSuppressor.suppressNewListener(BaseSensorType.GYROSCOPE);
-        SENSOR_LISTENERS.put(BaseSensorType.GYROSCOPE.toInt(),
+        listenerSuppressor.registerListener(BaseSensorType.GYROSCOPE);
+        sensorListeners.put(BaseSensorType.GYROSCOPE.toInt(),
                 new GyroscopeSensorListener(eventSynchronizer, listenerSuppressor));
-        listenerSuppressor.suppressNewListener(BaseSensorType.MAGNETOMETER);
-        SENSOR_LISTENERS.put(BaseSensorType.MAGNETOMETER.toInt(),
+        listenerSuppressor.registerListener(BaseSensorType.MAGNETOMETER);
+        sensorListeners.put(BaseSensorType.MAGNETOMETER.toInt(),
                 new MagneticFieldSensorListener(eventSynchronizer, listenerSuppressor));
     }
 
