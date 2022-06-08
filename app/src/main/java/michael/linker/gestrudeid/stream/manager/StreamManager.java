@@ -1,70 +1,56 @@
 package michael.linker.gestrudeid.stream.manager;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
-import michael.linker.gestrudeid.config.StreamsBuildConfiguration;
+import michael.linker.gestrudeid.stream.manager.builder.output.IStreamManagerOutputFactoryBuilder;
+import michael.linker.gestrudeid.stream.manager.builder.output.StreamManagerFileOutputFactoryBuilder;
+import michael.linker.gestrudeid.stream.manager.builder.output.StreamManagerUiOutputFactoryBuilder;
 import michael.linker.gestrudeid.stream.output.factory.IOutputStreamFactory;
 import michael.linker.gestrudeid.stream.output.factory.OutputStreamFactoryFailedException;
-import michael.linker.gestrudeid.stream.output.factory.impl.FileOutputStreamFactory;
-import michael.linker.gestrudeid.stream.output.factory.impl.LogOutputStreamFactory;
-import michael.linker.gestrudeid.stream.output.factory.impl.UiOutputStreamFactory;
+import michael.linker.gestrudeid.stream.output.model.AOutputStreamModel;
 import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
-import michael.linker.gestrudeid.stream.output.stream.impl.UiOutputStream;
 import michael.linker.gestrudeid.stream.output.type.OutputStreamType;
 
 public class StreamManager implements IStreamManager {
-    private final static String TAG = StreamManager.class.getCanonicalName();
-    private final Map<OutputStreamType, IOutputStreamFactory> sensorStreamFactories =
+    private static final String TAG = StreamManager.class.getCanonicalName();
+    private final Map<OutputStreamType, IStreamManagerOutputFactoryBuilder> outputFactories =
             new HashMap<>();
 
-    /**
-     * Default constructor
-     *
-     * @param textView UI element for the UiSensorOutputStream
-     * @param context Main context
-     * @param filename Filename for output data
-     * @see UiOutputStream
-     */
-    public StreamManager(final TextView textView, final Context context, final String filename) {
-        sensorStreamFactories.put(OutputStreamType.LOGGER, new LogOutputStreamFactory());
-        sensorStreamFactories.put(OutputStreamType.UI, new UiOutputStreamFactory(textView));
-        sensorStreamFactories.put(OutputStreamType.FILE,
-                new FileOutputStreamFactory(context, filename));
+    public StreamManager() {
+        outputFactories.put(OutputStreamType.LOGGER, new StreamManagerFileOutputFactoryBuilder());
+        outputFactories.put(OutputStreamType.UI, new StreamManagerUiOutputFactoryBuilder());
+        outputFactories.put(OutputStreamType.FILE, new StreamManagerFileOutputFactoryBuilder());
     }
 
     @Override
-    public IOutputStream getOutputStream() throws StreamManagerNotFoundException {
-        try {
-            return getStreamByKey(StreamsBuildConfiguration.getMainOutputStreamType());
-        } catch (OutputStreamFactoryFailedException e) {
-            Log.w(TAG, e.getMessage());
-            Log.w(TAG, "The main output stream is not available, "
-                    + "switching to the backup is being performed");
-            try {
-                return getStreamByKey(StreamsBuildConfiguration.getBackupOutputStreamType());
-            } catch (OutputStreamFactoryFailedException ee) {
-                Log.w(TAG, e.getMessage());
-                throw new StreamManagerFailedException(
-                        "The main and backup output streams are not available!");
-            }
-        }
-    }
+    public IOutputStream getOutputStream(final AOutputStreamModel streamModel)
+            throws StreamManagerNotFoundException, StreamManagerFailedException {
+        final OutputStreamType streamType = streamModel.getStreamType();
+        IStreamManagerOutputFactoryBuilder streamManagerOutputFactory
+                = getManagerOutputFactory(streamType);
 
-    private IOutputStream getStreamByKey(final OutputStreamType streamType)
-            throws StreamManagerNotFoundException {
-        IOutputStreamFactory sensorStreamFactory = sensorStreamFactories.get(streamType);
+        IOutputStreamFactory streamFactory = streamManagerOutputFactory.buildFactory(streamModel);
+
         try {
-            return Objects.requireNonNull(sensorStreamFactory).getOutputStream();
+            return streamFactory.getOutputStream();
         } catch (OutputStreamFactoryFailedException e) {
             Log.e(TAG, e.getMessage());
             throw new StreamManagerNotFoundException("Required output stream with type: "
                     + streamType.toString() + " was not found!", e);
         }
+    }
+
+    private IStreamManagerOutputFactoryBuilder getManagerOutputFactory(OutputStreamType streamType)
+            throws StreamManagerNotFoundException {
+        IStreamManagerOutputFactoryBuilder factory = outputFactories.get(streamType);
+        if (factory == null) {
+            throw new StreamManagerNotFoundException(
+                    "Required internal output stream factory with type: " + streamType.toString()
+                            + " was not found!");
+        }
+        return factory;
     }
 }

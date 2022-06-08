@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.Collectors;
@@ -28,6 +29,8 @@ import michael.linker.gestrudeid.sensor.provider.SensorProvider;
 import michael.linker.gestrudeid.sensor.type.BaseSensorType;
 import michael.linker.gestrudeid.stream.manager.IStreamManager;
 import michael.linker.gestrudeid.stream.manager.StreamManager;
+import michael.linker.gestrudeid.stream.output.model.FileOutputModel;
+import michael.linker.gestrudeid.stream.output.model.UiOutputModel;
 import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
 import michael.linker.gestrudeid.synchronizer.EventSynchronizer;
 import michael.linker.gestrudeid.synchronizer.IEventSynchronizer;
@@ -45,17 +48,22 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.main_text_view);
         textView.setMovementMethod(new ScrollingMovementMethod());
+        File directory = this.getExternalFilesDir(null);
+        String filename = "Output.txt";
 
-        IStreamManager streamManager = new StreamManager(textView, this, "First.txt");
-        IOutputStream outputStream = streamManager.getOutputStream();
+        IStreamManager streamManager = new StreamManager();
+        FileOutputModel fileOutputModel = new FileOutputModel(directory, filename);
+        IOutputStream outputStream = streamManager.getOutputStream(fileOutputModel);
+        UiOutputModel uiOutputModel = new UiOutputModel(textView);
+        IOutputStream uiOutputStream = streamManager.getOutputStream(uiOutputModel);
 
         ISensorProvider sensorProvider = new SensorProvider(sensorManager);
-        outputStream.write("\nAll sensors:\n" + sensorProvider.
+        uiOutputStream.write("\nAll sensors:\n" + sensorProvider.
                 getSensors().
                 stream().
                 map(sensor -> sensor.getName() + "\n")
                 .collect(Collectors.joining()));
-        outputStream.write("\nActivated sensors:\n" + sensorProvider.
+        uiOutputStream.write("\nActivated sensors:\n" + sensorProvider.
                 getActivatedSensors().
                 stream().
                 map(sensor -> sensor.getName() + "\n")
@@ -87,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
+                uiOutputStream.write("\nUnsuppressing...\n");
                 sensorListenerSuppressor.unsuppressAllListeners();
             }
         }, 5000);
@@ -96,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 sensorListenerSuppressor.suppressAllListeners();
                 sensorListenerManager.unregisterAllListeners();
+                uiOutputStream.write("\nThe data for the past 5 seconds has been recorded\n");
             }
         }, 10000);
     }

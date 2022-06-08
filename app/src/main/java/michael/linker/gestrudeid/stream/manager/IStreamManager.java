@@ -1,5 +1,6 @@
 package michael.linker.gestrudeid.stream.manager;
 
+import michael.linker.gestrudeid.stream.output.model.AOutputStreamModel;
 import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
 
 /**
@@ -8,12 +9,12 @@ import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
 public interface IStreamManager {
     /**
      * Returns a output stream for the sensors data
-     * According to the configuration, the primary stream is returned,
-     * if it fails, the backup one is returned
      *
+     * @param streamModel Model for stream that contains all necessary data
      * @return Output sensor stream
-     * @throws StreamManagerNotFoundException If the primary and backup streams cannot be
-     * returned
+     * @throws StreamManagerNotFoundException If the required resources was not found
+     * @throws StreamManagerFailedException If the internal error occurs
      */
-    IOutputStream getOutputStream() throws StreamManagerNotFoundException;
+    IOutputStream getOutputStream(AOutputStreamModel streamModel)
+            throws StreamManagerNotFoundException, StreamManagerFailedException;
 }

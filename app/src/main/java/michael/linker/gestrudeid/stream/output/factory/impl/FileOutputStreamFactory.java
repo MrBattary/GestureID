@@ -1,7 +1,5 @@
 package michael.linker.gestrudeid.stream.output.factory.impl;
 
-import android.content.Context;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,6 +7,7 @@ import java.io.IOException;
 import michael.linker.gestrudeid.config.StreamsBuildConfiguration;
 import michael.linker.gestrudeid.stream.output.factory.IOutputStreamFactory;
 import michael.linker.gestrudeid.stream.output.factory.OutputStreamFactoryFailedException;
+import michael.linker.gestrudeid.stream.output.model.FileOutputModel;
 import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
 import michael.linker.gestrudeid.stream.output.stream.impl.FileOutputStream;
 
@@ -16,13 +15,11 @@ import michael.linker.gestrudeid.stream.output.stream.impl.FileOutputStream;
  * The file stream factory
  */
 public class FileOutputStreamFactory implements IOutputStreamFactory {
-    private final String filename;
-    private final Context context;
+    private final FileOutputModel fileOutputModel;
     private FileOutputStream fileOutputStream;
 
-    public FileOutputStreamFactory(Context context, String filename) {
-        this.filename = filename;
-        this.context = context;
+    public FileOutputStreamFactory(FileOutputModel fileOutputModel) {
+        this.fileOutputModel = fileOutputModel;
     }
 
     @Override
@@ -35,7 +32,7 @@ public class FileOutputStreamFactory implements IOutputStreamFactory {
 
     private FileWriter openFileForWriting() throws OutputStreamFactoryFailedException {
         // Create directory
-        File directory = new File(context.getExternalFilesDir(null),
+        File directory = new File(fileOutputModel.getDestination(),
                 StreamsBuildConfiguration.getFileOutputDirectory());
         if (!directory.exists()) {
             if (!directory.mkdirs()) {
@@ -45,7 +42,7 @@ public class FileOutputStreamFactory implements IOutputStreamFactory {
         }
 
         // Create file
-        File file = new File(directory, filename);
+        File file = new File(directory, fileOutputModel.getFilename());
         if (!file.canWrite()) {
             try {
                 if (!file.createNewFile()) {

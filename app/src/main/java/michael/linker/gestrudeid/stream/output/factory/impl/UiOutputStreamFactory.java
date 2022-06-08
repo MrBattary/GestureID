@@ -4,6 +4,7 @@ import android.widget.TextView;
 
 import michael.linker.gestrudeid.stream.output.factory.IOutputStreamFactory;
 import michael.linker.gestrudeid.stream.output.factory.OutputStreamFactoryFailedException;
+import michael.linker.gestrudeid.stream.output.model.UiOutputModel;
 import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
 import michael.linker.gestrudeid.stream.output.stream.impl.UiOutputStream;
 
@@ -11,15 +12,16 @@ import michael.linker.gestrudeid.stream.output.stream.impl.UiOutputStream;
  * The UI stream factory
  */
 public class UiOutputStreamFactory implements IOutputStreamFactory {
-    private final TextView textView;
+    private final UiOutputModel uiOutputModel;
     private UiOutputStream uiOutputStream;
 
-    public UiOutputStreamFactory(TextView textView) {
-        this.textView = textView;
+    public UiOutputStreamFactory(UiOutputModel uiOutputModel) {
+        this.uiOutputModel = uiOutputModel;
     }
 
     @Override
     public IOutputStream getOutputStream() throws OutputStreamFactoryFailedException {
+        final TextView textView = uiOutputModel.getTextView();
         if (uiOutputStream == null) {
             if (textView == null) {
                 throw new OutputStreamFactoryFailedException(
