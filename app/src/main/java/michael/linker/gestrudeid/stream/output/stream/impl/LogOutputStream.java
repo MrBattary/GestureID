@@ -15,4 +15,8 @@ public class LogOutputStream implements IOutputStream {
     public void write(String s) {
         Log.i(TAG, s);
     }
+
+    @Override
+    public void close() {
+    }
 }
