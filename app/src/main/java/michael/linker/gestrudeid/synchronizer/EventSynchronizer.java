@@ -34,12 +34,12 @@ public class EventSynchronizer implements IEventSynchronizer {
                 registeredModels.put(sensorIdFromModel, sensorModel);
             } else {
                 throw new EventSynchronizerFailedException(
-                        "Event for the listener of the sensor with ID "
+                        "Event for the listener of the sensor "
                                 + SensorRecognizer.recognizeSensorById(sensorIdFromModel)
                                 + " has already been registered!");
             }
         } else {
-            throw new EventSynchronizerNotFoundException("A listener of the sensor with ID "
+            throw new EventSynchronizerNotFoundException("A listener of the sensor "
                     + SensorRecognizer.recognizeSensorById(sensorIdFromModel)
                     + " has not been attached!");
         }

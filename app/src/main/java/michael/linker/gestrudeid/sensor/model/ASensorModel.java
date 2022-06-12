@@ -7,8 +7,10 @@ import michael.linker.gestrudeid.sensor.type.SensorType;
 
 /**
  * Basic sensor model for other sensor models
+ *
+ * @param <T> Axis type
  */
-public abstract class ASensorModel {
+public abstract class ASensorModel<T> {
     protected final SensorType sensorType;
     protected Long timestamp;
 
@@ -45,12 +47,12 @@ public abstract class ASensorModel {
      *
      * @return List of values
      */
-    abstract public List<Float> getValuesList();
+    abstract public List<T> getValuesList();
 
     /**
      * Get values from model as map of pairs name-value
      *
      * @return Map of pairs name-value
      */
-    abstract public Map<String, Float> getNamesAndValuesMap();
+    abstract public Map<String, T> getNamesAndValuesMap();
 }

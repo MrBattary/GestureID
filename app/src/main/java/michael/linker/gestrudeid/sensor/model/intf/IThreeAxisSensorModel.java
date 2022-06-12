@@ -1,4 +1,7 @@
-package michael.linker.gestrudeid.sensor.model.shared;
+package michael.linker.gestrudeid.sensor.model.intf;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Interface for working with models of three axes
@@ -6,6 +9,12 @@ package michael.linker.gestrudeid.sensor.model.shared;
  * @param <T> Axis type
  */
 public interface IThreeAxisSensorModel<T> {
+    List<String> getNamesList();
+
+    List<T> getValuesList();
+
+    Map<String, T> getNamesAndValuesMap();
+
     T getX();
 
     void setX(T x);
