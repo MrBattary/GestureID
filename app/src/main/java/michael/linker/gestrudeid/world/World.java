@@ -133,7 +133,7 @@ public class World implements IWorld {
 
     private void closeOpenedStreams() {
         closeOpenedOutputStream();
-        // TODO: Input stream
+        // TODO: Close input stream
     }
 
     private void closeOpenedOutputStream() {
