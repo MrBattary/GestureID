@@ -1,29 +1,28 @@
 package michael.linker.gestrudeid.sensor.factory.composite;
 
-import android.hardware.Sensor;
-
 import michael.linker.gestrudeid.config.SensorsBuildConfiguration;
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.manager.ASensorManager;
 import michael.linker.gestrudeid.sensor.type.CompositeSensorType;
 import michael.linker.gestrudeid.sensor.type.SensorType;
+import michael.linker.gestrudeid.sensor.wrapper.manager.ASensorManager;
+import michael.linker.gestrudeid.sensor.wrapper.sensor.SensorWrapper;
 
 /**
  * Returns a Gravity sensor implementation
  */
 public class GravitySensorFactory implements ISensorFactory {
     private final static SensorType SENSOR_TYPE = CompositeSensorType.GRAVITY;
-    private static Sensor gravityImplementation;
     private final ASensorManager sensorManager;
+    private SensorWrapper gravityImplementation;
 
     public GravitySensorFactory(final ASensorManager sensorManager) {
         this.sensorManager = sensorManager;
     }
 
     @Override
-    public Sensor getActivatedImplementation()
+    public SensorWrapper getActivatedImplementation()
             throws SensorNotActivatedException, SensorNotFoundException {
         if (SensorsBuildConfiguration.isGravityDeactivated()) {
             throw new SensorNotActivatedException("The gravity sensor is not activated!");
@@ -33,7 +32,7 @@ public class GravitySensorFactory implements ISensorFactory {
     }
 
     @Override
-    public Sensor getImplementation() throws SensorNotFoundException {
+    public SensorWrapper getImplementation() throws SensorNotFoundException {
         buildImplementation();
         if (gravityImplementation != null) {
             return gravityImplementation;
@@ -49,7 +48,8 @@ public class GravitySensorFactory implements ISensorFactory {
 
     private void buildImplementation() {
         if (gravityImplementation == null) {
-            gravityImplementation = sensorManager.getDefaultSensor(SENSOR_TYPE);
+            gravityImplementation =
+                    new SensorWrapper(SENSOR_TYPE, sensorManager.getDefaultSensor(SENSOR_TYPE));
         }
     }
 }

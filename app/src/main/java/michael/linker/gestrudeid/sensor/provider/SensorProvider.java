@@ -1,6 +1,5 @@
 package michael.linker.gestrudeid.sensor.provider;
 
-import android.hardware.Sensor;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -18,10 +17,11 @@ import michael.linker.gestrudeid.sensor.factory.composite.GeomagneticRotationVec
 import michael.linker.gestrudeid.sensor.factory.composite.GravitySensorFactory;
 import michael.linker.gestrudeid.sensor.factory.composite.LinearAccelerationSensorFactory;
 import michael.linker.gestrudeid.sensor.factory.composite.RotationVectorSensorFactory;
-import michael.linker.gestrudeid.sensor.manager.ASensorManager;
 import michael.linker.gestrudeid.sensor.type.BaseSensorType;
 import michael.linker.gestrudeid.sensor.type.CompositeSensorType;
 import michael.linker.gestrudeid.sensor.type.SensorType;
+import michael.linker.gestrudeid.sensor.wrapper.manager.ASensorManager;
+import michael.linker.gestrudeid.sensor.wrapper.sensor.SensorWrapper;
 
 public class SensorProvider implements ISensorProvider {
     private final static String TAG = SensorProvider.class.getCanonicalName();
@@ -32,7 +32,8 @@ public class SensorProvider implements ISensorProvider {
     }
 
     @Override
-    public Sensor getSensor(final SensorType sensorType) throws SensorProviderNotFoundException {
+    public SensorWrapper getSensor(final SensorType sensorType)
+            throws SensorProviderNotFoundException {
         try {
             ISensorFactory sensorFactory = sensorFactories.get(sensorType.toInt());
             if (sensorFactory != null) {
@@ -49,9 +50,9 @@ public class SensorProvider implements ISensorProvider {
     }
 
     @Override
-    public List<Sensor> getActivatedSensors() throws SensorProviderNotFoundException {
+    public List<SensorWrapper> getActivatedSensors() throws SensorProviderNotFoundException {
         try {
-            List<Sensor> sensorList = new ArrayList<>();
+            List<SensorWrapper> sensorList = new ArrayList<>();
             for (ISensorFactory sensorFactory : sensorFactories.values()) {
                 try {
                     sensorList.add(sensorFactory.getActivatedImplementation());
@@ -67,8 +68,8 @@ public class SensorProvider implements ISensorProvider {
     }
 
     @Override
-    public List<Sensor> getSensors() {
-        List<Sensor> sensorList = new ArrayList<>();
+    public List<SensorWrapper> getSensors() {
+        List<SensorWrapper> sensorList = new ArrayList<>();
         for (ISensorFactory sensorFactory : sensorFactories.values()) {
             try {
                 sensorList.add(sensorFactory.getImplementation());

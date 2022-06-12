@@ -10,12 +10,8 @@ import michael.linker.gestrudeid.formatter.type.FormatterMode;
  * @see michael.linker.gestrudeid.formatter
  */
 public final class FormatterBuildConfiguration {
-    public static FormatterMode getMainFormatterMode() {
-        return BuildConfig.MAIN_FORMATTER_MODE;
-    }
-
-    public static FormatterMode getBackupFormatterMode() {
-        return BuildConfig.BACKUP_FORMATTER_MODE;
+    public static FormatterMode getFormatterMode() {
+        return BuildConfig.FORMATTER_MODE;
     }
 
     public static char getEventsSeparator() {
@@ -28,5 +24,17 @@ public final class FormatterBuildConfiguration {
 
     public static String getModelValuesSeparator() {
         return BuildConfig.MODEL_VALUES_SEPARATOR;
+    }
+
+    public static String getHeadingSeparator() {
+        return BuildConfig.HEADING_SEPARATOR;
+    }
+
+    public static String getHeadingValueSeparator() {
+        return BuildConfig.HEADING_VALUE_SEPARATOR;
+    }
+
+    public static String getHeadingTimestamp() {
+        return BuildConfig.HEADING_TIMESTAMP;
     }
 }

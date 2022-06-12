@@ -1,22 +1,11 @@
 package michael.linker.gestrudeid.sensor.listener.manager;
 
-import michael.linker.gestrudeid.sensor.type.SensorDelayType;
 import michael.linker.gestrudeid.sensor.type.SensorType;
 
 /**
  * Manager that helps to work with sensor listeners
  */
 public interface ISensorListenerManager {
-    /**
-     * @return Current delay value
-     */
-    SensorDelayType getDelay();
-
-    /**
-     * @param delay New delay value
-     */
-    void setDelay(SensorDelayType delay);
-
     /**
      * Checks if a certain listener is registered
      *

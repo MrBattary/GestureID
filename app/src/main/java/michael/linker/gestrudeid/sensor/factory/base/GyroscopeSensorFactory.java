@@ -1,29 +1,28 @@
 package michael.linker.gestrudeid.sensor.factory.base;
 
-import android.hardware.Sensor;
-
 import michael.linker.gestrudeid.config.SensorsBuildConfiguration;
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.manager.ASensorManager;
 import michael.linker.gestrudeid.sensor.type.BaseSensorType;
 import michael.linker.gestrudeid.sensor.type.SensorType;
+import michael.linker.gestrudeid.sensor.wrapper.manager.ASensorManager;
+import michael.linker.gestrudeid.sensor.wrapper.sensor.SensorWrapper;
 
 /**
  * Returns a Gyroscope implementation
  */
 public class GyroscopeSensorFactory implements ISensorFactory {
     private final static SensorType SENSOR_TYPE = BaseSensorType.GYROSCOPE;
-    private static Sensor gyroscopeImplementation;
     private final ASensorManager sensorManager;
+    private SensorWrapper gyroscopeImplementation;
 
     public GyroscopeSensorFactory(final ASensorManager sensorManager) {
         this.sensorManager = sensorManager;
     }
 
     @Override
-    public Sensor getActivatedImplementation()
+    public SensorWrapper getActivatedImplementation()
             throws SensorNotActivatedException, SensorNotFoundException {
         if (SensorsBuildConfiguration.isGyroscopeDeactivated()) {
             throw new SensorNotActivatedException("The gyroscope is not activated!");
@@ -33,7 +32,7 @@ public class GyroscopeSensorFactory implements ISensorFactory {
     }
 
     @Override
-    public Sensor getImplementation() throws SensorNotFoundException {
+    public SensorWrapper getImplementation() throws SensorNotFoundException {
         buildImplementation();
         if (gyroscopeImplementation != null) {
             return gyroscopeImplementation;
@@ -49,7 +48,8 @@ public class GyroscopeSensorFactory implements ISensorFactory {
 
     private void buildImplementation() {
         if (gyroscopeImplementation == null) {
-            gyroscopeImplementation = sensorManager.getDefaultSensor(SENSOR_TYPE);
+            gyroscopeImplementation =
+                    new SensorWrapper(SENSOR_TYPE, sensorManager.getDefaultSensor(SENSOR_TYPE));
         }
     }
 }

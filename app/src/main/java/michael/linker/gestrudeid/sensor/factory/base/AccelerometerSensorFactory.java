@@ -1,29 +1,28 @@
 package michael.linker.gestrudeid.sensor.factory.base;
 
-import android.hardware.Sensor;
-
 import michael.linker.gestrudeid.config.SensorsBuildConfiguration;
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.manager.ASensorManager;
 import michael.linker.gestrudeid.sensor.type.BaseSensorType;
 import michael.linker.gestrudeid.sensor.type.SensorType;
+import michael.linker.gestrudeid.sensor.wrapper.manager.ASensorManager;
+import michael.linker.gestrudeid.sensor.wrapper.sensor.SensorWrapper;
 
 /**
  * Returns an Accelerometer implementation
  */
 public class AccelerometerSensorFactory implements ISensorFactory {
     private final static SensorType SENSOR_TYPE = BaseSensorType.ACCELEROMETER;
-    private static Sensor accelerometerImplementation;
     private final ASensorManager sensorManager;
+    private SensorWrapper accelerometerImplementation;
 
     public AccelerometerSensorFactory(final ASensorManager sensorManager) {
         this.sensorManager = sensorManager;
     }
 
     @Override
-    public Sensor getActivatedImplementation()
+    public SensorWrapper getActivatedImplementation()
             throws SensorNotActivatedException, SensorNotFoundException {
         if (SensorsBuildConfiguration.isAccelerometerDeactivated()) {
             throw new SensorNotActivatedException("The accelerometer is not activated!");
@@ -33,7 +32,7 @@ public class AccelerometerSensorFactory implements ISensorFactory {
     }
 
     @Override
-    public Sensor getImplementation() throws SensorNotFoundException {
+    public SensorWrapper getImplementation() throws SensorNotFoundException {
         buildImplementation();
         if (accelerometerImplementation != null) {
             return accelerometerImplementation;
@@ -49,7 +48,8 @@ public class AccelerometerSensorFactory implements ISensorFactory {
 
     private void buildImplementation() {
         if (accelerometerImplementation == null) {
-            accelerometerImplementation = sensorManager.getDefaultSensor(SENSOR_TYPE);
+            accelerometerImplementation =
+                    new SensorWrapper(SENSOR_TYPE, sensorManager.getDefaultSensor(SENSOR_TYPE));
         }
     }
 }

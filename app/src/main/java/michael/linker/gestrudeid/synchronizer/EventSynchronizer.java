@@ -9,6 +9,7 @@ import java.util.TreeSet;
 
 import michael.linker.gestrudeid.formatter.IFormatter;
 import michael.linker.gestrudeid.sensor.model.ASensorModel;
+import michael.linker.gestrudeid.sensor.recognizer.SensorRecognizer;
 import michael.linker.gestrudeid.sensor.type.SensorType;
 import michael.linker.gestrudeid.synchronizer.model.SynchronizedEventListOfModels;
 
@@ -33,12 +34,14 @@ public class EventSynchronizer implements IEventSynchronizer {
                 registeredModels.put(sensorIdFromModel, sensorModel);
             } else {
                 throw new EventSynchronizerFailedException(
-                        "Event for the listener of the sensor with ID " + sensorIdFromModel +
-                                " has already been registered!");
+                        "Event for the listener of the sensor with ID "
+                                + SensorRecognizer.recognizeSensorById(sensorIdFromModel)
+                                + " has already been registered!");
             }
         } else {
             throw new EventSynchronizerNotFoundException("A listener of the sensor with ID "
-                    + sensorIdFromModel + " has not been attached!");
+                    + SensorRecognizer.recognizeSensorById(sensorIdFromModel)
+                    + " has not been attached!");
         }
     }
 

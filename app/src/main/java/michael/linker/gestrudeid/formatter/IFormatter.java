@@ -1,5 +1,6 @@
 package michael.linker.gestrudeid.formatter;
 
+import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
 import michael.linker.gestrudeid.synchronizer.model.SynchronizedEventOneModel;
 import michael.linker.gestrudeid.synchronizer.model.SynchronizedEventListOfModels;
 
@@ -21,4 +22,11 @@ public interface IFormatter {
      * @param synchronizedSensorModels Model that containing timestamp and list of sensor event data
      */
     void format(SynchronizedEventListOfModels synchronizedSensorModels);
+
+    /**
+     * Set a new output stream
+     *
+     * @param outputStream New output stream
+     */
+    void setNewOutputStream(IOutputStream outputStream);
 }

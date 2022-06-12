@@ -10,12 +10,8 @@ import michael.linker.gestrudeid.stream.output.type.OutputStreamType;
  * @see michael.linker.gestrudeid.stream
  */
 public final class StreamsBuildConfiguration {
-    public static OutputStreamType getMainOutputStreamType() {
-        return BuildConfig.MAIN_OUTPUT_STREAM_TYPE;
-    }
-
-    public static OutputStreamType getBackupOutputStreamType() {
-        return BuildConfig.BACKUP_OUTPUT_STREAM_TYPE;
+    public static OutputStreamType getOutputStreamType() {
+        return BuildConfig.OUTPUT_STREAM_TYPE;
     }
 
     public static String getFileOutputDirectory() {

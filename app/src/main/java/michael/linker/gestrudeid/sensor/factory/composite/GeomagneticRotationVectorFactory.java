@@ -1,29 +1,28 @@
 package michael.linker.gestrudeid.sensor.factory.composite;
 
-import android.hardware.Sensor;
-
 import michael.linker.gestrudeid.config.SensorsBuildConfiguration;
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.manager.ASensorManager;
 import michael.linker.gestrudeid.sensor.type.CompositeSensorType;
 import michael.linker.gestrudeid.sensor.type.SensorType;
+import michael.linker.gestrudeid.sensor.wrapper.manager.ASensorManager;
+import michael.linker.gestrudeid.sensor.wrapper.sensor.SensorWrapper;
 
 /**
  * Returns a Geomagnetic Rotation Vector sensor implementation
  */
 public class GeomagneticRotationVectorFactory implements ISensorFactory {
     private final static SensorType SENSOR_TYPE = CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR;
-    private static Sensor geomagneticRotationVectorSensorImplementation;
     private final ASensorManager sensorManager;
+    private SensorWrapper geomagneticRotationVectorSensorImplementation;
 
     public GeomagneticRotationVectorFactory(final ASensorManager sensorManager) {
         this.sensorManager = sensorManager;
     }
 
     @Override
-    public Sensor getActivatedImplementation()
+    public SensorWrapper getActivatedImplementation()
             throws SensorNotActivatedException, SensorNotFoundException {
         if (SensorsBuildConfiguration.isGeomagneticRotationVectorDeactivated()) {
             throw new SensorNotActivatedException(
@@ -34,7 +33,7 @@ public class GeomagneticRotationVectorFactory implements ISensorFactory {
     }
 
     @Override
-    public Sensor getImplementation() throws SensorNotFoundException {
+    public SensorWrapper getImplementation() throws SensorNotFoundException {
         buildImplementation();
         if (geomagneticRotationVectorSensorImplementation != null) {
             return geomagneticRotationVectorSensorImplementation;
@@ -52,7 +51,7 @@ public class GeomagneticRotationVectorFactory implements ISensorFactory {
     private void buildImplementation() {
         if (geomagneticRotationVectorSensorImplementation == null) {
             geomagneticRotationVectorSensorImplementation
-                    = sensorManager.getDefaultSensor(SENSOR_TYPE);
+                    = new SensorWrapper(SENSOR_TYPE, sensorManager.getDefaultSensor(SENSOR_TYPE));
         }
     }
 }

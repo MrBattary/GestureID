@@ -33,7 +33,9 @@ public class FileOutputStreamFactory implements IOutputStreamFactory {
     private FileWriter openFileForWriting() throws OutputStreamFactoryFailedException {
         // Create directory
         File directory = new File(fileOutputModel.getDestination(),
-                StreamsBuildConfiguration.getFileOutputDirectory());
+                StreamsBuildConfiguration
+                        .getFileOutputDirectory()
+                        .concat(fileOutputModel.getPath()));
         if (!directory.exists()) {
             if (!directory.mkdirs()) {
                 throw new OutputStreamFactoryFailedException(

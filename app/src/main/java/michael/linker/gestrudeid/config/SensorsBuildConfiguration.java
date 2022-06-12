@@ -9,9 +9,7 @@ import michael.linker.gestrudeid.BuildConfig;
  * @see michael.linker.gestrudeid.sensor
  */
 public final class SensorsBuildConfiguration {
-    /**
-     * Base
-     */
+    //Base
     public static boolean isAccelerometerDeactivated() {
         return BuildConfig.DEACTIVATE_ACCELEROMETER;
     }
@@ -24,9 +22,7 @@ public final class SensorsBuildConfiguration {
         return BuildConfig.DEACTIVATE_MAGNETOMETER;
     }
 
-    /**
-     * Composite
-     */
+    //Composite
     public static boolean isGravityDeactivated() {
         return BuildConfig.DEACTIVATE_GRAVITY;
     }

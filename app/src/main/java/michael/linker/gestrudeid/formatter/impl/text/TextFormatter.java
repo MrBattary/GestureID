@@ -13,11 +13,18 @@ import michael.linker.gestrudeid.synchronizer.model.SynchronizedEventOneModel;
 import michael.linker.gestrudeid.synchronizer.model.SynchronizedEventListOfModels;
 
 public class TextFormatter implements IFormatter {
-    private static final String HEADING_SEPARATOR = "-";
-    private static final String HEADING_VALUE_SEPARATOR = ":";
-    private static final String HEADING_TIMESTAMP = "Timestamp";
-    private final IOutputStream outputStream;
+    private IOutputStream outputStream;
 
+    /**
+     * Default constructor
+     */
+    public TextFormatter() {
+    }
+
+    /**
+     * Default constructor with stream
+     * @param outputStream Provided realisation of the output stream
+     */
     public TextFormatter(IOutputStream outputStream) {
         this.outputStream = outputStream;
     }
@@ -50,6 +57,11 @@ public class TextFormatter implements IFormatter {
         outputStream.write(formattedEvent);
     }
 
+    @Override
+    public void setNewOutputStream(IOutputStream outputStream) {
+        this.outputStream = outputStream;
+    }
+
     private String formatSensorModelParameters(final ASensorModel sensorModel) {
         final List<String> modelParameters = new ArrayList<>();
         final Map<String, Float> parametersNamesAndValuesMap = sensorModel.getNamesAndValuesMap();
@@ -57,9 +69,9 @@ public class TextFormatter implements IFormatter {
 
         for (String parameterName : parametersNamesAndValuesMap.keySet()) {
             String parameterNameValueStringBuilder = sensorTypeAsString
-                    + HEADING_SEPARATOR
+                    + FormatterBuildConfiguration.getHeadingSeparator()
                     + parameterName
-                    + HEADING_VALUE_SEPARATOR
+                    + FormatterBuildConfiguration.getHeadingValueSeparator()
                     + parametersNamesAndValuesMap.get(parameterName);
             modelParameters.add(parameterNameValueStringBuilder);
         }
@@ -68,6 +80,8 @@ public class TextFormatter implements IFormatter {
     }
 
     private String formatTimestamp(final SynchronizedEvent sensorEvent) {
-        return HEADING_TIMESTAMP.concat(HEADING_VALUE_SEPARATOR).concat(sensorEvent.getTimestamp());
+        return FormatterBuildConfiguration.getHeadingTimestamp()
+                .concat(FormatterBuildConfiguration.getHeadingValueSeparator())
+                .concat(sensorEvent.getTimestamp());
     }
 }

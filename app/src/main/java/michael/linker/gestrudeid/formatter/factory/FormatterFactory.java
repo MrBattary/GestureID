@@ -1,7 +1,5 @@
 package michael.linker.gestrudeid.formatter.factory;
 
-import android.util.Log;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,32 +7,22 @@ import michael.linker.gestrudeid.config.FormatterBuildConfiguration;
 import michael.linker.gestrudeid.formatter.IFormatter;
 import michael.linker.gestrudeid.formatter.impl.text.TextFormatter;
 import michael.linker.gestrudeid.formatter.type.FormatterMode;
-import michael.linker.gestrudeid.stream.output.stream.IOutputStream;
 
 public class FormatterFactory implements IFormatterFactory {
     private final static String TAG = FormatterFactory.class.getCanonicalName();
     private final Map<FormatterMode, IFormatter> formatters = new HashMap<>();
 
-    public FormatterFactory(IOutputStream outputStream) {
-        formatters.put(FormatterMode.TEXT, new TextFormatter(outputStream));
+    public FormatterFactory() {
+        formatters.put(FormatterMode.TEXT, new TextFormatter());
         // TODO: formatters.put(FormatterMode.DB, new DatabaseFormatter(outputStream));
     }
 
     @Override
     public IFormatter getFormatter() throws FormatterFactoryFailedException {
         try {
-            return getFormatterByKey(FormatterBuildConfiguration.getMainFormatterMode());
+            return getFormatterByKey(FormatterBuildConfiguration.getFormatterMode());
         } catch (FormatterFactoryNotFoundException e) {
-            Log.w(TAG, e.getMessage());
-            Log.w(TAG, "The main formatter is not available, "
-                    + "switching to the backup is being performed.");
-            try {
-                return getFormatterByKey(FormatterBuildConfiguration.getBackupFormatterMode());
-            } catch (FormatterFactoryNotFoundException ee) {
-                Log.w(TAG, ee.getMessage());
-                throw new FormatterFactoryFailedException(
-                        "The main and backup formatters are not available!");
-            }
+            throw new FormatterFactoryFailedException("Could not get the requested formatter!", e);
         }
     }
 

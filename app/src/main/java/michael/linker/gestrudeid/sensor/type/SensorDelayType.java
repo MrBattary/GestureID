@@ -1,6 +1,6 @@
 package michael.linker.gestrudeid.sensor.type;
 
-import michael.linker.gestrudeid.sensor.manager.ASensorManager;
+import michael.linker.gestrudeid.sensor.wrapper.manager.ASensorManager;
 
 /**
  * Delay between event registration

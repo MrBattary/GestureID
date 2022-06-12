@@ -1,29 +1,28 @@
 package michael.linker.gestrudeid.sensor.factory.composite;
 
-import android.hardware.Sensor;
-
 import michael.linker.gestrudeid.config.SensorsBuildConfiguration;
 import michael.linker.gestrudeid.sensor.factory.ISensorFactory;
 import michael.linker.gestrudeid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestrudeid.sensor.manager.ASensorManager;
 import michael.linker.gestrudeid.sensor.type.CompositeSensorType;
 import michael.linker.gestrudeid.sensor.type.SensorType;
+import michael.linker.gestrudeid.sensor.wrapper.manager.ASensorManager;
+import michael.linker.gestrudeid.sensor.wrapper.sensor.SensorWrapper;
 
 /**
  * Returns a Linear Acceleration sensor implementation
  */
 public class LinearAccelerationSensorFactory implements ISensorFactory {
     private final static SensorType SENSOR_TYPE = CompositeSensorType.LINEAR_ACCELERATION;
-    private static Sensor linearAccelerationImplementation;
     private final ASensorManager sensorManager;
+    private SensorWrapper linearAccelerationImplementation;
 
     public LinearAccelerationSensorFactory(final ASensorManager sensorManager) {
         this.sensorManager = sensorManager;
     }
 
     @Override
-    public Sensor getActivatedImplementation()
+    public SensorWrapper getActivatedImplementation()
             throws SensorNotActivatedException, SensorNotFoundException {
         if (SensorsBuildConfiguration.isLinearAccelerationDeactivated()) {
             throw new SensorNotActivatedException(
@@ -34,7 +33,7 @@ public class LinearAccelerationSensorFactory implements ISensorFactory {
     }
 
     @Override
-    public Sensor getImplementation() throws SensorNotFoundException {
+    public SensorWrapper getImplementation() throws SensorNotFoundException {
         buildImplementation();
         if (linearAccelerationImplementation != null) {
             return linearAccelerationImplementation;
@@ -51,7 +50,8 @@ public class LinearAccelerationSensorFactory implements ISensorFactory {
 
     private void buildImplementation() {
         if (linearAccelerationImplementation == null) {
-            linearAccelerationImplementation = sensorManager.getDefaultSensor(SENSOR_TYPE);
+            linearAccelerationImplementation =
+                    new SensorWrapper(SENSOR_TYPE, sensorManager.getDefaultSensor(SENSOR_TYPE));
         }
     }
 }

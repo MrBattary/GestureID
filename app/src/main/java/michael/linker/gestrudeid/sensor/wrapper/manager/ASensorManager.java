@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.sensor.manager;
+package michael.linker.gestrudeid.sensor.wrapper.manager;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEventListener;

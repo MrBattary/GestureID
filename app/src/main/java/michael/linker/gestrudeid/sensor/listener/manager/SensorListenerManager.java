@@ -5,10 +5,11 @@ import android.util.ArraySet;
 import java.util.HashSet;
 import java.util.Set;
 
+import michael.linker.gestrudeid.config.ListenersBuildConfiguration;
 import michael.linker.gestrudeid.sensor.listener.ISensorListener;
 import michael.linker.gestrudeid.sensor.listener.provider.ISensorListenerProvider;
 import michael.linker.gestrudeid.sensor.listener.provider.SensorListenerProviderNotFoundException;
-import michael.linker.gestrudeid.sensor.manager.ASensorManager;
+import michael.linker.gestrudeid.sensor.wrapper.manager.ASensorManager;
 import michael.linker.gestrudeid.sensor.provider.ISensorProvider;
 import michael.linker.gestrudeid.sensor.provider.SensorProviderNotFoundException;
 import michael.linker.gestrudeid.sensor.type.SensorDelayType;
@@ -19,7 +20,7 @@ public class SensorListenerManager implements ISensorListenerManager {
     private final ISensorListenerProvider sensorListenerProvider;
     private final ASensorManager sensorManager;
     private final ISensorProvider sensorProvider;
-    private SensorDelayType delay;
+    private final SensorDelayType delay;
 
     public SensorListenerManager(
             final ISensorListenerProvider sensorListenerProvider,
@@ -28,17 +29,7 @@ public class SensorListenerManager implements ISensorListenerManager {
         this.sensorListenerProvider = sensorListenerProvider;
         this.sensorManager = sensorManager;
         this.sensorProvider = sensorProvider;
-        delay = new SensorDelayType(SensorDelayType.NORMAL);
-    }
-
-    @Override
-    public SensorDelayType getDelay() {
-        return delay;
-    }
-
-    @Override
-    public void setDelay(SensorDelayType delayValue) {
-        delay = delayValue;
+        this.delay = ListenersBuildConfiguration.getSensorDelay();
     }
 
     @Override
@@ -55,7 +46,7 @@ public class SensorListenerManager implements ISensorListenerManager {
         }
         try {
             sensorManager.registerListener(getListener(sensorType),
-                    sensorProvider.getSensor(sensorType), delay.toInt());
+                    sensorProvider.getSensor(sensorType).getHardwareSensor(), delay.toInt());
             registeredListeners.add(sensorType);
         } catch (SensorListenerProviderNotFoundException | SensorProviderNotFoundException e) {
             throw new SensorListenerManagerFailedException(
