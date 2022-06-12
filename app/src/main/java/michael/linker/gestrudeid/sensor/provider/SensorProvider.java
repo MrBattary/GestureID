@@ -13,7 +13,7 @@ import michael.linker.gestrudeid.sensor.factory.SensorNotFoundException;
 import michael.linker.gestrudeid.sensor.factory.base.AccelerometerSensorFactory;
 import michael.linker.gestrudeid.sensor.factory.base.GyroscopeSensorFactory;
 import michael.linker.gestrudeid.sensor.factory.base.MagneticFieldSensorFactory;
-import michael.linker.gestrudeid.sensor.factory.composite.GeomagneticRotationVectorFactory;
+import michael.linker.gestrudeid.sensor.factory.composite.GeomagneticRotationVectorSensorFactory;
 import michael.linker.gestrudeid.sensor.factory.composite.GravitySensorFactory;
 import michael.linker.gestrudeid.sensor.factory.composite.LinearAccelerationSensorFactory;
 import michael.linker.gestrudeid.sensor.factory.composite.RotationVectorSensorFactory;
@@ -98,7 +98,7 @@ public class SensorProvider implements ISensorProvider {
         sensorFactories.put(CompositeSensorType.GRAVITY.toInt(),
                 new GravitySensorFactory(sensorManager));
         sensorFactories.put(CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR.toInt(),
-                new GeomagneticRotationVectorFactory(sensorManager));
+                new GeomagneticRotationVectorSensorFactory(sensorManager));
         sensorFactories.put(CompositeSensorType.LINEAR_ACCELERATION.toInt(),
                 new LinearAccelerationSensorFactory(sensorManager));
         sensorFactories.put(CompositeSensorType.ROTATION_VECTOR.toInt(),

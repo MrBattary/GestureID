@@ -12,12 +12,12 @@ import michael.linker.gestrudeid.sensor.wrapper.sensor.SensorWrapper;
 /**
  * Returns a Geomagnetic Rotation Vector sensor implementation
  */
-public class GeomagneticRotationVectorFactory implements ISensorFactory {
+public class GeomagneticRotationVectorSensorFactory implements ISensorFactory {
     private final static SensorType SENSOR_TYPE = CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR;
     private final ASensorManager sensorManager;
     private SensorWrapper geomagneticRotationVectorSensorImplementation;
 
-    public GeomagneticRotationVectorFactory(final ASensorManager sensorManager) {
+    public GeomagneticRotationVectorSensorFactory(final ASensorManager sensorManager) {
         this.sensorManager = sensorManager;
     }
 

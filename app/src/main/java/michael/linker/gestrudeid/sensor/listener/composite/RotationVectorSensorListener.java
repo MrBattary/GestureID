@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.sensor.listener.base;
+package michael.linker.gestrudeid.sensor.listener.composite;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -7,17 +7,17 @@ import android.util.Log;
 import michael.linker.gestrudeid.sensor.listener.ISensorListener;
 import michael.linker.gestrudeid.sensor.listener.suppressor.ISensorListenerSuppressor;
 import michael.linker.gestrudeid.sensor.listener.suppressor.SensorListenerSuppressorNotFoundException;
-import michael.linker.gestrudeid.sensor.model.base.AccelerometerSensorModel;
-import michael.linker.gestrudeid.sensor.type.BaseSensorType;
+import michael.linker.gestrudeid.sensor.model.composite.RotationVectorSensorModel;
+import michael.linker.gestrudeid.sensor.type.CompositeSensorType;
 import michael.linker.gestrudeid.synchronizer.EventSynchronizerFailedException;
 import michael.linker.gestrudeid.synchronizer.IEventSynchronizer;
 
-public class AccelerometerSensorListener implements ISensorListener {
-    private static final String TAG = AccelerometerSensorListener.class.getCanonicalName();
+public class RotationVectorSensorListener implements ISensorListener {
+    private static final String TAG = RotationVectorSensorListener.class.getCanonicalName();
     private final IEventSynchronizer eventSynchronizer;
     private final ISensorListenerSuppressor listenerSuppressor;
 
-    public AccelerometerSensorListener(final IEventSynchronizer eventSynchronizer,
+    public RotationVectorSensorListener(final IEventSynchronizer eventSynchronizer,
             final ISensorListenerSuppressor listenerSuppressor) {
         this.eventSynchronizer = eventSynchronizer;
         this.listenerSuppressor = listenerSuppressor;
@@ -27,7 +27,7 @@ public class AccelerometerSensorListener implements ISensorListener {
     public void onSensorChanged(SensorEvent sensorEvent) {
         try {
             final boolean isThisListenerSuppressed = listenerSuppressor.isListenerSuppressed(
-                    BaseSensorType.ACCELEROMETER);
+                    CompositeSensorType.ROTATION_VECTOR);
             if (!listenerSuppressor.isAllListenersSuppressed()) {
                 if (!isThisListenerSuppressed) {
                     proceedEvent(sensorEvent);
@@ -45,10 +45,11 @@ public class AccelerometerSensorListener implements ISensorListener {
     }
 
     private void proceedEvent(SensorEvent sensorEvent) {
-        AccelerometerSensorModel sensorModel = new AccelerometerSensorModel();
+        RotationVectorSensorModel sensorModel = new RotationVectorSensorModel();
         sensorModel.setX(sensorEvent.values[0]);
         sensorModel.setY(sensorEvent.values[1]);
         sensorModel.setZ(sensorEvent.values[2]);
+        sensorModel.setW(sensorEvent.values[3]);
         sensorModel.setTimestamp(sensorEvent.timestamp);
         try {
             eventSynchronizer.registerEvent(sensorModel);

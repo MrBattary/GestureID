@@ -7,8 +7,13 @@ import michael.linker.gestrudeid.sensor.listener.ISensorListener;
 import michael.linker.gestrudeid.sensor.listener.base.AccelerometerSensorListener;
 import michael.linker.gestrudeid.sensor.listener.base.GyroscopeSensorListener;
 import michael.linker.gestrudeid.sensor.listener.base.MagneticFieldSensorListener;
+import michael.linker.gestrudeid.sensor.listener.composite.GeomagneticRotationVectorSensorListener;
+import michael.linker.gestrudeid.sensor.listener.composite.GravitySensorListener;
+import michael.linker.gestrudeid.sensor.listener.composite.LinearAccelerationSensorListener;
+import michael.linker.gestrudeid.sensor.listener.composite.RotationVectorSensorListener;
 import michael.linker.gestrudeid.sensor.listener.suppressor.ISensorListenerSuppressor;
 import michael.linker.gestrudeid.sensor.type.BaseSensorType;
+import michael.linker.gestrudeid.sensor.type.CompositeSensorType;
 import michael.linker.gestrudeid.sensor.type.SensorType;
 import michael.linker.gestrudeid.synchronizer.IEventSynchronizer;
 
@@ -21,7 +26,7 @@ public class SensorListenerProvider implements ISensorListenerProvider {
     }
 
     @Override
-    public ISensorListener getListener(SensorType sensorType)
+    public ISensorListener getListener(final SensorType sensorType)
             throws SensorListenerProviderNotFoundException {
         ISensorListener sensorListener = sensorListeners.get(sensorType.toInt());
         if (sensorListener != null) {
@@ -34,13 +39,13 @@ public class SensorListenerProvider implements ISensorListenerProvider {
     }
 
     private void initializeSensorListeners(final IEventSynchronizer eventSynchronizer,
-                                           final ISensorListenerSuppressor listenerSuppressor) {
+            final ISensorListenerSuppressor listenerSuppressor) {
         initializeBaseSensorListeners(eventSynchronizer, listenerSuppressor);
         initializeCompositeSensorListeners(eventSynchronizer, listenerSuppressor);
     }
 
     private void initializeBaseSensorListeners(final IEventSynchronizer eventSynchronizer,
-                                               final ISensorListenerSuppressor listenerSuppressor) {
+            final ISensorListenerSuppressor listenerSuppressor) {
         listenerSuppressor.registerListener(BaseSensorType.ACCELEROMETER);
         sensorListeners.put(BaseSensorType.ACCELEROMETER.toInt(),
                 new AccelerometerSensorListener(eventSynchronizer, listenerSuppressor));
@@ -53,7 +58,18 @@ public class SensorListenerProvider implements ISensorListenerProvider {
     }
 
     private void initializeCompositeSensorListeners(final IEventSynchronizer eventSynchronizer,
-                                                    final ISensorListenerSuppressor listenerSuppressor) {
-        // TODO: Add composite listeners
+            final ISensorListenerSuppressor listenerSuppressor) {
+        listenerSuppressor.registerListener(CompositeSensorType.GRAVITY);
+        sensorListeners.put(CompositeSensorType.GRAVITY.toInt(),
+                new GravitySensorListener(eventSynchronizer, listenerSuppressor));
+        listenerSuppressor.registerListener(CompositeSensorType.LINEAR_ACCELERATION);
+        sensorListeners.put(CompositeSensorType.LINEAR_ACCELERATION.toInt(),
+                new LinearAccelerationSensorListener(eventSynchronizer, listenerSuppressor));
+        listenerSuppressor.registerListener(CompositeSensorType.ROTATION_VECTOR);
+        sensorListeners.put(CompositeSensorType.ROTATION_VECTOR.toInt(),
+                new RotationVectorSensorListener(eventSynchronizer, listenerSuppressor));
+        listenerSuppressor.registerListener(CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR);
+        sensorListeners.put(CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR.toInt(),
+                new GeomagneticRotationVectorSensorListener(eventSynchronizer, listenerSuppressor));
     }
 }
