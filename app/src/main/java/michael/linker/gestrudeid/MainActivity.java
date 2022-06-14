@@ -17,8 +17,8 @@ import michael.linker.gestrudeid.sensor.wrapper.manager.SensorManagerWrapper;
 import michael.linker.gestrudeid.stream.output.model.FileOutputModel;
 import michael.linker.gestrudeid.stream.output.model.UiOutputModel;
 import michael.linker.gestrudeid.world.IWorld;
-import michael.linker.gestrudeid.world.World;
 import michael.linker.gestrudeid.world.exception.WorldFailedException;
+import michael.linker.gestrudeid.world.singleton.WorldSingleton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,13 +36,11 @@ public class MainActivity extends AppCompatActivity {
 
         File directory = this.getExternalFilesDir(null);
         String path = "";
-        String filename = "Output.txt";
 
         UiOutputModel uiOutputModel = new UiOutputModel(textView);
 
-        IWorld world;
         try {
-            world = new World(sensorManager);
+            IWorld world = WorldSingleton.getInstance(sensorManager);
             world.setNewOutputStream(uiOutputModel);
             new Timer().schedule(new TimerTask() {
                 @Override
