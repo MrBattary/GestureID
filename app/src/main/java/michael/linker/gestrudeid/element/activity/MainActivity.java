@@ -1,36 +1,41 @@
 package michael.linker.gestrudeid.element.activity;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import michael.linker.gestrudeid.R;
+
 public class MainActivity extends AppCompatActivity {
+    Button start;
+    Button exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Test text");
-        builder.setTitle("Test dialog");
-        builder.setPositiveButton("Close", (dialogInterface, i) -> {
-            dialogInterface.dismiss();
-            Intent intent = new Intent(MainActivity.this, SwipeActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+
+        start = findViewById(R.id.main__start);
+        start.setOnClickListener(view -> {
+            Intent activity = new Intent(MainActivity.this, ButtonActivity.class);
+            activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(activity);
             finish();
         });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+
+        exit = findViewById(R.id.main__exit);
+        exit.setOnClickListener(view -> closeApplication());
+
         /*SensorManager hardwareSensorManager = (SensorManager) getSystemService(
                 Context.SENSOR_SERVICE);
         ASensorManager sensorManager = new SensorManagerWrapper(hardwareSensorManager);
 
         File directory = this.getExternalFilesDir(null);
-        String path = "";
-
+        String path = "";*/
+        /*
         try {
             IWorld world = WorldSingleton.getInstance(sensorManager);
 
@@ -58,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     world.suppressRegistering();
                     world.destroy();
-                    exit();
+                    closeApplication();
                 }
             }, 15000);
         } catch (WorldFailedException e) {
@@ -66,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         }*/
     }
 
-    private void exit() {
+    private void closeApplication() {
         this.finishAffinity();
     }
 }

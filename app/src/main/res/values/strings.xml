@@ -6,7 +6,7 @@
     <string name="success">Success</string>
     <string name="next">Next</string>
     <string name="finish">Finish</string>
-    <string name="description">Description</string>
+    <string name="description">Task description</string>
     <!--General descriptions-->
     <string name="rules">As part of the experiment, you are invited to perform everyday actions with a smartphone.\nThey will include clicks, swipes and other simple actions.\nGood luck!</string>
     <string name="success_description">The task was completed successfully! Click "Next" to proceed to the next task.</string>
