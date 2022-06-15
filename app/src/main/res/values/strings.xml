@@ -3,4 +3,5 @@
     <string name="startTest">Start</string>
     <string name="rules">As part of the experiment, you are invited to perform everyday actions with a smartphone.\nThey will include clicks, swipes and other simple actions.\nGood luck!</string>
     <string name="exit">Exit</string>
+    <string name="keyboard_input_hint">Enter the word above</string>
 </resources>
