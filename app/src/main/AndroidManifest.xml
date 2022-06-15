@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GestrudeID">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".element.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,13 +20,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ButtonActivity"
+            android:name=".element.activity.ButtonActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SwipeActivity"
+            android:name=".element.activity.SwipeActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.KeyboardActivity"
+            android:name=".element.activity.KeyboardActivity"
             android:exported="false" />
     </application>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

@@ -1,8 +1,10 @@
-package michael.linker.gestrudeid.activity;
+package michael.linker.gestrudeid.element.activity;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import michael.linker.gestrudeid.R;
 
 public class KeyboardActivity extends AppCompatActivity {
 

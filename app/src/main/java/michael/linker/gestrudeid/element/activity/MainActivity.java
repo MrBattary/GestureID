@@ -1,21 +1,10 @@
-package michael.linker.gestrudeid.activity;
+package michael.linker.gestrudeid.element.activity;
 
-import android.content.Context;
-import android.hardware.SensorManager;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.io.File;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import michael.linker.gestrudeid.sensor.wrapper.manager.ASensorManager;
-import michael.linker.gestrudeid.sensor.wrapper.manager.SensorManagerWrapper;
-import michael.linker.gestrudeid.stream.output.model.FileOutputModel;
-import michael.linker.gestrudeid.world.IWorld;
-import michael.linker.gestrudeid.world.exception.WorldFailedException;
-import michael.linker.gestrudeid.world.singleton.WorldSingleton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +12,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SensorManager hardwareSensorManager = (SensorManager) getSystemService(
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Test text");
+        builder.setTitle("Test dialog");
+        builder.setPositiveButton("Close", (dialogInterface, i) -> {
+            dialogInterface.dismiss();
+            Intent intent = new Intent(MainActivity.this, SwipeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        /*SensorManager hardwareSensorManager = (SensorManager) getSystemService(
                 Context.SENSOR_SERVICE);
         ASensorManager sensorManager = new SensorManagerWrapper(hardwareSensorManager);
 
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             }, 15000);
         } catch (WorldFailedException e) {
             e.getStackTrace();
-        }
+        }*/
     }
 
     private void exit() {
