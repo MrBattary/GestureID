@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.element.activity;
+package michael.linker.gestrudeid.elements.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

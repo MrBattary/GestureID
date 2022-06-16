@@ -40,6 +40,8 @@ android {
         buildConfigField "String", "HEADING_SEPARATOR", "\"-\""
         buildConfigField "String", "HEADING_VALUE_SEPARATOR", "\":\""
         buildConfigField "String", "HEADING_TIMESTAMP", "\"Timestamp\""
+        /* Tests */
+        buildConfigField "Integer[]", "BUTTONS_ORDER", "{" + "1," + "3," + "5," + "7," + "9," + "11," + "13," + "15," + "12," + "10," + "9," + "5," + "14," + "12," + "10," + "8," + "6," + "4," + "2," + "12," + "1" + "}"
     }
 
     buildTypes {

@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.element.activity;
+package michael.linker.gestrudeid.elements.activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
