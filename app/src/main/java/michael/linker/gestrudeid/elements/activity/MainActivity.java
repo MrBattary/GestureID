@@ -72,6 +72,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void closeApplication() {
-        this.finishAffinity();
+        this.finishAndRemoveTask();
     }
 }
