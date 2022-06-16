@@ -5,6 +5,7 @@ plugins {
 def OutputStreamType = 'michael.linker.gestrudeid.stream.output.type.OutputStreamType'
 def FormatterMode = 'michael.linker.gestrudeid.formatter.type.FormatterMode'
 def SensorDelayType = 'michael.linker.gestrudeid.sensor.type.SensorDelayType'
+def SwipeType = 'michael.linker.gestrudeid.elements.types.SwipeType'
 
 android {
     compileSdk 32
@@ -41,7 +42,14 @@ android {
         buildConfigField "String", "HEADING_VALUE_SEPARATOR", "\":\""
         buildConfigField "String", "HEADING_TIMESTAMP", "\"Timestamp\""
         /* Tests */
-        buildConfigField "Integer[]", "BUTTONS_ORDER", "{" + "1," + "3," + "5," + "7," + "9," + "11," + "13," + "15," + "12," + "10," + "9," + "5," + "14," + "12," + "10," + "8," + "6," + "4," + "2," + "12," + "1" + "}"
+        buildConfigField "Integer[]", "BUTTONS_ORDER", "{" + "1," /*+ "3," + "5," + "7," + "9," + "11," + "13," + "15," + "12," + "10," + "9," + "5," + "14," + "12," + "10," + "8," + "6," + "4," + "2," + "12," */+ "1" + "}"
+        buildConfigField "${SwipeType}[]", "SWIPES_ORDER", "{" + "${SwipeType}.UP," + "${SwipeType}.ZOOM_OUT," + "${SwipeType}.DOWN," + "${SwipeType}.ZOOM_IN," + "${SwipeType}.LEFT," + "${SwipeType}.RIGHT," + "${SwipeType}.DOWN," + "${SwipeType}.UP," + "${SwipeType}.ZOOM_IN," + "${SwipeType}.ZOOM_OUT," + "${SwipeType}.RIGHT," + "${SwipeType}.LEFT" + "}"
+        buildConfigField "String", "SWIPE_UP_ANIMATION", "\"swipe_up_arrows.json\""
+        buildConfigField "String", "SWIPE_DOWN_ANIMATION", "\"swipe_down_arrows.json\""
+        buildConfigField "String", "SWIPE_LEFT_ANIMATION", "\"swipe_left_arrows.json\""
+        buildConfigField "String", "SWIPE_RIGHT_ANIMATION", "\"swipe_right_arrows.json\""
+        buildConfigField "String", "ZOOM_IN_ANIMATION", "\"zoom_in.json\""
+        buildConfigField "String", "ZOOM_OUT_ANIMATION", "\"zoom_out.json\""
     }
 
     buildTypes {

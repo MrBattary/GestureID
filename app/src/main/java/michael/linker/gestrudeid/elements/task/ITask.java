@@ -8,4 +8,9 @@ public interface ITask {
      * Start task execution
      */
     void start();
+
+    /**
+     * Proceed task execution
+     */
+    void proceed();
 }

@@ -12,6 +12,7 @@ import michael.linker.gestrudeid.elements.task.ITask;
 
 public class ButtonActivity extends AppCompatActivity {
     private AlertDialog successAlertDialog;
+    private ITask buttonTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,7 @@ public class ButtonActivity extends AppCompatActivity {
         descriptionAlertBuilder.setTitle(R.string.description);
         descriptionAlertBuilder.setMessage(R.string.button_test_description);
         descriptionAlertBuilder.setPositiveButton(R.string.start, (dialogInterface, i) -> {
+            buttonTask.start();
             dialogInterface.dismiss();
         });
         AlertDialog descriptionAlertDialog = descriptionAlertBuilder.create();
@@ -39,7 +41,6 @@ public class ButtonActivity extends AppCompatActivity {
         });
         successAlertDialog = successAlertBuilder.create();
 
-        ITask buttonTask = new ButtonTask(this, () -> successAlertDialog.show());
-        buttonTask.start();
+        buttonTask = new ButtonTask(this, () -> successAlertDialog.show());
     }
 }

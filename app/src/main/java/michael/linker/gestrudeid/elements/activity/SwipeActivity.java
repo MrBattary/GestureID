@@ -3,13 +3,18 @@ package michael.linker.gestrudeid.elements.activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import michael.linker.gestrudeid.R;
+import michael.linker.gestrudeid.elements.task.ITask;
+import michael.linker.gestrudeid.elements.task.SwipeTask;
 
 public class SwipeActivity extends AppCompatActivity {
     private AlertDialog successAlertDialog;
+    private boolean isGesturesRegisters = false;
+    private ITask swipeTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +26,6 @@ public class SwipeActivity extends AppCompatActivity {
         descriptionAlertBuilder.setMessage(R.string.swipe_test_description);
         descriptionAlertBuilder.setPositiveButton(R.string.start, (dialogInterface, i) -> {
             dialogInterface.dismiss();
-            successAlertDialog.show();
         });
         AlertDialog descriptionAlertDialog = descriptionAlertBuilder.create();
         descriptionAlertDialog.show();
@@ -37,5 +41,26 @@ public class SwipeActivity extends AppCompatActivity {
             finish();
         });
         successAlertDialog = successAlertBuilder.create();
+        swipeTask = new SwipeTask(this, this::endActivity);
+        swipeTask.start();
+        isGesturesRegisters = true;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (!isGesturesRegisters) {
+            return super.onTouchEvent(event);
+        }
+
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            swipeTask.proceed();
+            return true;
+        }
+        return super.onTouchEvent(event);
+    }
+
+    private void endActivity() {
+        isGesturesRegisters = false;
+        successAlertDialog.show();
     }
 }

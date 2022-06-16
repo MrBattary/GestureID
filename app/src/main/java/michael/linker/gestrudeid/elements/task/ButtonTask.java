@@ -5,8 +5,8 @@ import android.widget.Button;
 
 import androidx.core.content.ContextCompat;
 
+import java.util.Deque;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 import michael.linker.gestrudeid.R;
@@ -16,13 +16,13 @@ public class ButtonTask implements ITask {
     private final int activeColor;
     private final int inactiveColor;
     private final Map<Integer, Button> buttons = new HashMap<>();
-    private final LinkedList<Integer> buttonsOrder = ActivitiesBuildConfiguration.getButtonsOrder();
+    private final Deque<Integer> buttonsOrder = ActivitiesBuildConfiguration.getButtonsOrder();
     private final Runnable finishMethod;
 
     /**
      * Default constructor
      *
-     * @param activity ButtonActivity or another activity that provides buttons and colors
+     * @param activity     ButtonActivity or another activity that provides buttons and colors
      * @param finishMethod The function or lambda that will be called after completing this task
      */
     public ButtonTask(final Activity activity, final Runnable finishMethod) {
@@ -37,10 +37,11 @@ public class ButtonTask implements ITask {
         proceed();
     }
 
-    private void proceed() {
+    @Override
+    public void proceed() {
         if (!buttonsOrder.isEmpty()) {
             Button button = buttons.get(buttonsOrder.pollFirst());
-            if(button != null) {
+            if (button != null) {
                 button.setBackgroundColor(activeColor);
                 button.setOnClickListener((view) -> {
                     button.setBackgroundColor(inactiveColor);
