@@ -35,6 +35,7 @@ public class KeyboardTask implements ITask {
     @Override
     public void start() {
         textInput.addTextChangedListener(textWatcher);
+        textInput.requestFocus();
         proceed();
     }
 

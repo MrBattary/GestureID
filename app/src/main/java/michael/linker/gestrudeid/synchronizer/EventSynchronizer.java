@@ -30,13 +30,13 @@ public class EventSynchronizer implements IEventSynchronizer {
         tryToSynchronize();
 
         if (attachedListeners.contains(sensorIdFromModel)) {
-            if (!registeredModels.containsKey(sensorIdFromModel)) {
-                registeredModels.put(sensorIdFromModel, sensorModel);
-            } else {
+            boolean isEventAlreadyRegistered = registeredModels.containsKey(sensorIdFromModel);
+            registeredModels.put(sensorIdFromModel, sensorModel);
+            if (isEventAlreadyRegistered) {
                 throw new EventSynchronizerFailedException(
                         "Event for the listener of the sensor "
                                 + SensorRecognizer.recognizeSensorById(sensorIdFromModel)
-                                + " has already been registered!");
+                                + " has already been registered and was overwritten!");
             }
         } else {
             throw new EventSynchronizerNotFoundException("A listener of the sensor "

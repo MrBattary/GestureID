@@ -14,8 +14,9 @@ import michael.linker.gestrudeid.sensor.type.SensorType;
 public abstract class ASensorManager {
     // Constants
     public static final int SENSOR_DELAY_FASTEST = SensorManager.SENSOR_DELAY_FASTEST;
-    public static final int SENSOR_DELAY_NORMAL = SensorManager.SENSOR_DELAY_NORMAL;
+    public static final int SENSOR_DELAY_GAME = SensorManager.SENSOR_DELAY_GAME;
     public static final int SENSOR_DELAY_UI = SensorManager.SENSOR_DELAY_UI;
+    public static final int SENSOR_DELAY_NORMAL = SensorManager.SENSOR_DELAY_NORMAL;
 
     // Methods
     /**
