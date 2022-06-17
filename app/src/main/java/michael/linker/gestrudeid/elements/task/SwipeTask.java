@@ -10,7 +10,7 @@ import java.util.Map;
 
 import michael.linker.gestrudeid.R;
 import michael.linker.gestrudeid.config.ActivitiesBuildConfiguration;
-import michael.linker.gestrudeid.elements.types.SwipeType;
+import michael.linker.gestrudeid.elements.type.SwipeType;
 
 public class SwipeTask implements ITask {
     private final Deque<SwipeType> swipesOrder = ActivitiesBuildConfiguration.getSwipesOrder();

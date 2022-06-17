@@ -5,7 +5,7 @@ plugins {
 def OutputStreamType = 'michael.linker.gestrudeid.stream.output.type.OutputStreamType'
 def FormatterMode = 'michael.linker.gestrudeid.formatter.type.FormatterMode'
 def SensorDelayType = 'michael.linker.gestrudeid.sensor.type.SensorDelayType'
-def SwipeType = 'michael.linker.gestrudeid.elements.types.SwipeType'
+def SwipeType = 'michael.linker.gestrudeid.elements.type.SwipeType'
 
 android {
     compileSdk 32

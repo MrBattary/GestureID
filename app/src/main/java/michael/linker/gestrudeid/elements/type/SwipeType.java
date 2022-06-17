@@ -1,4 +1,4 @@
-package michael.linker.gestrudeid.elements.types;
+package michael.linker.gestrudeid.elements.type;
 
 /**
  * Types of swipes using by swipe task

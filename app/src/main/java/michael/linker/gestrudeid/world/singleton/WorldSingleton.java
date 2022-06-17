@@ -15,16 +15,27 @@ public class WorldSingleton {
     }
 
     /**
-     * Get instance of the World
+     * Initialize instance of the World
      *
      * @param sensorManager Wrapper around hardware SensorManager
-     * @return World instance
      * @throws WorldFailedException If the creation of the World fails
      */
-    public static IWorld getInstance(final ASensorManager sensorManager)
-            throws WorldFailedException {
+    public static void initialize(final ASensorManager sensorManager) throws WorldFailedException {
         if (world == null) {
             world = new World(sensorManager);
+        }
+    }
+
+    /**
+     * Get instance of the World
+     *
+     * @return World instance
+     * @throws WorldFailedException If the World is not found
+     */
+    public static IWorld getInstance()
+            throws WorldFailedException {
+        if (world == null) {
+            throw new WorldFailedException("Instance of the World is not found!");
         }
         return world;
     }

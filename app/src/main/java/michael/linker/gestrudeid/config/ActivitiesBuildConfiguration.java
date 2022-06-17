@@ -5,7 +5,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 import michael.linker.gestrudeid.BuildConfig;
-import michael.linker.gestrudeid.elements.types.SwipeType;
+import michael.linker.gestrudeid.elements.type.SwipeType;
 
 /**
  * Wrapper for the activities build variables
