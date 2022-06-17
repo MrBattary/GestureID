@@ -20,7 +20,7 @@ public class SwipeTask implements ITask {
 
     public SwipeTask(final Activity activity, Runnable finishMethod) {
         animationContainer = activity.findViewById(R.id.swipe__animation);
-        animationContainer.setSpeed(1.5f);
+        animationContainer.setSpeed(ActivitiesBuildConfiguration.getSwipeAnimationSpeed());
         this.finishMethod = finishMethod;
         initializeSwipeAnimationSources();
     }

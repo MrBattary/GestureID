@@ -54,4 +54,8 @@ public class ActivitiesBuildConfiguration {
     public static String getZoomOutAnimation() {
         return BuildConfig.ZOOM_OUT_ANIMATION;
     }
+
+    public static float getSwipeAnimationSpeed() {
+        return BuildConfig.SWIPE_ANIMATION_SPEED;
+    }
 }
