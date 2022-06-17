@@ -16,6 +16,7 @@ import michael.linker.gestrudeid.elements.types.SwipeType;
 public class ActivitiesBuildConfiguration {
     private static Deque<Integer> buttonsOrder = null;
     private static Deque<SwipeType> swipesOrder = null;
+    private static Deque<String> wordsOrder = null;
 
     public static Deque<Integer> getButtonsOrder() {
         if (buttonsOrder == null) {
@@ -57,5 +58,12 @@ public class ActivitiesBuildConfiguration {
 
     public static float getSwipeAnimationSpeed() {
         return BuildConfig.SWIPE_ANIMATION_SPEED;
+    }
+
+    public static Deque<String> getWordsOrder() {
+        if (wordsOrder == null) {
+            wordsOrder = new LinkedList<>(Arrays.asList(BuildConfig.WORDS_ORDER));
+        }
+        return new LinkedList<>(wordsOrder);
     }
 }

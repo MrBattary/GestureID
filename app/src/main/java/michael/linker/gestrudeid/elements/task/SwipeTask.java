@@ -18,6 +18,12 @@ public class SwipeTask implements ITask {
     private final LottieAnimationView animationContainer;
     private final Runnable finishMethod;
 
+    /**
+     * Default constructor
+     *
+     * @param activity     SwipeActivity or another activity that provides animation container
+     * @param finishMethod The function or lambda that will be called after completing this task
+     */
     public SwipeTask(final Activity activity, Runnable finishMethod) {
         animationContainer = activity.findViewById(R.id.swipe__animation);
         animationContainer.setSpeed(ActivitiesBuildConfiguration.getSwipeAnimationSpeed());

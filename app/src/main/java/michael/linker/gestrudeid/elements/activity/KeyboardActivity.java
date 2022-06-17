@@ -7,9 +7,12 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import michael.linker.gestrudeid.R;
+import michael.linker.gestrudeid.elements.task.ITask;
+import michael.linker.gestrudeid.elements.task.KeyboardTask;
 
 public class KeyboardActivity extends AppCompatActivity {
     private AlertDialog successAlertDialog;
+    private ITask keyboardTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +23,8 @@ public class KeyboardActivity extends AppCompatActivity {
         descriptionAlertBuilder.setTitle(R.string.description);
         descriptionAlertBuilder.setMessage(R.string.keyboard_test_description);
         descriptionAlertBuilder.setPositiveButton(R.string.start, (dialogInterface, i) -> {
+            keyboardTask.start();
             dialogInterface.dismiss();
-            successAlertDialog.show();
         });
         AlertDialog descriptionAlertDialog = descriptionAlertBuilder.create();
         descriptionAlertDialog.show();
@@ -37,5 +40,7 @@ public class KeyboardActivity extends AppCompatActivity {
             finish();
         });
         successAlertDialog = successAlertBuilder.create();
+
+        keyboardTask = new KeyboardTask(this, () -> successAlertDialog.show());
     }
 }

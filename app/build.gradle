@@ -42,7 +42,7 @@ android {
         buildConfigField "String", "HEADING_VALUE_SEPARATOR", "\":\""
         buildConfigField "String", "HEADING_TIMESTAMP", "\"Timestamp\""
         /* Tests */
-        buildConfigField "Integer[]", "BUTTONS_ORDER", "{" + "1," /*+ "3," + "5," + "7," + "9," + "11," + "13," + "15," + "12," + "10," + "9," + "5," + "14," + "12," + "10," + "8," + "6," + "4," + "2," + "12," */+ "1" + "}"
+        buildConfigField "Integer[]", "BUTTONS_ORDER", "{" + "1," /*+ "3," + "5," + "7," + "9," + "11," + "13," + "15," + "12," + "10," + "9," + "5," + "14," + "12," + "10," + "8," + "6," + "4," + "2," + "12," */ + "1" + "}"
         buildConfigField "${SwipeType}[]", "SWIPES_ORDER", "{" + "${SwipeType}.UP," /*+ "${SwipeType}.ZOOM_OUT," + "${SwipeType}.DOWN," + "${SwipeType}.ZOOM_IN," + "${SwipeType}.LEFT," + "${SwipeType}.RIGHT," + "${SwipeType}.DOWN," + "${SwipeType}.UP," + "${SwipeType}.ZOOM_IN," + "${SwipeType}.ZOOM_OUT," + "${SwipeType}.RIGHT,"*/ + "${SwipeType}.LEFT" + "}"
         buildConfigField "float", "SWIPE_ANIMATION_SPEED", "1.2f"
         buildConfigField "String", "SWIPE_UP_ANIMATION", "\"swipe_up_arrows.json\""
@@ -51,6 +51,7 @@ android {
         buildConfigField "String", "SWIPE_RIGHT_ANIMATION", "\"swipe_right_arrows.json\""
         buildConfigField "String", "ZOOM_IN_ANIMATION", "\"zoom_in.json\""
         buildConfigField "String", "ZOOM_OUT_ANIMATION", "\"zoom_out.json\""
+        buildConfigField "String[]", "WORDS_ORDER", "{" + "\"Test\"," + "\"Experiment\"" + "}"
     }
 
     buildTypes {
