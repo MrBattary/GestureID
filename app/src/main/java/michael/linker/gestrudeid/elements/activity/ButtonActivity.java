@@ -17,6 +17,7 @@ import michael.linker.gestrudeid.world.singleton.WorldSingleton;
 public class ButtonActivity extends AppCompatActivity {
     private static final String TEST_FILE = "ButtonTest.txt";
     private final IWorld world = WorldSingleton.getInstance();
+    private AlertDialog descriptionAlertDialog;
     private AlertDialog successAlertDialog;
     private ITask buttonTask;
 
@@ -25,12 +26,23 @@ public class ButtonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_button);
 
+        openFileForRecording();
+        buildDescriptionDialog();
+        buildSuccessDialog();
+        descriptionAlertDialog.show();
+
+        buttonTask = new ButtonTask(this, this::onTaskEnd);
+    }
+
+    private void openFileForRecording() {
         FileOutputModel fileOutputModel = new FileOutputModel(
                 TestLoopConfiguration.getDestination(),
                 TestLoopConfiguration.getTestLoopFolder(),
                 TEST_FILE);
         world.setNewOutputStream(fileOutputModel);
+    }
 
+    private void buildDescriptionDialog() {
         AlertDialog.Builder descriptionAlertBuilder = new AlertDialog.Builder(this);
         descriptionAlertBuilder.setTitle(R.string.description);
         descriptionAlertBuilder.setMessage(R.string.button_test_description);
@@ -39,9 +51,10 @@ public class ButtonActivity extends AppCompatActivity {
             world.unsuppressRegistering();
             dialogInterface.dismiss();
         });
-        AlertDialog descriptionAlertDialog = descriptionAlertBuilder.create();
-        descriptionAlertDialog.show();
+        descriptionAlertDialog = descriptionAlertBuilder.create();
+    }
 
+    private void buildSuccessDialog() {
         AlertDialog.Builder successAlertBuilder = new AlertDialog.Builder(this);
         successAlertBuilder.setTitle(R.string.success);
         successAlertBuilder.setMessage(R.string.success_description);
@@ -53,11 +66,9 @@ public class ButtonActivity extends AppCompatActivity {
             finish();
         });
         successAlertDialog = successAlertBuilder.create();
-
-        buttonTask = new ButtonTask(this, this::endActivity);
     }
 
-    private void endActivity() {
+    private void onTaskEnd() {
         world.suppressRegistering();
         successAlertDialog.show();
     }

@@ -31,16 +31,7 @@ public class MainActivity extends AppCompatActivity {
         TestLoopConfiguration.setTestLoopFolder(
                 "/Test".concat(String.valueOf(System.currentTimeMillis())));
 
-        Button start = findViewById(R.id.main__start);
-        start.setOnClickListener(view -> {
-            Intent activity = new Intent(MainActivity.this, ButtonActivity.class);
-            activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(activity);
-            finish();
-        });
-
-        Button exit = findViewById(R.id.main__exit);
-        exit.setOnClickListener(view -> closeApplication());
+        buildButtons();
 
         SensorManager hardwareSensorManager = (SensorManager) getSystemService(
                 Context.SENSOR_SERVICE);
@@ -52,6 +43,19 @@ public class MainActivity extends AppCompatActivity {
         } catch (WorldFailedException e) {
             closeApplication();
         }
+    }
+
+    private void buildButtons() {
+        Button start = findViewById(R.id.main__start);
+        start.setOnClickListener(view -> {
+            Intent activity = new Intent(MainActivity.this, ButtonActivity.class);
+            activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(activity);
+            finish();
+        });
+
+        Button exit = findViewById(R.id.main__exit);
+        exit.setOnClickListener(view -> closeApplication());
     }
 
     private void closeApplication() {

@@ -17,6 +17,7 @@ import michael.linker.gestrudeid.world.singleton.WorldSingleton;
 public class KeyboardActivity extends AppCompatActivity {
     private static final String TEST_FILE = "KeyboardTest.txt";
     private final IWorld world = WorldSingleton.getInstance();
+    private AlertDialog descriptionAlertDialog;
     private AlertDialog successAlertDialog;
     private ITask keyboardTask;
 
@@ -25,12 +26,23 @@ public class KeyboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_keyboard);
 
+        openFileForRecording();
+        buildDescriptionDialog();
+        buildSuccessDialog();
+        descriptionAlertDialog.show();
+
+        keyboardTask = new KeyboardTask(this, this::onTaskEnd);
+    }
+
+    private void openFileForRecording() {
         FileOutputModel fileOutputModel = new FileOutputModel(
                 TestLoopConfiguration.getDestination(),
                 TestLoopConfiguration.getTestLoopFolder(),
                 TEST_FILE);
         world.setNewOutputStream(fileOutputModel);
+    }
 
+    private void buildDescriptionDialog() {
         AlertDialog.Builder descriptionAlertBuilder = new AlertDialog.Builder(this);
         descriptionAlertBuilder.setTitle(R.string.description);
         descriptionAlertBuilder.setMessage(R.string.keyboard_test_description);
@@ -39,9 +51,10 @@ public class KeyboardActivity extends AppCompatActivity {
             world.unsuppressRegistering();
             dialogInterface.dismiss();
         });
-        AlertDialog descriptionAlertDialog = descriptionAlertBuilder.create();
-        descriptionAlertDialog.show();
+        descriptionAlertDialog = descriptionAlertBuilder.create();
+    }
 
+    private void buildSuccessDialog() {
         AlertDialog.Builder successAlertBuilder = new AlertDialog.Builder(this);
         successAlertBuilder.setTitle(R.string.success);
         successAlertBuilder.setMessage(R.string.finish_description);
@@ -53,11 +66,9 @@ public class KeyboardActivity extends AppCompatActivity {
             finish();
         });
         successAlertDialog = successAlertBuilder.create();
-
-        keyboardTask = new KeyboardTask(this, this::endActivity);
     }
 
-    private void endActivity() {
+    private void onTaskEnd() {
         world.suppressRegistering();
         successAlertDialog.show();
     }

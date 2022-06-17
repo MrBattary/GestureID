@@ -81,9 +81,9 @@ android {
             buildConfigField "boolean", "DEACTIVATE_ROTATION_VECTOR", "false"
             buildConfigField "boolean", "DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
             /* Streams */
-            buildConfigField OutputStreamType, "OUTPUT_STREAM_TYPE", "${OutputStreamType}.DATABASE"
+            buildConfigField OutputStreamType, "OUTPUT_STREAM_TYPE", "${OutputStreamType}.FILE"
             /* Formatter */
-            buildConfigField FormatterMode, "MAIN_FORMATTER_MODE", "${FormatterMode}.DB"
+            buildConfigField FormatterMode, "MAIN_FORMATTER_MODE", "${FormatterMode}.TEXT"
 
             it.minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

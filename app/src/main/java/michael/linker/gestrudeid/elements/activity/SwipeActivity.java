@@ -18,6 +18,7 @@ import michael.linker.gestrudeid.world.singleton.WorldSingleton;
 public class SwipeActivity extends AppCompatActivity {
     private static final String TEST_FILE = "SwipeTest.txt";
     private final IWorld world = WorldSingleton.getInstance();
+    private AlertDialog descriptionAlertDialog;
     private AlertDialog successAlertDialog;
     private boolean isGesturesRegisters = false;
     private ITask swipeTask;
@@ -27,36 +28,11 @@ public class SwipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe);
 
-        FileOutputModel fileOutputModel = new FileOutputModel(
-                TestLoopConfiguration.getDestination(),
-                TestLoopConfiguration.getTestLoopFolder(),
-                TEST_FILE);
-        world.setNewOutputStream(fileOutputModel);
-
-        AlertDialog.Builder descriptionAlertBuilder = new AlertDialog.Builder(this);
-        descriptionAlertBuilder.setTitle(R.string.description);
-        descriptionAlertBuilder.setMessage(R.string.swipe_test_description);
-        descriptionAlertBuilder.setPositiveButton(R.string.start, (dialogInterface, i) -> {
-            swipeTask.start();
-            world.unsuppressRegistering();
-            dialogInterface.dismiss();
-        });
-        AlertDialog descriptionAlertDialog = descriptionAlertBuilder.create();
+        openFileForRecording();
+        buildDescriptionDialog();
+        buildSuccessDialog();
         descriptionAlertDialog.show();
-
-        AlertDialog.Builder successAlertBuilder = new AlertDialog.Builder(this);
-        successAlertBuilder.setTitle(R.string.success);
-        successAlertBuilder.setMessage(R.string.success_description);
-        successAlertBuilder.setPositiveButton(R.string.next, (dialogInterface, i) -> {
-            dialogInterface.dismiss();
-            Intent activity = new Intent(SwipeActivity.this, KeyboardActivity.class);
-            activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(activity);
-            finish();
-        });
-        successAlertDialog = successAlertBuilder.create();
-        swipeTask = new SwipeTask(this, this::endActivity);
-        isGesturesRegisters = true;
+        swipeTask = new SwipeTask(this, this::onTaskEnd);
     }
 
     @Override
@@ -72,7 +48,42 @@ public class SwipeActivity extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
-    private void endActivity() {
+    private void openFileForRecording() {
+        FileOutputModel fileOutputModel = new FileOutputModel(
+                TestLoopConfiguration.getDestination(),
+                TestLoopConfiguration.getTestLoopFolder(),
+                TEST_FILE);
+        world.setNewOutputStream(fileOutputModel);
+    }
+
+    private void buildDescriptionDialog() {
+        AlertDialog.Builder descriptionAlertBuilder = new AlertDialog.Builder(this);
+        descriptionAlertBuilder.setTitle(R.string.description);
+        descriptionAlertBuilder.setMessage(R.string.swipe_test_description);
+        descriptionAlertBuilder.setPositiveButton(R.string.start, (dialogInterface, i) -> {
+            swipeTask.start();
+            isGesturesRegisters = true;
+            world.unsuppressRegistering();
+            dialogInterface.dismiss();
+        });
+        descriptionAlertDialog = descriptionAlertBuilder.create();
+    }
+
+    private void buildSuccessDialog() {
+        AlertDialog.Builder successAlertBuilder = new AlertDialog.Builder(this);
+        successAlertBuilder.setTitle(R.string.success);
+        successAlertBuilder.setMessage(R.string.success_description);
+        successAlertBuilder.setPositiveButton(R.string.next, (dialogInterface, i) -> {
+            dialogInterface.dismiss();
+            Intent activity = new Intent(SwipeActivity.this, KeyboardActivity.class);
+            activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(activity);
+            finish();
+        });
+        successAlertDialog = successAlertBuilder.create();
+    }
+
+    private void onTaskEnd() {
         world.suppressRegistering();
         isGesturesRegisters = false;
         successAlertDialog.show();
