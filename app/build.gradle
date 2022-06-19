@@ -42,7 +42,7 @@ android {
         buildConfigField "String", "HEADING_VALUE_SEPARATOR", "\":\""
         buildConfigField "String", "HEADING_TIMESTAMP", "\"Timestamp\""
         /* Tests */
-        buildConfigField "Integer[]", "BUTTONS_ORDER", "{" + "1," + "5," + "11," + "9," + "2," + "13," + "5," + "12," + "10," + "4," + "7," + "14," + "11," + "6," + "8," + "2," + "10," + "4," + "12," + "3," + "7," + "15," + "4," + "14," + "5," + "2," + "11," + "8," + "10," + "1" + "}"
+        buildConfigField "Integer[]", "BUTTONS_ORDER", "{" + "9," + "5," + "1," + "11," + "2," + "13," + "5," + "12," + "10," + "4," + "7," + "14," + "11," + "6," + "8," + "2," + "10," + "4," + "12," + "3," + "7," + "15," + "4," + "14," + "5," + "9," + "11," + "8," + "10," + "1" + "}"
         buildConfigField "${SwipeType}[]", "SWIPES_ORDER", "{" + "${SwipeType}.LEFT," + "${SwipeType}.UP," + "${SwipeType}.RIGHT," + "${SwipeType}.DOWN," + "${SwipeType}.LEFT," + "${SwipeType}.RIGHT," + "${SwipeType}.DOWN," + "${SwipeType}.UP," + "${SwipeType}.RIGHT," + "${SwipeType}.DOWN," + "${SwipeType}.UP," + "${SwipeType}.LEFT" + "}"
         buildConfigField "float", "SWIPE_ANIMATION_SPEED", "1.4f"
         buildConfigField "String", "SWIPE_UP_ANIMATION", "\"swipe_up_arrows.json\""
