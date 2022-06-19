@@ -13,8 +13,9 @@
     <string name="finish_description">All tasks have been completed successfully. Thank you for participating!</string>
     <!--Button test-->
     <string name="button_test_description">In this task, you will need to click on the highlighted area.</string>
+    <string name="button_test_alt">Press me!</string>
     <!--Swipe test-->
-    <string name="swipe_test_description">In this task, you will need to perform various swipes on the screen.</string>
+    <string name="swipe_test_description">In this task, you will need to perform various swipes on the screen. Arrow - Swipe your finger in this direction.</string>
     <!--Keyboard test-->
     <string name="keyboard_test_description">In this task, various words will appear and your task will be to enter them into a special field. Words are case sensitive!</string>
     <string name="keyboard_input_hint">Enter the word above</string>
