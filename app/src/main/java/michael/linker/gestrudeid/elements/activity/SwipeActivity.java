@@ -84,8 +84,9 @@ public class SwipeActivity extends AppCompatActivity {
     }
 
     private void onTaskEnd() {
-        world.suppressRegistering();
         isGesturesRegisters = false;
+        world.suppressRegistering();
+        world.closeOutputStream();
         successAlertDialog.show();
     }
 }

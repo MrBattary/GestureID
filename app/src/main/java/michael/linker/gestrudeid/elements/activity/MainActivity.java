@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void closeApplication() {
         world.suppressRegistering();
+        world.closeOutputStream();
         world.destroy();
         this.finishAndRemoveTask();
     }

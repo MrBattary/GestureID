@@ -70,6 +70,7 @@ public class ButtonActivity extends AppCompatActivity {
 
     private void onTaskEnd() {
         world.suppressRegistering();
+        world.closeOutputStream();
         successAlertDialog.show();
     }
 }

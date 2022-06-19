@@ -13,6 +13,11 @@ public interface IWorld {
     void setNewOutputStream(AOutputStreamModel outputStreamModel) throws WorldFailedException;
 
     /**
+     * Closes the open output stream, if there is no open output stream, does nothing
+     */
+    void closeOutputStream();
+
+    /**
      * Pause recording of events in the output stream
      */
     void suppressRegistering();

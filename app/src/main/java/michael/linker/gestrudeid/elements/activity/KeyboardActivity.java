@@ -70,6 +70,7 @@ public class KeyboardActivity extends AppCompatActivity {
 
     private void onTaskEnd() {
         world.suppressRegistering();
+        world.closeOutputStream();
         successAlertDialog.show();
     }
 }

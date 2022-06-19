@@ -56,11 +56,18 @@ public class World implements IWorld {
     @Override
     public void setNewOutputStream(AOutputStreamModel outputStreamModel) {
         try {
-            closeOpenedOutputStream();
+            closeOutputStream();
             outputStream = streamManager.getOutputStream(outputStreamModel);
             formatter.setNewOutputStream(outputStream);
         } catch (StreamManagerNotFoundException | StreamManagerFailedException e) {
             throw new WorldFailedException("It is not possible to create a new output stream!", e);
+        }
+    }
+
+    @Override
+    public void closeOutputStream() {
+        if (outputStream != null) {
+            outputStream.close();
         }
     }
 
@@ -132,14 +139,8 @@ public class World implements IWorld {
     }
 
     private void closeOpenedStreams() {
-        closeOpenedOutputStream();
+        closeOutputStream();
         // TODO: Close input stream
-    }
-
-    private void closeOpenedOutputStream() {
-        if (outputStream != null) {
-            outputStream.close();
-        }
     }
 
     private void unregisterRegisteredEntities() {
