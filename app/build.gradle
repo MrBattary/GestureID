@@ -2,10 +2,10 @@ plugins {
     id 'com.android.application'
 }
 
-def OutputStreamType = 'michael.linker.gestrudeid.stream.output.type.OutputStreamType'
-def FormatterMode = 'michael.linker.gestrudeid.formatter.type.FormatterMode'
-def SensorDelayType = 'michael.linker.gestrudeid.sensor.type.SensorDelayType'
-def SwipeType = 'michael.linker.gestrudeid.elements.type.SwipeType'
+def OutputStreamType = 'michael.linker.gestureid.stream.output.type.OutputStreamType'
+def FormatterMode = 'michael.linker.gestureid.formatter.type.FormatterMode'
+def SensorDelayType = 'michael.linker.gestureid.sensor.type.SensorDelayType'
+def SwipeType = 'michael.linker.gestureid.elements.type.SwipeType'
 
 android {
     compileSdk 32
@@ -42,7 +42,7 @@ android {
         buildConfigField "String", "HEADING_VALUE_SEPARATOR", "\":\""
         buildConfigField "String", "HEADING_TIMESTAMP", "\"Timestamp\""
         /* Tests */
-        buildConfigField "Integer[]", "BUTTONS_ORDER", "{" + "9," + "5," + "1," + "11," + "2," + "13," + "5," + "12," + "10," + "4," + "7," + "14," + "11," + "6," + "8," + "2," + "10," + "4," + "12," + "3," + "7," + "15," + "4," + "14," + "5," + "9," + "11," + "8," + "10," + "1" + "}"
+        buildConfigField "Integer[]", "BUTTONS_ORDER", "{" + "9," + "5," + "1," + "3," + "2," + "13," + "5," + "12," + "10," + "4," + "7," + "14," + "11," + "6," + "8," + "2," + "10," + "4," + "11," + "3," + "7," + "15," + "4," + "14," + "5," + "9," + "12," + "7," + "10," + "8" + "}"
         buildConfigField "${SwipeType}[]", "SWIPES_ORDER", "{" + "${SwipeType}.LEFT," + "${SwipeType}.UP," + "${SwipeType}.RIGHT," + "${SwipeType}.DOWN," + "${SwipeType}.LEFT," + "${SwipeType}.RIGHT," + "${SwipeType}.DOWN," + "${SwipeType}.UP," + "${SwipeType}.RIGHT," + "${SwipeType}.DOWN," + "${SwipeType}.UP," + "${SwipeType}.LEFT" + "}"
         buildConfigField "float", "SWIPE_ANIMATION_SPEED", "1.4f"
         buildConfigField "String", "SWIPE_UP_ANIMATION", "\"swipe_up_arrows.json\""
