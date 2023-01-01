@@ -15,7 +15,7 @@ import michael.linker.gestureid.sensor.listener.suppressor.ISensorListenerSuppre
 import michael.linker.gestureid.sensor.type.BaseSensorType;
 import michael.linker.gestureid.sensor.type.CompositeSensorType;
 import michael.linker.gestureid.sensor.type.SensorType;
-import michael.linker.gestureid.synchronizer.IEventSynchronizer;
+import michael.linker.gestureid.event.synchronizer.IEventSynchronizer;
 
 public class SensorListenerProvider implements ISensorListenerProvider {
     private final Map<Integer, ISensorListener> sensorListeners = new HashMap<>();

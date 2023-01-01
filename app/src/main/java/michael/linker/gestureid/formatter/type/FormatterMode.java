@@ -5,5 +5,5 @@ package michael.linker.gestureid.formatter.type;
  */
 public enum FormatterMode {
     TEXT,
-    DB
+    OBJECT
 }

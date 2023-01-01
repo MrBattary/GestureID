@@ -9,8 +9,8 @@ import michael.linker.gestureid.sensor.listener.suppressor.ISensorListenerSuppre
 import michael.linker.gestureid.sensor.listener.suppressor.SensorListenerSuppressorNotFoundException;
 import michael.linker.gestureid.sensor.model.composite.RotationVectorSensorModel;
 import michael.linker.gestureid.sensor.type.CompositeSensorType;
-import michael.linker.gestureid.synchronizer.EventSynchronizerFailedException;
-import michael.linker.gestureid.synchronizer.IEventSynchronizer;
+import michael.linker.gestureid.event.synchronizer.EventSynchronizerFailedException;
+import michael.linker.gestureid.event.synchronizer.IEventSynchronizer;
 
 public class RotationVectorSensorListener implements ISensorListener {
     private static final String TAG = RotationVectorSensorListener.class.getCanonicalName();

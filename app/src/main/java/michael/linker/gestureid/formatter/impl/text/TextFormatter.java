@@ -8,9 +8,9 @@ import michael.linker.gestureid.config.FormatterBuildConfiguration;
 import michael.linker.gestureid.formatter.IFormatter;
 import michael.linker.gestureid.sensor.model.ASensorModel;
 import michael.linker.gestureid.stream.output.stream.IOutputStream;
-import michael.linker.gestureid.synchronizer.model.SynchronizedEvent;
-import michael.linker.gestureid.synchronizer.model.SynchronizedEventOneModel;
-import michael.linker.gestureid.synchronizer.model.SynchronizedEventListOfModels;
+import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
+import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventSingleModel;
+import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventListOfModels;
 
 public class TextFormatter implements IFormatter {
     private IOutputStream outputStream;
@@ -30,7 +30,7 @@ public class TextFormatter implements IFormatter {
     }
 
     @Override
-    public void format(SynchronizedEventOneModel synchronizedSensorModel) {
+    public void format(SynchronizedEventSingleModel synchronizedSensorModel) {
         List<String> formattedModelFields = new ArrayList<>();
         formattedModelFields.add(formatTimestamp(synchronizedSensorModel));
         formattedModelFields.add(

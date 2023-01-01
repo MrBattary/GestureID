@@ -1,8 +1,6 @@
 package michael.linker.gestureid.world;
 
-import michael.linker.gestureid.formatter.IFormatter;
-import michael.linker.gestureid.formatter.factory.FormatterFactory;
-import michael.linker.gestureid.formatter.factory.IFormatterFactory;
+import michael.linker.gestureid.event.buffer.IEventBuffer;
 import michael.linker.gestureid.sensor.listener.manager.ISensorListenerManager;
 import michael.linker.gestureid.sensor.listener.manager.SensorListenerManager;
 import michael.linker.gestureid.sensor.listener.manager.SensorListenerManagerFailedException;
@@ -17,56 +15,28 @@ import michael.linker.gestureid.sensor.provider.SensorProviderNotFoundException;
 import michael.linker.gestureid.sensor.type.SensorType;
 import michael.linker.gestureid.sensor.wrapper.manager.ASensorManager;
 import michael.linker.gestureid.sensor.wrapper.sensor.SensorWrapper;
-import michael.linker.gestureid.stream.manager.IStreamManager;
-import michael.linker.gestureid.stream.manager.StreamManager;
-import michael.linker.gestureid.stream.manager.StreamManagerFailedException;
-import michael.linker.gestureid.stream.manager.StreamManagerNotFoundException;
-import michael.linker.gestureid.stream.output.model.AOutputStreamModel;
-import michael.linker.gestureid.stream.output.stream.IOutputStream;
-import michael.linker.gestureid.synchronizer.EventSynchronizer;
-import michael.linker.gestureid.synchronizer.EventSynchronizerFailedException;
-import michael.linker.gestureid.synchronizer.IEventSynchronizer;
+import michael.linker.gestureid.event.synchronizer.EventSynchronizer;
+import michael.linker.gestureid.event.synchronizer.EventSynchronizerFailedException;
+import michael.linker.gestureid.event.synchronizer.IEventSynchronizer;
 import michael.linker.gestureid.world.exception.WorldFailedException;
 
 public class World implements IWorld {
     // Sensor
     private final ASensorManager sensorManager;
     private ISensorProvider sensorProvider;
-    // Streams
-    private IStreamManager streamManager;
-    private IOutputStream outputStream;
-    // Formatter
-    private IFormatterFactory formatterFactory;
-    private IFormatter formatter;
-    // Synchronizer
-    private IEventSynchronizer eventSynchronizer;
-    // Listener
+    // Sensor listener
     private ISensorListenerSuppressor sensorListenerSuppressor;
     private ISensorListenerProvider sensorListenerProvider;
     private ISensorListenerManager sensorListenerManager;
+    // Event synchronizer
+    private IEventSynchronizer eventSynchronizer;
+    // Event buffer
+    private IEventBuffer eventBuffer;
 
     public World(final ASensorManager sensorManager) throws WorldFailedException {
         this.sensorManager = sensorManager;
         initializeRequiredParts();
         registerListenersForActivatedSensors();
-    }
-
-    @Override
-    public void setNewOutputStream(AOutputStreamModel outputStreamModel) {
-        try {
-            closeOutputStream();
-            outputStream = streamManager.getOutputStream(outputStreamModel);
-            formatter.setNewOutputStream(outputStream);
-        } catch (StreamManagerNotFoundException | StreamManagerFailedException e) {
-            throw new WorldFailedException("It is not possible to create a new output stream!", e);
-        }
-    }
-
-    @Override
-    public void closeOutputStream() {
-        if (outputStream != null) {
-            outputStream.close();
-        }
     }
 
     @Override
@@ -82,14 +52,11 @@ public class World implements IWorld {
     @Override
     public void destroy() {
         suppressRegistering();
-        closeOpenedStreams();
         unregisterRegisteredEntities();
     }
 
     private void initializeRequiredParts() {
         initializeSensorPart();
-        initializeStreamPart();
-        initializeFormatterPart();
         initializeSynchronizerPart();
         initializeListenerPart();
     }
@@ -98,17 +65,8 @@ public class World implements IWorld {
         sensorProvider = new SensorProvider(sensorManager);
     }
 
-    private void initializeStreamPart() {
-        streamManager = new StreamManager();
-    }
-
-    private void initializeFormatterPart() {
-        formatterFactory = new FormatterFactory();
-        formatter = formatterFactory.getFormatter();
-    }
-
     private void initializeSynchronizerPart() {
-        eventSynchronizer = new EventSynchronizer(formatter);
+        eventSynchronizer = new EventSynchronizer(eventBuffer);
     }
 
     private void initializeListenerPart() {
@@ -130,14 +88,9 @@ public class World implements IWorld {
                 EventSynchronizerFailedException |
                 SensorListenerManagerFailedException |
                 SensorListenerSuppressorNotFoundException e) {
-            throw new
-                    WorldFailedException("Error during the initialization of the sensor world!", e);
+            throw new WorldFailedException(
+                    "Error during the initialization of the sensor world!", e);
         }
-    }
-
-    private void closeOpenedStreams() {
-        closeOutputStream();
-        // TODO: Close input stream
     }
 
     private void unregisterRegisteredEntities() {

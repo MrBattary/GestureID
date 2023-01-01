@@ -1,8 +1,8 @@
 package michael.linker.gestureid.formatter;
 
 import michael.linker.gestureid.stream.output.stream.IOutputStream;
-import michael.linker.gestureid.synchronizer.model.SynchronizedEventOneModel;
-import michael.linker.gestureid.synchronizer.model.SynchronizedEventListOfModels;
+import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventSingleModel;
+import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventListOfModels;
 
 /**
  * Formats sensor event data according to the configuration file
@@ -14,7 +14,7 @@ public interface IFormatter {
      *
      * @param synchronizedSensorModel Model containing timestamp and sensor event data
      */
-    void format(SynchronizedEventOneModel synchronizedSensorModel);
+    void format(SynchronizedEventSingleModel synchronizedSensorModel);
 
     /**
      * Format data from the list of the models

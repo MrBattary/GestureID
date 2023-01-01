@@ -1,4 +1,4 @@
-package michael.linker.gestureid.synchronizer;
+package michael.linker.gestureid.event.synchronizer;
 
 /**
  * If there was any error related to the lack of the necessary resource

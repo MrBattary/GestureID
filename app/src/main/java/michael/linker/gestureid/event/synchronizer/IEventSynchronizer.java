@@ -1,4 +1,4 @@
-package michael.linker.gestureid.synchronizer;
+package michael.linker.gestureid.event.synchronizer;
 
 import java.util.List;
 

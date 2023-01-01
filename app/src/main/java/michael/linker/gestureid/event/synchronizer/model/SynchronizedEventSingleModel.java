@@ -1,14 +1,14 @@
-package michael.linker.gestureid.synchronizer.model;
+package michael.linker.gestureid.event.synchronizer.model;
 
 import michael.linker.gestureid.sensor.model.ASensorModel;
 
 /**
- * Wrapper for SynchronizedEvent with only one model
+ * Wrapper for SynchronizedEvent with single model
  */
-public class SynchronizedEventOneModel extends SynchronizedEvent {
+public class SynchronizedEventSingleModel extends SynchronizedEvent {
     private final ASensorModel sensorModel;
 
-    public SynchronizedEventOneModel(final String timestamp,
+    public SynchronizedEventSingleModel(final String timestamp,
                                      final ASensorModel sensorModel) {
         super(timestamp);
         this.sensorModel = sensorModel;

@@ -1,4 +1,4 @@
-package michael.linker.gestureid.synchronizer.model;
+package michael.linker.gestureid.event.synchronizer.model;
 
 /**
  * A base class for a synchronized event that provides general information about the event

@@ -1,4 +1,4 @@
-package michael.linker.gestureid.synchronizer;
+package michael.linker.gestureid.event.synchronizer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,20 +7,20 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import michael.linker.gestureid.formatter.IFormatter;
+import michael.linker.gestureid.event.buffer.IEventBuffer;
+import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventListOfModels;
 import michael.linker.gestureid.sensor.model.ASensorModel;
 import michael.linker.gestureid.sensor.recognizer.SensorRecognizer;
 import michael.linker.gestureid.sensor.type.SensorType;
-import michael.linker.gestureid.synchronizer.model.SynchronizedEventListOfModels;
 
 public class EventSynchronizer implements IEventSynchronizer {
-    private final IFormatter formatter;
+    private final IEventBuffer eventBuffer;
 
     private final Map<Integer, ASensorModel> registeredModels = new TreeMap<>();
     private final Set<Integer> attachedListeners = new TreeSet<>();
 
-    public EventSynchronizer(IFormatter formatter) {
-        this.formatter = formatter;
+    public EventSynchronizer(IEventBuffer eventBuffer) {
+        this.eventBuffer = eventBuffer;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class EventSynchronizer implements IEventSynchronizer {
                             String.valueOf(System.currentTimeMillis()),
                             new ArrayList<>(registeredModels.values())
                     );
-            formatter.format(synchronizedEvent);
+            eventBuffer.buffer(synchronizedEvent);
             registeredModels.clear();
         }
     }
