@@ -1,8 +1,10 @@
 # Folders
 .gradle/
 .idea/
-build/
 .git/
+build/
+release/
+debug/
 
 # Log file
 *.log

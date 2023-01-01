@@ -2,9 +2,10 @@ plugins {
     id 'com.android.application'
 }
 
-def OutputStreamType = 'michael.linker.gestrudeid.stream.output.type.OutputStreamType'
-def FormatterMode = 'michael.linker.gestrudeid.formatter.type.FormatterMode'
-def SensorDelayType = 'michael.linker.gestrudeid.sensor.type.SensorDelayType'
+def OutputStreamType = 'michael.linker.gestureid.stream.output.type.OutputStreamType'
+def FormatterMode = 'michael.linker.gestureid.formatter.type.FormatterMode'
+def SensorDelayType = 'michael.linker.gestureid.sensor.type.SensorDelayType'
+def SwipeType = 'michael.linker.gestureid.elements.type.SwipeType'
 
 android {
     compileSdk 32
@@ -14,7 +15,7 @@ android {
         minSdk 29
         targetSdk 32
         versionCode 1
-        versionName '0.3'
+        versionName '1.0'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -31,7 +32,7 @@ android {
         buildConfigField OutputStreamType, "OUTPUT_STREAM_TYPE", "${OutputStreamType}.FILE"
         buildConfigField "String", "FILE_OUTPUT_DIRECTORY", "\"Data/Text\""
         /* Listeners */
-        buildConfigField "Integer", "SENSOR_DELAY", "${SensorDelayType}.NORMAL"
+        buildConfigField "Integer", "SENSOR_DELAY", "${SensorDelayType}.GAME"
         /* Formatter */
         buildConfigField FormatterMode, "FORMATTER_MODE", "${FormatterMode}.TEXT"
         buildConfigField "String", "MODEL_VALUES_SEPARATOR", "\",\""
@@ -40,6 +41,17 @@ android {
         buildConfigField "String", "HEADING_SEPARATOR", "\"-\""
         buildConfigField "String", "HEADING_VALUE_SEPARATOR", "\":\""
         buildConfigField "String", "HEADING_TIMESTAMP", "\"Timestamp\""
+        /* Tests */
+        buildConfigField "Integer[]", "BUTTONS_ORDER", "{" + "9," + "5," + "1," + "3," + "2," + "13," + "5," + "12," + "10," + "4," + "7," + "14," + "11," + "6," + "8," + "2," + "10," + "4," + "11," + "3," + "7," + "15," + "4," + "14," + "5," + "9," + "12," + "7," + "10," + "8" + "}"
+        buildConfigField "${SwipeType}[]", "SWIPES_ORDER", "{" + "${SwipeType}.LEFT," + "${SwipeType}.UP," + "${SwipeType}.RIGHT," + "${SwipeType}.DOWN," + "${SwipeType}.LEFT," + "${SwipeType}.RIGHT," + "${SwipeType}.DOWN," + "${SwipeType}.UP," + "${SwipeType}.RIGHT," + "${SwipeType}.DOWN," + "${SwipeType}.UP," + "${SwipeType}.LEFT" + "}"
+        buildConfigField "float", "SWIPE_ANIMATION_SPEED", "1.4f"
+        buildConfigField "String", "SWIPE_UP_ANIMATION", "\"swipe_up_arrows.json\""
+        buildConfigField "String", "SWIPE_DOWN_ANIMATION", "\"swipe_down_arrows.json\""
+        buildConfigField "String", "SWIPE_LEFT_ANIMATION", "\"swipe_left_arrows.json\""
+        buildConfigField "String", "SWIPE_RIGHT_ANIMATION", "\"swipe_right_arrows.json\""
+        buildConfigField "String", "ZOOM_IN_ANIMATION", "\"zoom_in.json\""
+        buildConfigField "String", "ZOOM_OUT_ANIMATION", "\"zoom_out.json\""
+        buildConfigField "String[]", "WORDS_ORDER", "{" + "\"Install\"," + "\"moment\"," + "\"popular\"," + "\"is\"," + "\"schedule\"," + "\"What\"," + "\"concept\"," + "\"at\"," + "\"egg\"," + "\"history\"," + "\"test\"," + "\"the\"," + "\"bottle\"," + "\"Earth\"," + "\"dependent\"" + "}"
     }
 
     buildTypes {
@@ -69,9 +81,9 @@ android {
             buildConfigField "boolean", "DEACTIVATE_ROTATION_VECTOR", "false"
             buildConfigField "boolean", "DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
             /* Streams */
-            buildConfigField OutputStreamType, "OUTPUT_STREAM_TYPE", "${OutputStreamType}.DATABASE"
+            buildConfigField OutputStreamType, "OUTPUT_STREAM_TYPE", "${OutputStreamType}.FILE"
             /* Formatter */
-            buildConfigField FormatterMode, "MAIN_FORMATTER_MODE", "${FormatterMode}.DB"
+            buildConfigField FormatterMode, "MAIN_FORMATTER_MODE", "${FormatterMode}.TEXT"
 
             it.minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -84,9 +96,10 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "com.airbnb.android:lottie:5.2.0"
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
