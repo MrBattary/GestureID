@@ -2,8 +2,6 @@ plugins {
     id 'com.android.application'
 }
 
-def OutputStreamType = 'michael.linker.gestureid.stream.output.type.OutputStreamType'
-def FormatterMode = 'michael.linker.gestureid.formatter.type.FormatterMode'
 def SensorDelayType = 'michael.linker.gestureid.sensor.type.SensorDelayType'
 
 android {
@@ -27,19 +25,8 @@ android {
         buildConfigField "boolean", "DEACTIVATE_LINEAR_ACCELERATION", "false"
         buildConfigField "boolean", "DEACTIVATE_ROTATION_VECTOR", "false"
         buildConfigField "boolean", "DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
-        /* Streams */
-        buildConfigField OutputStreamType, "OUTPUT_STREAM_TYPE", "${OutputStreamType}.FILE"
-        buildConfigField "String", "FILE_OUTPUT_DIRECTORY", "\"Data/Text\""
         /* Listeners */
         buildConfigField "Integer", "SENSOR_DELAY", "${SensorDelayType}.GAME"
-        /* Formatter */
-        buildConfigField FormatterMode, "FORMATTER_MODE", "${FormatterMode}.TEXT"
-        buildConfigField "String", "MODEL_VALUES_SEPARATOR", "\",\""
-        buildConfigField "String", "MODELS_SEPARATOR", "\";\""
-        buildConfigField "char", "EVENTS_SEPARATOR", "'\\n'"
-        buildConfigField "String", "HEADING_SEPARATOR", "\"-\""
-        buildConfigField "String", "HEADING_VALUE_SEPARATOR", "\":\""
-        buildConfigField "String", "HEADING_TIMESTAMP", "\"Timestamp\""
     }
 
     buildTypes {
@@ -53,10 +40,6 @@ android {
             buildConfigField "boolean", "DEACTIVATE_LINEAR_ACCELERATION", "false"
             buildConfigField "boolean", "DEACTIVATE_ROTATION_VECTOR", "false"
             buildConfigField "boolean", "DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
-            /* Streams */
-            buildConfigField OutputStreamType, "OUTPUT_STREAM_TYPE", "${OutputStreamType}.FILE"
-            /* Formatter */
-            buildConfigField FormatterMode, "FORMATTER_MODE", "${FormatterMode}.TEXT"
         }
         release {
             /* User config */
@@ -68,10 +51,6 @@ android {
             buildConfigField "boolean", "DEACTIVATE_LINEAR_ACCELERATION", "false"
             buildConfigField "boolean", "DEACTIVATE_ROTATION_VECTOR", "false"
             buildConfigField "boolean", "DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
-            /* Streams */
-            buildConfigField OutputStreamType, "OUTPUT_STREAM_TYPE", "${OutputStreamType}.FILE"
-            /* Formatter */
-            buildConfigField FormatterMode, "MAIN_FORMATTER_MODE", "${FormatterMode}.TEXT"
 
             it.minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

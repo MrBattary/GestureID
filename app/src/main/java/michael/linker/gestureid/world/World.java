@@ -56,17 +56,22 @@ public class World implements IWorld {
     }
 
     private void initializeRequiredParts() {
+        initializeEventBufferPart();
+        initializeEventSynchronizerPart();
         initializeSensorPart();
-        initializeSynchronizerPart();
         initializeListenerPart();
+    }
+
+    private void initializeEventBufferPart() {
+        // TODO: init eventBuffer
+    }
+
+    private void initializeEventSynchronizerPart() {
+        eventSynchronizer = new EventSynchronizer(eventBuffer);
     }
 
     private void initializeSensorPart() {
         sensorProvider = new SensorProvider(sensorManager);
-    }
-
-    private void initializeSynchronizerPart() {
-        eventSynchronizer = new EventSynchronizer(eventBuffer);
     }
 
     private void initializeListenerPart() {

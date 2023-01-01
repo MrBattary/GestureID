@@ -21,4 +21,18 @@ public interface IEventBuffer {
      *                                 and list of sensor event data.
      */
     void buffer(SynchronizedEventListOfModels synchronizedSensorModels);
+
+    /**
+     * Returns buffer max size.
+     *
+     * @return max size.
+     */
+    int getMaxSize();
+
+    /**
+     * Returns buffer current size.
+     *
+     * @return current size.
+     */
+    int getSize();
 }
