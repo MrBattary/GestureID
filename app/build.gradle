@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
 }
 
+def EventBufferOverflowStrategy = 'michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowStrategy'
 def SensorDelayType = 'michael.linker.gestureid.sensor.type.SensorDelayType'
 
 android {
@@ -16,7 +17,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        /* User config */
+        /* Shared config */
         /* Sensors */
         buildConfigField "boolean", "DEACTIVATE_ACCELEROMETER", "false"
         buildConfigField "boolean", "DEACTIVATE_GYROSCOPE", "false"
@@ -27,11 +28,13 @@ android {
         buildConfigField "boolean", "DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
         /* Listeners */
         buildConfigField "Integer", "SENSOR_DELAY", "${SensorDelayType}.GAME"
+        /* Buffer */
+        buildConfigField "int", "EVENT_BUFFER_MAX_SIZE", "1000"
+        buildConfigField EventBufferOverflowStrategy, "EVENT_BUFFER_OVERFLOW_STRATEGY", "${EventBufferOverflowStrategy}.RAISE_ERROR"
     }
 
     buildTypes {
         debug {
-            /* User config */
             /* Sensors */
             buildConfigField "boolean", "DEACTIVATE_ACCELEROMETER", "false"
             buildConfigField "boolean", "DEACTIVATE_GYROSCOPE", "false"
@@ -42,7 +45,6 @@ android {
             buildConfigField "boolean", "DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
         }
         release {
-            /* User config */
             /* Sensors */
             buildConfigField "boolean", "DEACTIVATE_ACCELEROMETER", "false"
             buildConfigField "boolean", "DEACTIVATE_GYROSCOPE", "false"
@@ -57,8 +59,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 

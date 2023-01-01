@@ -1,9 +1,11 @@
-package michael.linker.gestureid.event.buffer.active;
+package michael.linker.gestureid.event.buffer.mode.active;
+
+import michael.linker.gestureid.event.buffer.mode.IEventBuffer;
 
 /**
  * An active buffer that performs certain actions when receiving new information.
  */
-public interface IActiveEventBuffer {
+public interface IActiveEventBuffer extends IEventBuffer {
     /**
      * Subscribe listener to the buffer updates.
      *

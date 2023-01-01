@@ -1,6 +1,6 @@
 package michael.linker.gestureid.world;
 
-import michael.linker.gestureid.event.buffer.IEventBuffer;
+import michael.linker.gestureid.event.buffer.mode.IEventBuffer;
 import michael.linker.gestureid.sensor.listener.manager.ISensorListenerManager;
 import michael.linker.gestureid.sensor.listener.manager.SensorListenerManager;
 import michael.linker.gestureid.sensor.listener.manager.SensorListenerManagerFailedException;

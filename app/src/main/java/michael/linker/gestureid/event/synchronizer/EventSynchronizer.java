@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import michael.linker.gestureid.event.buffer.IEventBuffer;
+import michael.linker.gestureid.event.buffer.mode.IEventBuffer;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventListOfModels;
 import michael.linker.gestureid.sensor.model.ASensorModel;
 import michael.linker.gestureid.sensor.recognizer.SensorRecognizer;

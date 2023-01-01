@@ -1,6 +1,5 @@
 package michael.linker.gestureid.config;
 
-import michael.linker.gestureid.BuildConfig;
 import michael.linker.gestureid.stream.output.type.OutputStreamType;
 
 /**
@@ -9,13 +8,16 @@ import michael.linker.gestureid.stream.output.type.OutputStreamType;
  *
  * @see michael.linker.gestureid.stream
  */
+// TODO: STUBS!
 public final class StreamsBuildConfiguration {
     public static OutputStreamType getOutputStreamType() {
-        return BuildConfig.OUTPUT_STREAM_TYPE;
+        return null;
+        //return BuildConfig.OUTPUT_STREAM_TYPE;
     }
 
     public static String getFileOutputDirectory() {
-        return BuildConfig.FILE_OUTPUT_DIRECTORY;
+        return null;
+        //return BuildConfig.FILE_OUTPUT_DIRECTORY;
     }
 
     // TODO: Add db stream

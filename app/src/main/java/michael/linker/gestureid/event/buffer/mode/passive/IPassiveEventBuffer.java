@@ -1,6 +1,6 @@
-package michael.linker.gestureid.event.buffer.passive;
+package michael.linker.gestureid.event.buffer.mode.passive;
 
-import michael.linker.gestureid.event.buffer.IEventBuffer;
+import michael.linker.gestureid.event.buffer.mode.IEventBuffer;
 import michael.linker.gestureid.event.synchronizer.EventSynchronizerNotFoundException;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventListOfModels;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventSingleModel;
@@ -10,7 +10,7 @@ import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventSingle
  */
 public interface IPassiveEventBuffer extends IEventBuffer {
     /**
-     * Returns last event from the buffer but does not removes it from the buffer.
+     * Returns, but does not remove last event from the buffer.
      *
      * @return last event model.
      * @throws EventSynchronizerNotFoundException if buffer is empty.
@@ -18,19 +18,19 @@ public interface IPassiveEventBuffer extends IEventBuffer {
     SynchronizedEventSingleModel peekLastEvent() throws EventSynchronizerNotFoundException;
 
     /**
-     * Returns last event from the buffer.
+     * Returns and removes last event from the buffer.
      *
      * @return last event model.
      * @throws EventSynchronizerNotFoundException if buffer is empty.
      */
-    SynchronizedEventSingleModel popLastEvent() throws EventSynchronizerNotFoundException;
+    SynchronizedEventSingleModel pullLastEvent() throws EventSynchronizerNotFoundException;
 
     /**
-     * Returns all events from the buffer.
+     * Returns and removes all events from the buffer.
      *
      * @return all event models.
      * @throws EventSynchronizerNotFoundException if buffer is empty.
      */
-    SynchronizedEventListOfModels popAllEventsFromBuffer()
+    SynchronizedEventListOfModels pullAllEventsFromBuffer()
             throws EventSynchronizerNotFoundException;
 }
