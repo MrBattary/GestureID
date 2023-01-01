@@ -45,12 +45,10 @@ public class World implements IWorld {
     private ISensorListenerProvider sensorListenerProvider;
     private ISensorListenerManager sensorListenerManager;
 
-    public World(
-            final ASensorManager sensorManager
-    ) throws WorldFailedException {
+    public World(final ASensorManager sensorManager) throws WorldFailedException {
         this.sensorManager = sensorManager;
         initializeRequiredParts();
-        registerListenersForActivatedSensor();
+        registerListenersForActivatedSensors();
     }
 
     @Override
@@ -121,13 +119,12 @@ public class World implements IWorld {
                 new SensorListenerManager(sensorListenerProvider, sensorManager, sensorProvider);
     }
 
-    private void registerListenersForActivatedSensor() {
+    private void registerListenersForActivatedSensors() {
         try {
             for (SensorWrapper sensorWrapper : sensorProvider.getActivatedSensors()) {
                 SensorType sensorType = sensorWrapper.getSensorType();
                 eventSynchronizer.attachOneListener(sensorType);
                 sensorListenerManager.registerListener(sensorType);
-                sensorListenerSuppressor.unsuppressListener(sensorType);
             }
         } catch (SensorProviderNotFoundException |
                 EventSynchronizerFailedException |
