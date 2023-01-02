@@ -24,14 +24,14 @@ public interface IEventSynchronizer {
      * @param sensorType Sensor type as in Listener
      * @throws EventSynchronizerFailedException If the Listener has already been attached
      */
-    void attachOneListener(SensorType sensorType) throws EventSynchronizerFailedException;
+    void attachListener(SensorType sensorType) throws EventSynchronizerFailedException;
 
     /**
      * Detach listener by SensorType
      *
      * @param sensorType Sensor type as in Listener
      */
-    void detachOneListener(SensorType sensorType);
+    void detachListener(SensorType sensorType);
 
     /**
      * Attach list of SensorListeners by SensorType

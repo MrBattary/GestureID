@@ -61,7 +61,7 @@ public class EventSynchronizer implements IEventSynchronizer {
     }
 
     @Override
-    public void attachOneListener(SensorType sensorType)
+    public void attachListener(SensorType sensorType)
             throws EventSynchronizerFailedException {
         if (!attachedListeners.contains(sensorType.toInt())) {
             attachedListeners.add(sensorType.toInt());
@@ -73,7 +73,7 @@ public class EventSynchronizer implements IEventSynchronizer {
     }
 
     @Override
-    public void detachOneListener(SensorType sensorType) {
+    public void detachListener(SensorType sensorType) {
         if (attachedListeners.contains(sensorType.toInt())) {
             attachedListeners.remove(sensorType.toInt());
             registeredModels.clear();
@@ -84,14 +84,14 @@ public class EventSynchronizer implements IEventSynchronizer {
     public void attachListenersList(List<SensorType> sensorTypesList)
             throws EventSynchronizerFailedException {
         for (SensorType sensorType : sensorTypesList) {
-            attachOneListener(sensorType);
+            attachListener(sensorType);
         }
     }
 
     @Override
     public void detachListenersList(List<SensorType> sensorTypesList) {
         for (SensorType sensorType : sensorTypesList) {
-            detachOneListener(sensorType);
+            detachListener(sensorType);
         }
     }
 }

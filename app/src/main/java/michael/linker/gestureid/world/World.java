@@ -86,7 +86,7 @@ public class World implements IWorld {
         try {
             for (SensorWrapper sensorWrapper : sensorProvider.getActivatedSensors()) {
                 SensorType sensorType = sensorWrapper.getSensorType();
-                eventSynchronizer.attachOneListener(sensorType);
+                eventSynchronizer.attachListener(sensorType);
                 sensorListenerManager.registerListener(sensorType);
             }
         } catch (SensorProviderNotFoundException |

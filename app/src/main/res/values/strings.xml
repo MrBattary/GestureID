@@ -19,4 +19,9 @@
     <!--Keyboard test-->
     <string name="keyboard_test_description">In this task, various words will appear and your task will be to enter them into a special field. Words are case sensitive!</string>
     <string name="keyboard_input_hint">Enter the word above</string>
+
+    <!-- Navigation -->
+    <string name="navigation_title_home">Home</string>
+    <string name="navigation_title_sensors">Sensors</string>
+    <string name="navigation_title_playground">Playground</string>
 </resources>
