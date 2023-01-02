@@ -7,6 +7,11 @@ import michael.linker.gestureid.event.buffer.mode.IEventBuffer;
  */
 public interface IActiveEventBuffer extends IEventBuffer {
     /**
+     * Clears all data from the buffer and notifies listeners with it.
+     */
+    void flush();
+
+    /**
      * Subscribe listener to the buffer updates.
      *
      * @param listener active event buffer listener.

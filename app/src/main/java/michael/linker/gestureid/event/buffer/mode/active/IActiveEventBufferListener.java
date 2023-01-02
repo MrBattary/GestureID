@@ -1,5 +1,7 @@
 package michael.linker.gestureid.event.buffer.mode.active;
 
+import java.util.List;
+
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
 
 /**
@@ -7,9 +9,9 @@ import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
  */
 public interface IActiveEventBufferListener {
     /**
-     * Calls by IActiveEventBuffer impl when buffer updates with the sensor event.
+     * Calls by IActiveEventBuffer impl when buffer updates.
      *
-     * @param eventSingleModel last buffer sensor event update.
+     * @param synchronizedEventList event list.
      */
-    void notifyAboutEvent(SynchronizedEvent eventSingleModel);
+    void notifyAboutEvents(List<SynchronizedEvent> synchronizedEventList);
 }

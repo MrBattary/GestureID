@@ -1,10 +1,15 @@
 package michael.linker.gestureid.event.buffer.mode.active;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import michael.linker.gestureid.config.EventsBuildConfiguration;
 import michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowException;
+import michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowStrategyProvider;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventListOfModels;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventSingleModel;
@@ -14,9 +19,20 @@ import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventSingle
  */
 public class ActiveEventBuffer implements IActiveEventBuffer {
     private final Set<IActiveEventBufferListener> listenerSet;
+    private final Deque<SynchronizedEvent> eventDeque;
 
     public ActiveEventBuffer() {
         listenerSet = new HashSet<>();
+        eventDeque = new ArrayDeque<>();
+    }
+
+    @Override
+    public void flush() {
+        List<SynchronizedEvent> eventList = new ArrayList<>(eventDeque);
+        eventDeque.clear();
+        for (IActiveEventBufferListener listener : listenerSet) {
+            listener.notifyAboutEvents(eventList);
+        }
     }
 
     @Override
@@ -37,13 +53,15 @@ public class ActiveEventBuffer implements IActiveEventBuffer {
     @Override
     public void buffer(SynchronizedEventSingleModel synchronizedSensorModel)
             throws EventBufferOverflowException {
-        notifyListeners(synchronizedSensorModel);
+        applyOverflowStrategy();
+        eventDeque.add(synchronizedSensorModel);
     }
 
     @Override
     public void buffer(SynchronizedEventListOfModels synchronizedSensorModels)
             throws EventBufferOverflowException {
-        notifyListeners(synchronizedSensorModels);
+        applyOverflowStrategy();
+        eventDeque.add(synchronizedSensorModels);
     }
 
     @Override
@@ -53,12 +71,12 @@ public class ActiveEventBuffer implements IActiveEventBuffer {
 
     @Override
     public int getSize() {
-        return 0;
+        return eventDeque.size();
     }
 
-    private void notifyListeners(SynchronizedEvent event) {
-        for (IActiveEventBufferListener listener : listenerSet) {
-            listener.notifyAboutEvent(event);
+    private void applyOverflowStrategy() throws EventBufferOverflowException {
+        if (getSize() >= getMaxSize()) {
+            EventBufferOverflowStrategyProvider.getOverflowStrategy().execute(eventDeque);
         }
     }
 }
