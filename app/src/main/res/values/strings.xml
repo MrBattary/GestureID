@@ -20,8 +20,14 @@
     <string name="keyboard_test_description">In this task, various words will appear and your task will be to enter them into a special field. Words are case sensitive!</string>
     <string name="keyboard_input_hint">Enter the word above</string>
 
-    <!-- Navigation -->
+    <!-- Navigation. -->
     <string name="navigation_title_home">Home</string>
     <string name="navigation_title_sensors">Sensors</string>
     <string name="navigation_title_playground">Playground</string>
+
+    <!-- Development. -->
+    <string name="placeholder_sensor_name" translatable="false">Sensor</string>
+    <string name="placeholder_sensor_status" translatable="false">Status</string>
+    <string name="placeholder_sensor_data" translatable="false">XX YY ZZ WW</string>
+    <string name="placeholder_sensors_time" translatable="false">NNNNNNNNN</string>
 </resources>

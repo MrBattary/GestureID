@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sensors"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginHorizontal="@dimen/fragment_content_margin_horizontal"
     tools:context=".elements.fragment.sensors.root.SensorsFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello from sensors" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sensors_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder_sensors_time" />
 
-</FrameLayout>
+    <include
+        android:id="@+id/sensors_accelerometer"
+        layout="@layout/component_sensor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sensors_time"
+        android:layout_marginTop="@dimen/fragment_margin_vertical" />
+
+    <include
+        android:id="@+id/sensors_gyroscope"
+        layout="@layout/component_sensor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sensors_accelerometer"
+        android:layout_marginTop="@dimen/fragment_margin_vertical" />
+
+    <include
+        android:id="@+id/sensors_magnetometer"
+        layout="@layout/component_sensor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sensors_gyroscope"
+        android:layout_marginTop="@dimen/fragment_margin_vertical" />
+
+</RelativeLayout>
