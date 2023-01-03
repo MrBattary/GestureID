@@ -1,7 +1,7 @@
 package michael.linker.gestureid.sensor.model.base;
 
 import michael.linker.gestureid.sensor.model.ThreeAxisSensorModel;
-import michael.linker.gestureid.sensor.type.BaseSensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.BaseSensorType;
 
 public final class GyroscopeSensorModel extends ThreeAxisSensorModel<Float> {
     public GyroscopeSensorModel() {

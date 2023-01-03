@@ -3,7 +3,7 @@ plugins {
 }
 
 def EventBufferOverflowStrategy = 'michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowStrategy'
-def SensorDelayType = 'michael.linker.gestureid.sensor.type.SensorDelayType'
+def SensorDelayType = 'michael.linker.gestureid.core.sensor.sensor.type.SensorDelayType'
 
 android {
     compileSdk 32

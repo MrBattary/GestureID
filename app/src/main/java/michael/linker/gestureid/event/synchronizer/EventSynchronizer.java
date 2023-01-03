@@ -7,11 +7,12 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import michael.linker.gestureid.config.event.EventBufferConfiguration;
 import michael.linker.gestureid.event.buffer.mode.IEventBuffer;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventListOfModels;
 import michael.linker.gestureid.sensor.model.ASensorModel;
 import michael.linker.gestureid.sensor.recognizer.SensorRecognizer;
-import michael.linker.gestureid.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
 public class EventSynchronizer implements IEventSynchronizer {
     private final IEventBuffer eventBuffer;
@@ -19,8 +20,8 @@ public class EventSynchronizer implements IEventSynchronizer {
     private final Map<Integer, ASensorModel> registeredModels = new TreeMap<>();
     private final Set<Integer> attachedListeners = new TreeSet<>();
 
-    public EventSynchronizer(IEventBuffer eventBuffer) {
-        this.eventBuffer = eventBuffer;
+    public EventSynchronizer() {
+        eventBuffer = EventBufferConfiguration.getActiveBuffer();
     }
 
     @Override
@@ -61,7 +62,7 @@ public class EventSynchronizer implements IEventSynchronizer {
     }
 
     @Override
-    public void attachListener(SensorType sensorType)
+    public void attach(SensorType sensorType)
             throws EventSynchronizerFailedException {
         if (!attachedListeners.contains(sensorType.toInt())) {
             attachedListeners.add(sensorType.toInt());
@@ -73,7 +74,7 @@ public class EventSynchronizer implements IEventSynchronizer {
     }
 
     @Override
-    public void detachListener(SensorType sensorType) {
+    public void detach(SensorType sensorType) {
         if (attachedListeners.contains(sensorType.toInt())) {
             attachedListeners.remove(sensorType.toInt());
             registeredModels.clear();
@@ -81,17 +82,23 @@ public class EventSynchronizer implements IEventSynchronizer {
     }
 
     @Override
-    public void attachListenersList(List<SensorType> sensorTypesList)
+    public void attach(List<SensorType> sensorTypesList)
             throws EventSynchronizerFailedException {
         for (SensorType sensorType : sensorTypesList) {
-            attachListener(sensorType);
+            attach(sensorType);
         }
     }
 
     @Override
-    public void detachListenersList(List<SensorType> sensorTypesList) {
+    public void detach(List<SensorType> sensorTypesList) {
         for (SensorType sensorType : sensorTypesList) {
-            detachListener(sensorType);
+            detach(sensorType);
         }
+    }
+
+    @Override
+    public void detachAll() {
+        attachedListeners.clear();
+        registeredModels.clear();
     }
 }

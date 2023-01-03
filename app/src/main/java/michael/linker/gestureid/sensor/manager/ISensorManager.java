@@ -1,6 +1,6 @@
-package michael.linker.gestureid.world;
+package michael.linker.gestureid.sensor.manager;
 
-public interface IWorld {
+public interface ISensorManager {
     /**
      * Pause recording of events in the output stream
      */

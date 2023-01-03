@@ -1,7 +1,5 @@
 package michael.linker.gestureid.elements.activity;
 
-import android.content.Context;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,18 +12,15 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import michael.linker.gestureid.R;
+import michael.linker.gestureid.config.sensor.SensorWorldConfiguration;
 import michael.linker.gestureid.databinding.ActivityMainBinding;
-import michael.linker.gestureid.sensor.wrapper.manager.ASensorManager;
-import michael.linker.gestureid.sensor.wrapper.manager.SensorManagerWrapper;
-import michael.linker.gestureid.world.IWorld;
-import michael.linker.gestureid.world.exception.WorldFailedException;
-import michael.linker.gestureid.world.singleton.WorldSingleton;
+import michael.linker.gestureid.sensor.manager.ISensorManager;
 
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private NavController navController;
 
-    private IWorld world;
+    private ISensorManager world;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,21 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initWorld() {
-        SensorManager hardwareSensorManager = (SensorManager) getSystemService(
-                Context.SENSOR_SERVICE);
-        ASensorManager sensorManager = new SensorManagerWrapper(hardwareSensorManager);
-
-        try {
-            WorldSingleton.initialize(sensorManager);
-            world = WorldSingleton.getInstance();
-            world.suppressRegistering();
-        } catch (WorldFailedException e) {
-            closeApplication();
-        }
-    }
-
-    private void closeApplication() {
-        world.destroy();
-        ActivityGate.finishApplication(this);
+        world = SensorWorldConfiguration.getWorld();
+        world.suppressRegistering();
     }
 }

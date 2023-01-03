@@ -1,4 +1,4 @@
-package michael.linker.gestureid.sensor.type;
+package michael.linker.gestureid.core.sensor.sensor.type;
 
 import androidx.annotation.NonNull;
 

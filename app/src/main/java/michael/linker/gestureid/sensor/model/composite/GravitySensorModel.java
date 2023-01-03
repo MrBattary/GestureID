@@ -1,7 +1,7 @@
 package michael.linker.gestureid.sensor.model.composite;
 
 import michael.linker.gestureid.sensor.model.ThreeAxisSensorModel;
-import michael.linker.gestureid.sensor.type.CompositeSensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.CompositeSensorType;
 
 public final class GravitySensorModel extends ThreeAxisSensorModel<Float> {
     public GravitySensorModel() {

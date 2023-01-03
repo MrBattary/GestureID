@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 import michael.linker.gestureid.sensor.model.intf.IFourAxisSensorModel;
 import michael.linker.gestureid.sensor.model.intf.IThreeAxisSensorModel;
-import michael.linker.gestureid.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
 /**
  * A model that includes four axis values: x,y,z,w

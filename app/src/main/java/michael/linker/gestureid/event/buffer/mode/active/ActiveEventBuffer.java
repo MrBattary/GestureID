@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import michael.linker.gestureid.config.EventBufferConfiguration;
+import michael.linker.gestureid.config.event.EventBufferConfiguration;
 import michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowException;
 import michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowStrategyProvider;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;

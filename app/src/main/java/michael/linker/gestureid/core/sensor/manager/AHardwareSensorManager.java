@@ -1,17 +1,17 @@
-package michael.linker.gestureid.sensor.wrapper.manager;
+package michael.linker.gestureid.core.sensor.manager;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import michael.linker.gestureid.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
 /**
  * Wrapper for the hardware SensorManager
  *
  * @see android.hardware.SensorManager
  */
-public abstract class ASensorManager {
+public abstract class AHardwareSensorManager {
     // Constants
     public static final int SENSOR_DELAY_FASTEST = SensorManager.SENSOR_DELAY_FASTEST;
     public static final int SENSOR_DELAY_GAME = SensorManager.SENSOR_DELAY_GAME;

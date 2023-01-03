@@ -1,30 +1,30 @@
 package michael.linker.gestureid.sensor.factory.base;
 
-import michael.linker.gestureid.config.SensorsBuildConfiguration;
+import michael.linker.gestureid.config.SensorsConfiguration;
 import michael.linker.gestureid.sensor.factory.ISensorFactory;
 import michael.linker.gestureid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestureid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestureid.sensor.type.BaseSensorType;
-import michael.linker.gestureid.sensor.type.SensorType;
-import michael.linker.gestureid.sensor.wrapper.manager.ASensorManager;
-import michael.linker.gestureid.sensor.wrapper.sensor.SensorWrapper;
+import michael.linker.gestureid.core.sensor.sensor.type.BaseSensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.manager.AHardwareSensorManager;
+import michael.linker.gestureid.core.sensor.sensor.SensorWrapper;
 
 /**
  * Returns a Magnetometer sensor implementation
  */
 public class MagneticFieldSensorFactory implements ISensorFactory {
     private final static SensorType SENSOR_TYPE = BaseSensorType.MAGNETOMETER;
-    private final ASensorManager sensorManager;
+    private final AHardwareSensorManager sensorManager;
     private SensorWrapper magnetometerImplementation;
 
-    public MagneticFieldSensorFactory(final ASensorManager sensorManager) {
+    public MagneticFieldSensorFactory(final AHardwareSensorManager sensorManager) {
         this.sensorManager = sensorManager;
     }
 
     @Override
     public SensorWrapper getActivatedImplementation()
             throws SensorNotActivatedException, SensorNotFoundException {
-        if (SensorsBuildConfiguration.isMagnetometerDeactivated()) {
+        if (SensorsConfiguration.Build.isMagnetometerDeactivated()) {
             throw new SensorNotActivatedException("The magnetic field sensor is not activated");
         } else {
             return this.getImplementation();

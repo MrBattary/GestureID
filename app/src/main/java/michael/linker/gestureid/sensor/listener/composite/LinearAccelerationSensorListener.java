@@ -4,23 +4,24 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.util.Log;
 
+import michael.linker.gestureid.config.event.EventSynchronizerConfiguration;
+import michael.linker.gestureid.config.sensor.SensorListenerConfiguration;
+import michael.linker.gestureid.event.synchronizer.EventSynchronizerFailedException;
+import michael.linker.gestureid.event.synchronizer.IEventSynchronizer;
 import michael.linker.gestureid.sensor.listener.ISensorListener;
 import michael.linker.gestureid.sensor.listener.suppressor.ISensorListenerSuppressor;
 import michael.linker.gestureid.sensor.listener.suppressor.SensorListenerSuppressorNotFoundException;
 import michael.linker.gestureid.sensor.model.composite.LinearAccelerationSensorModel;
-import michael.linker.gestureid.sensor.type.CompositeSensorType;
-import michael.linker.gestureid.event.synchronizer.EventSynchronizerFailedException;
-import michael.linker.gestureid.event.synchronizer.IEventSynchronizer;
+import michael.linker.gestureid.core.sensor.sensor.type.CompositeSensorType;
 
 public class LinearAccelerationSensorListener implements ISensorListener {
     private static final String TAG = LinearAccelerationSensorListener.class.getCanonicalName();
     private final IEventSynchronizer eventSynchronizer;
     private final ISensorListenerSuppressor listenerSuppressor;
 
-    public LinearAccelerationSensorListener(final IEventSynchronizer eventSynchronizer,
-            final ISensorListenerSuppressor listenerSuppressor) {
-        this.eventSynchronizer = eventSynchronizer;
-        this.listenerSuppressor = listenerSuppressor;
+    public LinearAccelerationSensorListener() {
+        this.eventSynchronizer = EventSynchronizerConfiguration.getEventSynchronizer();
+        this.listenerSuppressor = SensorListenerConfiguration.getSensorListenerSuppressor();;
     }
 
     @Override

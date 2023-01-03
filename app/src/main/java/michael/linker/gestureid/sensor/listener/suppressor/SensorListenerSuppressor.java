@@ -3,7 +3,7 @@ package michael.linker.gestureid.sensor.listener.suppressor;
 import java.util.HashMap;
 import java.util.Map;
 
-import michael.linker.gestureid.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
 public class SensorListenerSuppressor implements ISensorListenerSuppressor {
     private boolean suppressAllListeners = true;

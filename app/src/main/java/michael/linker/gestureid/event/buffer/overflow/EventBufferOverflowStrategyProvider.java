@@ -2,7 +2,7 @@ package michael.linker.gestureid.event.buffer.overflow;
 
 import java.util.Map;
 
-import michael.linker.gestureid.config.EventBufferConfiguration;
+import michael.linker.gestureid.config.event.EventBufferConfiguration;
 import michael.linker.gestureid.event.buffer.overflow.strategy.EventBufferFlushOldestStrategy;
 import michael.linker.gestureid.event.buffer.overflow.strategy.EventBufferFlushStrategy;
 import michael.linker.gestureid.event.buffer.overflow.strategy.EventBufferRaiseErrorStrategy;

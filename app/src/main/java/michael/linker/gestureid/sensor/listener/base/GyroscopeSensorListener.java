@@ -4,23 +4,24 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.util.Log;
 
+import michael.linker.gestureid.config.event.EventSynchronizerConfiguration;
+import michael.linker.gestureid.config.sensor.SensorListenerConfiguration;
+import michael.linker.gestureid.event.synchronizer.EventSynchronizerFailedException;
+import michael.linker.gestureid.event.synchronizer.IEventSynchronizer;
 import michael.linker.gestureid.sensor.listener.ISensorListener;
 import michael.linker.gestureid.sensor.listener.suppressor.ISensorListenerSuppressor;
 import michael.linker.gestureid.sensor.listener.suppressor.SensorListenerSuppressorNotFoundException;
 import michael.linker.gestureid.sensor.model.base.GyroscopeSensorModel;
-import michael.linker.gestureid.sensor.type.BaseSensorType;
-import michael.linker.gestureid.event.synchronizer.EventSynchronizerFailedException;
-import michael.linker.gestureid.event.synchronizer.IEventSynchronizer;
+import michael.linker.gestureid.core.sensor.sensor.type.BaseSensorType;
 
 public class GyroscopeSensorListener implements ISensorListener {
     private static final String TAG = GyroscopeSensorListener.class.getCanonicalName();
     private final IEventSynchronizer eventSynchronizer;
     private final ISensorListenerSuppressor listenerSuppressor;
 
-    public GyroscopeSensorListener(final IEventSynchronizer eventSynchronizer,
-                                   final ISensorListenerSuppressor listenerSuppressor) {
-        this.eventSynchronizer = eventSynchronizer;
-        this.listenerSuppressor = listenerSuppressor;
+    public GyroscopeSensorListener() {
+        this.eventSynchronizer = EventSynchronizerConfiguration.getEventSynchronizer();
+        this.listenerSuppressor = SensorListenerConfiguration.getSensorListenerSuppressor();
     }
 
     @Override

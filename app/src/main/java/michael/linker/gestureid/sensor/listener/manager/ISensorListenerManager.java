@@ -1,6 +1,6 @@
 package michael.linker.gestureid.sensor.listener.manager;
 
-import michael.linker.gestureid.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
 /**
  * Manager that helps to work with sensor listeners

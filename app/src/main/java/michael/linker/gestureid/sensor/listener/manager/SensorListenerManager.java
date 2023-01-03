@@ -5,31 +5,33 @@ import android.util.ArraySet;
 import java.util.HashSet;
 import java.util.Set;
 
-import michael.linker.gestureid.config.ListenersBuildConfiguration;
+import michael.linker.gestureid.config.sensor.SensorListenerConfiguration;
+import michael.linker.gestureid.core.sensor.manager.HardwareSensorManagerSingleton;
+import michael.linker.gestureid.config.sensor.SensorProviderConfiguration;
 import michael.linker.gestureid.sensor.listener.ISensorListener;
 import michael.linker.gestureid.sensor.listener.provider.ISensorListenerProvider;
 import michael.linker.gestureid.sensor.listener.provider.SensorListenerProviderNotFoundException;
-import michael.linker.gestureid.sensor.wrapper.manager.ASensorManager;
 import michael.linker.gestureid.sensor.provider.ISensorProvider;
 import michael.linker.gestureid.sensor.provider.SensorProviderNotFoundException;
-import michael.linker.gestureid.sensor.type.SensorDelayType;
-import michael.linker.gestureid.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorDelayType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.manager.AHardwareSensorManager;
 
 public class SensorListenerManager implements ISensorListenerManager {
-    private final Set<SensorType> registeredListeners = new ArraySet<>();
     private final ISensorListenerProvider sensorListenerProvider;
-    private final ASensorManager sensorManager;
+    private final AHardwareSensorManager sensorManager;
     private final ISensorProvider sensorProvider;
+
+    private final Set<SensorType> registeredListeners;
     private final SensorDelayType delay;
 
-    public SensorListenerManager(
-            final ISensorListenerProvider sensorListenerProvider,
-            final ASensorManager sensorManager,
-            final ISensorProvider sensorProvider) {
-        this.sensorListenerProvider = sensorListenerProvider;
-        this.sensorManager = sensorManager;
-        this.sensorProvider = sensorProvider;
-        this.delay = ListenersBuildConfiguration.getSensorDelay();
+    public SensorListenerManager() {
+        this.sensorListenerProvider = SensorListenerConfiguration.getSensorListenerProvider();
+        this.sensorManager = HardwareSensorManagerSingleton.getInstance();
+        this.sensorProvider = SensorProviderConfiguration.getSensorProvider();
+
+        this.registeredListeners = new ArraySet<>();
+        this.delay = SensorListenerConfiguration.Build.getSensorDelay();
     }
 
     @Override

@@ -1,6 +1,6 @@
-package michael.linker.gestureid.sensor.type;
+package michael.linker.gestureid.core.sensor.sensor.type;
 
-import michael.linker.gestureid.sensor.wrapper.manager.ASensorManager;
+import michael.linker.gestureid.core.sensor.manager.AHardwareSensorManager;
 
 /**
  * Delay between event registration
@@ -24,10 +24,10 @@ public class SensorDelayType {
     public final static Integer NORMAL;
 
     static {
-        FASTEST = ASensorManager.SENSOR_DELAY_FASTEST;
-        UI = ASensorManager.SENSOR_DELAY_UI;
-        GAME = ASensorManager.SENSOR_DELAY_GAME;
-        NORMAL = ASensorManager.SENSOR_DELAY_NORMAL;
+        FASTEST = AHardwareSensorManager.SENSOR_DELAY_FASTEST;
+        UI = AHardwareSensorManager.SENSOR_DELAY_UI;
+        GAME = AHardwareSensorManager.SENSOR_DELAY_GAME;
+        NORMAL = AHardwareSensorManager.SENSOR_DELAY_NORMAL;
     }
 
     final Integer sensorDelay;

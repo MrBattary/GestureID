@@ -1,8 +1,8 @@
-package michael.linker.gestureid.sensor.wrapper.sensor;
+package michael.linker.gestureid.core.sensor.sensor;
 
 import android.hardware.Sensor;
 
-import michael.linker.gestureid.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
 /**
  * A wrapper around hardware Sensor

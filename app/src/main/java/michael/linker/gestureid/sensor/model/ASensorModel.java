@@ -3,7 +3,7 @@ package michael.linker.gestureid.sensor.model;
 import java.util.List;
 import java.util.Map;
 
-import michael.linker.gestureid.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
 /**
  * Basic sensor model for other sensor models

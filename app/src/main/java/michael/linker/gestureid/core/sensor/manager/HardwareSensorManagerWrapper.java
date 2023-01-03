@@ -1,15 +1,15 @@
-package michael.linker.gestureid.sensor.wrapper.manager;
+package michael.linker.gestureid.core.sensor.manager;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import michael.linker.gestureid.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
-public class SensorManagerWrapper extends ASensorManager {
+public class HardwareSensorManagerWrapper extends AHardwareSensorManager {
     private final SensorManager hardwareSensorManager;
 
-    public SensorManagerWrapper(SensorManager hardwareSensorManager) {
+    public HardwareSensorManagerWrapper(SensorManager hardwareSensorManager) {
         this.hardwareSensorManager = hardwareSensorManager;
     }
 

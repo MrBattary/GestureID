@@ -3,7 +3,7 @@ package michael.linker.gestureid.event.synchronizer;
 import java.util.List;
 
 import michael.linker.gestureid.sensor.model.ASensorModel;
-import michael.linker.gestureid.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
 /**
  * Synchronizes sensor events from multiple SensorListeners
@@ -19,33 +19,38 @@ public interface IEventSynchronizer {
     throws EventSynchronizerNotFoundException, EventSynchronizerFailedException;
 
     /**
-     * Attach SensorListener by SensorType
+     * Attach listener by SensorType
      *
      * @param sensorType Sensor type as in Listener
      * @throws EventSynchronizerFailedException If the Listener has already been attached
      */
-    void attachListener(SensorType sensorType) throws EventSynchronizerFailedException;
+    void attach(SensorType sensorType) throws EventSynchronizerFailedException;
 
     /**
      * Detach listener by SensorType
      *
      * @param sensorType Sensor type as in Listener
      */
-    void detachListener(SensorType sensorType);
+    void detach(SensorType sensorType);
 
     /**
-     * Attach list of SensorListeners by SensorType
+     * Attach list of listeners by SensorType
      *
      * @param sensorTypesList List of sensor types as in Listeners
      * @throws EventSynchronizerFailedException If any Listener has already been attached
      */
-    void attachListenersList(List<SensorType> sensorTypesList)
+    void attach(List<SensorType> sensorTypesList)
             throws EventSynchronizerFailedException;
 
     /**
-     * Detach list of SensorListeners by SensorType
+     * Detach list of listeners by SensorType
      *
      * @param sensorTypesList List of sensor types as in Listeners
      */
-    void detachListenersList(List<SensorType> sensorTypesList);
+    void detach(List<SensorType> sensorTypesList);
+
+    /**
+     * Detach all listeners
+     */
+    void detachAll();
 }

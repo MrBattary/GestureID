@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import michael.linker.gestureid.sensor.model.intf.IThreeAxisSensorModel;
-import michael.linker.gestureid.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
 /**
  * A model that includes three axis values: x,y,z

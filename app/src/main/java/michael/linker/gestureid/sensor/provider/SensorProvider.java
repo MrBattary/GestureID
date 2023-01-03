@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import michael.linker.gestureid.core.sensor.manager.HardwareSensorManagerSingleton;
 import michael.linker.gestureid.sensor.factory.ISensorFactory;
 import michael.linker.gestureid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestureid.sensor.factory.SensorNotFoundException;
@@ -17,18 +18,18 @@ import michael.linker.gestureid.sensor.factory.composite.GeomagneticRotationVect
 import michael.linker.gestureid.sensor.factory.composite.GravitySensorFactory;
 import michael.linker.gestureid.sensor.factory.composite.LinearAccelerationSensorFactory;
 import michael.linker.gestureid.sensor.factory.composite.RotationVectorSensorFactory;
-import michael.linker.gestureid.sensor.type.BaseSensorType;
-import michael.linker.gestureid.sensor.type.CompositeSensorType;
-import michael.linker.gestureid.sensor.type.SensorType;
-import michael.linker.gestureid.sensor.wrapper.manager.ASensorManager;
-import michael.linker.gestureid.sensor.wrapper.sensor.SensorWrapper;
+import michael.linker.gestureid.core.sensor.sensor.type.BaseSensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.CompositeSensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.manager.AHardwareSensorManager;
+import michael.linker.gestureid.core.sensor.sensor.SensorWrapper;
 
 public class SensorProvider implements ISensorProvider {
     private final static String TAG = SensorProvider.class.getCanonicalName();
     private final Map<Integer, ISensorFactory> sensorFactories = new HashMap<>();
 
-    public SensorProvider(final ASensorManager sensorManager) {
-        initializeSensorFactories(sensorManager);
+    public SensorProvider() {
+        initializeSensorFactories(HardwareSensorManagerSingleton.getInstance());
     }
 
     @Override
@@ -80,12 +81,12 @@ public class SensorProvider implements ISensorProvider {
         return sensorList;
     }
 
-    private void initializeSensorFactories(final ASensorManager sensorManager) {
+    private void initializeSensorFactories(final AHardwareSensorManager sensorManager) {
         initializeBaseSensorFactories(sensorManager);
         initializeCompositeSensorFactories(sensorManager);
     }
 
-    private void initializeBaseSensorFactories(final ASensorManager sensorManager) {
+    private void initializeBaseSensorFactories(final AHardwareSensorManager sensorManager) {
         sensorFactories.put(BaseSensorType.ACCELEROMETER.toInt(),
                 new AccelerometerSensorFactory(sensorManager));
         sensorFactories.put(BaseSensorType.GYROSCOPE.toInt(),
@@ -94,7 +95,7 @@ public class SensorProvider implements ISensorProvider {
                 new MagneticFieldSensorFactory(sensorManager));
     }
 
-    private void initializeCompositeSensorFactories(final ASensorManager sensorManager) {
+    private void initializeCompositeSensorFactories(final AHardwareSensorManager sensorManager) {
         sensorFactories.put(CompositeSensorType.GRAVITY.toInt(),
                 new GravitySensorFactory(sensorManager));
         sensorFactories.put(CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR.toInt(),

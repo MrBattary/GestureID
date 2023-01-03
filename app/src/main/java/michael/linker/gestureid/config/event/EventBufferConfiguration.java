@@ -1,4 +1,4 @@
-package michael.linker.gestureid.config;
+package michael.linker.gestureid.config.event;
 
 import michael.linker.gestureid.BuildConfig;
 import michael.linker.gestureid.event.buffer.mode.active.ActiveEventBuffer;
@@ -10,7 +10,7 @@ import michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowStrateg
  *
  * @see michael.linker.gestureid.event.buffer
  */
-public class EventBufferConfiguration {
+public final class EventBufferConfiguration {
     private static IActiveEventBuffer activeBuffer = null;
 
     public static IActiveEventBuffer getActiveBuffer() {
@@ -23,7 +23,7 @@ public class EventBufferConfiguration {
     /**
      * Wrapper for the event buffer build variables
      */
-    public static class Build {
+    public static final class Build {
         public static int getBufferMaxSize() {
             return BuildConfig.EVENT_BUFFER_MAX_SIZE;
         }

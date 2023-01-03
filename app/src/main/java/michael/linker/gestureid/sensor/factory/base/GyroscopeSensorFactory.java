@@ -1,30 +1,30 @@
 package michael.linker.gestureid.sensor.factory.base;
 
-import michael.linker.gestureid.config.SensorsBuildConfiguration;
+import michael.linker.gestureid.config.SensorsConfiguration;
 import michael.linker.gestureid.sensor.factory.ISensorFactory;
 import michael.linker.gestureid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestureid.sensor.factory.SensorNotFoundException;
-import michael.linker.gestureid.sensor.type.BaseSensorType;
-import michael.linker.gestureid.sensor.type.SensorType;
-import michael.linker.gestureid.sensor.wrapper.manager.ASensorManager;
-import michael.linker.gestureid.sensor.wrapper.sensor.SensorWrapper;
+import michael.linker.gestureid.core.sensor.sensor.type.BaseSensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.manager.AHardwareSensorManager;
+import michael.linker.gestureid.core.sensor.sensor.SensorWrapper;
 
 /**
  * Returns a Gyroscope implementation
  */
 public class GyroscopeSensorFactory implements ISensorFactory {
     private final static SensorType SENSOR_TYPE = BaseSensorType.GYROSCOPE;
-    private final ASensorManager sensorManager;
+    private final AHardwareSensorManager sensorManager;
     private SensorWrapper gyroscopeImplementation;
 
-    public GyroscopeSensorFactory(final ASensorManager sensorManager) {
+    public GyroscopeSensorFactory(final AHardwareSensorManager sensorManager) {
         this.sensorManager = sensorManager;
     }
 
     @Override
     public SensorWrapper getActivatedImplementation()
             throws SensorNotActivatedException, SensorNotFoundException {
-        if (SensorsBuildConfiguration.isGyroscopeDeactivated()) {
+        if (SensorsConfiguration.Build.isGyroscopeDeactivated()) {
             throw new SensorNotActivatedException("The gyroscope is not activated!");
         } else {
             return getImplementation();
