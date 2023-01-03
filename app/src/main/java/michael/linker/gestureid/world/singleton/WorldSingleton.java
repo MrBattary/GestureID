@@ -11,9 +11,6 @@ import michael.linker.gestureid.world.exception.WorldFailedException;
 public class WorldSingleton {
     private static IWorld world = null;
 
-    private WorldSingleton() {
-    }
-
     /**
      * Initialize instance of the World
      *
@@ -32,8 +29,7 @@ public class WorldSingleton {
      * @return World instance
      * @throws WorldFailedException If the World is not found
      */
-    public static IWorld getInstance()
-            throws WorldFailedException {
+    public static IWorld getInstance() throws WorldFailedException {
         if (world == null) {
             throw new WorldFailedException("Instance of the World is not found!");
         }

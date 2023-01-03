@@ -2,7 +2,7 @@ package michael.linker.gestureid.event.buffer.overflow;
 
 import java.util.Map;
 
-import michael.linker.gestureid.config.EventsBuildConfiguration;
+import michael.linker.gestureid.config.EventBufferConfiguration;
 import michael.linker.gestureid.event.buffer.overflow.strategy.EventBufferFlushOldestStrategy;
 import michael.linker.gestureid.event.buffer.overflow.strategy.EventBufferFlushStrategy;
 import michael.linker.gestureid.event.buffer.overflow.strategy.EventBufferRaiseErrorStrategy;
@@ -23,6 +23,6 @@ public class EventBufferOverflowStrategyProvider {
 
     public static IEventBufferOverflowStrategy getOverflowStrategy() {
         return STRATEGY_MAP.getOrDefault(
-                EventsBuildConfiguration.Buffer.getBufferOverflowStrategy(), DEFAULT_STRATEGY);
+                EventBufferConfiguration.Build.getBufferOverflowStrategy(), DEFAULT_STRATEGY);
     }
 }

@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import michael.linker.gestureid.config.EventsBuildConfiguration;
+import michael.linker.gestureid.config.EventBufferConfiguration;
 import michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowException;
 import michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowStrategyProvider;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
@@ -66,7 +66,7 @@ public class ActiveEventBuffer implements IActiveEventBuffer {
 
     @Override
     public int getMaxSize() {
-        return EventsBuildConfiguration.Buffer.getBufferMaxSize();
+        return EventBufferConfiguration.Build.getBufferMaxSize();
     }
 
     @Override
