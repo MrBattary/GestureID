@@ -38,11 +38,11 @@ public class SensorRecognizer {
     }
 
     /**
-     * Recognizes sensor by the provided ID
+     * Recognizes sensor by the provided sensor ID.
      *
-     * @param typeId ID for recognizing
-     * @return SensorType
-     * @throws SensorTypeRecognizerFailedException If it cannot be recognized by the provided ID
+     * @param typeId ID for recognizing.
+     * @return SensorType object.
+     * @throws SensorTypeRecognizerFailedException If it cannot be recognized by the provided ID.
      */
     public static SensorType recognizeSensorById(final Integer typeId)
             throws SensorTypeRecognizerFailedException {
@@ -54,11 +54,11 @@ public class SensorRecognizer {
     }
 
     /**
-     * Recognizes sensor model by the provided sensor type
+     * Recognizes sensor model by the provided sensor type.
      *
-     * @param sensorType Sensor type for recognizing
-     * @return SensorModel
-     * @throws SensorTypeRecognizerFailedException If it cannot be recognized by the provided type
+     * @param sensorType Sensor type for recognizing.
+     * @return SensorModel object.
+     * @throws SensorTypeRecognizerFailedException If it cannot be recognized by the provided type.
      */
     public static ASensorModel recognizeSensorModelByType(final SensorType sensorType)
             throws SensorTypeRecognizerFailedException {

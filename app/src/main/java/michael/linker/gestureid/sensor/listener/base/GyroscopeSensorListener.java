@@ -29,10 +29,8 @@ public class GyroscopeSensorListener implements ISensorListener {
         try {
             final boolean isThisListenerSuppressed = listenerSuppressor.isListenerSuppressed(
                     BaseSensorType.GYROSCOPE);
-            if (!listenerSuppressor.isAllListenersSuppressed()) {
-                if (!isThisListenerSuppressed) {
-                    proceedEvent(sensorEvent);
-                }
+            if (!isThisListenerSuppressed) {
+                proceedEvent(sensorEvent);
             }
             // If this listener is not registered in the ListenerSuppressor
         } catch (SensorListenerSuppressorNotFoundException e) {
@@ -53,7 +51,7 @@ public class GyroscopeSensorListener implements ISensorListener {
         sensorModel.setTimestamp(sensorEvent.timestamp);
         try {
             eventSynchronizer.registerEvent(sensorModel);
-        } catch (EventSynchronizerFailedException e){
+        } catch (EventSynchronizerFailedException e) {
             Log.w(TAG, e.getMessage());
         }
     }

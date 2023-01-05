@@ -39,17 +39,17 @@ public class SensorsViewModel extends ViewModel implements IActiveEventAccumulat
 
     @Override
     public void notifyAboutEpisode(AccumulatedEpisode accumulatedEpisode) {
-        for (SynchronizedEvent event : accumulatedEpisode) {
-            timestamp.postValue(event.getTimestamp());
+        for (SynchronizedEvent event : accumulatedEpisode.getData()) {
+            timestamp.setValue(event.getTimestamp());
             for (ASensorModel sensorModel : event.getData()) {
                 if (sensorModel.getSensorType() == BaseSensorType.ACCELEROMETER) {
-                    accelerometerEvent.postValue(sensorModel.getNamesAndValuesMap().toString());
+                    accelerometerEvent.setValue(sensorModel.getNamesAndValuesMap().toString());
                 }
                 if (sensorModel.getSensorType() == BaseSensorType.GYROSCOPE) {
-                    gyroscopeEvent.postValue(sensorModel.getNamesAndValuesMap().toString());
+                    gyroscopeEvent.setValue(sensorModel.getNamesAndValuesMap().toString());
                 }
                 if (sensorModel.getSensorType() == BaseSensorType.MAGNETOMETER) {
-                    magnetometerEvent.postValue(sensorModel.getNamesAndValuesMap().toString());
+                    magnetometerEvent.setValue(sensorModel.getNamesAndValuesMap().toString());
                 }
             }
         }

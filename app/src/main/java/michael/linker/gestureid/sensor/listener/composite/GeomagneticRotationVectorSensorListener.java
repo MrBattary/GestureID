@@ -22,7 +22,8 @@ public class GeomagneticRotationVectorSensorListener implements ISensorListener 
 
     public GeomagneticRotationVectorSensorListener() {
         this.eventSynchronizer = EventSynchronizerConfiguration.getEventSynchronizer();
-        this.listenerSuppressor = SensorListenerConfiguration.getSensorListenerSuppressor();;
+        this.listenerSuppressor = SensorListenerConfiguration.getSensorListenerSuppressor();
+        ;
     }
 
     @Override
@@ -30,10 +31,8 @@ public class GeomagneticRotationVectorSensorListener implements ISensorListener 
         try {
             final boolean isThisListenerSuppressed = listenerSuppressor.isListenerSuppressed(
                     CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR);
-            if (!listenerSuppressor.isAllListenersSuppressed()) {
-                if (!isThisListenerSuppressed) {
-                    proceedEvent(sensorEvent);
-                }
+            if (!isThisListenerSuppressed) {
+                proceedEvent(sensorEvent);
             }
             // If this listener is not registered in the ListenerSuppressor
         } catch (SensorListenerSuppressorNotFoundException e) {
@@ -47,7 +46,8 @@ public class GeomagneticRotationVectorSensorListener implements ISensorListener 
     }
 
     private void proceedEvent(SensorEvent sensorEvent) {
-        GeomagneticRotationVectorSensorModel sensorModel = new GeomagneticRotationVectorSensorModel();
+        GeomagneticRotationVectorSensorModel sensorModel =
+                new GeomagneticRotationVectorSensorModel();
         sensorModel.setX(sensorEvent.values[0]);
         sensorModel.setY(sensorEvent.values[1]);
         sensorModel.setZ(sensorEvent.values[2]);

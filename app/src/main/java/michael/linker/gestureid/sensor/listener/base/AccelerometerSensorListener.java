@@ -29,10 +29,8 @@ public class AccelerometerSensorListener implements ISensorListener {
         try {
             final boolean isThisListenerSuppressed = listenerSuppressor.isListenerSuppressed(
                     BaseSensorType.ACCELEROMETER);
-            if (!listenerSuppressor.isAllListenersSuppressed()) {
-                if (!isThisListenerSuppressed) {
-                    proceedEvent(sensorEvent);
-                }
+            if (!isThisListenerSuppressed) {
+                proceedEvent(sensorEvent);
             }
             // If this listener is not registered in the ListenerSuppressor
         } catch (SensorListenerSuppressorNotFoundException e) {

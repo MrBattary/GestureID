@@ -21,7 +21,8 @@ public class LinearAccelerationSensorListener implements ISensorListener {
 
     public LinearAccelerationSensorListener() {
         this.eventSynchronizer = EventSynchronizerConfiguration.getEventSynchronizer();
-        this.listenerSuppressor = SensorListenerConfiguration.getSensorListenerSuppressor();;
+        this.listenerSuppressor = SensorListenerConfiguration.getSensorListenerSuppressor();
+        ;
     }
 
     @Override
@@ -29,10 +30,8 @@ public class LinearAccelerationSensorListener implements ISensorListener {
         try {
             final boolean isThisListenerSuppressed = listenerSuppressor.isListenerSuppressed(
                     CompositeSensorType.LINEAR_ACCELERATION);
-            if (!listenerSuppressor.isAllListenersSuppressed()) {
-                if (!isThisListenerSuppressed) {
-                    proceedEvent(sensorEvent);
-                }
+            if (!isThisListenerSuppressed) {
+                proceedEvent(sensorEvent);
             }
             // If this listener is not registered in the ListenerSuppressor
         } catch (SensorListenerSuppressorNotFoundException e) {

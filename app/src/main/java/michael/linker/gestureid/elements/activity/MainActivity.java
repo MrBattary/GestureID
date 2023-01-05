@@ -12,7 +12,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import michael.linker.gestureid.R;
-import michael.linker.gestureid.config.sensor.SensorWorldConfiguration;
+import michael.linker.gestureid.config.sensor.SensorManagerConfiguration;
 import michael.linker.gestureid.databinding.ActivityMainBinding;
 import michael.linker.gestureid.sensor.manager.ISensorManager;
 
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initSensorWorld() {
-        world = SensorWorldConfiguration.getWorld();
+        world = SensorManagerConfiguration.getManager();
         world.suppressRegistering();
     }
 }
