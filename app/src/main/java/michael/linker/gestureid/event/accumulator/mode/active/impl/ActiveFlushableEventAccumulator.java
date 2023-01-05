@@ -3,12 +3,12 @@ package michael.linker.gestureid.event.accumulator.mode.active.impl;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.List;
 
 import michael.linker.gestureid.config.event.EventAccumulatorConfiguration;
 import michael.linker.gestureid.event.accumulator.mode.active.ABaseActiveEventAccumulator;
 import michael.linker.gestureid.event.accumulator.mode.active.IActiveEventAccumulatorListener;
 import michael.linker.gestureid.event.accumulator.mode.active.IActiveFlushableEventAccumulator;
+import michael.linker.gestureid.event.accumulator.model.AccumulatedEpisode;
 import michael.linker.gestureid.event.accumulator.overflow.EventAccumulatorOverflowException;
 import michael.linker.gestureid.event.accumulator.overflow.EventAccumulatorOverflowStrategyProvider;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
@@ -26,10 +26,10 @@ public class ActiveFlushableEventAccumulator extends ABaseActiveEventAccumulator
 
     @Override
     public void flush() {
-        List<SynchronizedEvent> eventList = new ArrayList<>(eventDeque);
+        AccumulatedEpisode episode = new AccumulatedEpisode(new ArrayList<>(eventDeque));
         eventDeque.clear();
         for (IActiveEventAccumulatorListener listener : super.listenerSet) {
-            listener.notifyAboutEvents(eventList);
+            listener.notifyAboutEpisode(episode);
         }
     }
 

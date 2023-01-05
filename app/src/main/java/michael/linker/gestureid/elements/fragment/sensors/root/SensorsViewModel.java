@@ -4,10 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.List;
-
 import michael.linker.gestureid.core.sensor.sensor.type.BaseSensorType;
 import michael.linker.gestureid.event.accumulator.mode.active.IActiveEventAccumulatorListener;
+import michael.linker.gestureid.event.accumulator.model.AccumulatedEpisode;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
 import michael.linker.gestureid.sensor.model.ASensorModel;
 
@@ -39,8 +38,8 @@ public class SensorsViewModel extends ViewModel implements IActiveEventAccumulat
     }
 
     @Override
-    public void notifyAboutEvents(List<SynchronizedEvent> synchronizedEventList) {
-        for (SynchronizedEvent event : synchronizedEventList) {
+    public void notifyAboutEpisode(AccumulatedEpisode accumulatedEpisode) {
+        for (SynchronizedEvent event : accumulatedEpisode) {
             timestamp.postValue(event.getTimestamp());
             for (ASensorModel sensorModel : event.getData()) {
                 if (sensorModel.getSensorType() == BaseSensorType.ACCELEROMETER) {

@@ -5,6 +5,7 @@ import java.util.List;
 import michael.linker.gestureid.event.accumulator.mode.active.ABaseActiveEventAccumulator;
 import michael.linker.gestureid.event.accumulator.mode.active.IActiveEventAccumulator;
 import michael.linker.gestureid.event.accumulator.mode.active.IActiveEventAccumulatorListener;
+import michael.linker.gestureid.event.accumulator.model.AccumulatedEpisode;
 import michael.linker.gestureid.event.accumulator.overflow.EventAccumulatorOverflowException;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
 
@@ -27,10 +28,10 @@ public class ActiveDistributableEventAccumulator extends ABaseActiveEventAccumul
     }
 
     private void flush() {
-        List<SynchronizedEvent> eventList = List.of(accumulatedEvent);
+        AccumulatedEpisode episode = new AccumulatedEpisode(List.of(accumulatedEvent));
         accumulatedEvent = null;
         for (IActiveEventAccumulatorListener listener : super.listenerSet) {
-            listener.notifyAboutEvents(eventList);
+            listener.notifyAboutEpisode(episode);
         }
     }
 

@@ -1,8 +1,6 @@
 package michael.linker.gestureid.event.accumulator.mode.active;
 
-import java.util.List;
-
-import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
+import michael.linker.gestureid.event.accumulator.model.AccumulatedEpisode;
 
 /**
  * Listener of active accumulator updates.
@@ -11,7 +9,7 @@ public interface IActiveEventAccumulatorListener {
     /**
      * Calls by IActiveEventAccumulator impl when accumulator updates.
      *
-     * @param synchronizedEventList event list.
+     * @param accumulatedEpisode accumulated episode with list of events..
      */
-    void notifyAboutEvents(List<SynchronizedEvent> synchronizedEventList);
+    void notifyAboutEpisode(AccumulatedEpisode accumulatedEpisode);
 }
