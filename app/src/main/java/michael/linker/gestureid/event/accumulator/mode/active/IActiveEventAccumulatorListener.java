@@ -7,7 +7,7 @@ import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
 /**
  * Listener of active accumulator updates.
  */
-public interface IActiveEventBufferListener {
+public interface IActiveEventAccumulatorListener {
     /**
      * Calls by IActiveEventAccumulator impl when accumulator updates.
      *

@@ -1,8 +1,8 @@
 package michael.linker.gestureid.config.event;
 
 import michael.linker.gestureid.BuildConfig;
-import michael.linker.gestureid.event.accumulator.mode.active.ActiveFlushableEventAccumulator;
 import michael.linker.gestureid.event.accumulator.mode.active.IActiveEventAccumulator;
+import michael.linker.gestureid.event.accumulator.mode.active.impl.ActiveDistributableEventAccumulator;
 import michael.linker.gestureid.event.accumulator.overflow.EventAccumulatorOverflowStrategy;
 
 /**
@@ -15,7 +15,7 @@ public final class EventAccumulatorConfiguration {
 
     public static IActiveEventAccumulator getActiveAccumulator() {
         if (activeAccumulator == null) {
-            activeAccumulator = new ActiveFlushableEventAccumulator();
+            activeAccumulator = new ActiveDistributableEventAccumulator();
         }
         return activeAccumulator;
     }

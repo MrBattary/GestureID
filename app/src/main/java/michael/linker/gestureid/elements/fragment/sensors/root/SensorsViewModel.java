@@ -7,11 +7,11 @@ import androidx.lifecycle.ViewModel;
 import java.util.List;
 
 import michael.linker.gestureid.core.sensor.sensor.type.BaseSensorType;
-import michael.linker.gestureid.event.accumulator.mode.active.IActiveEventBufferListener;
+import michael.linker.gestureid.event.accumulator.mode.active.IActiveEventAccumulatorListener;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
 import michael.linker.gestureid.sensor.model.ASensorModel;
 
-public class SensorsViewModel extends ViewModel implements IActiveEventBufferListener {
+public class SensorsViewModel extends ViewModel implements IActiveEventAccumulatorListener {
     private final MutableLiveData<String> timestamp, accelerometerEvent, gyroscopeEvent,
             magnetometerEvent;
 
