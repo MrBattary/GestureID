@@ -8,11 +8,12 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import michael.linker.gestureid.config.event.EventBufferConfiguration;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 import michael.linker.gestureid.event.buffer.mode.IEventBuffer;
-import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventListOfModels;
+import michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowException;
+import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
 import michael.linker.gestureid.sensor.model.ASensorModel;
 import michael.linker.gestureid.sensor.recognizer.SensorRecognizer;
-import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
 public class EventSynchronizer implements IEventSynchronizer {
     private final IEventBuffer eventBuffer;
@@ -49,14 +50,18 @@ public class EventSynchronizer implements IEventSynchronizer {
     /**
      * Syncs if each listener has submitted their own model
      */
-    private void tryToSynchronize() {
+    private void tryToSynchronize() throws EventSynchronizerFailedException {
         if (registeredModels.keySet().equals(attachedListeners)) {
-            SynchronizedEventListOfModels synchronizedEvent =
-                    new SynchronizedEventListOfModels(
+            SynchronizedEvent synchronizedEvent =
+                    new SynchronizedEvent(
                             String.valueOf(System.currentTimeMillis()),
                             new ArrayList<>(registeredModels.values())
                     );
-            eventBuffer.buffer(synchronizedEvent);
+            try {
+                eventBuffer.buffer(synchronizedEvent);
+            } catch (EventBufferOverflowException e) {
+                throw new EventSynchronizerFailedException("Accumulator is full!");
+            }
             registeredModels.clear();
         }
     }

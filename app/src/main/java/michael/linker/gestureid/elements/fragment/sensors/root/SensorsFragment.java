@@ -16,6 +16,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import michael.linker.gestureid.R;
 
 public class SensorsFragment extends Fragment {
+
+
     private SensorsViewModel viewModel;
 
     @Override

@@ -1,14 +1,14 @@
-package michael.linker.gestureid.config;
+package michael.linker.gestureid.config.sensor;
 
 import michael.linker.gestureid.BuildConfig;
 
-/**
- * Wrapper for the sensors build variables
- * "build.gradle" file in the application main folder
- *
- * @see michael.linker.gestureid.sensor
- */
 public final class SensorsConfiguration {
+    /**
+     * Wrapper for the sensors build variables
+     * "build.gradle" file in the application main folder
+     *
+     * @see michael.linker.gestureid.sensor
+     */
     public static final class Build {
         //Base
         public static boolean isAccelerometerDeactivated() {

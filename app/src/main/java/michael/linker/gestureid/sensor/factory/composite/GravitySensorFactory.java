@@ -1,6 +1,6 @@
 package michael.linker.gestureid.sensor.factory.composite;
 
-import michael.linker.gestureid.config.SensorsConfiguration;
+import michael.linker.gestureid.config.sensor.SensorsConfiguration;
 import michael.linker.gestureid.sensor.factory.ISensorFactory;
 import michael.linker.gestureid.sensor.factory.SensorNotActivatedException;
 import michael.linker.gestureid.sensor.factory.SensorNotFoundException;

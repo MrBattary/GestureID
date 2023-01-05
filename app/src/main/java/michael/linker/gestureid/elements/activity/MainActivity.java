@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         initNavigation();
-        initWorld();
+        initSensorWorld();
     }
 
     @Override
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_playground*/).build();
     }
 
-    private void initWorld() {
+    private void initSensorWorld() {
         world = SensorWorldConfiguration.getWorld();
         world.suppressRegistering();
     }

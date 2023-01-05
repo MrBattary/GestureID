@@ -11,8 +11,6 @@ import michael.linker.gestureid.config.event.EventBufferConfiguration;
 import michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowException;
 import michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowStrategyProvider;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
-import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventListOfModels;
-import michael.linker.gestureid.event.synchronizer.model.SynchronizedEventSingleModel;
 
 /**
  * Buffer without storage that notifies listeners.
@@ -51,17 +49,11 @@ public class ActiveEventBuffer implements IActiveEventBuffer {
     }
 
     @Override
-    public void buffer(SynchronizedEventSingleModel synchronizedSensorModel)
+    public void buffer(SynchronizedEvent synchronizedEvent)
             throws EventBufferOverflowException {
         applyOverflowStrategy();
-        eventDeque.add(synchronizedSensorModel);
-    }
-
-    @Override
-    public void buffer(SynchronizedEventListOfModels synchronizedSensorModels)
-            throws EventBufferOverflowException {
-        applyOverflowStrategy();
-        eventDeque.add(synchronizedSensorModels);
+        eventDeque.add(synchronizedEvent);
+        flush();
     }
 
     @Override
