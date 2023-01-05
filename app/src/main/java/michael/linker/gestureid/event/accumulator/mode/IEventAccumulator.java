@@ -1,21 +1,21 @@
-package michael.linker.gestureid.event.buffer.mode;
+package michael.linker.gestureid.event.accumulator.mode;
 
-import michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowException;
+import michael.linker.gestureid.event.accumulator.overflow.EventAccumulatorOverflowException;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
 
 /**
- * Intermediate event storage for subsequent processing
+ * Intermediate event accumulator for subsequent processing
  */
-public interface IEventBuffer {
+public interface IEventAccumulator {
     /**
      * Store data about synchronized event from the all sensors.
      *
      * @param synchronizedEvent model that containing timestamp
      *                          and list of sensor event data.
-     * @throws EventBufferOverflowException if the buffer is full.
+     * @throws EventAccumulatorOverflowException if the accumulator is full.
      */
-    void buffer(SynchronizedEvent synchronizedEvent)
-            throws EventBufferOverflowException;
+    void accumulate(SynchronizedEvent synchronizedEvent)
+            throws EventAccumulatorOverflowException;
 
     /**
      * Returns buffer max size.

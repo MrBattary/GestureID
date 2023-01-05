@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 import java.util.List;
 
 import michael.linker.gestureid.core.sensor.sensor.type.BaseSensorType;
-import michael.linker.gestureid.event.buffer.mode.active.IActiveEventBufferListener;
+import michael.linker.gestureid.event.accumulator.mode.active.IActiveEventBufferListener;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
 import michael.linker.gestureid.sensor.model.ASensorModel;
 

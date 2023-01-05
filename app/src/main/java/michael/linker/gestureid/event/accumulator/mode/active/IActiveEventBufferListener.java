@@ -1,15 +1,15 @@
-package michael.linker.gestureid.event.buffer.mode.active;
+package michael.linker.gestureid.event.accumulator.mode.active;
 
 import java.util.List;
 
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
 
 /**
- * Listener of active buffer updates.
+ * Listener of active accumulator updates.
  */
 public interface IActiveEventBufferListener {
     /**
-     * Calls by IActiveEventBuffer impl when buffer updates.
+     * Calls by IActiveEventAccumulator impl when accumulator updates.
      *
      * @param synchronizedEventList event list.
      */

@@ -1,6 +1,6 @@
-package michael.linker.gestureid.event.buffer.overflow;
+package michael.linker.gestureid.event.accumulator.overflow;
 
-public enum EventBufferOverflowStrategy {
+public enum EventAccumulatorOverflowStrategy {
     // Flush all data from the buffer
     FLUSH,
     // Flush the oldest data

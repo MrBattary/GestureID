@@ -1,4 +1,4 @@
-package michael.linker.gestureid.event.buffer.mode.active;
+package michael.linker.gestureid.event.accumulator.mode.active;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -7,19 +7,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import michael.linker.gestureid.config.event.EventBufferConfiguration;
-import michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowException;
-import michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowStrategyProvider;
+import michael.linker.gestureid.config.event.EventAccumulatorConfiguration;
+import michael.linker.gestureid.event.accumulator.overflow.EventAccumulatorOverflowException;
+import michael.linker.gestureid.event.accumulator.overflow.EventAccumulatorOverflowStrategyProvider;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
 
 /**
- * Buffer without storage that notifies listeners.
+ * Accumulator with internal storage storage that notifies listeners with list of events.
  */
-public class ActiveEventBuffer implements IActiveEventBuffer {
+public class ActiveFlushableEventAccumulator implements IActiveFlushableEventAccumulator {
     private final Set<IActiveEventBufferListener> listenerSet;
     private final Deque<SynchronizedEvent> eventDeque;
 
-    public ActiveEventBuffer() {
+    public ActiveFlushableEventAccumulator() {
         listenerSet = new HashSet<>();
         eventDeque = new ArrayDeque<>();
     }
@@ -49,8 +49,8 @@ public class ActiveEventBuffer implements IActiveEventBuffer {
     }
 
     @Override
-    public void buffer(SynchronizedEvent synchronizedEvent)
-            throws EventBufferOverflowException {
+    public void accumulate(SynchronizedEvent synchronizedEvent) throws
+            EventAccumulatorOverflowException {
         applyOverflowStrategy();
         eventDeque.add(synchronizedEvent);
         flush();
@@ -58,7 +58,7 @@ public class ActiveEventBuffer implements IActiveEventBuffer {
 
     @Override
     public int getMaxSize() {
-        return EventBufferConfiguration.Build.getBufferMaxSize();
+        return EventAccumulatorConfiguration.Build.getAccumulatorMaxSize();
     }
 
     @Override
@@ -66,9 +66,9 @@ public class ActiveEventBuffer implements IActiveEventBuffer {
         return eventDeque.size();
     }
 
-    private void applyOverflowStrategy() throws EventBufferOverflowException {
+    private void applyOverflowStrategy() throws EventAccumulatorOverflowException {
         if (getSize() >= getMaxSize()) {
-            EventBufferOverflowStrategyProvider.getOverflowStrategy().execute(eventDeque);
+            EventAccumulatorOverflowStrategyProvider.getOverflowStrategy().execute(eventDeque);
         }
     }
 }

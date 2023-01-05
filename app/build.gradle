@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
 }
 
-def EventBufferOverflowStrategy = 'michael.linker.gestureid.event.buffer.overflow.EventBufferOverflowStrategy'
+def EventAccumulatorOverflowStrategy = 'michael.linker.gestureid.event.accumulator.overflow.EventAccumulatorOverflowStrategy'
 def SensorDelayType = 'michael.linker.gestureid.core.sensor.sensor.type.SensorDelayType'
 
 android {
@@ -29,8 +29,8 @@ android {
         /* Listeners */
         buildConfigField "Integer", "SENSOR_DELAY", "${SensorDelayType}.GAME"
         /* Buffer */
-        buildConfigField "int", "EVENT_BUFFER_MAX_SIZE", "1000"
-        buildConfigField EventBufferOverflowStrategy, "EVENT_BUFFER_OVERFLOW_STRATEGY", "${EventBufferOverflowStrategy}.RAISE_ERROR"
+        buildConfigField "int", "EVENT_ACCUMULATOR_MAX_SIZE", "1000"
+        buildConfigField EventAccumulatorOverflowStrategy, "EVENT_ACCUMULATOR_OVERFLOW_STRATEGY", "${EventAccumulatorOverflowStrategy}.RAISE_ERROR"
     }
 
     buildTypes {
