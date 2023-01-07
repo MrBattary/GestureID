@@ -9,9 +9,9 @@ import michael.linker.gestureid.sensor.model.ASensorModel;
  */
 public class SynchronizedEvent {
     private final String timestamp;
-    private final List<ASensorModel> data;
+    private final List<ASensorModel<Float>> data;
 
-    public SynchronizedEvent(String timestamp, List<ASensorModel> data) {
+    public SynchronizedEvent(String timestamp, List<ASensorModel<Float>> data) {
         this.timestamp = timestamp;
         this.data = data;
     }
@@ -20,7 +20,7 @@ public class SynchronizedEvent {
         return timestamp;
     }
 
-    public List<ASensorModel> getData() {
+    public List<ASensorModel<Float>> getData() {
         return data;
     }
 }

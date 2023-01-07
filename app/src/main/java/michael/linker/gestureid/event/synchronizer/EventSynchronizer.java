@@ -18,7 +18,7 @@ import michael.linker.gestureid.sensor.recognizer.SensorRecognizer;
 public class EventSynchronizer implements IEventSynchronizer {
     private final IEventAccumulator eventBuffer;
 
-    private final Map<Integer, ASensorModel> registeredModels = new TreeMap<>();
+    private final Map<Integer, ASensorModel<Float>> registeredModels = new TreeMap<>();
     private final Set<Integer> attachedListeners = new TreeSet<>();
 
     public EventSynchronizer() {
@@ -26,7 +26,7 @@ public class EventSynchronizer implements IEventSynchronizer {
     }
 
     @Override
-    public void registerEvent(ASensorModel sensorModel) throws
+    public void registerEvent(ASensorModel<Float> sensorModel) throws
             EventSynchronizerNotFoundException, EventSynchronizerFailedException {
         final int sensorIdFromModel = sensorModel.getSensorType().toInt();
         tryToSynchronize();

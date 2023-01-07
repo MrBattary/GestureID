@@ -3,17 +3,19 @@ package michael.linker.gestureid.sensor.model.intf;
 import java.util.List;
 import java.util.Map;
 
+import michael.linker.gestureid.core.sensor.sensor.type.SensorAxisType;
+
 /**
  * Interface for working with models of three axes
  *
  * @param <T> Axis type
  */
 public interface IThreeAxisSensorModel<T> {
-    List<String> getNamesList();
+    List<SensorAxisType> getAxisList();
 
-    List<T> getValuesList();
+    List<T> getValueList();
 
-    Map<String, T> getNamesAndValuesMap();
+    Map<SensorAxisType, T> getAxisValueMap();
 
     T getX();
 

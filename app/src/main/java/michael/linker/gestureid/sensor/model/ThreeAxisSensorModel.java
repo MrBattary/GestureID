@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import michael.linker.gestureid.core.sensor.sensor.type.SensorAxisType;
 import michael.linker.gestureid.sensor.model.intf.IThreeAxisSensorModel;
 import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
@@ -14,9 +15,6 @@ import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
  * @param <T> Axis type
  */
 public class ThreeAxisSensorModel<T> extends ASensorModel<T> implements IThreeAxisSensorModel<T> {
-    protected static final String X = "x";
-    protected static final String Y = "y";
-    protected static final String Z = "z";
     protected T x;
     protected T y;
     protected T z;
@@ -31,21 +29,23 @@ public class ThreeAxisSensorModel<T> extends ASensorModel<T> implements IThreeAx
         this.y = y;
         this.z = z;
     }
+
     @Override
-    public List<String> getNamesList() {
-        return Arrays.asList(X, Y, Z);
+    public List<SensorAxisType> getAxisList() {
+        return Arrays.asList(SensorAxisType.X, SensorAxisType.Y, SensorAxisType.Z);
     }
+
     @Override
-    public List<T> getValuesList() {
+    public List<T> getValueList() {
         return Arrays.asList(x, y, z);
     }
 
     @Override
-    public Map<String, T> getNamesAndValuesMap() {
-        Map<String, T> valuesMap = new HashMap<>();
-        valuesMap.put(X, x);
-        valuesMap.put(Y, y);
-        valuesMap.put(Z, z);
+    public Map<SensorAxisType, T> getAxisValueMap() {
+        Map<SensorAxisType, T> valuesMap = new HashMap<>();
+        valuesMap.put(SensorAxisType.X, x);
+        valuesMap.put(SensorAxisType.Y, y);
+        valuesMap.put(SensorAxisType.Z, z);
         return valuesMap;
     }
 

@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import michael.linker.gestureid.core.sensor.sensor.type.SensorAxisType;
 import michael.linker.gestureid.sensor.model.intf.IFourAxisSensorModel;
 import michael.linker.gestureid.sensor.model.intf.IThreeAxisSensorModel;
 import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
@@ -16,7 +17,6 @@ import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
  */
 public class FourAxisSensorModel<T> extends ASensorModel<T> implements IFourAxisSensorModel<T> {
     protected final IThreeAxisSensorModel<T> threeAxisSensorModel;
-    protected static final String W = "w";
     protected T w;
 
     public FourAxisSensorModel(SensorType sensorType) {
@@ -44,23 +44,23 @@ public class FourAxisSensorModel<T> extends ASensorModel<T> implements IFourAxis
     }
 
     @Override
-    public List<String> getNamesList() {
+    public List<SensorAxisType> getAxisList() {
         return Stream
-                .concat(threeAxisSensorModel.getNamesList().stream(), Stream.of(W))
+                .concat(threeAxisSensorModel.getAxisList().stream(), Stream.of(SensorAxisType.W))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<T> getValuesList() {
+    public List<T> getValueList() {
         return Stream
-                .concat(threeAxisSensorModel.getValuesList().stream(), Stream.of(w))
+                .concat(threeAxisSensorModel.getValueList().stream(), Stream.of(w))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Map<String, T> getNamesAndValuesMap() {
-        Map<String, T> buff = threeAxisSensorModel.getNamesAndValuesMap();
-        buff.put(W, w);
+    public Map<SensorAxisType, T> getAxisValueMap() {
+        Map<SensorAxisType, T> buff = threeAxisSensorModel.getAxisValueMap();
+        buff.put(SensorAxisType.W, w);
         return buff;
     }
 

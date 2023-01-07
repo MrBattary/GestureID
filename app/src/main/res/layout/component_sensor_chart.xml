@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sensor_chart"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/sensor_chart_line"
+        android:layout_width="match_parent"
+        android:minHeight="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sensor_chart_heading"
+        android:layout_marginTop="@dimen/fragment_margin_vertical_small" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sensor_chart_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder_sensor_name" />
+</RelativeLayout>

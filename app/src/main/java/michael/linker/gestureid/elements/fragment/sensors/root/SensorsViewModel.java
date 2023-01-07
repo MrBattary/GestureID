@@ -11,45 +11,29 @@ import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
 import michael.linker.gestureid.sensor.model.ASensorModel;
 
 public class SensorsViewModel extends ViewModel implements IActiveEventAccumulatorListener {
-    private final MutableLiveData<String> timestamp, accelerometerEvent, gyroscopeEvent,
-            magnetometerEvent;
+    private final MutableLiveData<String> timestamp;
+    private final MutableLiveData<ASensorModel<Float>> accelerometerEvent;
 
     public SensorsViewModel() {
         timestamp = new MutableLiveData<>();
         accelerometerEvent = new MutableLiveData<>();
-        gyroscopeEvent = new MutableLiveData<>();
-        magnetometerEvent = new MutableLiveData<>();
     }
 
     public MutableLiveData<String> getTimestamp() {
         return timestamp;
     }
 
-    public LiveData<String> getAccelerometerEvent() {
+    public LiveData<ASensorModel<Float>> getAccelerometerEvent() {
         return accelerometerEvent;
-    }
-
-    public LiveData<String> getGyroscopeEvent() {
-        return gyroscopeEvent;
-    }
-
-    public LiveData<String> getMagnetometerEvent() {
-        return magnetometerEvent;
     }
 
     @Override
     public void notifyAboutEpisode(AccumulatedEpisode accumulatedEpisode) {
         for (SynchronizedEvent event : accumulatedEpisode.getData()) {
             timestamp.setValue(event.getTimestamp());
-            for (ASensorModel sensorModel : event.getData()) {
+            for (ASensorModel<Float> sensorModel : event.getData()) {
                 if (sensorModel.getSensorType() == BaseSensorType.ACCELEROMETER) {
-                    accelerometerEvent.setValue(sensorModel.getNamesAndValuesMap().toString());
-                }
-                if (sensorModel.getSensorType() == BaseSensorType.GYROSCOPE) {
-                    gyroscopeEvent.setValue(sensorModel.getNamesAndValuesMap().toString());
-                }
-                if (sensorModel.getSensorType() == BaseSensorType.MAGNETOMETER) {
-                    magnetometerEvent.setValue(sensorModel.getNamesAndValuesMap().toString());
+                    accelerometerEvent.setValue(sensorModel);
                 }
             }
         }

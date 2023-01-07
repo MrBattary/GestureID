@@ -18,13 +18,14 @@ import com.google.android.material.textview.MaterialTextView;
 import michael.linker.gestureid.R;
 import michael.linker.gestureid.config.event.EventAccumulatorConfiguration;
 import michael.linker.gestureid.config.sensor.SensorManagerConfiguration;
-import michael.linker.gestureid.config.sensor.SensorsConfiguration;
-import michael.linker.gestureid.core.sensor.sensor.type.BaseSensorType;
-import michael.linker.gestureid.elements.component.sensor.StubSensorComponent;
+import michael.linker.gestureid.elements.component.elementary.chart.line.sensor.ISensorDataLineChart;
+import michael.linker.gestureid.elements.component.elementary.chart.line.sensor.autosize.SensorDataAutoSizeLineChart;
+import michael.linker.gestureid.elements.component.elementary.chart.line.sensor.autosize.SensorDataAutoSizeLineChartProperties;
+import michael.linker.gestureid.sensor.model.ASensorModel;
 
 public class SensorsFragment extends Fragment {
     MaterialTextView timeView;
-    StubSensorComponent accelerometerComponent, gyroscopeComponent, magnetometerComponent;
+    ISensorDataLineChart<ASensorModel<Float>> accelerometerChart;
 
     private SensorsViewModel viewModel;
 
@@ -49,31 +50,16 @@ public class SensorsFragment extends Fragment {
 
     private void initViews(View view) {
         timeView = view.findViewById(R.id.sensors_time);
-        accelerometerComponent = new StubSensorComponent(
-                view.findViewById(R.id.sensors_accelerometer));
-        accelerometerComponent.setName(BaseSensorType.ACCELEROMETER.toString());
-        accelerometerComponent.setStatus(
-                SensorsConfiguration.Build.isAccelerometerDeactivated() ? "inactive" : "active");
-        gyroscopeComponent = new StubSensorComponent(view.findViewById(R.id.sensors_gyroscope));
-        gyroscopeComponent.setName(BaseSensorType.GYROSCOPE.toString());
-        gyroscopeComponent.setStatus(
-                SensorsConfiguration.Build.isGyroscopeDeactivated() ? "inactive" : "active");
-        magnetometerComponent = new StubSensorComponent(
-                view.findViewById(R.id.sensors_magnetometer));
-        magnetometerComponent.setName(BaseSensorType.MAGNETOMETER.toString());
-        magnetometerComponent.setStatus(
-                SensorsConfiguration.Build.isMagnetometerDeactivated() ? "inactive" : "active");
+        accelerometerChart = new SensorDataAutoSizeLineChart(
+                view.findViewById(R.id.sensors_accelerometer_chart),
+                new SensorDataAutoSizeLineChartProperties(100, 10f));
     }
 
     private void initSubscriptions() {
         viewModel.getTimestamp().observe(getViewLifecycleOwner(),
                 timestamp -> timeView.setText(timestamp));
         viewModel.getAccelerometerEvent().observe(getViewLifecycleOwner(),
-                data -> accelerometerComponent.setSensorData(data));
-        viewModel.getGyroscopeEvent().observe(getViewLifecycleOwner(),
-                data -> gyroscopeComponent.setSensorData(data));
-        viewModel.getGyroscopeEvent().observe(getViewLifecycleOwner(),
-                data -> magnetometerComponent.setSensorData(data));
+                data -> accelerometerChart.addData(data));
     }
 
     @Override

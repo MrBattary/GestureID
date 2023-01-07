@@ -72,10 +72,13 @@ android {
 
 dependencies {
     def room_version = "2.4.3"
+    def mp_android_chart_version = "v3.1.0"
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-rxjava3:$room_version"
+
+    implementation "com.github.PhilJay:MPAndroidChart:$mp_android_chart_version"
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'

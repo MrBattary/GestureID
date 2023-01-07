@@ -1,4 +1,3 @@
-
 <resources>
     <color name="seed">#1e511e</color>
     <color name="md_theme_light_primary">#296B2A</color>
@@ -61,4 +60,10 @@
     <color name="md_theme_dark_surfaceTint">#91D888</color>
     <color name="md_theme_dark_outlineVariant">#424940</color>
     <color name="md_theme_dark_scrim">#000000</color>
+
+    <color name="axis_x">#5BC0EB</color>
+    <color name="axis_y">#FDE74C</color>
+    <color name="axis_z">#9BC53D</color>
+    <color name="axis_w">#C3423F</color>
+    <color name="axis_default">#404E4D</color>
 </resources>

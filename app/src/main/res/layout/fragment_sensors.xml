@@ -14,27 +14,11 @@
         android:text="@string/placeholder_sensors_time" />
 
     <include
-        android:id="@+id/sensors_accelerometer"
-        layout="@layout/component_sensor"
+        android:id="@+id/sensors_accelerometer_chart"
+        layout="@layout/component_sensor_chart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/sensors_time"
-        android:layout_marginTop="@dimen/fragment_margin_vertical" />
-
-    <include
-        android:id="@+id/sensors_gyroscope"
-        layout="@layout/component_sensor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/sensors_accelerometer"
-        android:layout_marginTop="@dimen/fragment_margin_vertical" />
-
-    <include
-        android:id="@+id/sensors_magnetometer"
-        layout="@layout/component_sensor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/sensors_gyroscope"
         android:layout_marginTop="@dimen/fragment_margin_vertical" />
 
 </RelativeLayout>
