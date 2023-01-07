@@ -1,9 +1,9 @@
-package michael.linker.gestureid.elements.component.elementary.chart.line;
+package michael.linker.gestureid.elements.view.elementary.chart.line;
 
 import android.view.View;
 
 import michael.linker.gestureid.R;
-import michael.linker.gestureid.elements.component.elementary.chart.IChart;
+import michael.linker.gestureid.elements.view.elementary.chart.IChart;
 
 public class LineChart implements IChart {
     protected final com.github.mikephil.charting.charts.LineChart chart;

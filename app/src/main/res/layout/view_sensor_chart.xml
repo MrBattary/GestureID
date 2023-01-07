@@ -17,15 +17,15 @@
             android:layout_marginHorizontal="@dimen/fragment_content_margin_horizontal">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/sensor_chart_info_button"
+                android:id="@+id/sensor_chart_header_info_button"
                 style="?attr/materialIconButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/sensor_chart_heading"
+                android:layout_toEndOf="@id/sensor_chart_header_name"
                 app:icon="@drawable/ic_info" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/sensor_chart_heading"
+                android:id="@+id/sensor_chart_header_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"

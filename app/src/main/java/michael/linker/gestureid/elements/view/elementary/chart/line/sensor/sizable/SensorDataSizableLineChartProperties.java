@@ -1,6 +1,6 @@
-package michael.linker.gestureid.elements.component.elementary.chart.line.sensor.sizable;
+package michael.linker.gestureid.elements.view.elementary.chart.line.sensor.sizable;
 
-import michael.linker.gestureid.elements.component.elementary.chart.line.sensor.SensorDataLineChartProperties;
+import michael.linker.gestureid.elements.view.elementary.chart.line.sensor.SensorDataLineChartProperties;
 
 public class SensorDataSizableLineChartProperties extends SensorDataLineChartProperties {
     private final float yAxisMinMax;

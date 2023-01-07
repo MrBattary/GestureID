@@ -1,6 +1,6 @@
-package michael.linker.gestureid.elements.component.elementary.chart.line.sensor;
+package michael.linker.gestureid.elements.view.elementary.chart.line.sensor;
 
-import michael.linker.gestureid.elements.component.elementary.chart.line.ILineChart;
+import michael.linker.gestureid.elements.view.elementary.chart.line.ILineChart;
 
 public interface ISensorDataLineChart<T> extends ILineChart {
     /**

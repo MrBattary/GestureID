@@ -18,14 +18,16 @@ import com.google.android.material.textview.MaterialTextView;
 import michael.linker.gestureid.R;
 import michael.linker.gestureid.config.event.EventAccumulatorConfiguration;
 import michael.linker.gestureid.config.sensor.SensorManagerConfiguration;
-import michael.linker.gestureid.elements.component.elementary.chart.line.sensor.ISensorDataLineChart;
-import michael.linker.gestureid.elements.component.elementary.chart.line.sensor.autosize.SensorDataAutoSizeLineChart;
-import michael.linker.gestureid.elements.component.elementary.chart.line.sensor.autosize.SensorDataAutoSizeLineChartProperties;
-import michael.linker.gestureid.sensor.model.ASensorModel;
+import michael.linker.gestureid.config.sensor.SensorsConfiguration;
+import michael.linker.gestureid.core.sensor.sensor.type.BaseSensorType;
+import michael.linker.gestureid.data.res.StringsProvider;
+import michael.linker.gestureid.elements.view.composite.chart.ISensorChartView;
+import michael.linker.gestureid.elements.view.composite.chart.SensorChartView;
+import michael.linker.gestureid.elements.view.composite.chart.SensorChartViewData;
 
 public class SensorsFragment extends Fragment {
     MaterialTextView timeView;
-    ISensorDataLineChart<ASensorModel<Float>> accelerometerChart;
+    ISensorChartView accelerometerChartView;
 
     private SensorsViewModel viewModel;
 
@@ -50,16 +52,25 @@ public class SensorsFragment extends Fragment {
 
     private void initViews(View view) {
         timeView = view.findViewById(R.id.sensors_current_time);
-        accelerometerChart = new SensorDataAutoSizeLineChart(
+        accelerometerChartView = new SensorChartView(
+                requireContext(),
                 view.findViewById(R.id.sensors_accelerometer_chart),
-                new SensorDataAutoSizeLineChartProperties(100, 10f));
+                new SensorChartViewData(
+                        BaseSensorType.ACCELEROMETER,
+                        StringsProvider.getString(R.string.sensor_accelerometer),
+                        StringsProvider.getString(R.string.sensor_accelerometer_not_available)
+                ));
+        // TODO: Finish for the another sensors
     }
 
     private void initSubscriptions() {
         viewModel.getTimestamp().observe(getViewLifecycleOwner(),
                 timestamp -> timeView.setText(timestamp));
-        viewModel.getAccelerometerEvent().observe(getViewLifecycleOwner(),
-                data -> accelerometerChart.addData(data));
+        if (!SensorsConfiguration.Build.isAccelerometerDeactivated()) {
+            accelerometerChartView.subscribe(getViewLifecycleOwner(),
+                    viewModel.getAccelerometerEvent());
+        }
+        // TODO: Finish for the another sensors
     }
 
     @Override

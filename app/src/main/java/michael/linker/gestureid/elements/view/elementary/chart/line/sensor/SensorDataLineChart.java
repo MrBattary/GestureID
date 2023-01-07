@@ -1,4 +1,4 @@
-package michael.linker.gestureid.elements.component.elementary.chart.line.sensor;
+package michael.linker.gestureid.elements.view.elementary.chart.line.sensor;
 
 import android.view.View;
 
@@ -15,7 +15,7 @@ import michael.linker.gestureid.R;
 import michael.linker.gestureid.core.sensor.sensor.type.SensorAxisType;
 import michael.linker.gestureid.data.res.ColorsProvider;
 import michael.linker.gestureid.data.res.DimensionsProvider;
-import michael.linker.gestureid.elements.component.elementary.chart.line.LineChart;
+import michael.linker.gestureid.elements.view.elementary.chart.line.LineChart;
 import michael.linker.gestureid.sensor.model.ASensorModel;
 
 public class SensorDataLineChart extends LineChart implements

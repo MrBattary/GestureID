@@ -38,7 +38,7 @@
 
             <include
                 android:id="@+id/sensors_accelerometer_chart"
-                layout="@layout/component_sensor_chart"
+                layout="@layout/view_sensor_chart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/sensors_time"
@@ -46,7 +46,7 @@
 
             <include
                 android:id="@+id/sensors_gyroscope_chart"
-                layout="@layout/component_sensor_chart"
+                layout="@layout/view_sensor_chart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/sensors_accelerometer_chart"
@@ -54,7 +54,7 @@
 
             <include
                 android:id="@+id/sensors_magnetometer_chart"
-                layout="@layout/component_sensor_chart"
+                layout="@layout/view_sensor_chart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/sensors_gyroscope_chart"
@@ -62,7 +62,7 @@
 
             <include
                 android:id="@+id/sensors_gravity_chart"
-                layout="@layout/component_sensor_chart"
+                layout="@layout/view_sensor_chart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/sensors_magnetometer_chart"
@@ -70,7 +70,7 @@
 
             <include
                 android:id="@+id/sensors_linear_acceleration_chart"
-                layout="@layout/component_sensor_chart"
+                layout="@layout/view_sensor_chart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/sensors_gravity_chart"
@@ -78,7 +78,7 @@
 
             <include
                 android:id="@+id/sensors_rotation_vector_chart"
-                layout="@layout/component_sensor_chart"
+                layout="@layout/view_sensor_chart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/sensors_linear_acceleration_chart"
@@ -86,7 +86,7 @@
 
             <include
                 android:id="@+id/sensors_geo_rotation_vector_chart"
-                layout="@layout/component_sensor_chart"
+                layout="@layout/view_sensor_chart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/sensors_rotation_vector_chart"

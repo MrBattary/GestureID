@@ -1,11 +1,11 @@
-package michael.linker.gestureid.elements.component.elementary.chart.line.sensor.sizable;
+package michael.linker.gestureid.elements.view.elementary.chart.line.sensor.sizable;
 
 import android.view.View;
 
 import com.github.mikephil.charting.components.YAxis;
 
-import michael.linker.gestureid.elements.component.elementary.chart.line.sensor.ISensorDataLineChart;
-import michael.linker.gestureid.elements.component.elementary.chart.line.sensor.SensorDataLineChart;
+import michael.linker.gestureid.elements.view.elementary.chart.line.sensor.ISensorDataLineChart;
+import michael.linker.gestureid.elements.view.elementary.chart.line.sensor.SensorDataLineChart;
 import michael.linker.gestureid.sensor.model.ASensorModel;
 
 public class SensorDataSizableLineChart extends SensorDataLineChart

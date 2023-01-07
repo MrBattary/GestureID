@@ -1,6 +1,6 @@
-package michael.linker.gestureid.elements.component.elementary.chart.line.sensor.autosize;
+package michael.linker.gestureid.elements.view.elementary.chart.line.sensor.autosize;
 
-import michael.linker.gestureid.elements.component.elementary.chart.line.sensor.SensorDataLineChartProperties;
+import michael.linker.gestureid.elements.view.elementary.chart.line.sensor.SensorDataLineChartProperties;
 
 public class SensorDataAutoSizeLineChartProperties extends SensorDataLineChartProperties {
     private final float yAxisSpacePercent;

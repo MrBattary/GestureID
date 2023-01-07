@@ -1,6 +1,6 @@
-package michael.linker.gestureid.elements.component.elementary.chart.line.sensor;
+package michael.linker.gestureid.elements.view.elementary.chart.line.sensor;
 
-import michael.linker.gestureid.elements.component.elementary.chart.line.LineChartProperties;
+import michael.linker.gestureid.elements.view.elementary.chart.line.LineChartProperties;
 
 public class SensorDataLineChartProperties extends LineChartProperties {
     private final int chartMaxSize;
