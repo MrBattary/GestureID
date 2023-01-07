@@ -27,7 +27,14 @@
 
     <!-- Development. -->
     <string name="placeholder_sensor_name" translatable="false">Sensor</string>
+    <string name="placeholder_sensor_not_found" translatable="false">Sensor was not found</string>
     <string name="placeholder_sensor_status" translatable="false">Status</string>
     <string name="placeholder_sensor_data" translatable="false">XX YY ZZ WW</string>
-    <string name="placeholder_sensors_time" translatable="false">NNNNNNNNN</string>
+    <string name="placeholder_sensors_current_time" translatable="false">NNNNNNNNN</string>
+
+    <!-- Texts. -->
+    <string name="sensors_time">Time:</string>
+
+    <!-- Descriptions. -->
+    <string name="content_description_recording_fab">Stop and continue recording</string>
 </resources>

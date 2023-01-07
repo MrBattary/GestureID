@@ -1,24 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/sensors"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginHorizontal="@dimen/fragment_content_margin_horizontal"
-    tools:context=".elements.fragment.sensors.root.SensorsFragment">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/sensors_time"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/sensors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/fragment_content_margin_small"
+            android:paddingBottom="@dimen/fragment_content_bottom_padding_with_fab"
+            tools:context=".elements.fragment.sensors.root.SensorsFragment">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/sensors_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/fragment_margin_horizontal"
+                android:text="@string/sensors_time"
+                android:textAppearance="?attr/textAppearanceHeadline5" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/sensors_current_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/fragment_margin_horizontal_small"
+                android:layout_toEndOf="@id/sensors_time"
+                android:text="@string/placeholder_sensors_current_time"
+                android:textAppearance="?attr/textAppearanceHeadline5" />
+
+            <include
+                android:id="@+id/sensors_accelerometer_chart"
+                layout="@layout/component_sensor_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sensors_time"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small" />
+
+            <include
+                android:id="@+id/sensors_gyroscope_chart"
+                layout="@layout/component_sensor_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sensors_accelerometer_chart"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small" />
+
+            <include
+                android:id="@+id/sensors_magnetometer_chart"
+                layout="@layout/component_sensor_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sensors_gyroscope_chart"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small" />
+
+            <include
+                android:id="@+id/sensors_gravity_chart"
+                layout="@layout/component_sensor_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sensors_magnetometer_chart"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small" />
+
+            <include
+                android:id="@+id/sensors_linear_acceleration_chart"
+                layout="@layout/component_sensor_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sensors_gravity_chart"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small" />
+
+            <include
+                android:id="@+id/sensors_rotation_vector_chart"
+                layout="@layout/component_sensor_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sensors_linear_acceleration_chart"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small" />
+
+            <include
+                android:id="@+id/sensors_geo_rotation_vector_chart"
+                layout="@layout/component_sensor_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sensors_rotation_vector_chart"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/sensors_manage_recording_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/placeholder_sensors_time" />
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_default_margin"
+        android:contentDescription="@string/content_description_recording_fab"
+        app:srcCompat="@drawable/ic_stop_and_play" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <include
-        android:id="@+id/sensors_accelerometer_chart"
-        layout="@layout/component_sensor_chart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/sensors_time"
-        android:layout_marginTop="@dimen/fragment_margin_vertical" />
 
-</RelativeLayout>
+

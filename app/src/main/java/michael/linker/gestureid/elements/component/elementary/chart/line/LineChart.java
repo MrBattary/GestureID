@@ -9,6 +9,6 @@ public class LineChart implements IChart {
     protected final com.github.mikephil.charting.charts.LineChart chart;
 
     public LineChart(View view) {
-        chart = view.findViewById(R.id.sensor_chart_line);
+        chart = view.findViewById(R.id.sensor_chart_line_chart);
     }
 }

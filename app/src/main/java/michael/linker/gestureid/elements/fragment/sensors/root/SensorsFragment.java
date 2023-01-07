@@ -49,7 +49,7 @@ public class SensorsFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        timeView = view.findViewById(R.id.sensors_time);
+        timeView = view.findViewById(R.id.sensors_current_time);
         accelerometerChart = new SensorDataAutoSizeLineChart(
                 view.findViewById(R.id.sensors_accelerometer_chart),
                 new SensorDataAutoSizeLineChartProperties(100, 10f));

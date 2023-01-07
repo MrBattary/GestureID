@@ -4,12 +4,21 @@
     <dimen name="navigation_icon_size">30dp</dimen>
 
     <!-- Fragment dimensions. -->
+    <dimen name="fragment_content_margin_small">10dp</dimen>
     <dimen name="fragment_content_margin_horizontal">20dp</dimen>
+    <dimen name="fragment_content_margin_horizontal_small">10dp</dimen>
+    <dimen name="fragment_content_bottom_padding_with_fab">88dp</dimen>
+    <dimen name="fragment_margin">20dp</dimen>
     <dimen name="fragment_margin_horizontal">20dp</dimen>
     <dimen name="fragment_margin_vertical">20dp</dimen>
     <dimen name="fragment_margin_horizontal_small">10dp</dimen>
     <dimen name="fragment_margin_vertical_small">10dp</dimen>
 
     <!-- Chart dimensions. -->
+    <dimen name="chart_min_height">200dp</dimen>
     <dimen name="chart_line_width">2dp</dimen>
+
+    <!-- Buttons dimensions. -->
+    <!-- FAB. -->
+    <dimen name="fab_default_margin">16dp</dimen>
 </resources>
