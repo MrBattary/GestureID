@@ -38,11 +38,11 @@ android {
             /* Sensors */
             buildConfigField "boolean", "DEACTIVATE_ACCELEROMETER", "false"
             buildConfigField "boolean", "DEACTIVATE_GYROSCOPE", "false"
-            buildConfigField "boolean", "DEACTIVATE_MAGNETOMETER", "false"
-            buildConfigField "boolean", "DEACTIVATE_GRAVITY", "false"
+            buildConfigField "boolean", "DEACTIVATE_MAGNETOMETER", "true"
+            buildConfigField "boolean", "DEACTIVATE_GRAVITY", "true"
             buildConfigField "boolean", "DEACTIVATE_LINEAR_ACCELERATION", "false"
-            buildConfigField "boolean", "DEACTIVATE_ROTATION_VECTOR", "false"
-            buildConfigField "boolean", "DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
+            buildConfigField "boolean", "DEACTIVATE_ROTATION_VECTOR", "true"
+            buildConfigField "boolean", "DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "true"
         }
         release {
             /* Sensors */

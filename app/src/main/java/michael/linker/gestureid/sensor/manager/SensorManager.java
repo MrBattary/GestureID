@@ -58,6 +58,11 @@ public class SensorManager implements ISensorManager {
     }
 
     @Override
+    public boolean isRegisteringSuppressed() {
+        return sensorListenerSuppressor.isAllListenersSuppressed();
+    }
+
+    @Override
     public void suppressRegistering() {
         sensorListenerSuppressor.suppressAllListeners();
     }

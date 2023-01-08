@@ -31,7 +31,6 @@ public final class CompositeSensorType {
     public final static SensorType ROTATION_VECTOR;
     /**
      * Simplified version of the ROTATION_VECTOR sensor
-     * <p>
      * Attitude sensor
      * Required sensors: Accelerometer, Magnetometer
      */
