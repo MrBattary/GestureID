@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sensor_chart"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/sensor_chart_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/sensor_chart_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/fragment_content_margin_horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sensor_chart_header_info_button"
+                style="?attr/materialIconButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/sensor_chart_header_name"
+                app:icon="@drawable/ic_info" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/sensor_chart_header_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="@string/placeholder_sensor_name"
+                android:textAppearance="?attr/textAppearanceHeadline5" />
+        </RelativeLayout>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/sensor_chart_line_chart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sensor_chart_header"
+            android:minHeight="@dimen/chart_min_height" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/sensor_chart_content_not_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fragment_margin"
+        android:visibility="gone">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/sensor_chart_heading_not_found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/placeholder_sensor_not_found"
+            android:textAppearance="?attr/textAppearanceHeadline5" />
+    </RelativeLayout>
+</RelativeLayout>

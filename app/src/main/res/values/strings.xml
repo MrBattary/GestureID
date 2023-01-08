@@ -1,22 +1,44 @@
 <resources>
     <string name="app_name">GestureID</string>
-    <!--Utility-->
-    <string name="start">Start</string>
-    <string name="exit">Exit</string>
-    <string name="success">Success</string>
-    <string name="next">Next</string>
-    <string name="finish">Finish</string>
-    <string name="description">Task description</string>
-    <!--General descriptions-->
-    <string name="rules">As part of the experiment, you are invited to perform everyday actions with a smartphone.\nThey will include clicks, swipes and other simple actions.\nRelax and imagine that you are just working with your device.\nGood luck!</string>
-    <string name="success_description">The task was completed successfully! Click "Next" to proceed to the next task.</string>
-    <string name="finish_description">All tasks have been completed successfully. Thank you for participating!</string>
-    <!--Button test-->
-    <string name="button_test_description">In this task, you will need to click on the highlighted area.</string>
-    <string name="button_test_alt">Press me!</string>
-    <!--Swipe test-->
-    <string name="swipe_test_description">In this task, you will need to perform various swipes on the screen. Arrow - Swipe your finger in this direction.</string>
-    <!--Keyboard test-->
-    <string name="keyboard_test_description">In this task, various words will appear and your task will be to enter them into a special field. Words are case sensitive!</string>
-    <string name="keyboard_input_hint">Enter the word above</string>
+    <!-- Navigation. -->
+    <string name="navigation_title_home">Home</string>
+    <string name="navigation_title_sensors">Sensors</string>
+    <string name="navigation_title_playground">Playground</string>
+
+    <!-- Development. -->
+    <string name="placeholder_sensor_name" translatable="false">Sensor</string>
+    <string name="placeholder_sensor_not_found" translatable="false">Sensor was not found</string>
+    <string name="placeholder_sensor_status" translatable="false">Status</string>
+    <string name="placeholder_sensor_data" translatable="false">XX YY ZZ WW</string>
+    <string name="placeholder_sensors_current_time" translatable="false">NNNNNNNNN</string>
+
+    <!-- Texts. -->
+    <string name="sensors_time">Time:</string>
+    <string name="sensor_info">Sensor info</string>
+    <string name="sensor_info_not_available">Sensor info not available</string>
+    <string name="sensor_info_name">Name: </string>
+    <string name="sensor_info_range">Max range: </string>
+    <string name="sensor_info_resolution">Resolution: </string>
+    <string name="sensor_info_power">Power: </string>
+    <string name="sensor_info_delay">Min delay: </string>
+    <string name="sensor_accelerometer">Accelerometer</string>
+    <string name="sensor_accelerometer_not_available">Accelerometer not available</string>
+    <string name="sensor_gyroscope">Gyroscope</string>
+    <string name="sensor_gyroscope_not_available">Gyroscope not available</string>
+    <string name="sensor_magnetometer">Magnetometer</string>
+    <string name="sensor_magnetometer_not_available">Magnetometer not available</string>
+    <string name="sensor_gravity">Gravity</string>
+    <string name="sensor_gravity_not_available">Gravity not available</string>
+    <string name="sensor_linear_acceleration">Linear Acceleration</string>
+    <string name="sensor_linear_acceleration_not_available">Linear Acceleration not available</string>
+    <string name="sensor_rotation_vector">Rotation Vector</string>
+    <string name="sensor_rotation_vector_not_available">Rotation Vector not available</string>
+    <string name="sensor_geo_rotation_vector">Geo Rotation Vector</string>
+    <string name="sensor_geo_rotation_vector_not_available">Geomagnetic Rotation Vector not available</string>
+
+    <!-- Descriptions. -->
+    <string name="content_description_recording_fab">Stop and continue recording</string>
+
+    <!-- Buttons. -->
+    <string name="button_ok">OK</string>
 </resources>

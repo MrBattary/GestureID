@@ -3,31 +3,41 @@ package michael.linker.gestureid.sensor.listener.suppressor;
 import java.util.HashMap;
 import java.util.Map;
 
-import michael.linker.gestureid.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
 public class SensorListenerSuppressor implements ISensorListenerSuppressor {
-    private boolean suppressAllListeners = true;
-    private final Map<SensorType, Boolean> listeners = new HashMap<>();
+    private final Map<SensorType, Boolean> listenerSuppressedMap = new HashMap<>();
 
     @Override
     public void suppressAllListeners() {
-        suppressAllListeners = true;
+        for (SensorType sensorType : listenerSuppressedMap.keySet()) {
+            suppressListener(sensorType);
+        }
     }
 
     @Override
     public void unsuppressAllListeners() {
-        suppressAllListeners = false;
+        for (SensorType sensorType : listenerSuppressedMap.keySet()) {
+            unsuppressListener(sensorType);
+        }
     }
 
     @Override
     public boolean isAllListenersSuppressed() {
-        return suppressAllListeners;
+        boolean isAllListenersSuppressed = true;
+        for (Boolean listenerSuppression : listenerSuppressedMap.values()) {
+            if (!listenerSuppression) {
+                isAllListenersSuppressed = false;
+                break;
+            }
+        }
+        return isAllListenersSuppressed;
     }
 
     @Override
     public Boolean isListenerSuppressed(SensorType sensorType)
             throws SensorListenerSuppressorNotFoundException {
-        final Boolean status = listeners.get(sensorType);
+        final Boolean status = listenerSuppressedMap.get(sensorType);
         if (status == null) {
             throw new SensorListenerSuppressorNotFoundException(
                     "Unable to get the suppression status, the " + sensorType.toString()
@@ -51,18 +61,18 @@ public class SensorListenerSuppressor implements ISensorListenerSuppressor {
 
     @Override
     public Map<SensorType, Boolean> getListenersSuppressedStatus() {
-        return listeners;
+        return listenerSuppressedMap;
     }
 
     @Override
     public void registerListener(SensorType sensorType) {
-        listeners.put(sensorType, true);
+        listenerSuppressedMap.put(sensorType, true);
     }
 
     private void setListenerSuppressionStatus(SensorType sensorType, boolean suppressionStatus)
             throws SensorListenerSuppressorNotFoundException {
-        if (listeners.containsKey(sensorType)) {
-            listeners.replace(sensorType, suppressionStatus);
+        if (listenerSuppressedMap.containsKey(sensorType)) {
+            listenerSuppressedMap.replace(sensorType, suppressionStatus);
         } else {
             throw new SensorListenerSuppressorNotFoundException(
                     "Unable to set the suppression status, the " + sensorType.toString()

@@ -1,7 +1,7 @@
 package michael.linker.gestureid.sensor.factory;
 
-import michael.linker.gestureid.sensor.type.SensorType;
-import michael.linker.gestureid.sensor.wrapper.sensor.SensorWrapper;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.SensorWrapper;
 
 /**
  * Default/stub sensor factory

@@ -1,7 +1,7 @@
 package michael.linker.gestureid.sensor.listener.provider;
 
 import michael.linker.gestureid.sensor.listener.ISensorListener;
-import michael.linker.gestureid.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
 /**
  * Provider for listeners

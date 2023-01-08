@@ -3,6 +3,7 @@ package michael.linker.gestureid.sensor.listener.provider;
 import java.util.HashMap;
 import java.util.Map;
 
+import michael.linker.gestureid.config.sensor.SensorListenerConfiguration;
 import michael.linker.gestureid.sensor.listener.ISensorListener;
 import michael.linker.gestureid.sensor.listener.base.AccelerometerSensorListener;
 import michael.linker.gestureid.sensor.listener.base.GyroscopeSensorListener;
@@ -12,17 +13,15 @@ import michael.linker.gestureid.sensor.listener.composite.GravitySensorListener;
 import michael.linker.gestureid.sensor.listener.composite.LinearAccelerationSensorListener;
 import michael.linker.gestureid.sensor.listener.composite.RotationVectorSensorListener;
 import michael.linker.gestureid.sensor.listener.suppressor.ISensorListenerSuppressor;
-import michael.linker.gestureid.sensor.type.BaseSensorType;
-import michael.linker.gestureid.sensor.type.CompositeSensorType;
-import michael.linker.gestureid.sensor.type.SensorType;
-import michael.linker.gestureid.synchronizer.IEventSynchronizer;
+import michael.linker.gestureid.core.sensor.sensor.type.BaseSensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.CompositeSensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
 public class SensorListenerProvider implements ISensorListenerProvider {
     private final Map<Integer, ISensorListener> sensorListeners = new HashMap<>();
 
-    public SensorListenerProvider(final IEventSynchronizer eventSynchronizer,
-            final ISensorListenerSuppressor listenerSuppressor) {
-        initializeSensorListeners(eventSynchronizer, listenerSuppressor);
+    public SensorListenerProvider() {
+        initializeSensorListeners(SensorListenerConfiguration.getSensorListenerSuppressor());
     }
 
     @Override
@@ -38,38 +37,42 @@ public class SensorListenerProvider implements ISensorListenerProvider {
         }
     }
 
-    private void initializeSensorListeners(final IEventSynchronizer eventSynchronizer,
+    private void initializeSensorListeners(
             final ISensorListenerSuppressor listenerSuppressor) {
-        initializeBaseSensorListeners(eventSynchronizer, listenerSuppressor);
-        initializeCompositeSensorListeners(eventSynchronizer, listenerSuppressor);
+        initializeBaseSensorListeners(listenerSuppressor);
+        initializeCompositeSensorListeners(listenerSuppressor);
     }
 
-    private void initializeBaseSensorListeners(final IEventSynchronizer eventSynchronizer,
-            final ISensorListenerSuppressor listenerSuppressor) {
+    private void initializeBaseSensorListeners(final ISensorListenerSuppressor listenerSuppressor) {
         listenerSuppressor.registerListener(BaseSensorType.ACCELEROMETER);
         sensorListeners.put(BaseSensorType.ACCELEROMETER.toInt(),
-                new AccelerometerSensorListener(eventSynchronizer, listenerSuppressor));
+                new AccelerometerSensorListener());
+
         listenerSuppressor.registerListener(BaseSensorType.GYROSCOPE);
         sensorListeners.put(BaseSensorType.GYROSCOPE.toInt(),
-                new GyroscopeSensorListener(eventSynchronizer, listenerSuppressor));
+                new GyroscopeSensorListener());
+
         listenerSuppressor.registerListener(BaseSensorType.MAGNETOMETER);
         sensorListeners.put(BaseSensorType.MAGNETOMETER.toInt(),
-                new MagneticFieldSensorListener(eventSynchronizer, listenerSuppressor));
+                new MagneticFieldSensorListener());
     }
 
-    private void initializeCompositeSensorListeners(final IEventSynchronizer eventSynchronizer,
+    private void initializeCompositeSensorListeners(
             final ISensorListenerSuppressor listenerSuppressor) {
         listenerSuppressor.registerListener(CompositeSensorType.GRAVITY);
         sensorListeners.put(CompositeSensorType.GRAVITY.toInt(),
-                new GravitySensorListener(eventSynchronizer, listenerSuppressor));
+                new GravitySensorListener());
+
         listenerSuppressor.registerListener(CompositeSensorType.LINEAR_ACCELERATION);
         sensorListeners.put(CompositeSensorType.LINEAR_ACCELERATION.toInt(),
-                new LinearAccelerationSensorListener(eventSynchronizer, listenerSuppressor));
+                new LinearAccelerationSensorListener());
+
         listenerSuppressor.registerListener(CompositeSensorType.ROTATION_VECTOR);
         sensorListeners.put(CompositeSensorType.ROTATION_VECTOR.toInt(),
-                new RotationVectorSensorListener(eventSynchronizer, listenerSuppressor));
+                new RotationVectorSensorListener());
+
         listenerSuppressor.registerListener(CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR);
         sensorListeners.put(CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR.toInt(),
-                new GeomagneticRotationVectorSensorListener(eventSynchronizer, listenerSuppressor));
+                new GeomagneticRotationVectorSensorListener());
     }
 }

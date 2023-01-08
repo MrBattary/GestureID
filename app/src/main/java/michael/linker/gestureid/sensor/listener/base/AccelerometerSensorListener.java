@@ -4,23 +4,24 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.util.Log;
 
+import michael.linker.gestureid.config.event.EventSynchronizerConfiguration;
+import michael.linker.gestureid.config.sensor.SensorListenerConfiguration;
+import michael.linker.gestureid.event.synchronizer.EventSynchronizerFailedException;
+import michael.linker.gestureid.event.synchronizer.IEventSynchronizer;
 import michael.linker.gestureid.sensor.listener.ISensorListener;
 import michael.linker.gestureid.sensor.listener.suppressor.ISensorListenerSuppressor;
 import michael.linker.gestureid.sensor.listener.suppressor.SensorListenerSuppressorNotFoundException;
 import michael.linker.gestureid.sensor.model.base.AccelerometerSensorModel;
-import michael.linker.gestureid.sensor.type.BaseSensorType;
-import michael.linker.gestureid.synchronizer.EventSynchronizerFailedException;
-import michael.linker.gestureid.synchronizer.IEventSynchronizer;
+import michael.linker.gestureid.core.sensor.sensor.type.BaseSensorType;
 
 public class AccelerometerSensorListener implements ISensorListener {
     private static final String TAG = AccelerometerSensorListener.class.getCanonicalName();
     private final IEventSynchronizer eventSynchronizer;
     private final ISensorListenerSuppressor listenerSuppressor;
 
-    public AccelerometerSensorListener(final IEventSynchronizer eventSynchronizer,
-            final ISensorListenerSuppressor listenerSuppressor) {
-        this.eventSynchronizer = eventSynchronizer;
-        this.listenerSuppressor = listenerSuppressor;
+    public AccelerometerSensorListener() {
+        this.eventSynchronizer = EventSynchronizerConfiguration.getEventSynchronizer();
+        this.listenerSuppressor = SensorListenerConfiguration.getSensorListenerSuppressor();
     }
 
     @Override
@@ -28,10 +29,8 @@ public class AccelerometerSensorListener implements ISensorListener {
         try {
             final boolean isThisListenerSuppressed = listenerSuppressor.isListenerSuppressed(
                     BaseSensorType.ACCELEROMETER);
-            if (!listenerSuppressor.isAllListenersSuppressed()) {
-                if (!isThisListenerSuppressed) {
-                    proceedEvent(sensorEvent);
-                }
+            if (!isThisListenerSuppressed) {
+                proceedEvent(sensorEvent);
             }
             // If this listener is not registered in the ListenerSuppressor
         } catch (SensorListenerSuppressorNotFoundException e) {

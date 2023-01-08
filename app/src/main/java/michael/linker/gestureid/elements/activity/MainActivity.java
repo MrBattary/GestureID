@@ -1,67 +1,82 @@
 package michael.linker.gestureid.elements.activity;
 
-import android.content.Context;
-import android.content.Intent;
-import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
-import java.io.File;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import michael.linker.gestureid.R;
-import michael.linker.gestureid.elements.config.TestLoopConfiguration;
-import michael.linker.gestureid.sensor.wrapper.manager.ASensorManager;
-import michael.linker.gestureid.sensor.wrapper.manager.SensorManagerWrapper;
-import michael.linker.gestureid.world.IWorld;
-import michael.linker.gestureid.world.exception.WorldFailedException;
-import michael.linker.gestureid.world.singleton.WorldSingleton;
+import michael.linker.gestureid.config.sensor.SensorManagerConfiguration;
+import michael.linker.gestureid.databinding.ActivityMainBinding;
+import michael.linker.gestureid.sensor.manager.ISensorManager;
 
 public class MainActivity extends AppCompatActivity {
-    private IWorld world;
+    private AppBarConfiguration appBarConfiguration;
+    private NavController navController;
+
+    private ISensorManager world;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        File directory = this.getExternalFilesDir(null);
-        TestLoopConfiguration.setDestination(directory);
-        TestLoopConfiguration.setTestLoopFolder(
-                "/Test".concat(String.valueOf(System.currentTimeMillis())));
-
-        buildButtons();
-
-        SensorManager hardwareSensorManager = (SensorManager) getSystemService(
-                Context.SENSOR_SERVICE);
-        ASensorManager sensorManager = new SensorManagerWrapper(hardwareSensorManager);
-
-        try {
-            WorldSingleton.initialize(sensorManager);
-            world = WorldSingleton.getInstance();
-        } catch (WorldFailedException e) {
-            closeApplication();
-        }
+        initNavigation();
+        initSensorWorld();
     }
 
-    private void buildButtons() {
-        Button start = findViewById(R.id.main__start);
-        start.setOnClickListener(view -> {
-            Intent activity = new Intent(MainActivity.this, ButtonActivity.class);
-            activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(activity);
-            finish();
-        });
-
-        Button exit = findViewById(R.id.main__exit);
-        exit.setOnClickListener(view -> closeApplication());
+    @Override
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+                || super.onSupportNavigateUp();
     }
 
-    private void closeApplication() {
-        world.suppressRegistering();
-        world.closeOutputStream();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         world.destroy();
-        this.finishAndRemoveTask();
+    }
+
+    /*@Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+        switch (action) {
+            case (MotionEvent.ACTION_DOWN):
+                world.unsuppressRegistering();
+                break;
+            case (MotionEvent.ACTION_UP):
+                world.suppressRegistering();
+                break;
+        }
+        return super.dispatchTouchEvent(event);
+    }*/
+
+    private void initNavigation() {
+        BottomNavigationView bottomNavigationView = this.findViewById(R.id.bottom_navigation);
+        navController = findNavController(this);
+        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+    }
+
+    private NavController findNavController(final AppCompatActivity activity)
+            throws RuntimeException {
+        Fragment fragment = activity.getSupportFragmentManager().findFragmentById(
+                R.id.main_navigation_host_fragment);
+        if (!(fragment instanceof NavHostFragment)) {
+            throw new RuntimeException();
+        }
+        return ((NavHostFragment) fragment).getNavController();
+    }
+
+    private void initSensorWorld() {
+        world = SensorManagerConfiguration.getManager();
+        world.suppressRegistering();
     }
 }

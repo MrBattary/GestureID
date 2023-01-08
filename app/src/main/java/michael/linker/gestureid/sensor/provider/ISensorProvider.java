@@ -2,8 +2,8 @@ package michael.linker.gestureid.sensor.provider;
 
 import java.util.List;
 
-import michael.linker.gestureid.sensor.type.SensorType;
-import michael.linker.gestureid.sensor.wrapper.sensor.SensorWrapper;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.SensorWrapper;
 
 /**
  * Provider for sensors

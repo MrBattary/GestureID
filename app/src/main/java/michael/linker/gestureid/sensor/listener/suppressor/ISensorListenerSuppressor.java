@@ -2,7 +2,7 @@ package michael.linker.gestureid.sensor.listener.suppressor;
 
 import java.util.Map;
 
-import michael.linker.gestureid.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
 /**
  * The ListenerSuppressor helps filter data from sensor listeners by suppressing them,

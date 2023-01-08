@@ -3,7 +3,8 @@ package michael.linker.gestureid.sensor.model;
 import java.util.List;
 import java.util.Map;
 
-import michael.linker.gestureid.sensor.type.SensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorAxisType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 
 /**
  * Basic sensor model for other sensor models
@@ -40,19 +41,19 @@ public abstract class ASensorModel<T> {
      *
      * @return List of names
      */
-    abstract public List<String> getNamesList();
+    abstract public List<SensorAxisType> getAxisList();
 
     /**
      * Get values from model as list of values
      *
      * @return List of values
      */
-    abstract public List<T> getValuesList();
+    abstract public List<T> getValueList();
 
     /**
      * Get values from model as map of pairs name-value
      *
      * @return Map of pairs name-value
      */
-    abstract public Map<String, T> getNamesAndValuesMap();
+    abstract public Map<SensorAxisType, T> getAxisValueMap();
 }
