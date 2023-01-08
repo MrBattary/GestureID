@@ -74,6 +74,11 @@ public class SensorChartView implements ISensorChartView {
         liveData.observe(lifecycleOwner, chart::addData);
     }
 
+    @Override
+    public void clear() {
+        chart.clear();
+    }
+
 
     @Override
     public View getViewInstance() {

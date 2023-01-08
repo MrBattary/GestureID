@@ -77,6 +77,11 @@ public class SensorDataLineChart extends LineChart implements
         super.chart.invalidate();
     }
 
+    @Override
+    public void clear() {
+        axisValuesMap.clear();
+    }
+
     private LineDataSet buildLineDataSet(List<Entry> values, SensorAxisType axis) {
         LineDataSet axisDataSet = new LineDataSet(values, axis.toString());
         axisDataSet.setDrawCircles(false);

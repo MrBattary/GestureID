@@ -44,6 +44,20 @@ public class MainActivity extends AppCompatActivity {
         world.destroy();
     }
 
+    /*@Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+        switch (action) {
+            case (MotionEvent.ACTION_DOWN):
+                world.unsuppressRegistering();
+                break;
+            case (MotionEvent.ACTION_UP):
+                world.suppressRegistering();
+                break;
+        }
+        return super.dispatchTouchEvent(event);
+    }*/
+
     private void initNavigation() {
         BottomNavigationView bottomNavigationView = this.findViewById(R.id.bottom_navigation);
         navController = findNavController(this);
@@ -59,15 +73,6 @@ public class MainActivity extends AppCompatActivity {
             throw new RuntimeException();
         }
         return ((NavHostFragment) fragment).getNavController();
-    }
-
-    private AppBarConfiguration buildAppBarConfiguration() {
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        return new AppBarConfiguration.Builder(
-                R.id.navigation_sensors,
-                R.id.navigation_home/*,
-                R.id.navigation_playground*/).build();
     }
 
     private void initSensorWorld() {

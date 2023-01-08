@@ -7,14 +7,25 @@ public class SensorManagerConfiguration {
     private static ISensorManager sensorManager = null;
 
     /**
-     * Get instance of the World with the hardware SensorManager.
+     * Get instance of the custom Sensor Manager with the Hardware SensorManager.
      *
-     * @return World instance.
+     * @return sensor manager instance.
      */
     public static ISensorManager getManager() {
         if (sensorManager == null) {
             sensorManager = new SensorManager();
         }
+        return sensorManager;
+    }
+
+    /**
+     * Rebuild and get instance of the custom Sensor Manager with the Hardware SensorManager.
+     *
+     * @return sensor manager instance.
+     */
+    public static ISensorManager getFreshManager() {
+        sensorManager.destroy();
+        sensorManager = new SensorManager();
         return sensorManager;
     }
 }

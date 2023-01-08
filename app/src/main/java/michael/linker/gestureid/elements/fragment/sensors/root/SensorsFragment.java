@@ -128,6 +128,13 @@ public class SensorsFragment extends Fragment {
         manageRecordingFab.setOnClickListener(l -> {
             ISensorManager sensorManager = SensorManagerConfiguration.getManager();
             if (sensorManager.isRegisteringSuppressed()) {
+                accelerometerChartView.clear();
+                gyroscopeChartView.clear();
+                magnetometerChartView.clear();
+                gravityChartView.clear();
+                linearAccelerationChartView.clear();
+                rotationVectorChartView.clear();
+                geoRotationVectorChartView.clear();
                 sensorManager.unsuppressRegistering();
             } else {
                 sensorManager.suppressRegistering();

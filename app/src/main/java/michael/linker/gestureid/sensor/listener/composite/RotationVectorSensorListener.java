@@ -22,7 +22,6 @@ public class RotationVectorSensorListener implements ISensorListener {
     public RotationVectorSensorListener() {
         this.eventSynchronizer = EventSynchronizerConfiguration.getEventSynchronizer();
         this.listenerSuppressor = SensorListenerConfiguration.getSensorListenerSuppressor();
-        ;
     }
 
     @Override
@@ -30,7 +29,7 @@ public class RotationVectorSensorListener implements ISensorListener {
         try {
             final boolean isThisListenerSuppressed = listenerSuppressor.isListenerSuppressed(
                     CompositeSensorType.ROTATION_VECTOR);
-            if (!listenerSuppressor.isAllListenersSuppressed()) {
+            if (!isThisListenerSuppressed) {
                 proceedEvent(sensorEvent);
             }
             // If this listener is not registered in the ListenerSuppressor

@@ -14,4 +14,9 @@ public interface ISensorChartView extends IView {
      * @param liveData       live data from the ViewModel.
      */
     void subscribe(LifecycleOwner lifecycleOwner, LiveData<ASensorModel<Float>> liveData);
+
+    /**
+     * Clears the chart from all data (sets it to null) and refreshes it.
+     */
+    void clear();
 }
