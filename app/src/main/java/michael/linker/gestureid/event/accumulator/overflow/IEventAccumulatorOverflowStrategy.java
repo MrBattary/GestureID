@@ -1,6 +1,6 @@
 package michael.linker.gestureid.event.accumulator.overflow;
 
-import java.util.Deque;
+import java.util.Queue;
 
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
 
@@ -13,5 +13,5 @@ public interface IEventAccumulatorOverflowStrategy {
      *
      * @param buffer buffer as deque.
      */
-    void execute(Deque<SynchronizedEvent> buffer);
+    void execute(Queue<SynchronizedEvent> buffer);
 }

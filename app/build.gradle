@@ -48,11 +48,11 @@ android {
             /* Sensors */
             buildConfigField "boolean", "DEACTIVATE_ACCELEROMETER", "false"
             buildConfigField "boolean", "DEACTIVATE_GYROSCOPE", "false"
-            buildConfigField "boolean", "DEACTIVATE_MAGNETOMETER", "false"
-            buildConfigField "boolean", "DEACTIVATE_GRAVITY", "false"
+            buildConfigField "boolean", "DEACTIVATE_MAGNETOMETER", "true"
+            buildConfigField "boolean", "DEACTIVATE_GRAVITY", "true"
             buildConfigField "boolean", "DEACTIVATE_LINEAR_ACCELERATION", "false"
-            buildConfigField "boolean", "DEACTIVATE_ROTATION_VECTOR", "false"
-            buildConfigField "boolean", "DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "false"
+            buildConfigField "boolean", "DEACTIVATE_ROTATION_VECTOR", "true"
+            buildConfigField "boolean", "DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "true"
 
             it.minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -73,6 +73,7 @@ android {
 dependencies {
     def room_version = "2.4.3"
     def mp_android_chart_version = "v3.1.0"
+    def apache_commons_collections = "commons-collections4:4.4"
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
@@ -92,6 +93,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.annotation:annotation:1.5.0'
+    implementation "org.apache.commons:$apache_commons_collections"
     implementation 'commons-codec:commons-codec:1.15'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'

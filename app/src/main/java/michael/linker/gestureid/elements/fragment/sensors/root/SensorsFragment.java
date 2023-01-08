@@ -146,29 +146,30 @@ public class SensorsFragment extends Fragment {
         viewModel.getTimestamp().observe(getViewLifecycleOwner(),
                 timestamp -> timeView.setText(timestamp));
         if (!SensorsConfiguration.Build.isAccelerometerDeactivated()) {
-            accelerometerChartView.subscribe(getViewLifecycleOwner(),
+            accelerometerChartView.subscribeList(getViewLifecycleOwner(),
                     viewModel.getAccelerometerEvent());
         }
         if (!SensorsConfiguration.Build.isGyroscopeDeactivated()) {
-            gyroscopeChartView.subscribe(getViewLifecycleOwner(), viewModel.getGyroscopeEvent());
+            gyroscopeChartView.subscribeList(getViewLifecycleOwner(),
+                    viewModel.getGyroscopeEvent());
         }
         if (!SensorsConfiguration.Build.isMagnetometerDeactivated()) {
-            magnetometerChartView.subscribe(getViewLifecycleOwner(),
+            magnetometerChartView.subscribeList(getViewLifecycleOwner(),
                     viewModel.getMagnetometerEvent());
         }
         if (!SensorsConfiguration.Build.isGravityDeactivated()) {
-            gravityChartView.subscribe(getViewLifecycleOwner(), viewModel.getGravityEvent());
+            gravityChartView.subscribeList(getViewLifecycleOwner(), viewModel.getGravityEvent());
         }
         if (!SensorsConfiguration.Build.isLinearAccelerationDeactivated()) {
-            linearAccelerationChartView.subscribe(getViewLifecycleOwner(),
+            linearAccelerationChartView.subscribeList(getViewLifecycleOwner(),
                     viewModel.getLinearAccelerationEvent());
         }
         if (!SensorsConfiguration.Build.isRotationVectorDeactivated()) {
-            rotationVectorChartView.subscribe(getViewLifecycleOwner(),
+            rotationVectorChartView.subscribeList(getViewLifecycleOwner(),
                     viewModel.getRotationVectorEvent());
         }
         if (!SensorsConfiguration.Build.isGeomagneticRotationVectorDeactivated()) {
-            geoRotationVectorChartView.subscribe(getViewLifecycleOwner(),
+            geoRotationVectorChartView.subscribeList(getViewLifecycleOwner(),
                     viewModel.getGeoRotationVectorEvent());
         }
     }

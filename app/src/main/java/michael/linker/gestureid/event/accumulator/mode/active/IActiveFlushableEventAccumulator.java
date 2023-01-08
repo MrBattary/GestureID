@@ -5,6 +5,11 @@ package michael.linker.gestureid.event.accumulator.mode.active;
  */
 public interface IActiveFlushableEventAccumulator extends IActiveEventAccumulator {
     /**
+     * Starts accumulate data to the internal buffer.
+     */
+    void startAccumulation();
+
+    /**
      * Clears all data from the accumulator and notifies listeners with it.
      */
     void flush();

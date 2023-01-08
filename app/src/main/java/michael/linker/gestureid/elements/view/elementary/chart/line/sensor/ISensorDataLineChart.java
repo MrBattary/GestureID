@@ -1,5 +1,7 @@
 package michael.linker.gestureid.elements.view.elementary.chart.line.sensor;
 
+import java.util.List;
+
 import michael.linker.gestureid.elements.view.elementary.chart.line.ILineChart;
 
 public interface ISensorDataLineChart<T> extends ILineChart {
@@ -9,4 +11,11 @@ public interface ISensorDataLineChart<T> extends ILineChart {
      * @param data Data model of the chart.
      */
     void addData(T data);
+
+    /**
+     * Provide new data list for the chart.
+     *
+     * @param dataList Data model list of the chart.
+     */
+    void addDataList(List<T> dataList);
 }

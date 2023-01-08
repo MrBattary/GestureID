@@ -4,8 +4,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import michael.linker.gestureid.core.sensor.sensor.type.BaseSensorType;
 import michael.linker.gestureid.core.sensor.sensor.type.CompositeSensorType;
+import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 import michael.linker.gestureid.event.accumulator.mode.active.IActiveEventAccumulatorListener;
 import michael.linker.gestureid.event.accumulator.model.AccumulatedEpisode;
 import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
@@ -13,7 +19,7 @@ import michael.linker.gestureid.sensor.model.ASensorModel;
 
 public class SensorsViewModel extends ViewModel implements IActiveEventAccumulatorListener {
     private final MutableLiveData<String> timestamp;
-    private final MutableLiveData<ASensorModel<Float>> accelerometerEvent, magnetometerEvent,
+    private final MutableLiveData<List<ASensorModel<Float>>> accelerometerEvent, magnetometerEvent,
             gyroscopeEvent, gravityEvent, linearAccelerationEvent, rotationVectorEvent,
             geoRotationVectorEvent;
 
@@ -32,54 +38,78 @@ public class SensorsViewModel extends ViewModel implements IActiveEventAccumulat
         return timestamp;
     }
 
-    public LiveData<ASensorModel<Float>> getAccelerometerEvent() {
+    public LiveData<List<ASensorModel<Float>>> getAccelerometerEvent() {
         return accelerometerEvent;
     }
 
-    public LiveData<ASensorModel<Float>> getMagnetometerEvent() {
+    public LiveData<List<ASensorModel<Float>>> getMagnetometerEvent() {
         return magnetometerEvent;
     }
 
-    public LiveData<ASensorModel<Float>> getGyroscopeEvent() {
+    public LiveData<List<ASensorModel<Float>>> getGyroscopeEvent() {
         return gyroscopeEvent;
     }
 
-    public LiveData<ASensorModel<Float>> getGravityEvent() {
+    public LiveData<List<ASensorModel<Float>>> getGravityEvent() {
         return gravityEvent;
     }
 
-    public LiveData<ASensorModel<Float>> getLinearAccelerationEvent() {
+    public LiveData<List<ASensorModel<Float>>> getLinearAccelerationEvent() {
         return linearAccelerationEvent;
     }
 
-    public LiveData<ASensorModel<Float>> getRotationVectorEvent() {
+    public LiveData<List<ASensorModel<Float>>> getRotationVectorEvent() {
         return rotationVectorEvent;
     }
 
-    public LiveData<ASensorModel<Float>> getGeoRotationVectorEvent() {
+    public LiveData<List<ASensorModel<Float>>> getGeoRotationVectorEvent() {
         return geoRotationVectorEvent;
     }
 
     @Override
     public void notifyAboutEpisode(AccumulatedEpisode accumulatedEpisode) {
-        for (SynchronizedEvent event : accumulatedEpisode.getData()) {
-            timestamp.postValue(event.getTimestamp());
+        Map<SensorType, List<ASensorModel<Float>>> modelsPerSensorFromEpisodeMap =
+                new HashMap<>();
+        List<SynchronizedEvent> eventList = accumulatedEpisode.getData();
+        if (eventList.size() >= 1) {
+            timestamp.postValue(
+                    Long.valueOf(
+                            Long.parseLong(eventList.get(eventList.size() - 1).getTimestamp())
+                            -
+                            Long.parseLong(eventList.get(0).getTimestamp())
+                    ).toString()
+            );
+        }
+        for (SynchronizedEvent event : eventList) {
             for (ASensorModel<Float> sensorModel : event.getData()) {
-                if (sensorModel.getSensorType() == BaseSensorType.ACCELEROMETER) {
-                    accelerometerEvent.postValue(sensorModel);
-                } else if (sensorModel.getSensorType() == BaseSensorType.GYROSCOPE) {
-                    gyroscopeEvent.postValue(sensorModel);
-                } else if (sensorModel.getSensorType() == BaseSensorType.MAGNETOMETER) {
-                    magnetometerEvent.postValue(sensorModel);
-                } else if (sensorModel.getSensorType() == CompositeSensorType.GRAVITY) {
-                    gravityEvent.postValue(sensorModel);
-                } else if (sensorModel.getSensorType() == CompositeSensorType.LINEAR_ACCELERATION) {
-                    linearAccelerationEvent.postValue(sensorModel);
-                } else if (sensorModel.getSensorType() == CompositeSensorType.ROTATION_VECTOR) {
-                    rotationVectorEvent.postValue(sensorModel);
-                } else if (sensorModel.getSensorType() == CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR) {
-                    geoRotationVectorEvent.postValue(sensorModel);
+                if (!modelsPerSensorFromEpisodeMap.containsKey(sensorModel.getSensorType())) {
+                    modelsPerSensorFromEpisodeMap.put(sensorModel.getSensorType(),
+                            new ArrayList<>());
                 }
+                List<ASensorModel<Float>> sensorModelList =
+                        modelsPerSensorFromEpisodeMap.get(sensorModel.getSensorType());
+                sensorModelList.add(sensorModel);
+            }
+        }
+
+        for (SensorType sensorType : modelsPerSensorFromEpisodeMap.keySet()) {
+            List<ASensorModel<Float>> sensorModelList =
+                    modelsPerSensorFromEpisodeMap.get(sensorType);
+            if (sensorType == BaseSensorType.ACCELEROMETER) {
+                accelerometerEvent.postValue(sensorModelList);
+            } else if (sensorType == BaseSensorType.GYROSCOPE) {
+                gyroscopeEvent.postValue(sensorModelList);
+            } else if (sensorType == BaseSensorType.MAGNETOMETER) {
+                magnetometerEvent.postValue(sensorModelList);
+            } else if (sensorType == CompositeSensorType.GRAVITY) {
+                gravityEvent.postValue(sensorModelList);
+            } else if (sensorType == CompositeSensorType.LINEAR_ACCELERATION) {
+                linearAccelerationEvent.postValue(sensorModelList);
+            } else if (sensorType == CompositeSensorType.ROTATION_VECTOR) {
+                rotationVectorEvent.postValue(sensorModelList);
+            } else if (sensorType
+                    == CompositeSensorType.GEOMAGNETIC_ROTATION_VECTOR) {
+                geoRotationVectorEvent.postValue(sensorModelList);
             }
         }
     }

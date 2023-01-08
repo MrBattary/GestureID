@@ -1,6 +1,7 @@
 package michael.linker.gestureid.elements.activity;
 
 import android.os.Bundle;
+import android.view.MotionEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -12,15 +13,17 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import michael.linker.gestureid.R;
+import michael.linker.gestureid.config.event.EventAccumulatorConfiguration;
 import michael.linker.gestureid.config.sensor.SensorManagerConfiguration;
 import michael.linker.gestureid.databinding.ActivityMainBinding;
+import michael.linker.gestureid.event.accumulator.mode.active.IActiveFlushableEventAccumulator;
 import michael.linker.gestureid.sensor.manager.ISensorManager;
 
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private NavController navController;
 
-    private ISensorManager world;
+    private ISensorManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         initNavigation();
-        initSensorWorld();
+        initSensorManager();
     }
 
     @Override
@@ -41,22 +44,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        world.destroy();
+        manager.destroy();
     }
 
-    /*@Override
+    @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         int action = event.getAction();
         switch (action) {
             case (MotionEvent.ACTION_DOWN):
-                world.unsuppressRegistering();
+                ((IActiveFlushableEventAccumulator) EventAccumulatorConfiguration.getActiveAccumulator()).startAccumulation();
                 break;
             case (MotionEvent.ACTION_UP):
-                world.suppressRegistering();
+                ((IActiveFlushableEventAccumulator) EventAccumulatorConfiguration.getActiveAccumulator()).flush();
                 break;
         }
         return super.dispatchTouchEvent(event);
-    }*/
+    }
 
     private void initNavigation() {
         BottomNavigationView bottomNavigationView = this.findViewById(R.id.bottom_navigation);
@@ -75,8 +78,9 @@ public class MainActivity extends AppCompatActivity {
         return ((NavHostFragment) fragment).getNavController();
     }
 
-    private void initSensorWorld() {
-        world = SensorManagerConfiguration.getManager();
-        world.suppressRegistering();
+    private void initSensorManager() {
+        EventAccumulatorConfiguration.getFlushableActiveAccumulator();
+        manager = SensorManagerConfiguration.getManager();
+        manager.suppressRegistering();
     }
 }

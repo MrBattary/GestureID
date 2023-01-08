@@ -53,7 +53,24 @@ public class SensorDataLineChart extends LineChart implements
 
     @Override
     public void addData(ASensorModel<Float> data) {
-        LineData lineData = new LineData();
+        addDataToValuesMap(data);
+        updateChartWithNewData();
+    }
+
+    @Override
+    public void addDataList(List<ASensorModel<Float>> dataList) {
+        for (ASensorModel<Float> data : dataList) {
+            addDataToValuesMap(data);
+        }
+        updateChartWithNewData();
+    }
+
+    @Override
+    public void clear() {
+        axisValuesMap.clear();
+    }
+
+    private void addDataToValuesMap(ASensorModel<Float> data) {
         for (SensorAxisType axis : data.getAxisList()) {
             if (!axisValuesMap.containsKey(axis)) {
                 axisValuesMap.put(axis, new LinkedList<>());
@@ -70,16 +87,17 @@ public class SensorDataLineChart extends LineChart implements
                             data.getAxisValueMap().get(axis)
                     )
             );
-            lineData.addDataSet(buildLineDataSet(axisValueList, axis));
         }
-        super.chart.setData(lineData);
-
-        super.chart.invalidate();
     }
 
-    @Override
-    public void clear() {
-        axisValuesMap.clear();
+    private void updateChartWithNewData() {
+        LineData lineData = new LineData();
+        for (SensorAxisType axis : axisValuesMap.keySet()) {
+            lineData.addDataSet(buildLineDataSet(axisValuesMap.get(axis), axis));
+            super.chart.setData(lineData);
+        }
+
+        super.chart.invalidate();
     }
 
     private LineDataSet buildLineDataSet(List<Entry> values, SensorAxisType axis) {

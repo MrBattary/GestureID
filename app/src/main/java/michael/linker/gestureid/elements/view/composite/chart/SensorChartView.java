@@ -11,6 +11,8 @@ import androidx.lifecycle.LiveData;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
+import java.util.List;
+
 import michael.linker.gestureid.R;
 import michael.linker.gestureid.config.sensor.SensorProviderConfiguration;
 import michael.linker.gestureid.data.res.NumbersProvider;
@@ -72,6 +74,13 @@ public class SensorChartView implements ISensorChartView {
     public void subscribe(LifecycleOwner lifecycleOwner, LiveData<ASensorModel<Float>> liveData) {
         enableChart();
         liveData.observe(lifecycleOwner, chart::addData);
+    }
+
+    @Override
+    public void subscribeList(LifecycleOwner lifecycleOwner,
+            LiveData<List<ASensorModel<Float>>> liveData) {
+        enableChart();
+        liveData.observe(lifecycleOwner, chart::addDataList);
     }
 
     @Override

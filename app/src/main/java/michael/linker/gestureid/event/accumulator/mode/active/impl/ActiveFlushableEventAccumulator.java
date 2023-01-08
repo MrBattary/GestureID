@@ -1,8 +1,9 @@
 package michael.linker.gestureid.event.accumulator.mode.active.impl;
 
-import java.util.ArrayDeque;
+import org.apache.commons.collections4.queue.CircularFifoQueue;
+
 import java.util.ArrayList;
-import java.util.Deque;
+import java.util.Queue;
 
 import michael.linker.gestureid.config.event.EventAccumulatorConfiguration;
 import michael.linker.gestureid.event.accumulator.mode.active.ABaseActiveEventAccumulator;
@@ -18,14 +19,22 @@ import michael.linker.gestureid.event.synchronizer.model.SynchronizedEvent;
  */
 public class ActiveFlushableEventAccumulator extends ABaseActiveEventAccumulator implements
         IActiveFlushableEventAccumulator {
-    private final Deque<SynchronizedEvent> eventDeque;
+    private boolean accumulationEnabled;
+    private final Queue<SynchronizedEvent> eventDeque;
 
     public ActiveFlushableEventAccumulator() {
-        eventDeque = new ArrayDeque<>();
+        eventDeque = new CircularFifoQueue<>(getMaxSize());
+        accumulationEnabled = false;
+    }
+
+    @Override
+    public void startAccumulation() {
+        accumulationEnabled = true;
     }
 
     @Override
     public void flush() {
+        accumulationEnabled = false;
         AccumulatedEpisode episode = new AccumulatedEpisode(new ArrayList<>(eventDeque));
         eventDeque.clear();
         for (IActiveEventAccumulatorListener listener : super.listenerSet) {
@@ -36,8 +45,10 @@ public class ActiveFlushableEventAccumulator extends ABaseActiveEventAccumulator
     @Override
     public void accumulate(SynchronizedEvent synchronizedEvent) throws
             EventAccumulatorOverflowException {
-        applyOverflowStrategy();
-        eventDeque.add(synchronizedEvent);
+        if (accumulationEnabled) {
+            applyOverflowStrategy();
+            eventDeque.add(synchronizedEvent);
+        }
     }
 
     @Override
