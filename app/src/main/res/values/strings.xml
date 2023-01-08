@@ -15,6 +15,12 @@
     <!-- Texts. -->
     <string name="sensors_time">Time:</string>
     <string name="sensor_info">Sensor info</string>
+    <string name="sensor_info_not_available">Sensor info not available</string>
+    <string name="sensor_info_name">Name: </string>
+    <string name="sensor_info_range">Max range: </string>
+    <string name="sensor_info_resolution">Resolution: </string>
+    <string name="sensor_info_power">Power: </string>
+    <string name="sensor_info_delay">Min delay: </string>
     <string name="sensor_accelerometer">Accelerometer</string>
     <string name="sensor_accelerometer_not_available">Accelerometer not available</string>
 

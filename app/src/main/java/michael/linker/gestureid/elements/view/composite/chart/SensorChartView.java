@@ -1,6 +1,7 @@
 package michael.linker.gestureid.elements.view.composite.chart;
 
 import android.content.Context;
+import android.hardware.Sensor;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -95,22 +96,37 @@ public class SensorChartView implements ISensorChartView {
     }
 
     private void initDialogs(Context ctx) {
-        String sensorData;
-        try {
-            // TODO: Provide good data
-            sensorData = SensorProviderConfiguration.getSensorProvider()
-                    .getSensor(viewData.getSensorType()).getHardwareSensor().toString();
-        } catch (SensorProviderNotFoundException e) {
-            sensorData = null;
-        }
+
 
         infoDialog = new SingleChoiceInfoDialog(ctx,
                 new SingleChoiceDialogModel(
                         StringsProvider.getString(R.string.sensor_info),
-                        sensorData,
+                        buildSensorData(),
                         StringsProvider.getString(R.string.button_ok)),
                 (dialogInterface, i) -> dialogInterface.dismiss()
         );
+    }
+
+    private String buildSensorData() {
+        String sensorData;
+        try {
+            Sensor sensor = SensorProviderConfiguration.getSensorProvider()
+                    .getSensor(viewData.getSensorType()).getHardwareSensor();
+            sensorData =
+                    StringsProvider.getString(R.string.sensor_info_name) +
+                            sensor.getName() + "\n" +
+                            StringsProvider.getString(R.string.sensor_info_power)
+                            + sensor.getPower() + "\n" +
+                            StringsProvider.getString(R.string.sensor_info_delay)
+                            + sensor.getMinDelay() + "\n" +
+                            StringsProvider.getString(R.string.sensor_info_range)
+                            + sensor.getMaximumRange() + "\n" +
+                            StringsProvider.getString(R.string.sensor_info_resolution)
+                            + sensor.getResolution();
+        } catch (SensorProviderNotFoundException e) {
+            sensorData = StringsProvider.getString(R.string.sensor_accelerometer_not_available);
+        }
+        return sensorData;
     }
 
     private void initButtons() {
