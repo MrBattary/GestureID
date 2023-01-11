@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
 }
 
-def EventAccumulatorOverflowStrategy = 'michael.linker.gestureid.event.accumulator.overflow.EventAccumulatorOverflowStrategy'
+def EventAccumulatorOverflowStrategy = 'michael.linker.gestureid.data.event.accumulator.overflow.EventAccumulatorOverflowStrategy'
 def SensorDelayType = 'michael.linker.gestureid.core.sensor.sensor.type.SensorDelayType'
 
 android {

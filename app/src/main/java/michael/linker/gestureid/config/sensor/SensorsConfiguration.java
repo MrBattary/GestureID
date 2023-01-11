@@ -7,7 +7,7 @@ public final class SensorsConfiguration {
      * Wrapper for the sensors build variables
      * "build.gradle" file in the application main folder
      *
-     * @see michael.linker.gestureid.sensor
+     * @see michael.linker.gestureid.data.sensor
      */
     public static final class Build {
         //Base

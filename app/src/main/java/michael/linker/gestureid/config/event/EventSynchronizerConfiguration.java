@@ -1,7 +1,7 @@
 package michael.linker.gestureid.config.event;
 
-import michael.linker.gestureid.event.synchronizer.EventSynchronizer;
-import michael.linker.gestureid.event.synchronizer.IEventSynchronizer;
+import michael.linker.gestureid.data.event.synchronizer.EventSynchronizer;
+import michael.linker.gestureid.data.event.synchronizer.IEventSynchronizer;
 
 public final class EventSynchronizerConfiguration {
     private static IEventSynchronizer eventSynchronizer = null;

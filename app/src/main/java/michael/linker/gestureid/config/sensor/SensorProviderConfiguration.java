@@ -1,7 +1,7 @@
 package michael.linker.gestureid.config.sensor;
 
-import michael.linker.gestureid.sensor.provider.ISensorProvider;
-import michael.linker.gestureid.sensor.provider.SensorProvider;
+import michael.linker.gestureid.data.sensor.provider.ISensorProvider;
+import michael.linker.gestureid.data.sensor.provider.SensorProvider;
 
 public final class SensorProviderConfiguration {
     private static ISensorProvider sensorProvider = null;

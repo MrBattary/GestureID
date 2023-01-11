@@ -1,12 +1,12 @@
 package michael.linker.gestureid.config.sensor;
 
 import michael.linker.gestureid.BuildConfig;
-import michael.linker.gestureid.sensor.listener.manager.ISensorListenerManager;
-import michael.linker.gestureid.sensor.listener.manager.SensorListenerManager;
-import michael.linker.gestureid.sensor.listener.provider.ISensorListenerProvider;
-import michael.linker.gestureid.sensor.listener.provider.SensorListenerProvider;
-import michael.linker.gestureid.sensor.listener.suppressor.ISensorListenerSuppressor;
-import michael.linker.gestureid.sensor.listener.suppressor.SensorListenerSuppressor;
+import michael.linker.gestureid.data.sensor.listener.manager.ISensorListenerManager;
+import michael.linker.gestureid.data.sensor.listener.manager.SensorListenerManager;
+import michael.linker.gestureid.data.sensor.listener.provider.ISensorListenerProvider;
+import michael.linker.gestureid.data.sensor.listener.provider.SensorListenerProvider;
+import michael.linker.gestureid.data.sensor.listener.suppressor.ISensorListenerSuppressor;
+import michael.linker.gestureid.data.sensor.listener.suppressor.SensorListenerSuppressor;
 import michael.linker.gestureid.core.sensor.sensor.type.SensorDelayType;
 
 public final class SensorListenerConfiguration {

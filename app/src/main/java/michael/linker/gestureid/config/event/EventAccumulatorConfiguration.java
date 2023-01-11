@@ -1,16 +1,16 @@
 package michael.linker.gestureid.config.event;
 
 import michael.linker.gestureid.BuildConfig;
-import michael.linker.gestureid.event.accumulator.mode.active.IActiveEventAccumulator;
-import michael.linker.gestureid.event.accumulator.mode.active.IActiveFlushableEventAccumulator;
-import michael.linker.gestureid.event.accumulator.mode.active.impl.ActiveDistributableEventAccumulator;
-import michael.linker.gestureid.event.accumulator.mode.active.impl.ActiveFlushableEventAccumulator;
-import michael.linker.gestureid.event.accumulator.overflow.EventAccumulatorOverflowStrategy;
+import michael.linker.gestureid.data.event.accumulator.mode.active.IActiveEventAccumulator;
+import michael.linker.gestureid.data.event.accumulator.mode.active.IActiveFlushableEventAccumulator;
+import michael.linker.gestureid.data.event.accumulator.mode.active.impl.ActiveDistributableEventAccumulator;
+import michael.linker.gestureid.data.event.accumulator.mode.active.impl.ActiveFlushableEventAccumulator;
+import michael.linker.gestureid.data.event.accumulator.overflow.EventAccumulatorOverflowStrategy;
 
 /**
  * Event buffer configuration
  *
- * @see michael.linker.gestureid.event.accumulator
+ * @see michael.linker.gestureid.data.event.accumulator
  */
 public final class EventAccumulatorConfiguration {
     private static IActiveEventAccumulator activeAccumulator = null;

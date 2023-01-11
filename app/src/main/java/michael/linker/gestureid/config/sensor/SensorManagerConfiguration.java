@@ -1,7 +1,7 @@
 package michael.linker.gestureid.config.sensor;
 
-import michael.linker.gestureid.sensor.manager.ISensorManager;
-import michael.linker.gestureid.sensor.manager.SensorManager;
+import michael.linker.gestureid.data.sensor.manager.ISensorManager;
+import michael.linker.gestureid.data.sensor.manager.SensorManager;
 
 public class SensorManagerConfiguration {
     private static ISensorManager sensorManager = null;
@@ -24,7 +24,9 @@ public class SensorManagerConfiguration {
      * @return sensor manager instance.
      */
     public static ISensorManager getFreshManager() {
-        sensorManager.destroy();
+        if (sensorManager != null) {
+            sensorManager.destroy();
+        }
         sensorManager = new SensorManager();
         return sensorManager;
     }
