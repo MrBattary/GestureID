@@ -1,8 +1,7 @@
 package michael.linker.gestureid.ui.view.elementary.dialog.single;
 
 public class SingleChoiceDialogModel {
-    final String title, message;
-    final String acceptButtonText;
+    final String title, message, acceptButtonText;
 
     public SingleChoiceDialogModel(
             final String title,

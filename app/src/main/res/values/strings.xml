@@ -48,4 +48,15 @@
 
     <!-- Buttons. -->
     <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_exit">Exit</string>
+    <string name="button_leave">Leave</string>
+
+    <!-- Dialogs. -->
+    <!-- | Titles. -->
+    <string name="dialog_exit_title">Exit</string>
+    <string name="dialog_leave_playground_title">Leave playground</string>
+    <!-- | Texts. -->
+    <string name="dialog_exit_text">Are you sure you want to close the application?</string>
+    <string name="dialog_leave_playground_text">Are you sure you want to leave the playground?</string>
 </resources>

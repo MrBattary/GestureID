@@ -72,13 +72,7 @@ public class SensorsViewModel extends ViewModel implements IActiveEventAccumulat
                 new HashMap<>();
         List<SynchronizedEvent> eventList = accumulatedEpisode.getData();
         if (eventList.size() >= 1) {
-            timestamp.postValue(
-                    Long.valueOf(
-                            Long.parseLong(eventList.get(eventList.size() - 1).getTimestamp())
-                            -
-                            Long.parseLong(eventList.get(0).getTimestamp())
-                    ).toString()
-            );
+            timestamp.postValue(eventList.get(0).getTimestamp());
         }
         for (SynchronizedEvent event : eventList) {
             for (ASensorModel<Float> sensorModel : event.getData()) {

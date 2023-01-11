@@ -1,7 +1,6 @@
 package michael.linker.gestureid.ui.activity;
 
 import android.os.Bundle;
-import android.view.MotionEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -15,15 +14,20 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import michael.linker.gestureid.R;
 import michael.linker.gestureid.config.event.EventAccumulatorConfiguration;
 import michael.linker.gestureid.config.sensor.SensorManagerConfiguration;
-import michael.linker.gestureid.databinding.ActivityMainBinding;
-import michael.linker.gestureid.data.event.accumulator.mode.active.IActiveFlushableEventAccumulator;
+import michael.linker.gestureid.data.res.StringsProvider;
 import michael.linker.gestureid.data.sensor.manager.ISensorManager;
+import michael.linker.gestureid.databinding.ActivityMainBinding;
+import michael.linker.gestureid.ui.view.elementary.dialog.IDialog;
+import michael.linker.gestureid.ui.view.elementary.dialog.two.TwoChoicesDialog;
+import michael.linker.gestureid.ui.view.elementary.dialog.two.TwoChoicesDialogModel;
 
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private NavController navController;
 
     private ISensorManager manager;
+
+    private IDialog exitDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         initNavigation();
+        initDialogs();
         initSensorManager();
     }
 
@@ -42,23 +47,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        manager.destroy();
+    public void onBackPressed() {
+        if (!getOnBackPressedDispatcher().hasEnabledCallbacks()) {
+            exitDialog.show();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        int action = event.getAction();
-        switch (action) {
-            case (MotionEvent.ACTION_DOWN):
-                ((IActiveFlushableEventAccumulator) EventAccumulatorConfiguration.getActiveAccumulator()).startAccumulation();
-                break;
-            case (MotionEvent.ACTION_UP):
-                ((IActiveFlushableEventAccumulator) EventAccumulatorConfiguration.getActiveAccumulator()).flush();
-                break;
-        }
-        return super.dispatchTouchEvent(event);
+    protected void onDestroy() {
+        manager.destroy();
+        super.onDestroy();
     }
 
     private void initNavigation() {
@@ -78,9 +78,25 @@ public class MainActivity extends AppCompatActivity {
         return ((NavHostFragment) fragment).getNavController();
     }
 
+    private void initDialogs() {
+        exitDialog = new TwoChoicesDialog(
+                this,
+                new TwoChoicesDialogModel(
+                        StringsProvider.getString(R.string.dialog_exit_title),
+                        StringsProvider.getString(R.string.dialog_exit_text),
+                        StringsProvider.getString(R.string.button_exit),
+                        StringsProvider.getString(R.string.button_cancel)),
+                (dialogInterface, i) -> {
+                    exitDialog.dismiss();
+                    ActivityGate.finishApplication(this);
+                },
+                (dialogInterface, i) -> exitDialog.dismiss()
+        );
+    }
+
     private void initSensorManager() {
-        EventAccumulatorConfiguration.getFlushableActiveAccumulator();
-        manager = SensorManagerConfiguration.getManager();
+        EventAccumulatorConfiguration.getDistributableActiveAccumulator();
+        manager = SensorManagerConfiguration.getFreshManager();
         manager.suppressRegistering();
     }
 }
