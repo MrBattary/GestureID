@@ -3,10 +3,19 @@ package michael.linker.gestureid.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 
+import michael.linker.gestureid.ui.activity.intent.playground.PlaygroundSettingsIntent;
+import michael.linker.gestureid.ui.activity.intent.playground.PlaygroundSettingsParcelable;
+
 public class ActivityGate {
     public static void moveToMainActivity(final Activity activity) {
-        final Intent intent = new Intent(activity, MainActivity.class);
+        Intent intent = new Intent(activity, MainActivity.class);
         ActivityGate.moveToActivity(activity, intent);
+    }
+
+    public static void moveToPlaygroundActivity(final Activity activity,
+            PlaygroundSettingsParcelable settings) {
+        Intent intent = new Intent(activity, PlaygroundActivity.class);
+        ActivityGate.moveToActivity(activity, PlaygroundSettingsIntent.pack(settings, intent));
     }
 
     /**
