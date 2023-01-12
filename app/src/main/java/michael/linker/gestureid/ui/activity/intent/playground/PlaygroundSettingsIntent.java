@@ -12,6 +12,6 @@ public class PlaygroundSettingsIntent extends IIntent {
     }
 
     public static PlaygroundSettingsParcelable unpack(Intent intent) {
-        return intent.getParcelableExtra(KEY);
+        return (PlaygroundSettingsParcelable) intent.getParcelableExtra(KEY);
     }
 }

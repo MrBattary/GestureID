@@ -1,6 +1,11 @@
 package michael.linker.gestureid.config.event;
 
 import michael.linker.gestureid.BuildConfig;
+import michael.linker.gestureid.config.Configuration;
+import michael.linker.gestureid.config.ConfigurationBean;
+import michael.linker.gestureid.config.ConfigurationType;
+import michael.linker.gestureid.config.event.bean.ActiveEventDistributableAccumulatorBean;
+import michael.linker.gestureid.config.event.bean.ActiveEventFlushableAccumulatorBean;
 import michael.linker.gestureid.data.event.accumulator.mode.active.IActiveEventAccumulator;
 import michael.linker.gestureid.data.event.accumulator.mode.active.IActiveFlushableEventAccumulator;
 import michael.linker.gestureid.data.event.accumulator.mode.active.impl.ActiveDistributableEventAccumulator;
@@ -13,27 +18,31 @@ import michael.linker.gestureid.data.event.accumulator.overflow.EventAccumulator
  * @see michael.linker.gestureid.data.event.accumulator
  */
 public final class EventAccumulatorConfiguration {
-    private static IActiveEventAccumulator activeAccumulator = null;
+    private static ConfigurationBean<IActiveEventAccumulator> activeAccumulatorBean =
+            null;
 
     public static IActiveEventAccumulator getActiveAccumulator() {
-        if (activeAccumulator == null) {
-            activeAccumulator = new ActiveDistributableEventAccumulator();
+        if (activeAccumulatorBean == null) {
+            activeAccumulatorBean = new ActiveEventDistributableAccumulatorBean(
+                    new ActiveDistributableEventAccumulator());
         }
-        return activeAccumulator;
+        if (activeAccumulatorBean.getImplementation() instanceof IActiveFlushableEventAccumulator) {
+            return (IActiveFlushableEventAccumulator) activeAccumulatorBean;
+        }
+        return (IActiveEventAccumulator) activeAccumulatorBean;
     }
 
-    public static IActiveEventAccumulator getDistributableActiveAccumulator() {
-        if (!(activeAccumulator instanceof ActiveDistributableEventAccumulator)) {
-            activeAccumulator = new ActiveDistributableEventAccumulator();
+    public static void configure() {
+        switch (Type.valueOf(Configuration.getConfiguration(ConfigurationType.EVENT_ACCUMULATOR))) {
+            case ACTIVE_FLUSHABLE:
+                activeAccumulatorBean = new ActiveEventFlushableAccumulatorBean(
+                        new ActiveFlushableEventAccumulator());
+                break;
+            case ACTIVE_DISTRIBUTABLE:
+            default:
+                activeAccumulatorBean = new ActiveEventDistributableAccumulatorBean(
+                        new ActiveDistributableEventAccumulator());
         }
-        return activeAccumulator;
-    }
-
-    public static IActiveFlushableEventAccumulator getFlushableActiveAccumulator() {
-        if (!(activeAccumulator instanceof ActiveFlushableEventAccumulator)) {
-            activeAccumulator = new ActiveFlushableEventAccumulator();
-        }
-        return (IActiveFlushableEventAccumulator) activeAccumulator;
     }
 
     /**
@@ -47,5 +56,10 @@ public final class EventAccumulatorConfiguration {
         public static EventAccumulatorOverflowStrategy getAccumulatorOverflowStrategy() {
             return BuildConfig.EVENT_ACCUMULATOR_OVERFLOW_STRATEGY;
         }
+    }
+
+    public enum Type {
+        ACTIVE_FLUSHABLE,
+        ACTIVE_DISTRIBUTABLE
     }
 }

@@ -5,7 +5,7 @@ import android.hardware.SensorEvent;
 import android.util.Log;
 
 import michael.linker.gestureid.config.event.EventSynchronizerConfiguration;
-import michael.linker.gestureid.config.sensor.SensorListenerConfiguration;
+import michael.linker.gestureid.config.sensor.SensorListenerSuppressorConfiguration;
 import michael.linker.gestureid.data.event.synchronizer.EventSynchronizerFailedException;
 import michael.linker.gestureid.data.event.synchronizer.IEventSynchronizer;
 import michael.linker.gestureid.data.sensor.listener.ISensorListener;
@@ -21,7 +21,7 @@ public class AccelerometerSensorListener implements ISensorListener {
 
     public AccelerometerSensorListener() {
         this.eventSynchronizer = EventSynchronizerConfiguration.getEventSynchronizer();
-        this.listenerSuppressor = SensorListenerConfiguration.getSensorListenerSuppressor();
+        this.listenerSuppressor = SensorListenerSuppressorConfiguration.getSensorListenerSuppressor();
     }
 
     @Override

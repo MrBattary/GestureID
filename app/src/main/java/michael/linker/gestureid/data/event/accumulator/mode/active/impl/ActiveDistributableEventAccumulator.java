@@ -24,10 +24,10 @@ public class ActiveDistributableEventAccumulator extends ABaseActiveEventAccumul
     public void accumulate(SynchronizedEvent synchronizedEvent)
             throws EventAccumulatorOverflowException {
         accumulatedEvent = synchronizedEvent;
-        flush();
+        distribute();
     }
 
-    private void flush() {
+    private void distribute() {
         AccumulatedEpisode episode = new AccumulatedEpisode(List.of(accumulatedEvent));
         accumulatedEvent = null;
         for (IActiveEventAccumulatorListener listener : super.listenerSet) {

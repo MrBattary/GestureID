@@ -3,7 +3,7 @@ package michael.linker.gestureid.data.sensor.listener.provider;
 import java.util.HashMap;
 import java.util.Map;
 
-import michael.linker.gestureid.config.sensor.SensorListenerConfiguration;
+import michael.linker.gestureid.config.sensor.SensorListenerSuppressorConfiguration;
 import michael.linker.gestureid.data.sensor.listener.ISensorListener;
 import michael.linker.gestureid.data.sensor.listener.base.AccelerometerSensorListener;
 import michael.linker.gestureid.data.sensor.listener.base.GyroscopeSensorListener;
@@ -21,7 +21,7 @@ public class SensorListenerProvider implements ISensorListenerProvider {
     private final Map<Integer, ISensorListener> sensorListeners = new HashMap<>();
 
     public SensorListenerProvider() {
-        initializeSensorListeners(SensorListenerConfiguration.getSensorListenerSuppressor());
+        initializeSensorListeners(SensorListenerSuppressorConfiguration.getSensorListenerSuppressor());
     }
 
     @Override

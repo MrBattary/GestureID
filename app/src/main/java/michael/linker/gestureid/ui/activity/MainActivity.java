@@ -12,6 +12,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import michael.linker.gestureid.R;
+import michael.linker.gestureid.config.Configuration;
+import michael.linker.gestureid.config.ConfigurationChain;
 import michael.linker.gestureid.config.event.EventAccumulatorConfiguration;
 import michael.linker.gestureid.config.sensor.SensorManagerConfiguration;
 import michael.linker.gestureid.data.res.StringsProvider;
@@ -37,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
 
         initNavigation();
         initDialogs();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initSensorManager();
     }
 
@@ -56,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onPause() {
         manager.destroy();
-        super.onDestroy();
+        super.onPause();
     }
 
     private void initNavigation() {
@@ -95,8 +102,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initSensorManager() {
-        EventAccumulatorConfiguration.getDistributableActiveAccumulator();
-        manager = SensorManagerConfiguration.getFreshManager();
+        Configuration.updateConfiguration(
+                new ConfigurationChain(EventAccumulatorConfiguration.Type.ACTIVE_DISTRIBUTABLE));
+        manager = SensorManagerConfiguration.getManager();
         manager.suppressRegistering();
     }
 }

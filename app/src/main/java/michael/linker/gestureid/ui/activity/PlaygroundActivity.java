@@ -6,6 +6,8 @@ import android.view.MotionEvent;
 import androidx.appcompat.app.AppCompatActivity;
 
 import michael.linker.gestureid.R;
+import michael.linker.gestureid.config.Configuration;
+import michael.linker.gestureid.config.ConfigurationChain;
 import michael.linker.gestureid.config.event.EventAccumulatorConfiguration;
 import michael.linker.gestureid.config.sensor.SensorManagerConfiguration;
 import michael.linker.gestureid.data.event.accumulator.mode.active.IActiveFlushableEventAccumulator;
@@ -28,13 +30,18 @@ public class PlaygroundActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         initDialogs();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initSensorManager();
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onPause() {
         manager.destroy();
-        super.onDestroy();
+        super.onPause();
     }
 
     @Override
@@ -77,8 +84,9 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
     private void initSensorManager() {
-        EventAccumulatorConfiguration.getFlushableActiveAccumulator();
-        manager = SensorManagerConfiguration.getFreshManager();
-        manager.suppressRegistering();
+        Configuration.updateConfiguration(
+                new ConfigurationChain(EventAccumulatorConfiguration.Type.ACTIVE_FLUSHABLE));
+        manager = SensorManagerConfiguration.getManager();
+        manager.unsuppressRegistering();
     }
 }

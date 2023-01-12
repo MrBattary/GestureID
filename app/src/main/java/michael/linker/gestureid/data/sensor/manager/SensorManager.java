@@ -1,7 +1,8 @@
 package michael.linker.gestureid.data.sensor.manager;
 
 import michael.linker.gestureid.config.event.EventSynchronizerConfiguration;
-import michael.linker.gestureid.config.sensor.SensorListenerConfiguration;
+import michael.linker.gestureid.config.sensor.SensorListenerManagerConfiguration;
+import michael.linker.gestureid.config.sensor.SensorListenerSuppressorConfiguration;
 import michael.linker.gestureid.config.sensor.SensorProviderConfiguration;
 import michael.linker.gestureid.data.event.synchronizer.EventSynchronizerFailedException;
 import michael.linker.gestureid.data.event.synchronizer.IEventSynchronizer;
@@ -31,8 +32,8 @@ public class SensorManager implements ISensorManager {
 
     private void initializeDependencies() {
         sensorProvider = SensorProviderConfiguration.getSensorProvider();
-        sensorListenerSuppressor = SensorListenerConfiguration.getSensorListenerSuppressor();
-        sensorListenerManager = SensorListenerConfiguration.getSensorListenerManager();
+        sensorListenerSuppressor = SensorListenerSuppressorConfiguration.getSensorListenerSuppressor();
+        sensorListenerManager = SensorListenerManagerConfiguration.getSensorListenerManager();
         eventSynchronizer = EventSynchronizerConfiguration.getEventSynchronizer();
     }
 
@@ -76,11 +77,5 @@ public class SensorManager implements ISensorManager {
     public void destroy() {
         suppressRegistering();
         unregisterRegisteredListeners();
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        destroy();
-        super.finalize();
     }
 }
