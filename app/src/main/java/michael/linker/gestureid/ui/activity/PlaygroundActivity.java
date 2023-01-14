@@ -10,18 +10,26 @@ import michael.linker.gestureid.config.Configuration;
 import michael.linker.gestureid.config.ConfigurationChain;
 import michael.linker.gestureid.config.event.EventAccumulatorConfiguration;
 import michael.linker.gestureid.config.sensor.SensorManagerConfiguration;
+import michael.linker.gestureid.config.system.SystemConfiguration;
+import michael.linker.gestureid.config.system.SystemGateConfiguration;
+import michael.linker.gestureid.data.event.accumulator.mode.active.IActiveEventAccumulator;
 import michael.linker.gestureid.data.event.accumulator.mode.active.IActiveFlushableEventAccumulator;
 import michael.linker.gestureid.data.res.StringsProvider;
 import michael.linker.gestureid.data.sensor.manager.ISensorManager;
+import michael.linker.gestureid.data.system.gate.ISystemGate;
+import michael.linker.gestureid.data.system.gate.ISystemGateListener;
+import michael.linker.gestureid.data.system.gate.SystemGateAuthResult;
 import michael.linker.gestureid.databinding.ActivityPlaygroundBinding;
 import michael.linker.gestureid.ui.view.elementary.dialog.IDialog;
 import michael.linker.gestureid.ui.view.elementary.dialog.two.TwoChoicesDialog;
 import michael.linker.gestureid.ui.view.elementary.dialog.two.TwoChoicesDialogModel;
 
-public class PlaygroundActivity extends AppCompatActivity {
+public class PlaygroundActivity extends AppCompatActivity implements ISystemGateListener {
+    private IActiveEventAccumulator activeEventAccumulator;
+    private ISystemGate systemGate;
     private ISensorManager manager;
 
-    private IDialog leaveDialog;
+    private IDialog leaveDialog, authStubDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +43,13 @@ public class PlaygroundActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        initSensorManager();
+        initConfigurable();
     }
 
     @Override
     protected void onPause() {
+        activeEventAccumulator.unsubscribeAll();
+        systemGate.shutdown();
         manager.destroy();
         super.onPause();
     }
@@ -81,12 +91,42 @@ public class PlaygroundActivity extends AppCompatActivity {
                 },
                 (dialogInterface, i) -> leaveDialog.dismiss()
         );
+        authStubDialog = new TwoChoicesDialog(
+                this,
+                new TwoChoicesDialogModel(
+                        StringsProvider.getString(R.string.dialog_auth_title),
+                        StringsProvider.getString(R.string.dialog_auth_text),
+                        StringsProvider.getString(R.string.button_yes),
+                        StringsProvider.getString(R.string.button_no)),
+                (dialogInterface, i) -> {
+                    leaveDialog.dismiss();
+                    systemGate.notifyAboutAuthResult(SystemGateAuthResult.AUTH_ACQUIRED);
+                },
+                (dialogInterface, i) -> {
+                    leaveDialog.dismiss();
+                    systemGate.notifyAboutAuthResult(SystemGateAuthResult.AUTH_FAILED);
+                }
+        );
     }
 
-    private void initSensorManager() {
+    private void initConfigurable() {
         Configuration.updateConfiguration(
-                new ConfigurationChain(EventAccumulatorConfiguration.Type.ACTIVE_FLUSHABLE));
+                new ConfigurationChain(
+                        EventAccumulatorConfiguration.Type.ACTIVE_FLUSHABLE,
+                        SystemConfiguration.Type.Status.ENABLED
+                ));
+        systemGate = SystemGateConfiguration.getSystemGate();
+        systemGate.subscribe(this);
+
+        activeEventAccumulator = EventAccumulatorConfiguration.getActiveAccumulator();
+        activeEventAccumulator.subscribe(systemGate);
+
         manager = SensorManagerConfiguration.getManager();
         manager.unsuppressRegistering();
+    }
+
+    @Override
+    public void requireAuth() {
+        authStubDialog.show();
     }
 }

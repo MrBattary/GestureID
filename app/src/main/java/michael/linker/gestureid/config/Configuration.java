@@ -10,8 +10,9 @@ import michael.linker.gestureid.config.sensor.SensorListenerProviderConfiguratio
 import michael.linker.gestureid.config.sensor.SensorListenerSuppressorConfiguration;
 import michael.linker.gestureid.config.sensor.SensorManagerConfiguration;
 import michael.linker.gestureid.config.sensor.SensorProviderConfiguration;
+import michael.linker.gestureid.config.system.SystemGateConfiguration;
 
-public class Configuration {
+public final class Configuration {
     private static Map<ConfigurationType, String> currentConfigurationMap;
 
     static {
@@ -20,13 +21,14 @@ public class Configuration {
 
     public static void updateConfiguration(ConfigurationChain chain) {
         currentConfigurationMap = chain.getCurrentConfigurationMap();
-        SensorProviderConfiguration.configure();
-        SensorListenerSuppressorConfiguration.configure();
-        SensorListenerProviderConfiguration.configure();
-        EventAccumulatorConfiguration.configure();
-        EventSynchronizerConfiguration.configure();
-        SensorListenerManagerConfiguration.configure();
-        SensorManagerConfiguration.configure();
+        new SensorProviderConfiguration().configure();
+        new SensorListenerSuppressorConfiguration().configure();
+        new SensorListenerProviderConfiguration().configure();
+        new EventAccumulatorConfiguration().configure();
+        new EventSynchronizerConfiguration().configure();
+        new SensorListenerManagerConfiguration().configure();
+        new SensorManagerConfiguration().configure();
+        new SystemGateConfiguration().configure();
     }
 
     public static String getConfiguration(ConfigurationType configurationType) {

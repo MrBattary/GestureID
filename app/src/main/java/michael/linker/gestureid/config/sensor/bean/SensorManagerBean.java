@@ -1,6 +1,6 @@
 package michael.linker.gestureid.config.sensor.bean;
 
-import michael.linker.gestureid.config.ConfigurationBean;
+import michael.linker.gestureid.config.bean.ConfigurationBean;
 import michael.linker.gestureid.data.sensor.manager.ISensorManager;
 
 public class SensorManagerBean extends ConfigurationBean<ISensorManager> implements ISensorManager {

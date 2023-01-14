@@ -4,7 +4,6 @@ public interface ISystemGateListener {
     /**
      * Require auth from the subscriber.
      *
-     * @return auth result.
      */
-    SystemGateAuthResult requireAuth();
+    void requireAuth();
 }

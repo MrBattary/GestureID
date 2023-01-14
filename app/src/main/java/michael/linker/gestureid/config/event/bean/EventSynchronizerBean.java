@@ -2,7 +2,7 @@ package michael.linker.gestureid.config.event.bean;
 
 import java.util.List;
 
-import michael.linker.gestureid.config.ConfigurationBean;
+import michael.linker.gestureid.config.bean.ConfigurationBean;
 import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 import michael.linker.gestureid.data.event.synchronizer.EventSynchronizerFailedException;
 import michael.linker.gestureid.data.event.synchronizer.EventSynchronizerNotFoundException;

@@ -1,6 +1,6 @@
 package michael.linker.gestureid.data.system.gate.model;
 
-import java.util.concurrent.BlockingQueue;
+import java.util.Queue;
 import java.util.concurrent.atomic.AtomicReference;
 
 import michael.linker.gestureid.data.event.accumulator.model.AccumulatedEpisode;
@@ -10,15 +10,15 @@ import michael.linker.gestureid.data.system.gate.state.WorkerThreadState;
 public class SystemGateWorkerModel {
     private final AtomicReference<WorkerThreadState> workerThreadState;
     private final AtomicReference<WorkerState> workerState;
-    private final BlockingQueue<AccumulatedEpisode> accumulatedEpisodeBlockingQueue;
+    private final Queue<AccumulatedEpisode> accumulatedEpisodeQueue;
 
     public SystemGateWorkerModel(
             AtomicReference<WorkerThreadState> workerThreadState,
             AtomicReference<WorkerState> workerState,
-            BlockingQueue<AccumulatedEpisode> accumulatedEpisodeBlockingQueue) {
+            Queue<AccumulatedEpisode> accumulatedEpisodeQueue) {
         this.workerThreadState = workerThreadState;
         this.workerState = workerState;
-        this.accumulatedEpisodeBlockingQueue = accumulatedEpisodeBlockingQueue;
+        this.accumulatedEpisodeQueue = accumulatedEpisodeQueue;
     }
 
     public AtomicReference<WorkerThreadState> getWorkerThreadState() {
@@ -29,7 +29,7 @@ public class SystemGateWorkerModel {
         return workerState;
     }
 
-    public BlockingQueue<AccumulatedEpisode> getAccumulatedEpisodeBlockingQueue() {
-        return accumulatedEpisodeBlockingQueue;
+    public Queue<AccumulatedEpisode> getAccumulatedEpisodeQueue() {
+        return accumulatedEpisodeQueue;
     }
 }

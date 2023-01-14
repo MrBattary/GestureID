@@ -1,6 +1,6 @@
 package michael.linker.gestureid.config.sensor.bean;
 
-import michael.linker.gestureid.config.ConfigurationBean;
+import michael.linker.gestureid.config.bean.ConfigurationBean;
 import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
 import michael.linker.gestureid.data.sensor.listener.manager.ISensorListenerManager;
 import michael.linker.gestureid.data.sensor.listener.manager.SensorListenerManagerFailedException;

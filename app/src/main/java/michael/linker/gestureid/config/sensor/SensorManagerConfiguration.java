@@ -1,11 +1,12 @@
 package michael.linker.gestureid.config.sensor;
 
-import michael.linker.gestureid.config.ConfigurationBean;
+import michael.linker.gestureid.config.IConfiguration;
+import michael.linker.gestureid.config.bean.ConfigurationBean;
 import michael.linker.gestureid.config.sensor.bean.SensorManagerBean;
 import michael.linker.gestureid.data.sensor.manager.ISensorManager;
 import michael.linker.gestureid.data.sensor.manager.SensorManager;
 
-public class SensorManagerConfiguration {
+public final class SensorManagerConfiguration implements IConfiguration {
     private static ConfigurationBean<ISensorManager> sensorManagerBean = null;
 
     /**
@@ -20,11 +21,12 @@ public class SensorManagerConfiguration {
         return (ISensorManager) sensorManagerBean;
     }
 
-    public static void configure() {
+    @Override
+    public void configure() {
         if (sensorManagerBean == null) {
             sensorManagerBean = new SensorManagerBean(new SensorManager());
         } else {
-            sensorManagerBean.getImplementation().destroy();
+            ((ISensorManager) sensorManagerBean).destroy();
             sensorManagerBean.implement(new SensorManager());
         }
     }

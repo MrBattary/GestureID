@@ -1,12 +1,13 @@
 package michael.linker.gestureid.config.sensor;
 
-import michael.linker.gestureid.config.ConfigurationBean;
+import michael.linker.gestureid.config.IConfiguration;
+import michael.linker.gestureid.config.bean.ConfigurationBean;
 import michael.linker.gestureid.config.sensor.bean.SensorListenerSuppressorBean;
 import michael.linker.gestureid.data.sensor.listener.suppressor.ISensorListenerSuppressor;
 import michael.linker.gestureid.data.sensor.listener.suppressor.SensorListenerSuppressor;
 
-public final class SensorListenerSuppressorConfiguration {
-    private static ConfigurationBean<ISensorListenerSuppressor> sensorListenerSuppressorBean;
+public final class SensorListenerSuppressorConfiguration implements IConfiguration {
+    private static ConfigurationBean<ISensorListenerSuppressor> sensorListenerSuppressorBean = null;
 
     public static ISensorListenerSuppressor getSensorListenerSuppressor() {
         if (sensorListenerSuppressorBean == null) {
@@ -16,7 +17,8 @@ public final class SensorListenerSuppressorConfiguration {
         return (ISensorListenerSuppressor) sensorListenerSuppressorBean;
     }
 
-    public static void configure() {
+    @Override
+    public void configure() {
         if (sensorListenerSuppressorBean == null) {
             sensorListenerSuppressorBean =
                     new SensorListenerSuppressorBean(new SensorListenerSuppressor());

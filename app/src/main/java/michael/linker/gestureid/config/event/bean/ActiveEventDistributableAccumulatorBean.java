@@ -1,6 +1,6 @@
 package michael.linker.gestureid.config.event.bean;
 
-import michael.linker.gestureid.config.ConfigurationBean;
+import michael.linker.gestureid.config.bean.ConfigurationBean;
 import michael.linker.gestureid.data.event.accumulator.mode.active.IActiveEventAccumulator;
 import michael.linker.gestureid.data.event.accumulator.mode.active.IActiveEventAccumulatorListener;
 import michael.linker.gestureid.data.event.accumulator.overflow.EventAccumulatorOverflowException;

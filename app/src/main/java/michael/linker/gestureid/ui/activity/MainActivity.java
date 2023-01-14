@@ -16,6 +16,7 @@ import michael.linker.gestureid.config.Configuration;
 import michael.linker.gestureid.config.ConfigurationChain;
 import michael.linker.gestureid.config.event.EventAccumulatorConfiguration;
 import michael.linker.gestureid.config.sensor.SensorManagerConfiguration;
+import michael.linker.gestureid.config.system.SystemConfiguration;
 import michael.linker.gestureid.data.res.StringsProvider;
 import michael.linker.gestureid.data.sensor.manager.ISensorManager;
 import michael.linker.gestureid.databinding.ActivityMainBinding;
@@ -103,7 +104,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void initSensorManager() {
         Configuration.updateConfiguration(
-                new ConfigurationChain(EventAccumulatorConfiguration.Type.ACTIVE_DISTRIBUTABLE));
+                new ConfigurationChain(
+                        EventAccumulatorConfiguration.Type.ACTIVE_DISTRIBUTABLE,
+                        SystemConfiguration.Type.Status.DISABLED
+                ));
         manager = SensorManagerConfiguration.getManager();
         manager.suppressRegistering();
     }

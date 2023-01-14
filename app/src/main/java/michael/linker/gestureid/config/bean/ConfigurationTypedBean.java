@@ -1,4 +1,4 @@
-package michael.linker.gestureid.config;
+package michael.linker.gestureid.config.bean;
 
 public abstract class ConfigurationTypedBean<T, V extends Enum<V>> extends ConfigurationBean<T> {
     private V implementationType;

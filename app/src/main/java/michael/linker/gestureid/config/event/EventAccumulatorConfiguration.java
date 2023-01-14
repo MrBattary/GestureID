@@ -2,7 +2,8 @@ package michael.linker.gestureid.config.event;
 
 import michael.linker.gestureid.BuildConfig;
 import michael.linker.gestureid.config.Configuration;
-import michael.linker.gestureid.config.ConfigurationBean;
+import michael.linker.gestureid.config.IConfiguration;
+import michael.linker.gestureid.config.bean.ConfigurationBean;
 import michael.linker.gestureid.config.ConfigurationType;
 import michael.linker.gestureid.config.event.bean.ActiveEventDistributableAccumulatorBean;
 import michael.linker.gestureid.config.event.bean.ActiveEventFlushableAccumulatorBean;
@@ -17,7 +18,7 @@ import michael.linker.gestureid.data.event.accumulator.overflow.EventAccumulator
  *
  * @see michael.linker.gestureid.data.event.accumulator
  */
-public final class EventAccumulatorConfiguration {
+public final class EventAccumulatorConfiguration implements IConfiguration {
     private static ConfigurationBean<IActiveEventAccumulator> activeAccumulatorBean =
             null;
 
@@ -32,7 +33,8 @@ public final class EventAccumulatorConfiguration {
         return (IActiveEventAccumulator) activeAccumulatorBean;
     }
 
-    public static void configure() {
+    @Override
+    public void configure() {
         switch (Type.valueOf(Configuration.getConfiguration(ConfigurationType.EVENT_ACCUMULATOR))) {
             case ACTIVE_FLUSHABLE:
                 activeAccumulatorBean = new ActiveEventFlushableAccumulatorBean(

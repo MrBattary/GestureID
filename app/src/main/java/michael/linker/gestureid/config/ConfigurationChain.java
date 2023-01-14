@@ -4,13 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import michael.linker.gestureid.config.event.EventAccumulatorConfiguration;
+import michael.linker.gestureid.config.system.SystemConfiguration;
 
-public class ConfigurationChain {
+public final class ConfigurationChain {
     private static final String DEFAULT_TYPE = "DEFAULT";
     private final Map<ConfigurationType, String> currentConfigurationMap;
 
     public ConfigurationChain(
-            EventAccumulatorConfiguration.Type eventAccumulatorType
+            EventAccumulatorConfiguration.Type eventAccumulatorType,
+            SystemConfiguration.Type.Status systemStatusType
     ) {
         currentConfigurationMap = new HashMap<>();
         currentConfigurationMap.put(ConfigurationType.EVENT_ACCUMULATOR,
@@ -21,6 +23,7 @@ public class ConfigurationChain {
         currentConfigurationMap.put(ConfigurationType.SENSOR_LISTENER_MANAGER, DEFAULT_TYPE);
         currentConfigurationMap.put(ConfigurationType.SENSOR_PROVIDER, DEFAULT_TYPE);
         currentConfigurationMap.put(ConfigurationType.SENSOR_MANAGER, DEFAULT_TYPE);
+        currentConfigurationMap.put(ConfigurationType.SYSTEM_GATE, systemStatusType.toString());
     }
 
     public ConfigurationChain(Map<ConfigurationType, String> currentConfiguration) {

@@ -1,4 +1,4 @@
-package michael.linker.gestureid.config;
+package michael.linker.gestureid.config.bean;
 
 public abstract class ConfigurationBean<T> {
     private T implementation;

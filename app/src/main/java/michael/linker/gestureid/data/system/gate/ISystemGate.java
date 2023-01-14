@@ -1,11 +1,15 @@
 package michael.linker.gestureid.data.system.gate;
 
-public interface ISystemGate {
+import michael.linker.gestureid.data.event.accumulator.mode.active.IActiveEventAccumulatorListener;
+
+public interface ISystemGate extends IActiveEventAccumulatorListener {
     /**
      * Start processing and accumulation of episode events.
      * Call this on start.
      */
     //void start();
+
+    void notifyAboutAuthResult(SystemGateAuthResult authResult);
 
     /**
      * Shutdown stop processing and accumulation of episode events.
@@ -22,8 +26,6 @@ public interface ISystemGate {
 
     /**
      * Unsubscribe listener from the system gate requests.
-     *
-     * @param listener system gate listener.
      */
-    void unsubscribe(ISystemGateListener listener);
+    void unsubscribe();
 }

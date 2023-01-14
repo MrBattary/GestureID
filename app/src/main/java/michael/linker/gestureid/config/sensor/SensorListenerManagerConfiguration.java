@@ -1,14 +1,15 @@
 package michael.linker.gestureid.config.sensor;
 
 import michael.linker.gestureid.BuildConfig;
-import michael.linker.gestureid.config.ConfigurationBean;
+import michael.linker.gestureid.config.IConfiguration;
+import michael.linker.gestureid.config.bean.ConfigurationBean;
 import michael.linker.gestureid.config.sensor.bean.SensorListenerManagerBean;
 import michael.linker.gestureid.core.sensor.sensor.type.SensorDelayType;
 import michael.linker.gestureid.data.sensor.listener.manager.ISensorListenerManager;
 import michael.linker.gestureid.data.sensor.listener.manager.SensorListenerManager;
 
-public final class SensorListenerManagerConfiguration {
-    private static ConfigurationBean<ISensorListenerManager> sensorListenerManagerBean;
+public final class SensorListenerManagerConfiguration implements IConfiguration {
+    private static ConfigurationBean<ISensorListenerManager> sensorListenerManagerBean = null;
 
     public static ISensorListenerManager getSensorListenerManager() {
         if (sensorListenerManagerBean == null) {
@@ -17,7 +18,8 @@ public final class SensorListenerManagerConfiguration {
         return (ISensorListenerManager) sensorListenerManagerBean;
     }
 
-    public static void configure() {
+    @Override
+    public void configure() {
         if (sensorListenerManagerBean == null) {
             sensorListenerManagerBean = new SensorListenerManagerBean(new SensorListenerManager());
         } else {
