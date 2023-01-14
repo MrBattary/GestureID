@@ -1,5 +1,7 @@
 package michael.linker.gestureid.data.event.accumulator.mode.active.impl;
 
+import android.util.Log;
+
 import org.apache.commons.collections4.queue.CircularFifoQueue;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import michael.linker.gestureid.data.event.synchronizer.model.SynchronizedEvent;
  */
 public class ActiveFlushableEventAccumulator extends ABaseActiveEventAccumulator implements
         IActiveFlushableEventAccumulator {
+    private static final String TAG = ActiveFlushableEventAccumulator.class.getCanonicalName();
     private boolean accumulationEnabled;
     private final Queue<SynchronizedEvent> eventDeque;
 
@@ -30,6 +33,7 @@ public class ActiveFlushableEventAccumulator extends ABaseActiveEventAccumulator
     @Override
     public void startAccumulation() {
         accumulationEnabled = true;
+        Log.i(TAG, "Accumulation in the accumulator has been started.");
     }
 
     @Override
@@ -38,6 +42,7 @@ public class ActiveFlushableEventAccumulator extends ABaseActiveEventAccumulator
         AccumulatedEpisode episode = new AccumulatedEpisode(new ArrayList<>(eventDeque));
         eventDeque.clear();
         for (IActiveEventAccumulatorListener listener : super.listenerSet) {
+            Log.i(TAG, "Accumulated episode flushed to the listener.");
             listener.notifyAboutEpisode(episode);
         }
     }

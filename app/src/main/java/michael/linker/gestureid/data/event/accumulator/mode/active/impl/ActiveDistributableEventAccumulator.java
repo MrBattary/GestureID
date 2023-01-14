@@ -1,5 +1,7 @@
 package michael.linker.gestureid.data.event.accumulator.mode.active.impl;
 
+import android.util.Log;
+
 import java.util.List;
 
 import michael.linker.gestureid.data.event.accumulator.mode.active.ABaseActiveEventAccumulator;
@@ -14,6 +16,7 @@ import michael.linker.gestureid.data.event.synchronizer.model.SynchronizedEvent;
  */
 public class ActiveDistributableEventAccumulator extends ABaseActiveEventAccumulator implements
         IActiveEventAccumulator {
+    private static final String TAG = ActiveDistributableEventAccumulator.class.getCanonicalName();
     private SynchronizedEvent accumulatedEvent;
 
     public ActiveDistributableEventAccumulator() {
@@ -31,6 +34,7 @@ public class ActiveDistributableEventAccumulator extends ABaseActiveEventAccumul
         AccumulatedEpisode episode = new AccumulatedEpisode(List.of(accumulatedEvent));
         accumulatedEvent = null;
         for (IActiveEventAccumulatorListener listener : super.listenerSet) {
+            Log.i(TAG, "Accumulated episode distributed");
             listener.notifyAboutEpisode(episode);
         }
     }

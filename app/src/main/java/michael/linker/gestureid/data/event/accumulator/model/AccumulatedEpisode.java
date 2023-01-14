@@ -11,6 +11,10 @@ public class AccumulatedEpisode {
         this.eventList = eventList;
     }
 
+    public AccumulatedEpisode(AccumulatedEpisode accumulatedEpisode) {
+        eventList = accumulatedEpisode.getData();
+    }
+
     public List<SynchronizedEvent> getData() {
         return eventList;
     }
