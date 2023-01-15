@@ -144,7 +144,7 @@ public class SensorsFragment extends Fragment {
 
     private void initSubscriptions() {
         viewModel.getTimestamp().observe(getViewLifecycleOwner(),
-                timestamp -> timeView.setText(timestamp));
+                timestamp -> timeView.setText(String.valueOf(timestamp)));
         if (!SensorsConfiguration.Build.isAccelerometerDeactivated()) {
             accelerometerChartView.subscribeList(getViewLifecycleOwner(),
                     viewModel.getAccelerometerEvent());

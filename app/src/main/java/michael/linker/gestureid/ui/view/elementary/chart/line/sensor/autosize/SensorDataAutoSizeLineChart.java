@@ -9,7 +9,7 @@ import michael.linker.gestureid.ui.view.elementary.chart.line.sensor.SensorDataL
 import michael.linker.gestureid.data.sensor.model.ASensorModel;
 
 public class SensorDataAutoSizeLineChart extends SensorDataLineChart
-        implements ISensorDataLineChart<ASensorModel<Float>> {
+        implements ISensorDataLineChart<ASensorModel<Double>> {
     private final SensorDataAutoSizeLineChartProperties chartProperties;
 
     public SensorDataAutoSizeLineChart(View view,

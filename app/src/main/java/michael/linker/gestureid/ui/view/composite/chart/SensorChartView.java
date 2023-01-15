@@ -33,7 +33,7 @@ public class SensorChartView implements ISensorChartView {
     private final ViewGroup contentViewGroup, noContentViewGroup;
     private final MaterialTextView heading, headingNoContent;
     private final MaterialButton infoButton;
-    private final ISensorDataLineChart<ASensorModel<Float>> chart;
+    private final ISensorDataLineChart<ASensorModel<Double>> chart;
     private IDialog infoDialog;
 
     static {
@@ -71,14 +71,14 @@ public class SensorChartView implements ISensorChartView {
     }
 
     @Override
-    public void subscribe(LifecycleOwner lifecycleOwner, LiveData<ASensorModel<Float>> liveData) {
+    public void subscribe(LifecycleOwner lifecycleOwner, LiveData<ASensorModel<Double>> liveData) {
         enableChart();
         liveData.observe(lifecycleOwner, chart::addData);
     }
 
     @Override
     public void subscribeList(LifecycleOwner lifecycleOwner,
-            LiveData<List<ASensorModel<Float>>> liveData) {
+            LiveData<List<ASensorModel<Double>>> liveData) {
         enableChart();
         liveData.observe(lifecycleOwner, chart::addDataList);
     }

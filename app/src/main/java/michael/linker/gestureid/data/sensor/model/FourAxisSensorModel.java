@@ -24,7 +24,7 @@ public class FourAxisSensorModel<T> extends ASensorModel<T> implements IFourAxis
         threeAxisSensorModel = new ThreeAxisSensorModel<T>(sensorType);
     }
 
-    public FourAxisSensorModel(SensorType sensorType, Long timestamp, T x, T y, T z, T w) {
+    public FourAxisSensorModel(SensorType sensorType, Double timestamp, T x, T y, T z, T w) {
         super(sensorType, timestamp);
         threeAxisSensorModel = new ThreeAxisSensorModel<T>(sensorType);
         threeAxisSensorModel.setX(x);

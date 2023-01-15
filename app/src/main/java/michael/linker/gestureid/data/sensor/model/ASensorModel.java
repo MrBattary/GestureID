@@ -13,13 +13,13 @@ import michael.linker.gestureid.core.sensor.sensor.type.SensorType;
  */
 public abstract class ASensorModel<T> {
     protected final SensorType sensorType;
-    protected Long timestamp;
+    protected Double timestamp;
 
     protected ASensorModel(final SensorType sensorType) {
         this.sensorType = sensorType;
     }
 
-    protected ASensorModel(final SensorType sensorType, final Long timestamp) {
+    protected ASensorModel(final SensorType sensorType, final Double timestamp) {
         this.sensorType = sensorType;
         this.timestamp = timestamp;
     }
@@ -28,11 +28,11 @@ public abstract class ASensorModel<T> {
         return sensorType;
     }
 
-    public Long getTimestamp() {
+    public Double getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(final Long timestamp) {
+    public void setTimestamp(final Double timestamp) {
         this.timestamp = timestamp;
     }
 

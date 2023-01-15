@@ -15,7 +15,7 @@ public interface IEventSynchronizer {
      * @param sensorModel Model with event data
      * @throws EventSynchronizerNotFoundException If no place was found to register the event
      */
-    void registerEvent(ASensorModel<Float> sensorModel)
+    void registerEvent(ASensorModel<Double> sensorModel)
     throws EventSynchronizerNotFoundException, EventSynchronizerFailedException;
 
     /**

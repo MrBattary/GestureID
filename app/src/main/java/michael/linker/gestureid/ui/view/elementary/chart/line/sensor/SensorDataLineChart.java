@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import michael.linker.gestureid.R;
 import michael.linker.gestureid.core.sensor.sensor.type.SensorAxisType;
@@ -19,7 +20,7 @@ import michael.linker.gestureid.ui.view.elementary.chart.line.LineChart;
 import michael.linker.gestureid.data.sensor.model.ASensorModel;
 
 public class SensorDataLineChart extends LineChart implements
-        ISensorDataLineChart<ASensorModel<Float>> {
+        ISensorDataLineChart<ASensorModel<Double>> {
     private final SensorDataLineChartProperties chartProperties;
     private final Map<SensorAxisType, LinkedList<Entry>> axisValuesMap;
 
@@ -52,14 +53,14 @@ public class SensorDataLineChart extends LineChart implements
 
 
     @Override
-    public void addData(ASensorModel<Float> data) {
+    public void addData(ASensorModel<Double> data) {
         addDataToValuesMap(data);
         updateChartWithNewData();
     }
 
     @Override
-    public void addDataList(List<ASensorModel<Float>> dataList) {
-        for (ASensorModel<Float> data : dataList) {
+    public void addDataList(List<ASensorModel<Double>> dataList) {
+        for (ASensorModel<Double> data : dataList) {
             addDataToValuesMap(data);
         }
         updateChartWithNewData();
@@ -70,7 +71,7 @@ public class SensorDataLineChart extends LineChart implements
         axisValuesMap.clear();
     }
 
-    private void addDataToValuesMap(ASensorModel<Float> data) {
+    private void addDataToValuesMap(ASensorModel<Double> data) {
         for (SensorAxisType axis : data.getAxisList()) {
             if (!axisValuesMap.containsKey(axis)) {
                 axisValuesMap.put(axis, new LinkedList<>());
@@ -84,7 +85,7 @@ public class SensorDataLineChart extends LineChart implements
             axisValueList.addLast(
                     new Entry(
                             data.getTimestamp().floatValue(),
-                            data.getAxisValueMap().get(axis)
+                            Objects.requireNonNull(data.getAxisValueMap().get(axis)).floatValue()
                     )
             );
         }

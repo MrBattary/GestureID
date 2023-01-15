@@ -7,7 +7,7 @@ import michael.linker.gestureid.ui.activity.intent.IIntent;
 public class PlaygroundSettingsIntent extends IIntent {
     private static final String KEY = "EnterPlaygroundIntentParcelable";
 
-    public static Intent pack(PlaygroundSettingsParcelable parcelable, Intent intent) {
+    public static<T extends PlaygroundSettingsParcelable> Intent pack(T parcelable, Intent intent) {
         return intent.putExtra(KEY, parcelable);
     }
 

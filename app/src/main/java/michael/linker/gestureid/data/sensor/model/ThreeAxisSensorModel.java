@@ -23,7 +23,7 @@ public class ThreeAxisSensorModel<T> extends ASensorModel<T> implements IThreeAx
         super(sensorType);
     }
 
-    protected ThreeAxisSensorModel(SensorType sensorType, Long timestamp, T x, T y, T z) {
+    protected ThreeAxisSensorModel(SensorType sensorType, Double timestamp, T x, T y, T z) {
         super(sensorType, timestamp);
         this.x = x;
         this.y = y;

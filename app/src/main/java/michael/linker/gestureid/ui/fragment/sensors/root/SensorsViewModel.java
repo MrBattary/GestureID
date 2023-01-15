@@ -18,8 +18,8 @@ import michael.linker.gestureid.data.event.synchronizer.model.SynchronizedEvent;
 import michael.linker.gestureid.data.sensor.model.ASensorModel;
 
 public class SensorsViewModel extends ViewModel implements IActiveEventAccumulatorListener {
-    private final MutableLiveData<String> timestamp;
-    private final MutableLiveData<List<ASensorModel<Float>>> accelerometerEvent, magnetometerEvent,
+    private final MutableLiveData<Double> timestamp;
+    private final MutableLiveData<List<ASensorModel<Double>>> accelerometerEvent, magnetometerEvent,
             gyroscopeEvent, gravityEvent, linearAccelerationEvent, rotationVectorEvent,
             geoRotationVectorEvent;
 
@@ -34,60 +34,60 @@ public class SensorsViewModel extends ViewModel implements IActiveEventAccumulat
         geoRotationVectorEvent = new MutableLiveData<>();
     }
 
-    public LiveData<String> getTimestamp() {
+    public LiveData<Double> getTimestamp() {
         return timestamp;
     }
 
-    public LiveData<List<ASensorModel<Float>>> getAccelerometerEvent() {
+    public LiveData<List<ASensorModel<Double>>> getAccelerometerEvent() {
         return accelerometerEvent;
     }
 
-    public LiveData<List<ASensorModel<Float>>> getMagnetometerEvent() {
+    public LiveData<List<ASensorModel<Double>>> getMagnetometerEvent() {
         return magnetometerEvent;
     }
 
-    public LiveData<List<ASensorModel<Float>>> getGyroscopeEvent() {
+    public LiveData<List<ASensorModel<Double>>> getGyroscopeEvent() {
         return gyroscopeEvent;
     }
 
-    public LiveData<List<ASensorModel<Float>>> getGravityEvent() {
+    public LiveData<List<ASensorModel<Double>>> getGravityEvent() {
         return gravityEvent;
     }
 
-    public LiveData<List<ASensorModel<Float>>> getLinearAccelerationEvent() {
+    public LiveData<List<ASensorModel<Double>>> getLinearAccelerationEvent() {
         return linearAccelerationEvent;
     }
 
-    public LiveData<List<ASensorModel<Float>>> getRotationVectorEvent() {
+    public LiveData<List<ASensorModel<Double>>> getRotationVectorEvent() {
         return rotationVectorEvent;
     }
 
-    public LiveData<List<ASensorModel<Float>>> getGeoRotationVectorEvent() {
+    public LiveData<List<ASensorModel<Double>>> getGeoRotationVectorEvent() {
         return geoRotationVectorEvent;
     }
 
     @Override
     public void notifyAboutEpisode(AccumulatedEpisode accumulatedEpisode) {
-        Map<SensorType, List<ASensorModel<Float>>> modelsPerSensorFromEpisodeMap =
+        Map<SensorType, List<ASensorModel<Double>>> modelsPerSensorFromEpisodeMap =
                 new HashMap<>();
         List<SynchronizedEvent> eventList = accumulatedEpisode.getData();
         if (eventList.size() >= 1) {
             timestamp.postValue(eventList.get(0).getTimestamp());
         }
         for (SynchronizedEvent event : eventList) {
-            for (ASensorModel<Float> sensorModel : event.getData()) {
+            for (ASensorModel<Double> sensorModel : event.getData()) {
                 if (!modelsPerSensorFromEpisodeMap.containsKey(sensorModel.getSensorType())) {
                     modelsPerSensorFromEpisodeMap.put(sensorModel.getSensorType(),
                             new ArrayList<>());
                 }
-                List<ASensorModel<Float>> sensorModelList =
+                List<ASensorModel<Double>> sensorModelList =
                         modelsPerSensorFromEpisodeMap.get(sensorModel.getSensorType());
                 sensorModelList.add(sensorModel);
             }
         }
 
         for (SensorType sensorType : modelsPerSensorFromEpisodeMap.keySet()) {
-            List<ASensorModel<Float>> sensorModelList =
+            List<ASensorModel<Double>> sensorModelList =
                     modelsPerSensorFromEpisodeMap.get(sensorType);
             if (sensorType == BaseSensorType.ACCELEROMETER) {
                 accelerometerEvent.postValue(sensorModelList);

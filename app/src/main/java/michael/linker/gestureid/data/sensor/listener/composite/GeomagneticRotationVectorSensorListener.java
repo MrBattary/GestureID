@@ -47,11 +47,11 @@ public class GeomagneticRotationVectorSensorListener implements ISensorListener 
     private void proceedEvent(SensorEvent sensorEvent) {
         GeomagneticRotationVectorSensorModel sensorModel =
                 new GeomagneticRotationVectorSensorModel();
-        sensorModel.setX(sensorEvent.values[0]);
-        sensorModel.setY(sensorEvent.values[1]);
-        sensorModel.setZ(sensorEvent.values[2]);
-        sensorModel.setW(sensorEvent.values[3]);
-        sensorModel.setTimestamp(sensorEvent.timestamp);
+        sensorModel.setX((double) sensorEvent.values[0]);
+        sensorModel.setY((double) sensorEvent.values[1]);
+        sensorModel.setZ((double) sensorEvent.values[2]);
+        sensorModel.setW((double) sensorEvent.values[3]);
+        sensorModel.setTimestamp((double)sensorEvent.timestamp);
         try {
             eventSynchronizer.registerEvent(sensorModel);
         } catch (EventSynchronizerFailedException e) {

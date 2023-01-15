@@ -72,14 +72,17 @@ android {
 
 dependencies {
     def room_version = "2.4.3"
-    def mp_android_chart_version = "v3.1.0"
-    def apache_commons_collections = "commons-collections4:4.4"
+    def mp_android_chart_version = "3.1.0"
+    def apache_commons_collections = "4.4"
+    def guava = "31.1"
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-rxjava3:$room_version"
 
-    implementation "com.github.PhilJay:MPAndroidChart:$mp_android_chart_version"
+    implementation "com.github.PhilJay:MPAndroidChart:v$mp_android_chart_version"
+
+    implementation "com.google.guava:guava:$guava-android"
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
@@ -93,7 +96,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.annotation:annotation:1.5.0'
-    implementation "org.apache.commons:$apache_commons_collections"
+    implementation "org.apache.commons:commons-collections4:$apache_commons_collections"
     implementation 'commons-codec:commons-codec:1.15'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'

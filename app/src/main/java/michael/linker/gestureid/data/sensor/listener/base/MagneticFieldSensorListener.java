@@ -45,10 +45,10 @@ public class MagneticFieldSensorListener implements ISensorListener {
 
     private void proceedEvent(SensorEvent sensorEvent) {
         MagneticFieldSensorModel sensorModel = new MagneticFieldSensorModel();
-        sensorModel.setX(sensorEvent.values[0]);
-        sensorModel.setY(sensorEvent.values[1]);
-        sensorModel.setZ(sensorEvent.values[2]);
-        sensorModel.setTimestamp(sensorEvent.timestamp);
+        sensorModel.setX((double) sensorEvent.values[0]);
+        sensorModel.setY((double) sensorEvent.values[1]);
+        sensorModel.setZ((double) sensorEvent.values[2]);
+        sensorModel.setTimestamp((double)sensorEvent.timestamp);
         try {
             eventSynchronizer.registerEvent(sensorModel);
         } catch (EventSynchronizerFailedException e) {

@@ -2,9 +2,9 @@ package michael.linker.gestureid.data.system.metric.type;
 
 public enum MetricType {
     /**
-     * Value 'as is'.
+     * The sum of a collection of numbers divided by the count of numbers in the collection.
      */
-    VALUE_METRIC(0),
+    ARITHMETIC_MEAN(0),
     /**
      * Min value.
      */
@@ -14,7 +14,7 @@ public enum MetricType {
      */
     MAX_METRIC(2),
     /**
-     * spread = max - min
+     * Spread = Max - Min
      */
     SPREAD_METRIC(3),
     UNDEFINED_METRIC(-1);

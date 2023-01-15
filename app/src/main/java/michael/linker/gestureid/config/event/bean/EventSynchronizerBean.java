@@ -23,7 +23,7 @@ public class EventSynchronizerBean
     }
 
     @Override
-    public void registerEvent(ASensorModel<Float> sensorModel)
+    public void registerEvent(ASensorModel<Double> sensorModel)
             throws EventSynchronizerNotFoundException, EventSynchronizerFailedException {
         getImplementation().registerEvent(sensorModel);
     }

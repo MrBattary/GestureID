@@ -11,19 +11,17 @@ import michael.linker.gestureid.data.sensor.model.ASensorModel;
 public interface ISensorChartView extends IView {
     /**
      * Subscribe live data updates to the chart consumer.
-     *
-     * @param lifecycleOwner use getViewLifecycleOwner().
+     *  @param lifecycleOwner use getViewLifecycleOwner().
      * @param liveData       live data from the ViewModel.
      */
-    void subscribe(LifecycleOwner lifecycleOwner, LiveData<ASensorModel<Float>> liveData);
+    void subscribe(LifecycleOwner lifecycleOwner, LiveData<ASensorModel<Double>> liveData);
 
     /**
      * Subscribe live data updates to the chart consumer.
-     *
-     * @param lifecycleOwner use getViewLifecycleOwner().
+     *  @param lifecycleOwner use getViewLifecycleOwner().
      * @param liveData       live data from the ViewModel.
      */
-    void subscribeList(LifecycleOwner lifecycleOwner, LiveData<List<ASensorModel<Float>>> liveData);
+    void subscribeList(LifecycleOwner lifecycleOwner, LiveData<List<ASensorModel<Double>>> liveData);
 
     /**
      * Clears the chart from all data (sets it to null) and refreshes it.
