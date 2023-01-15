@@ -3,7 +3,7 @@ package michael.linker.gestureid.ui.activity.intent.playground;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import michael.linker.gestureid.data.system.SystemMode;
+import michael.linker.gestureid.data.system.metric.type.SystemMode;
 
 public class PlaygroundSettingsParcelable implements Parcelable {
     private SystemMode mode;
@@ -16,7 +16,7 @@ public class PlaygroundSettingsParcelable implements Parcelable {
     }
 
     protected PlaygroundSettingsParcelable(Parcel source) {
-        mode = SystemMode.parse(source.readBoolean());
+        mode = SystemMode.fromBoolean(source.readBoolean());
     }
 
     @Override

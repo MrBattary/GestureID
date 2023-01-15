@@ -28,6 +28,7 @@ class SystemGateWorker implements Runnable {
 
     @Override
     public void run() {
+        Log.i(TAG, "System gate worker has been started.");
         while (!(workerThreadState.get() == WorkerThreadState.SHUTDOWN)) {
             while (workerThreadState.get() == WorkerThreadState.WORKING) {
                 try {

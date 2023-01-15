@@ -13,7 +13,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
 import michael.linker.gestureid.R;
-import michael.linker.gestureid.data.system.SystemMode;
+import michael.linker.gestureid.data.system.metric.type.SystemMode;
 import michael.linker.gestureid.ui.activity.ActivityGate;
 import michael.linker.gestureid.ui.activity.intent.playground.PlaygroundSettingsParcelable;
 
