@@ -1,0 +1,13 @@
+package michael.linker.gestureid.config;
+
+public enum ConfigurationType {
+    SYSTEM_GATE,
+    EVENT_ACCUMULATOR,
+    EVENT_SYNCHRONIZER,
+    SENSOR_LISTENER,
+    SENSOR_LISTENER_SUPPRESSOR,
+    SENSOR_LISTENER_PROVIDER,
+    SENSOR_LISTENER_MANAGER,
+    SENSOR_PROVIDER,
+    SENSOR_MANAGER,
+}

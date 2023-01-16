@@ -3,6 +3,7 @@
     <!-- Navigation. -->
     <string name="navigation_title_home">Home</string>
     <string name="navigation_title_sensors">Sensors</string>
+    <string name="navigation_title_playground_gate">Playground</string>
     <string name="navigation_title_playground">Playground</string>
 
     <!-- Development. -->
@@ -13,6 +14,9 @@
     <string name="placeholder_sensors_current_time" translatable="false">NNNNNNNNN</string>
 
     <!-- Texts. -->
+    <!-- | Sensors. -->
+    <string name="home_header">Greetings!</string>
+    <!-- | Sensors. -->
     <string name="sensors_time">Time:</string>
     <string name="sensor_info">Sensor info</string>
     <string name="sensor_info_not_available">Sensor info not available</string>
@@ -35,10 +39,62 @@
     <string name="sensor_rotation_vector_not_available">Rotation Vector not available</string>
     <string name="sensor_geo_rotation_vector">Geo Rotation Vector</string>
     <string name="sensor_geo_rotation_vector_not_available">Geomagnetic Rotation Vector not available</string>
+    <!-- | Playground gate. -->
+    <string name="playground_gate_header">Playground</string>
+    <string name="playground_gate_description">The playground is intended for training and testing the authentication system by recording gesture data and their subsequent analysis.\nIn the <b>training</b> mode, gesture data is simply recorded, without additional verification, allowing to quickly create and modify the user model.\nIn the <b>control</b> mode, the system reads the gesture data, analyzes them and, upon successful authentication, modifies the user model.</string>
+    <string name="playground_gate_mode_training">Training</string>
+    <string name="playground_gate_mode_control">Control</string>
+    <string name="playground_gate_mode_enter_button">Enter playground</string>
+    <!-- | Playground. -->
+    <string name="playground_header">Have fun!</string>
+    <string name="playground_chip_1">First chip</string>
+    <string name="playground_chip_2">Second chip</string>
+    <string name="playground_chip_3">Third chip</string>
+    <string name="playground_chip_4">Fourth chip</string>
+    <string name="playground_chip_5">Fifth chip</string>
+    <string name="playground_checkbox_1">First checkbox</string>
+    <string name="playground_checkbox_2">Second checkbox</string>
+    <string name="playground_checkbox_3">Third checkbox</string>
+    <string name="playground_checkbox_4">Fourth checkbox</string>
+    <string name="playground_checkbox_5">Fifth checkbox</string>
+    <string name="playground_input_hint">Normal input</string>
+    <string name="playground_clear_input_hint">Clear input</string>
+    <string name="playground_password_input_hint">Password input</string>
+    <string name="playground_restricted_input_hint">Restricted input</string>
 
     <!-- Descriptions. -->
     <string name="content_description_recording_fab">Stop and continue recording</string>
 
     <!-- Buttons. -->
+    <!-- | General. -->
     <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_exit">Exit</string>
+    <string name="button_leave">Leave</string>
+    <string name="button_yes">Yes</string>
+    <string name="button_no">No</string>
+    <!-- | Playground. -->
+    <string name="playground_radio_button_1">First radio button</string>
+    <string name="playground_radio_button_2">Second radio button</string>
+    <string name="playground_radio_button_3">Third radio button</string>
+    <string name="playground_radio_button_4">Fourth radio button</string>
+    <string name="playground_radio_button_5">Fifth radio button</string>
+    <string name="playground_toggle_button_left">Left</string>
+    <string name="playground_toggle_button_middle">Middle</string>
+    <string name="playground_toggle_button_right">Right</string>
+    <string name="playground_button_elevated">Elevated button</string>
+    <string name="playground_button_filled">Filled button</string>
+    <string name="playground_button_filled_tonal">Filled tonal button</string>
+    <string name="playground_button_outlined">Outlined button</string>
+    <string name="playground_button_text">Text button</string>
+
+    <!-- Dialogs. -->
+    <!-- | Titles. -->
+    <string name="dialog_exit_title">Exit</string>
+    <string name="dialog_leave_playground_title">Leave playground</string>
+    <string name="dialog_auth_title">Authentication</string>
+    <!-- | Texts. -->
+    <string name="dialog_exit_text">Are you sure you want to close the application?</string>
+    <string name="dialog_leave_playground_text">Are you sure you want to leave the playground?</string>
+    <string name="dialog_auth_text">Are you the owner of this device?</string>
 </resources>

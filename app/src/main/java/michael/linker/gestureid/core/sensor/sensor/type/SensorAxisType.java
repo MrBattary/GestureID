@@ -2,22 +2,14 @@ package michael.linker.gestureid.core.sensor.sensor.type;
 
 import androidx.annotation.NonNull;
 
-public class SensorAxisType {
-    public static final SensorAxisType X;
-    public static final SensorAxisType Y;
-    public static final SensorAxisType Z;
-    public static final SensorAxisType W;
-
-    static {
-        X = new SensorAxisType("x");
-        Y = new SensorAxisType("y");
-        Z = new SensorAxisType("z");
-        W = new SensorAxisType("w");
-    }
+public enum SensorAxisType {
+    X("x"),
+    Y("y"),
+    Z("z"),
+    W("w");
 
     private final String axis;
-
-    public SensorAxisType(String axis) {
+    SensorAxisType(String axis) {
         this.axis = axis;
     }
 

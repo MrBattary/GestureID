@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/fragment_content_margin_small"
             android:paddingBottom="@dimen/fragment_content_bottom_padding_with_fab"
-            tools:context=".elements.fragment.sensors.root.SensorsFragment">
+            tools:context=".ui.fragment.main.sensors.root.SensorsFragment">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/sensors_time"
@@ -25,7 +25,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="@dimen/fragment_margin_horizontal"
                 android:text="@string/sensors_time"
-                android:textAppearance="?attr/textAppearanceHeadline5" />
+                android:textAppearance="?attr/textAppearanceHeadlineMedium" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/sensors_current_time"
@@ -34,7 +34,7 @@
                 android:layout_marginStart="@dimen/fragment_margin_horizontal_small"
                 android:layout_toEndOf="@id/sensors_time"
                 android:text="@string/placeholder_sensors_current_time"
-                android:textAppearance="?attr/textAppearanceHeadline5" />
+                android:textAppearance="?attr/textAppearanceHeadlineMedium" />
 
             <include
                 android:id="@+id/sensors_accelerometer_chart"

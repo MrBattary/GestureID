@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_sensors"
-        android:name="michael.linker.gestureid.elements.fragment.sensors.root.SensorsFragment"
+        android:name="michael.linker.gestureid.ui.fragment.main.sensors.root.SensorsFragment"
         android:label="@string/navigation_title_sensors"
         tools:layout="@layout/fragment_home" />
 </navigation>

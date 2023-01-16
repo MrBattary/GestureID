@@ -13,6 +13,5 @@
     <item
         android:id="@+id/root_navigation_playground"
         android:icon="@drawable/ic_playground"
-        android:enabled="false"
-        android:title="@string/navigation_title_playground" />
+        android:title="@string/navigation_title_playground_gate" />
 </menu>

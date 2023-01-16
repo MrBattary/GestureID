@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/playground_gate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/fragment_content_margin_small"
+        tools:context=".ui.fragment.main.playground.gate.PlaygroundGateFragment">
+
+        <RelativeLayout
+            android:id="@+id/playground_gate_controls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/playground_gate_description"
+            android:layout_marginTop="@dimen/fragment_margin_horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playground_gate_controls_enter_button"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/playground_gate_controls_mode_toggle_group"
+                android:layout_marginTop="@dimen/fragment_margin_horizontal"
+                android:enabled="false"
+                android:text="@string/playground_gate_mode_enter_button" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/playground_gate_controls_mode_toggle_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/playground_gate_controls_mode_training_button"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/playground_gate_mode_training" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/playground_gate_controls_mode_control_button"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/playground_gate_mode_control" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+        </RelativeLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/playground_gate_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/playground_gate_heading"
+            android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+            android:justificationMode="inter_word"
+            android:text="@string/playground_gate_description"
+            android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/playground_gate_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="@string/playground_gate_header"
+            android:textAppearance="?attr/textAppearanceHeadlineLarge" />
+    </RelativeLayout>
+</ScrollView>
