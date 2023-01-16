@@ -16,4 +16,9 @@ public interface ISystemProcessor {
      * Notifies processor with that auth was acquired from the user.
      */
     void authAcquired();
+
+    /**
+     * Saves nodes data.
+     */
+    void saveData();
 }

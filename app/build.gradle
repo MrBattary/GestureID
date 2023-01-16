@@ -71,9 +71,10 @@ android {
 }
 
 dependencies {
-    def room_version = "2.4.3"
+    def room_version = "2.5.0"
     def mp_android_chart_version = "3.1.0"
     def apache_commons_collections = "4.4"
+    def gson_version = "2.10"
     def guava = "31.1"
 
     implementation "androidx.room:room-runtime:$room_version"
@@ -83,8 +84,9 @@ dependencies {
     implementation "com.github.PhilJay:MPAndroidChart:v$mp_android_chart_version"
 
     implementation "com.google.guava:guava:$guava-android"
+    implementation "com.google.code.gson:gson:$gson_version"
 
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata:2.5.1'

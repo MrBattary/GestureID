@@ -18,6 +18,25 @@ public final class SystemConfiguration {
     }
 
     public static final class Build {
+        public static String getBuildHash() {
+            StringBuilder sb = new StringBuilder();
+            for (MetricClassType classType : MetricClassType.values()) {
+                if (Class.isMetricClassRequired(classType)) {
+                    sb.append(classType);
+                }
+                for (MetricGroupType groupType : Group.getMetricGroupForClass(classType)) {
+                    sb.append(groupType);
+                }
+            }
+            for (MetricGroupType groupType : MetricGroupType.values()) {
+                sb.append(groupType);
+                for (MetricType metricType : Metric.getMetricForGroup(groupType)) {
+                    sb.append(metricType);
+                }
+            }
+            return sb.toString();
+        }
+
         public static final class Class {
             public static boolean isMetricClassRequired(MetricClassType classType) {
                 switch (classType) {

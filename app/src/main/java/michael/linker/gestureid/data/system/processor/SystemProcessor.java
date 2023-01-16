@@ -1,19 +1,25 @@
 package michael.linker.gestureid.data.system.processor;
 
+import android.util.Log;
+
 import michael.linker.gestureid.config.system.SystemConfiguration;
 import michael.linker.gestureid.data.event.accumulator.model.AccumulatedEpisode;
 import michael.linker.gestureid.data.system.calculator.ISystemCalculator;
 import michael.linker.gestureid.data.system.calculator.SystemCalculator;
 import michael.linker.gestureid.data.system.calculator.model.EpisodeMetrics;
 import michael.linker.gestureid.data.system.network.DatabaseSystemNetwork;
+import michael.linker.gestureid.data.system.network.IPersistentSystemNetwork;
 import michael.linker.gestureid.data.system.network.ISystemNetwork;
 import michael.linker.gestureid.data.system.network.LocalSystemNetwork;
 import michael.linker.gestureid.data.system.network.type.SystemNetworkResult;
 import michael.linker.gestureid.data.system.processor.type.SystemProcessorResult;
 
 public class SystemProcessor implements ISystemProcessor {
+    private static final String TAG = SystemProcessor.class.getCanonicalName();
+
     private final ISystemCalculator systemCalculator;
-    private final ISystemNetwork userModelNetwork, stashNetwork;
+    private final IPersistentSystemNetwork userModelNetwork;
+    private final ISystemNetwork stashNetwork;
     private int unrecognizedEpisodesCounter;
 
     public SystemProcessor() {
@@ -55,10 +61,18 @@ public class SystemProcessor implements ISystemProcessor {
 
     @Override
     public void authAcquired() {
+        Log.i(TAG, "The system processor has received authorization.");
         for (EpisodeMetrics unrecognizedMetrics : stashNetwork.getNodes()) {
             userModelNetwork.create(unrecognizedMetrics);
         }
         stashNetwork.purgeNodes();
         unrecognizedEpisodesCounter = 0;
+    }
+
+    @Override
+    public void saveData() {
+        Log.i(TAG, "System processor has started saving network nodes.");
+        userModelNetwork.persist();
+        Log.i(TAG, "System processor has finished saving network nodes.");
     }
 }

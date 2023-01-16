@@ -35,6 +35,7 @@ class SystemGateWorker implements Runnable {
         while (!(workerThreadState.get() == WorkerThreadState.SHUTDOWN)) {
             while (workerThreadState.get() == WorkerThreadState.WORKING) {
                 if (workerState.get() == WorkerState.AUTH_ACQUIRED) {
+                    systemProcessor.authAcquired();
                     workerState.set(WorkerState.WORKING);
                     Log.i(TAG, "System gate worker acquired the auth result.");
                 }
@@ -52,6 +53,7 @@ class SystemGateWorker implements Runnable {
                 }
             }
         }
+        systemProcessor.saveData();
         Log.i(TAG, "System gate worker was shutdown.");
     }
 }
