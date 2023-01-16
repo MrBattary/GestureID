@@ -17,14 +17,18 @@ import michael.linker.gestureid.data.event.accumulator.mode.active.IActiveFlusha
 import michael.linker.gestureid.data.res.StringsProvider;
 import michael.linker.gestureid.data.sensor.manager.ISensorManager;
 import michael.linker.gestureid.data.system.gate.ISystemGate;
-import michael.linker.gestureid.data.system.gate.ISystemGateListener;
 import michael.linker.gestureid.data.system.gate.SystemGateAuthResult;
+import michael.linker.gestureid.data.system.metric.type.SystemMode;
 import michael.linker.gestureid.databinding.ActivityPlaygroundBinding;
+import michael.linker.gestureid.ui.activity.intent.playground.PlaygroundSettingsIntent;
+import michael.linker.gestureid.ui.activity.intent.playground.PlaygroundSettingsParcelable;
 import michael.linker.gestureid.ui.view.elementary.dialog.IDialog;
 import michael.linker.gestureid.ui.view.elementary.dialog.two.TwoChoicesDialog;
 import michael.linker.gestureid.ui.view.elementary.dialog.two.TwoChoicesDialogModel;
 
-public class PlaygroundActivity extends AppCompatActivity implements ISystemGateListener {
+public class PlaygroundActivity extends AppCompatActivity {
+    private SystemMode systemMode;
+
     private IActiveEventAccumulator activeEventAccumulator;
     private ISystemGate systemGate;
     private ISensorManager manager;
@@ -36,6 +40,9 @@ public class PlaygroundActivity extends AppCompatActivity implements ISystemGate
         super.onCreate(savedInstanceState);
         ActivityPlaygroundBinding binding = ActivityPlaygroundBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        PlaygroundSettingsParcelable parcelable = PlaygroundSettingsIntent.unpack(getIntent());
+        systemMode = parcelable.getMode();
 
         initDialogs();
     }
@@ -116,17 +123,20 @@ public class PlaygroundActivity extends AppCompatActivity implements ISystemGate
                         SystemConfiguration.Type.Status.ENABLED
                 ));
         systemGate = SystemGateConfiguration.getSystemGate();
-        systemGate.subscribe(this);
+        systemGate.getAuthRequiredLiveData().observe(this, isAuthRequired -> {
+            if (isAuthRequired) {
+                if (systemMode == SystemMode.LEARNING) {
+                    systemGate.notifyAboutAuthResult(SystemGateAuthResult.AUTH_ACQUIRED);
+                } else {
+                    authStubDialog.show();
+                }
+            }
+        });
 
         activeEventAccumulator = EventAccumulatorConfiguration.getActiveAccumulator();
         activeEventAccumulator.subscribe(systemGate);
 
         manager = SensorManagerConfiguration.getManager();
         manager.unsuppressRegistering();
-    }
-
-    @Override
-    public void requireAuth() {
-        authStubDialog.show();
     }
 }

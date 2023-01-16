@@ -25,7 +25,12 @@ public class DatabaseSystemNetwork extends LocalSystemNetwork implements IPersis
 
     private void initNodes() {
         String hash = SystemConfiguration.Build.getBuildHash();
-        if (hash.equals(db.networkHashDao().get().hashValue)) {
+        NetworkHash dbNetworkHash = db.networkHashDao().get();
+        if (dbNetworkHash == null || !hash.equals(dbNetworkHash.hashValue)) {
+            NetworkHash networkHash = new NetworkHash();
+            networkHash.hashValue = hash;
+            db.networkHashDao().set(networkHash);
+        } else {
             List<String> nodesFromDb = db.networkNodeDao().getAllNodes()
                     .stream()
                     .map(networkNode -> networkNode.nodeModel)
@@ -33,10 +38,6 @@ public class DatabaseSystemNetwork extends LocalSystemNetwork implements IPersis
             for (String nodeJson : nodesFromDb) {
                 super.create(gson.fromJson(nodeJson, EpisodeMetrics.class));
             }
-        } else {
-            NetworkHash networkHash = new NetworkHash();
-            networkHash.hashValue = hash;
-            db.networkHashDao().set(networkHash);
         }
     }
 

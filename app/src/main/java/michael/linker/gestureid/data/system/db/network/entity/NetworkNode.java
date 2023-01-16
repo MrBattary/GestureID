@@ -14,6 +14,9 @@ public class NetworkNode {
     @ColumnInfo(name = "node_model")
     public String nodeModel;
 
+    public NetworkNode() {
+    }
+
     @Ignore
     public NetworkNode(String nodeModel) {
         this.nodeModel = nodeModel;

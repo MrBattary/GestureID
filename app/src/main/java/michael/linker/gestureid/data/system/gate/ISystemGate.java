@@ -1,14 +1,15 @@
 package michael.linker.gestureid.data.system.gate;
 
+import androidx.lifecycle.LiveData;
+
 import michael.linker.gestureid.data.event.accumulator.mode.active.IActiveEventAccumulatorListener;
 
 public interface ISystemGate extends IActiveEventAccumulatorListener {
     /**
-     * Start processing and accumulation of episode events.
-     * Call this on start.
+     * Notify about auth result from the user.
+     *
+     * @param authResult auth result.
      */
-    //void start();
-
     void notifyAboutAuthResult(SystemGateAuthResult authResult);
 
     /**
@@ -17,15 +18,5 @@ public interface ISystemGate extends IActiveEventAccumulatorListener {
      */
     void shutdown();
 
-    /**
-     * Subscribe listener to the system gate requests.
-     *
-     * @param listener system gate listener.
-     */
-    void subscribe(ISystemGateListener listener);
-
-    /**
-     * Unsubscribe listener from the system gate requests.
-     */
-    void unsubscribe();
+    LiveData<Boolean> getAuthRequiredLiveData();
 }

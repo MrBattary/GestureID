@@ -37,8 +37,10 @@ public class SystemProcessor implements ISystemProcessor {
         }
 
         EpisodeMetrics metrics = systemCalculator.calculateEpisodeMetrics(accumulatedEpisode);
+        Log.i(TAG, "The system processor calculated episode metrics.");
         SystemNetworkResult stashNetworkResult = stashNetwork.proceed(metrics);
         if (stashNetworkResult == SystemNetworkResult.RECOGNIZED) {
+            Log.i(TAG, "The system processor recognized episode in the stash network.");
             unrecognizedEpisodesCounter++;
             if (unrecognizedEpisodesCounter
                     >= SystemConfiguration.Build.Network.getNumberOfUnrecognizedEpisodes()) {
@@ -47,8 +49,12 @@ public class SystemProcessor implements ISystemProcessor {
         } else {
             SystemNetworkResult userNetworkResult = userModelNetwork.proceed(metrics);
             if (userNetworkResult == SystemNetworkResult.RECOGNIZED) {
+                Log.i(TAG, "The system processor recognized episode in the user model network.");
                 unrecognizedEpisodesCounter = 0;
             } else {
+                Log.i(TAG, "The system processor did not recognize the episode "
+                        + "in the user network model and created a node in the stash network.");
+                stashNetwork.create(metrics);
                 unrecognizedEpisodesCounter++;
                 if (unrecognizedEpisodesCounter
                         >= SystemConfiguration.Build.Network.getNumberOfUnrecognizedEpisodes()) {

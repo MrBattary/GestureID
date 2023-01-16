@@ -2,6 +2,9 @@ package michael.linker.gestureid.data.system.gate;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicReference;
@@ -17,19 +20,20 @@ public class SystemGate implements ISystemGate {
     private final Queue<AccumulatedEpisode> accumulatedEpisodeQueue;
     private final AtomicReference<WorkerThreadState> workerThreadState;
     private final AtomicReference<WorkerState> workerState;
-
-    private ISystemGateListener authListener;
+    private final MutableLiveData<Boolean> ifAuthRequired;
 
     public SystemGate() {
         accumulatedEpisodeQueue = new ConcurrentLinkedQueue<>();
         workerThreadState = new AtomicReference<>(WorkerThreadState.WORKING);
         workerState = new AtomicReference<>(WorkerState.WORKING);
+        ifAuthRequired = new MutableLiveData<>(false);
         new Thread(
                 new SystemGateWorker(
                         new SystemGateWorkerModel(
                                 workerThreadState,
                                 workerState,
-                                accumulatedEpisodeQueue)
+                                accumulatedEpisodeQueue,
+                                ifAuthRequired)
                 )
         ).start();
     }
@@ -37,9 +41,6 @@ public class SystemGate implements ISystemGate {
     @Override
     public void notifyAboutEpisode(AccumulatedEpisode accumulatedEpisode) {
         Log.i(TAG, "System gate notified about episode.");
-        if (workerState.get() == WorkerState.AUTH_REQUIRED) {
-            requireAuthFromListener();
-        }
         if (workerState.get() == WorkerState.AUTH_ACQUIRED) {
             Log.i(TAG, "System gate received a notification about acquired authentication.");
             workerState.set(WorkerState.AUTH_ACQUIRED);
@@ -49,25 +50,17 @@ public class SystemGate implements ISystemGate {
             Log.i(TAG, "System gate received a notification about failed authentication.");
             workerState.set(WorkerState.AUTH_FAILED);
         }
-        if (workerState.get() == WorkerState.WORKING) {
+        if (workerState.get() == WorkerState.WORKING
+                || workerState.get() == WorkerState.AUTH_REQUIRED) {
             Log.i(TAG, "System gate stores accumulated episode.");
             accumulatedEpisodeQueue.add(accumulatedEpisode);
-        }
-    }
-
-    private void requireAuthFromListener() {
-        Log.i(TAG, "System gate requires authentication.");
-        if (authListener != null) {
-            authListener.requireAuth();
-        } else {
-            Log.e(TAG, "System gate does not have a listener!");
-            workerState.set(WorkerState.AUTH_FAILED);
         }
     }
 
     @Override
     public void notifyAboutAuthResult(SystemGateAuthResult authResult) {
         Log.i(TAG, "System gate notified about the auth result.");
+        ifAuthRequired.postValue(false);
         switch (authResult) {
             case AUTH_ACQUIRED:
                 workerState.set(WorkerState.AUTH_ACQUIRED);
@@ -82,18 +75,10 @@ public class SystemGate implements ISystemGate {
     @Override
     public void shutdown() {
         workerThreadState.set(WorkerThreadState.SHUTDOWN);
-        unsubscribe();
     }
 
     @Override
-    public void subscribe(ISystemGateListener listener) {
-        authListener = listener;
-    }
-
-    @Override
-    public void unsubscribe() {
-        if (authListener != null) {
-            authListener = null;
-        }
+    public LiveData<Boolean> getAuthRequiredLiveData() {
+        return ifAuthRequired;
     }
 }

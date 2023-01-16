@@ -1,9 +1,10 @@
 package michael.linker.gestureid.config.system.bean;
 
+import androidx.lifecycle.LiveData;
+
 import michael.linker.gestureid.config.bean.ConfigurationBean;
 import michael.linker.gestureid.data.event.accumulator.model.AccumulatedEpisode;
 import michael.linker.gestureid.data.system.gate.ISystemGate;
-import michael.linker.gestureid.data.system.gate.ISystemGateListener;
 import michael.linker.gestureid.data.system.gate.SystemGateAuthResult;
 
 public class SystemGateConfigurationBean
@@ -30,13 +31,8 @@ public class SystemGateConfigurationBean
     }
 
     @Override
-    public void subscribe(ISystemGateListener listener) {
-        getImplementation().subscribe(listener);
-    }
-
-    @Override
-    public void unsubscribe() {
-        getImplementation().unsubscribe();
+    public LiveData<Boolean> getAuthRequiredLiveData() {
+        return getImplementation().getAuthRequiredLiveData();
     }
 
     @Override

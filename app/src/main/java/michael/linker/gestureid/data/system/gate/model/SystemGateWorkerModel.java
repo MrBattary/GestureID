@@ -1,5 +1,7 @@
 package michael.linker.gestureid.data.system.gate.model;
 
+import androidx.lifecycle.MutableLiveData;
+
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -11,14 +13,17 @@ public class SystemGateWorkerModel {
     private final AtomicReference<WorkerThreadState> workerThreadState;
     private final AtomicReference<WorkerState> workerState;
     private final Queue<AccumulatedEpisode> accumulatedEpisodeQueue;
+    private final MutableLiveData<Boolean> ifAuthRequired;
 
     public SystemGateWorkerModel(
             AtomicReference<WorkerThreadState> workerThreadState,
             AtomicReference<WorkerState> workerState,
-            Queue<AccumulatedEpisode> accumulatedEpisodeQueue) {
+            Queue<AccumulatedEpisode> accumulatedEpisodeQueue,
+            MutableLiveData<Boolean> ifAuthRequired) {
         this.workerThreadState = workerThreadState;
         this.workerState = workerState;
         this.accumulatedEpisodeQueue = accumulatedEpisodeQueue;
+        this.ifAuthRequired = ifAuthRequired;
     }
 
     public AtomicReference<WorkerThreadState> getWorkerThreadState() {
@@ -31,5 +36,9 @@ public class SystemGateWorkerModel {
 
     public Queue<AccumulatedEpisode> getAccumulatedEpisodeQueue() {
         return accumulatedEpisodeQueue;
+    }
+
+    public MutableLiveData<Boolean> getIfAuthRequired() {
+        return ifAuthRequired;
     }
 }

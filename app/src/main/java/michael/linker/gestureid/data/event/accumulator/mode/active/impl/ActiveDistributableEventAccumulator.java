@@ -34,7 +34,6 @@ public class ActiveDistributableEventAccumulator extends ABaseActiveEventAccumul
         AccumulatedEpisode episode = new AccumulatedEpisode(List.of(accumulatedEvent));
         accumulatedEvent = null;
         for (IActiveEventAccumulatorListener listener : super.listenerSet) {
-            Log.i(TAG, "Accumulated episode distributed");
             listener.notifyAboutEpisode(episode);
         }
     }

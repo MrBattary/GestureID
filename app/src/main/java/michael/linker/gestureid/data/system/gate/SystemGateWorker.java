@@ -2,6 +2,8 @@ package michael.linker.gestureid.data.system.gate;
 
 import android.util.Log;
 
+import androidx.lifecycle.MutableLiveData;
+
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -19,6 +21,7 @@ class SystemGateWorker implements Runnable {
     private final Queue<AccumulatedEpisode> accumulatedEpisodeQueue;
     private final AtomicReference<WorkerThreadState> workerThreadState;
     private final AtomicReference<WorkerState> workerState;
+    private final MutableLiveData<Boolean> ifAuthRequired;
 
     private final ISystemProcessor systemProcessor;
 
@@ -26,6 +29,7 @@ class SystemGateWorker implements Runnable {
         this.accumulatedEpisodeQueue = model.getAccumulatedEpisodeQueue();
         this.workerThreadState = model.getWorkerThreadState();
         this.workerState = model.getWorkerState();
+        this.ifAuthRequired = model.getIfAuthRequired();
         systemProcessor = new SystemProcessor();
     }
 
@@ -45,6 +49,7 @@ class SystemGateWorker implements Runnable {
                                 .proceed(accumulatedEpisodeQueue.poll());
                         if (result == SystemProcessorResult.AUTH_REQUIRED) {
                             workerState.set(WorkerState.AUTH_REQUIRED);
+                            ifAuthRequired.postValue(true);
                             Log.i(TAG, "System gate worker required the auth check.");
                         } else {
                             Log.i(TAG, "System gate worker processed the event.");
