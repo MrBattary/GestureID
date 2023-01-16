@@ -1,13 +1,346 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragment.playground.home.root.PlaygroundHomeFragment">
+    android:layout_height="match_parent">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/playground_home"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:padding="@dimen/fragment_content_margin_small"
+        tools:context=".ui.fragment.playground.home.root.PlaygroundHomeFragment">
 
-</FrameLayout>
+        <HorizontalScrollView
+            android:id="@+id/playground_home_chip_scroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/playground_home_heading"
+            android:layout_marginTop="@dimen/fragment_margin_vertical"
+            android:paddingHorizontal="@dimen/fragment_content_margin_horizontal_small">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/playground_home_chip_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleLine="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/playground_home_chip_1"
+                    style="@style/Widget.Material3.Chip.Assist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/playground_chip_1" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/playground_home_chip_2"
+                    style="@style/Widget.Material3.Chip.Assist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/playground_chip_2" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/playground_home_chip_3"
+                    style="@style/Widget.Material3.Chip.Assist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/playground_chip_3" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/playground_home_chip_4"
+                    style="@style/Widget.Material3.Chip.Assist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/playground_chip_4" />
+
+                <com.google.android.material.chip.Chip
+
+                    android:id="@+id/playground_home_chip_5"
+                    style="@style/Widget.Material3.Chip.Assist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:text="@string/playground_chip_5" />
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:id="@+id/playground_home_checkboxes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/playground_home_sliders"
+            android:layout_marginTop="@dimen/fragment_margin_vertical"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/playground_home_checkbox_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/playground_checkbox_1" />
+
+            <CheckBox
+                android:id="@+id/playground_home_checkbox_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/playground_checkbox_2" />
+
+            <CheckBox
+                android:id="@+id/playground_home_checkbox_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/playground_checkbox_3" />
+
+            <CheckBox
+                android:id="@+id/playground_home_checkbox_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/playground_checkbox_4" />
+
+            <CheckBox
+                android:id="@+id/playground_home_checkbox_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="@string/playground_checkbox_5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/playground_home_sliders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/playground_home_inputs"
+            android:layout_marginTop="@dimen/fragment_margin_vertical"
+            android:orientation="vertical">
+
+            <com.google.android.material.slider.RangeSlider
+                android:id="@+id/playground_home_slider_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:valueFrom="0.0"
+                android:valueTo="100.0" />
+
+            <com.google.android.material.slider.RangeSlider
+                android:id="@+id/playground_home_slider_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                android:stepSize="10.0"
+                android:valueFrom="0.0"
+                android:valueTo="100.0" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/playground_home_slider_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                android:value="20.0"
+                android:valueFrom="0.0"
+                android:valueTo="100.0" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/playground_home_slider_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                android:stepSize="10.0"
+                android:value="40.0"
+                android:valueFrom="0.0"
+                android:valueTo="100.0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/playground_home_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/playground_home_toggle_group"
+            android:layout_marginTop="@dimen/fragment_margin_vertical"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playground_home_button_elevated"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/playground_button_elevated" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playground_home_button_filled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                android:text="@string/playground_button_filled" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playground_home_button_filled_tonal"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                android:text="@string/playground_button_filled_tonal" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playground_home_button_outlined"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                android:text="@string/playground_button_outlined" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playground_home_button_text"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                android:text="@string/playground_button_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/playground_home_inputs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/playground_home_radio_group"
+            android:layout_marginTop="@dimen/fragment_margin_vertical"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/playground_home_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/playground_input_hint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/playground_home_clear_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                android:hint="@string/playground_clear_input_hint"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/playground_home_password_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                android:hint="@string/playground_password_input_hint"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/playground_home_restricted_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                android:hint="@string/playground_restricted_input_hint"
+                app:counterEnabled="true"
+                app:counterMaxLength="20">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/playground_home_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/playground_home_chip_scroll"
+            android:layout_marginTop="@dimen/fragment_margin_vertical"
+            android:checkedButton="@+id/radio_button_1">
+
+            <RadioButton
+                android:id="@+id/playground_home_radio_button_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/playground_radio_button_1" />
+
+            <RadioButton
+                android:id="@+id/playground_home_radio_button_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/playground_radio_button_2" />
+
+            <RadioButton
+                android:id="@+id/playground_home_radio_button_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/playground_radio_button_4" />
+
+            <RadioButton
+                android:id="@+id/playground_home_radio_button_4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/playground_radio_button_5" />
+
+            <RadioButton
+                android:id="@+id/playground_home_radio_button_5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:enabled="false"
+                android:text="@string/playground_radio_button_5" />
+        </RadioGroup>
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/playground_home_toggle_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/playground_home_checkboxes"
+            android:layout_marginTop="@dimen/fragment_margin_vertical"
+            app:singleSelection="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playground_home_toggle_group_toggle_button_left"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/playground_toggle_button_left" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playground_home_toggle_group_toggle_button_middle"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/playground_toggle_button_middle" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playground_home_toggle_group_toggle_button_right"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/playground_toggle_button_right" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/playground_home_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="@string/playground_header"
+            android:textAppearance="?attr/textAppearanceHeadlineLarge" />
+    </RelativeLayout>
+</ScrollView>
