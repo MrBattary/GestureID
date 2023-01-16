@@ -17,7 +17,7 @@ import michael.linker.gestureid.data.system.metric.type.SystemMode;
 import michael.linker.gestureid.ui.activity.ActivityGate;
 import michael.linker.gestureid.ui.activity.intent.playground.PlaygroundSettingsParcelable;
 
-public class PlaygroundFragment extends Fragment {
+public class PlaygroundGateFragment extends Fragment {
     private MaterialButtonToggleGroup modeToggleGroup;
     private MaterialButton enterButton;
     private PlaygroundSettingsParcelable playgroundSettings;
@@ -25,7 +25,7 @@ public class PlaygroundFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_playground, container, false);
+        return inflater.inflate(R.layout.fragment_playground_gate, container, false);
     }
 
     @Override
@@ -38,8 +38,8 @@ public class PlaygroundFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        modeToggleGroup = view.findViewById(R.id.playground_controls_mode_toggle_group);
-        enterButton = view.findViewById(R.id.playground_controls_enter_button);
+        modeToggleGroup = view.findViewById(R.id.playground_gate_controls_mode_toggle_group);
+        enterButton = view.findViewById(R.id.playground_gate_controls_enter_button);
     }
 
     private void initButtonLogic(View view) {

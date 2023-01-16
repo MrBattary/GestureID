@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_playground"
-        android:name="michael.linker.gestureid.ui.fragment.playground.root.PlaygroundFragment"
+        android:name="michael.linker.gestureid.ui.fragment.playground.root.PlaygroundGateFragment"
         android:label="@string/navigation_title_playground"
-        tools:layout="@layout/fragment_playground" />
+        tools:layout="@layout/fragment_playground_gate" />
 </navigation>

@@ -296,7 +296,7 @@ public final class SystemConfiguration {
             }
 
             public static double getAcceptableSpread() {
-                return 0.1;
+                return 0.2;
             }
 
             public static boolean shouldUpdateOnAccept() {

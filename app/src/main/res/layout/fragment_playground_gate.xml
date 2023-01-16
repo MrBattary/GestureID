@@ -7,31 +7,31 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/playground"
+        android:id="@+id/playground_gate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/fragment_content_margin_small"
-        tools:context=".ui.fragment.playground.root.PlaygroundFragment">
+        tools:context=".ui.fragment.playground.root.PlaygroundGateFragment">
 
         <RelativeLayout
-            android:id="@+id/playground_controls"
+            android:id="@+id/playground_gate_controls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/playground_description"
+            android:layout_below="@id/playground_gate_description"
             android:layout_marginTop="@dimen/fragment_margin_horizontal">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/playground_controls_enter_button"
+                android:id="@+id/playground_gate_controls_enter_button"
                 style="@style/Widget.Material3.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/playground_controls_mode_toggle_group"
+                android:layout_below="@id/playground_gate_controls_mode_toggle_group"
                 android:layout_marginTop="@dimen/fragment_margin_horizontal"
                 android:enabled="false"
                 android:text="@string/playground_mode_enter_button" />
 
             <com.google.android.material.button.MaterialButtonToggleGroup
-                android:id="@+id/playground_controls_mode_toggle_group"
+                android:id="@+id/playground_gate_controls_mode_toggle_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -40,7 +40,7 @@
                 app:singleSelection="true">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/playground_controls_mode_training_button"
+                    android:id="@+id/playground_gate_controls_mode_training_button"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                     android:text="@string/playground_mode_training" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/playground_controls_mode_control_button"
+                    android:id="@+id/playground_gate_controls_mode_control_button"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -58,17 +58,17 @@
         </RelativeLayout>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/playground_description"
+            android:id="@+id/playground_gate_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/playground_heading"
+            android:layout_below="@id/playground_gate_heading"
             android:layout_marginTop="@dimen/fragment_margin_vertical_small"
             android:justificationMode="inter_word"
             android:text="@string/playground_description"
             android:textAppearance="?attr/textAppearanceBodyLarge" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/playground_heading"
+            android:id="@+id/playground_gate_heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
