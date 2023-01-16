@@ -1,4 +1,4 @@
-package michael.linker.gestureid.ui.fragment.sensors.root;
+package michael.linker.gestureid.ui.fragment.main.sensors.root;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

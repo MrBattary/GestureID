@@ -3,6 +3,7 @@
     <!-- Navigation. -->
     <string name="navigation_title_home">Home</string>
     <string name="navigation_title_sensors">Sensors</string>
+    <string name="navigation_title_playground_gate">Playground</string>
     <string name="navigation_title_playground">Playground</string>
 
     <!-- Development. -->
@@ -38,12 +39,12 @@
     <string name="sensor_rotation_vector_not_available">Rotation Vector not available</string>
     <string name="sensor_geo_rotation_vector">Geo Rotation Vector</string>
     <string name="sensor_geo_rotation_vector_not_available">Geomagnetic Rotation Vector not available</string>
-    <!-- | Playground. -->
-    <string name="playground_header">Playground</string>
-    <string name="playground_description">The playground is intended for training and testing the authentication system by recording gesture data and their subsequent analysis.\nIn the <b>training</b> mode, gesture data is simply recorded, without additional verification, allowing to quickly create and modify the user model.\nIn the <b>control</b> mode, the system reads the gesture data, analyzes them and, upon successful authentication, modifies the user model.</string>
-    <string name="playground_mode_training">Training</string>
-    <string name="playground_mode_control">Control</string>
-    <string name="playground_mode_enter_button">Enter playground</string>
+    <!-- | Playground gate. -->
+    <string name="playground_gate_header">Playground</string>
+    <string name="playground_gate_description">The playground is intended for training and testing the authentication system by recording gesture data and their subsequent analysis.\nIn the <b>training</b> mode, gesture data is simply recorded, without additional verification, allowing to quickly create and modify the user model.\nIn the <b>control</b> mode, the system reads the gesture data, analyzes them and, upon successful authentication, modifies the user model.</string>
+    <string name="playground_gate_mode_training">Training</string>
+    <string name="playground_gate_mode_control">Control</string>
+    <string name="playground_gate_mode_enter_button">Enter playground</string>
 
     <!-- Descriptions. -->
     <string name="content_description_recording_fab">Stop and continue recording</string>

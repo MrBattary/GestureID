@@ -1,4 +1,4 @@
-package michael.linker.gestureid.ui.fragment.playground.root;
+package michael.linker.gestureid.ui.fragment.main.playground.gate;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

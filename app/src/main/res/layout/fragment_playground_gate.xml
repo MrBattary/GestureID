@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/fragment_content_margin_small"
-        tools:context=".ui.fragment.playground.root.PlaygroundGateFragment">
+        tools:context=".ui.fragment.main.playground.gate.PlaygroundGateFragment">
 
         <RelativeLayout
             android:id="@+id/playground_gate_controls"
@@ -28,7 +28,7 @@
                 android:layout_below="@id/playground_gate_controls_mode_toggle_group"
                 android:layout_marginTop="@dimen/fragment_margin_horizontal"
                 android:enabled="false"
-                android:text="@string/playground_mode_enter_button" />
+                android:text="@string/playground_gate_mode_enter_button" />
 
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/playground_gate_controls_mode_toggle_group"
@@ -45,7 +45,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/playground_mode_training" />
+                    android:text="@string/playground_gate_mode_training" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/playground_gate_controls_mode_control_button"
@@ -53,7 +53,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/playground_mode_control" />
+                    android:text="@string/playground_gate_mode_control" />
             </com.google.android.material.button.MaterialButtonToggleGroup>
         </RelativeLayout>
 
@@ -64,7 +64,7 @@
             android:layout_below="@id/playground_gate_heading"
             android:layout_marginTop="@dimen/fragment_margin_vertical_small"
             android:justificationMode="inter_word"
-            android:text="@string/playground_description"
+            android:text="@string/playground_gate_description"
             android:textAppearance="?attr/textAppearanceBodyLarge" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -72,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:text="@string/playground_header"
+            android:text="@string/playground_gate_header"
             android:textAppearance="?attr/textAppearanceHeadlineLarge" />
     </RelativeLayout>
 </ScrollView>

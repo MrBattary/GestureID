@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="michael.linker.gestureid.ui.fragment.home.root.HomeFragment"
+        android:name="michael.linker.gestureid.ui.fragment.main.home.root.HomeFragment"
         android:label="@string/navigation_title_home"
         tools:layout="@layout/fragment_home" />
 </navigation>

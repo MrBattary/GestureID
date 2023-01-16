@@ -1,4 +1,4 @@
-package michael.linker.gestureid.ui.fragment.sensors.root;
+package michael.linker.gestureid.ui.fragment.main.sensors.root;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

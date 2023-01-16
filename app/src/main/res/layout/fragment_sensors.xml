@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/fragment_content_margin_small"
             android:paddingBottom="@dimen/fragment_content_bottom_padding_with_fab"
-            tools:context=".ui.fragment.sensors.root.SensorsFragment">
+            tools:context=".ui.fragment.main.sensors.root.SensorsFragment">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/sensors_time"
