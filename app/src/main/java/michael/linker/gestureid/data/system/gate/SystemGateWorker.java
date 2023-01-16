@@ -6,12 +6,12 @@ import java.util.Queue;
 import java.util.concurrent.atomic.AtomicReference;
 
 import michael.linker.gestureid.data.event.accumulator.model.AccumulatedEpisode;
-import michael.linker.gestureid.data.system.calculator.ISystemCalculator;
-import michael.linker.gestureid.data.system.calculator.SystemCalculator;
-import michael.linker.gestureid.data.system.calculator.model.EpisodeMetrics;
 import michael.linker.gestureid.data.system.gate.model.SystemGateWorkerModel;
 import michael.linker.gestureid.data.system.gate.state.WorkerState;
 import michael.linker.gestureid.data.system.gate.state.WorkerThreadState;
+import michael.linker.gestureid.data.system.processor.ISystemProcessor;
+import michael.linker.gestureid.data.system.processor.SystemProcessor;
+import michael.linker.gestureid.data.system.processor.type.SystemProcessorResult;
 
 class SystemGateWorker implements Runnable {
     private static final String TAG = SystemGateWorker.class.getCanonicalName();
@@ -20,16 +20,13 @@ class SystemGateWorker implements Runnable {
     private final AtomicReference<WorkerThreadState> workerThreadState;
     private final AtomicReference<WorkerState> workerState;
 
-    private final ISystemCalculator systemCalculator;
-
-    private int counter;
+    private final ISystemProcessor systemProcessor;
 
     public SystemGateWorker(SystemGateWorkerModel model) {
         this.accumulatedEpisodeQueue = model.getAccumulatedEpisodeQueue();
         this.workerThreadState = model.getWorkerThreadState();
         this.workerState = model.getWorkerState();
-        counter = 0;
-        systemCalculator = new SystemCalculator();
+        systemProcessor = new SystemProcessor();
     }
 
     @Override
@@ -43,15 +40,13 @@ class SystemGateWorker implements Runnable {
                 }
                 if (workerState.get() == WorkerState.WORKING) {
                     if (!accumulatedEpisodeQueue.isEmpty()) {
-                        // TODO(ML) : STUBS
-                        AccumulatedEpisode accumulatedEpisode = accumulatedEpisodeQueue.poll();
-                        EpisodeMetrics metrics = systemCalculator.calculateEpisodeMetrics(
-                                accumulatedEpisode);
-                        counter++;
-                        Log.i(TAG, "System gate worker processed the event.");
-                        if (counter % 3 == 0) {
+                        SystemProcessorResult result = systemProcessor
+                                .proceed(accumulatedEpisodeQueue.poll());
+                        if (result == SystemProcessorResult.AUTH_REQUIRED) {
                             workerState.set(WorkerState.AUTH_REQUIRED);
                             Log.i(TAG, "System gate worker required the auth check.");
+                        } else {
+                            Log.i(TAG, "System gate worker processed the event.");
                         }
                     }
                 }

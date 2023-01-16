@@ -10,9 +10,9 @@ public class AddMetricModel<T> extends GetMetricModel {
     public AddMetricModel(
             MetricClassType metricClass,
             MetricGroupType metricGroup,
-            MetricType metricType,
+            MetricType metric,
             T metricValue) {
-        super(metricClass, metricGroup, metricType);
+        super(metricClass, metricGroup, metric);
         this.metricValue = metricValue;
     }
 

@@ -211,5 +211,15 @@ public final class SystemConfiguration {
                 return Set.of(MetricType.ARITHMETIC_MEAN);
             }
         }
+
+        public static final class Network {
+            public static int getNumberOfUnrecognizedEpisodes() {
+                return 3;
+            }
+
+            public static double getAcceptableSpread() {
+                return 0.1;
+            }
+        }
     }
 }

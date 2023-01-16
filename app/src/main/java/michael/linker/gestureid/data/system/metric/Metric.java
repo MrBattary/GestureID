@@ -2,6 +2,7 @@ package michael.linker.gestureid.data.system.metric;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import michael.linker.gestureid.config.system.SystemConfiguration;
 import michael.linker.gestureid.data.system.metric.exception.MetricNotFoundException;
@@ -49,6 +50,25 @@ public class Metric<T> {
             throw new MetricNotFoundException(getModel.getMetricType());
         }
         return metric;
+    }
+
+    public Set<MetricClassType> getClasses() {
+        return metricMap.keySet();
+    }
+
+    public Set<MetricGroupType> getGroupsForClass(MetricClassType metricClass) {
+        return metricMap
+                .getOrDefault(metricClass, new HashMap<>())
+                .keySet();
+    }
+
+    public Set<MetricType> getMetricsForGroupAndClass(
+            MetricClassType metricClass,
+            MetricGroupType metricGroup) {
+        return metricMap
+                .getOrDefault(metricClass, new HashMap<>())
+                .getOrDefault(metricGroup, new HashMap<>())
+                .keySet();
     }
 
     private void initMetricMapClasses() {

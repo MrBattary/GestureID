@@ -12,10 +12,10 @@ public class GetMetricModel {
     public GetMetricModel(
             MetricClassType metricClass,
             MetricGroupType metricGroup,
-            MetricType metricType) {
+            MetricType metric) {
         this.metricClass = metricClass;
         this.metricGroup = metricGroup;
-        this.metricType = metricType;
+        this.metricType = metric;
     }
 
     public MetricClassType getMetricClass() {
