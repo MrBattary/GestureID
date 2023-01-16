@@ -25,6 +25,9 @@ public class LocalSystemNetwork implements ISystemNetwork {
     public SystemNetworkResult proceed(EpisodeMetrics metrics) {
         for (EpisodeMetrics networkMetrics : localNodesList) {
             if (isAcceptable(networkMetrics.getMetric(), metrics.getMetric())) {
+                if (SystemConfiguration.Build.Network.shouldUpdateOnAccept()) {
+                    // TODO: UPDATE ON ACCEPT THROUGH CONFIG
+                }
                 return SystemNetworkResult.RECOGNIZED;
             }
         }
@@ -41,10 +44,16 @@ public class LocalSystemNetwork implements ISystemNetwork {
                     try {
                         Double comparedMetricValue = comparedMetrics.getMetric(metricGetModel);
                         Double providedMetricValue = providedMetrics.getMetric(metricGetModel);
-                        double providedMetricValueUpperBorder = providedMetricValue * (1 + SPREAD);
-                        double providedMetricValueLowerBorder = providedMetricValue * (1 - SPREAD);
-                        if (providedMetricValueLowerBorder >= comparedMetricValue
-                                || comparedMetricValue >= providedMetricValueUpperBorder) {
+                        if (comparedMetricValue.doubleValue()
+                                == providedMetricValue.doubleValue()) {
+                            continue;
+                        }
+                        double providedMetricValueUpperBorder =
+                                generateBorder(providedMetricValue, true);
+                        double providedMetricValueLowerBorder =
+                                generateBorder(providedMetricValue, false);
+                        if (providedMetricValueLowerBorder > comparedMetricValue
+                                || comparedMetricValue > providedMetricValueUpperBorder) {
                             return false;
                         }
                     } catch (MetricNotFoundException e) {
@@ -54,6 +63,29 @@ public class LocalSystemNetwork implements ISystemNetwork {
             }
         }
         return true;
+    }
+
+    private double generateBorder(double metricValue, boolean isUpperBorder) {
+        if (metricValue >= -1.0 && metricValue <= 1.0) {
+            if (isUpperBorder) {
+                return metricValue + SPREAD;
+            } else {
+                return metricValue - SPREAD;
+            }
+        }
+        if (metricValue > 0) {
+            if (isUpperBorder) {
+                return metricValue * (1 + SPREAD);
+            } else {
+                return metricValue * (1 - SPREAD);
+            }
+        } else {
+            if (isUpperBorder) {
+                return metricValue * (1 - SPREAD);
+            } else {
+                return metricValue * (1 + SPREAD);
+            }
+        }
     }
 
     @Override

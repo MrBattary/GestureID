@@ -128,13 +128,6 @@ public class SensorsFragment extends Fragment {
         manageRecordingFab.setOnClickListener(l -> {
             ISensorManager sensorManager = SensorManagerConfiguration.getManager();
             if (sensorManager.isRegisteringSuppressed()) {
-                accelerometerChartView.clear();
-                gyroscopeChartView.clear();
-                magnetometerChartView.clear();
-                gravityChartView.clear();
-                linearAccelerationChartView.clear();
-                rotationVectorChartView.clear();
-                geoRotationVectorChartView.clear();
                 sensorManager.unsuppressRegistering();
             } else {
                 sensorManager.suppressRegistering();
@@ -144,7 +137,7 @@ public class SensorsFragment extends Fragment {
 
     private void initSubscriptions() {
         viewModel.getTimestamp().observe(getViewLifecycleOwner(),
-                timestamp -> timeView.setText(String.valueOf(timestamp)));
+                timestamp -> timeView.setText(String.valueOf(timestamp.longValue())));
         if (!SensorsConfiguration.Build.isAccelerometerDeactivated()) {
             accelerometerChartView.subscribeList(getViewLifecycleOwner(),
                     viewModel.getAccelerometerEvent());

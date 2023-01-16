@@ -1,8 +1,8 @@
 package michael.linker.gestureid.config.system;
 
-import android.util.ArraySet;
-
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import michael.linker.gestureid.config.sensor.SensorsConfiguration;
 import michael.linker.gestureid.data.system.metric.type.MetricClassType;
@@ -91,7 +91,53 @@ public final class SystemConfiguration {
         }
 
         public static final class Group {
-            public static Set<MetricGroupType> getMetricGroupForClass(MetricClassType classType) {
+            private static final SortedSet<MetricGroupType> GENERAL_METRIC_CLASS_SET;
+            private static final SortedSet<MetricGroupType> ACCELEROMETER_METRIC_CLASS_SET;
+            private static final SortedSet<MetricGroupType> GYROSCOPE_METRIC_CLASS_SET;
+            private static final SortedSet<MetricGroupType> MAGNETOMETER_METRIC_CLASS_SET;
+            private static final SortedSet<MetricGroupType> GRAVITY_METRIC_CLASS_SET;
+            private static final SortedSet<MetricGroupType> LINEAR_ACCELERATION_METRIC_CLASS_SET;
+            private static final SortedSet<MetricGroupType> ROTATION_VECTOR_METRIC_CLASS_SET;
+            private static final SortedSet<MetricGroupType> GEO_ROTATION_VECTOR_METRIC_CLASS_SET;
+            private static final SortedSet<MetricGroupType> EMPTY_SET;
+
+            static {
+                GENERAL_METRIC_CLASS_SET = new TreeSet<>(Set.of(MetricGroupType.TIME_METRIC_GROUP));
+                ACCELEROMETER_METRIC_CLASS_SET = new TreeSet<>(
+                        Set.of(MetricGroupType.AXIS_X_METRIC_GROUP,
+                                MetricGroupType.AXIS_Y_METRIC_GROUP,
+                                MetricGroupType.AXIS_Z_METRIC_GROUP));
+                GYROSCOPE_METRIC_CLASS_SET = new TreeSet<>(
+                        Set.of(MetricGroupType.AXIS_X_METRIC_GROUP,
+                                MetricGroupType.AXIS_Y_METRIC_GROUP,
+                                MetricGroupType.AXIS_Z_METRIC_GROUP));
+                MAGNETOMETER_METRIC_CLASS_SET = new TreeSet<>(
+                        Set.of(MetricGroupType.AXIS_STATIC_X_METRIC_GROUP,
+                                MetricGroupType.AXIS_STATIC_Y_METRIC_GROUP,
+                                MetricGroupType.AXIS_STATIC_Z_METRIC_GROUP));
+                GRAVITY_METRIC_CLASS_SET = new TreeSet<>(
+                        Set.of(MetricGroupType.AXIS_STATIC_X_METRIC_GROUP,
+                                MetricGroupType.AXIS_STATIC_Y_METRIC_GROUP,
+                                MetricGroupType.AXIS_STATIC_Z_METRIC_GROUP));
+                LINEAR_ACCELERATION_METRIC_CLASS_SET = new TreeSet<>(
+                        Set.of(MetricGroupType.AXIS_X_METRIC_GROUP,
+                                MetricGroupType.AXIS_Y_METRIC_GROUP,
+                                MetricGroupType.AXIS_Z_METRIC_GROUP));
+                ROTATION_VECTOR_METRIC_CLASS_SET = new TreeSet<>(
+                        Set.of(MetricGroupType.AXIS_STATIC_X_METRIC_GROUP,
+                                MetricGroupType.AXIS_STATIC_Y_METRIC_GROUP,
+                                MetricGroupType.AXIS_STATIC_Z_METRIC_GROUP,
+                                MetricGroupType.AXIS_STATIC_W_METRIC_GROUP));
+                GEO_ROTATION_VECTOR_METRIC_CLASS_SET = new TreeSet<>(
+                        Set.of(MetricGroupType.AXIS_STATIC_X_METRIC_GROUP,
+                                MetricGroupType.AXIS_STATIC_Y_METRIC_GROUP,
+                                MetricGroupType.AXIS_STATIC_Z_METRIC_GROUP,
+                                MetricGroupType.AXIS_STATIC_W_METRIC_GROUP));
+                EMPTY_SET = new TreeSet<>();
+            }
+
+            public static SortedSet<MetricGroupType> getMetricGroupForClass(
+                    MetricClassType classType) {
                 switch (classType) {
                     case GENERAL_METRIC_CLASS:
                         return getMetricGroupForGeneralClass();
@@ -110,62 +156,79 @@ public final class SystemConfiguration {
                     case GEO_ROTATION_VECTOR_METRIC_CLASS:
                         return getMetricGroupForGeoRotationVectorClass();
                     default:
-                        return new ArraySet<>();
+                        return EMPTY_SET;
                 }
             }
 
-            public static Set<MetricGroupType> getMetricGroupForGeneralClass() {
-                return Set.of(MetricGroupType.TIME_METRIC_GROUP);
+            public static SortedSet<MetricGroupType> getMetricGroupForGeneralClass() {
+                return GENERAL_METRIC_CLASS_SET;
             }
 
-            public static Set<MetricGroupType> getMetricGroupForAccelerometerClass() {
-                return Set.of(MetricGroupType.AXIS_X_METRIC_GROUP,
-                        MetricGroupType.AXIS_Y_METRIC_GROUP,
-                        MetricGroupType.AXIS_Z_METRIC_GROUP);
+            public static SortedSet<MetricGroupType> getMetricGroupForAccelerometerClass() {
+                return ACCELEROMETER_METRIC_CLASS_SET;
             }
 
-            public static Set<MetricGroupType> getMetricGroupForGyroscopeClass() {
-                return Set.of(MetricGroupType.AXIS_X_METRIC_GROUP,
-                        MetricGroupType.AXIS_Y_METRIC_GROUP,
-                        MetricGroupType.AXIS_Z_METRIC_GROUP);
+            public static SortedSet<MetricGroupType> getMetricGroupForGyroscopeClass() {
+                return GYROSCOPE_METRIC_CLASS_SET;
             }
 
 
-            public static Set<MetricGroupType> getMetricGroupForMagnetometerClass() {
-                return Set.of(MetricGroupType.AXIS_STATIC_X_METRIC_GROUP,
-                        MetricGroupType.AXIS_STATIC_Y_METRIC_GROUP,
-                        MetricGroupType.AXIS_STATIC_Z_METRIC_GROUP);
+            public static SortedSet<MetricGroupType> getMetricGroupForMagnetometerClass() {
+                return MAGNETOMETER_METRIC_CLASS_SET;
             }
 
-            public static Set<MetricGroupType> getMetricGroupForGravityClass() {
-                return Set.of(MetricGroupType.AXIS_STATIC_X_METRIC_GROUP,
-                        MetricGroupType.AXIS_STATIC_Y_METRIC_GROUP,
-                        MetricGroupType.AXIS_STATIC_Z_METRIC_GROUP);
+            public static SortedSet<MetricGroupType> getMetricGroupForGravityClass() {
+                return GRAVITY_METRIC_CLASS_SET;
             }
 
-            public static Set<MetricGroupType> getMetricLinearAccelerationClass() {
-                return Set.of(MetricGroupType.AXIS_X_METRIC_GROUP,
-                        MetricGroupType.AXIS_Y_METRIC_GROUP,
-                        MetricGroupType.AXIS_Z_METRIC_GROUP);
+            public static SortedSet<MetricGroupType> getMetricLinearAccelerationClass() {
+                return LINEAR_ACCELERATION_METRIC_CLASS_SET;
             }
 
-            public static Set<MetricGroupType> getMetricGroupForRotationVectorClass() {
-                return Set.of(MetricGroupType.AXIS_STATIC_X_METRIC_GROUP,
-                        MetricGroupType.AXIS_STATIC_Y_METRIC_GROUP,
-                        MetricGroupType.AXIS_STATIC_Z_METRIC_GROUP,
-                        MetricGroupType.AXIS_STATIC_W_METRIC_GROUP);
+            public static SortedSet<MetricGroupType> getMetricGroupForRotationVectorClass() {
+                return ROTATION_VECTOR_METRIC_CLASS_SET;
             }
 
-            public static Set<MetricGroupType> getMetricGroupForGeoRotationVectorClass() {
-                return Set.of(MetricGroupType.AXIS_STATIC_X_METRIC_GROUP,
-                        MetricGroupType.AXIS_STATIC_Y_METRIC_GROUP,
-                        MetricGroupType.AXIS_STATIC_Z_METRIC_GROUP,
-                        MetricGroupType.AXIS_STATIC_W_METRIC_GROUP);
+            public static SortedSet<MetricGroupType> getMetricGroupForGeoRotationVectorClass() {
+                return GEO_ROTATION_VECTOR_METRIC_CLASS_SET;
             }
         }
 
         public static final class Metric {
-            public static Set<MetricType> getMetricForGroup(MetricGroupType metricGroupType) {
+            public static final SortedSet<MetricType> TIME_METRIC_GROUP_SET;
+            public static final SortedSet<MetricType> AXIS_X_METRIC_GROUP_SET;
+            public static final SortedSet<MetricType> AXIS_Y_METRIC_GROUP_SET;
+            public static final SortedSet<MetricType> AXIS_Z_METRIC_GROUP_SET;
+            public static final SortedSet<MetricType> AXIS_W_METRIC_GROUP_SET;
+            public static final SortedSet<MetricType> AXIS_STATIC_X_METRIC_GROUP_SET;
+            public static final SortedSet<MetricType> AXIS_STATIC_Y_METRIC_GROUP_SET;
+            public static final SortedSet<MetricType> AXIS_STATIC_Z_METRIC_GROUP_SET;
+            public static final SortedSet<MetricType> AXIS_STATIC_W_METRIC_GROUP_SET;
+            public static final SortedSet<MetricType> EMPTY_SET;
+
+            static {
+                TIME_METRIC_GROUP_SET = new TreeSet<>(Set.of(MetricType.SPREAD_METRIC));
+                AXIS_X_METRIC_GROUP_SET = new TreeSet<>(
+                        Set.of(MetricType.MIN_METRIC, MetricType.MAX_METRIC,
+                                MetricType.SPREAD_METRIC));
+                AXIS_Y_METRIC_GROUP_SET = new TreeSet<>(
+                        Set.of(MetricType.MIN_METRIC, MetricType.MAX_METRIC,
+                                MetricType.SPREAD_METRIC));
+                AXIS_Z_METRIC_GROUP_SET = new TreeSet<>(
+                        Set.of(MetricType.MIN_METRIC, MetricType.MAX_METRIC,
+                                MetricType.SPREAD_METRIC));
+                AXIS_W_METRIC_GROUP_SET = new TreeSet<>(
+                        Set.of(MetricType.MIN_METRIC, MetricType.MAX_METRIC,
+                                MetricType.SPREAD_METRIC));
+                AXIS_STATIC_X_METRIC_GROUP_SET = new TreeSet<>(Set.of(MetricType.ARITHMETIC_MEAN));
+                AXIS_STATIC_Y_METRIC_GROUP_SET = new TreeSet<>(Set.of(MetricType.ARITHMETIC_MEAN));
+                AXIS_STATIC_Z_METRIC_GROUP_SET = new TreeSet<>(Set.of(MetricType.ARITHMETIC_MEAN));
+                AXIS_STATIC_W_METRIC_GROUP_SET = new TreeSet<>(Set.of(MetricType.ARITHMETIC_MEAN));
+                EMPTY_SET = new TreeSet<>();
+            }
+
+
+            public static SortedSet<MetricType> getMetricForGroup(MetricGroupType metricGroupType) {
                 switch (metricGroupType) {
                     case TIME_METRIC_GROUP:
                         return getMetricForTimeGroup();
@@ -186,48 +249,44 @@ public final class SystemConfiguration {
                     case AXIS_STATIC_W_METRIC_GROUP:
                         return getMetricForStaticAxisWGroup();
                     default:
-                        return new ArraySet<>();
+                        return EMPTY_SET;
                 }
             }
 
-            public static Set<MetricType> getMetricForTimeGroup() {
-                return Set.of(MetricType.SPREAD_METRIC);
+            public static SortedSet<MetricType> getMetricForTimeGroup() {
+                return TIME_METRIC_GROUP_SET;
             }
 
-            public static Set<MetricType> getMetricForAxisXGroup() {
-                return Set.of(MetricType.MIN_METRIC, MetricType.MAX_METRIC,
-                        MetricType.SPREAD_METRIC);
+            public static SortedSet<MetricType> getMetricForAxisXGroup() {
+                return AXIS_X_METRIC_GROUP_SET;
             }
 
-            public static Set<MetricType> getMetricForAxisYGroup() {
-                return Set.of(MetricType.MIN_METRIC, MetricType.MAX_METRIC,
-                        MetricType.SPREAD_METRIC);
+            public static SortedSet<MetricType> getMetricForAxisYGroup() {
+                return AXIS_Y_METRIC_GROUP_SET;
             }
 
-            public static Set<MetricType> getMetricForAxisZGroup() {
-                return Set.of(MetricType.MIN_METRIC, MetricType.MAX_METRIC,
-                        MetricType.SPREAD_METRIC);
+            public static SortedSet<MetricType> getMetricForAxisZGroup() {
+                return AXIS_Z_METRIC_GROUP_SET;
             }
 
-            public static Set<MetricType> getMetricForAxisWGroup() {
-                return Set.of(MetricType.MIN_METRIC, MetricType.MAX_METRIC,
-                        MetricType.SPREAD_METRIC);
+            public static SortedSet<MetricType> getMetricForAxisWGroup() {
+                return AXIS_W_METRIC_GROUP_SET;
             }
 
-            public static Set<MetricType> getMetricForStaticAxisXGroup() {
-                return Set.of(MetricType.ARITHMETIC_MEAN);
+            public static SortedSet<MetricType> getMetricForStaticAxisXGroup() {
+                return AXIS_STATIC_X_METRIC_GROUP_SET;
             }
 
-            public static Set<MetricType> getMetricForStaticAxisYGroup() {
-                return Set.of(MetricType.ARITHMETIC_MEAN);
+            public static SortedSet<MetricType> getMetricForStaticAxisYGroup() {
+                return AXIS_STATIC_Y_METRIC_GROUP_SET;
             }
 
-            public static Set<MetricType> getMetricForStaticAxisZGroup() {
-                return Set.of(MetricType.ARITHMETIC_MEAN);
+            public static SortedSet<MetricType> getMetricForStaticAxisZGroup() {
+                return AXIS_STATIC_Z_METRIC_GROUP_SET;
             }
 
-            public static Set<MetricType> getMetricForStaticAxisWGroup() {
-                return Set.of(MetricType.ARITHMETIC_MEAN);
+            public static SortedSet<MetricType> getMetricForStaticAxisWGroup() {
+                return AXIS_STATIC_W_METRIC_GROUP_SET;
             }
         }
 
@@ -238,6 +297,10 @@ public final class SystemConfiguration {
 
             public static double getAcceptableSpread() {
                 return 0.1;
+            }
+
+            public static boolean shouldUpdateOnAccept() {
+                return true;
             }
         }
     }

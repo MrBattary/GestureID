@@ -50,6 +50,7 @@ public class SystemProcessor implements ISystemProcessor {
             SystemNetworkResult userNetworkResult = userModelNetwork.proceed(metrics);
             if (userNetworkResult == SystemNetworkResult.RECOGNIZED) {
                 Log.i(TAG, "The system processor recognized episode in the user model network.");
+                flushUnrecognizedEpisodes();
                 unrecognizedEpisodesCounter = 0;
             } else {
                 Log.i(TAG, "The system processor did not recognize the episode "
@@ -68,11 +69,15 @@ public class SystemProcessor implements ISystemProcessor {
     @Override
     public void authAcquired() {
         Log.i(TAG, "The system processor has received authorization.");
+        flushUnrecognizedEpisodes();
+        unrecognizedEpisodesCounter = 0;
+    }
+
+    private void flushUnrecognizedEpisodes() {
         for (EpisodeMetrics unrecognizedMetrics : stashNetwork.getNodes()) {
             userModelNetwork.create(unrecognizedMetrics);
         }
         stashNetwork.purgeNodes();
-        unrecognizedEpisodesCounter = 0;
     }
 
     @Override
