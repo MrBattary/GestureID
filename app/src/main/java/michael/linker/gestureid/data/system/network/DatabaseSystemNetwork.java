@@ -26,10 +26,11 @@ public class DatabaseSystemNetwork extends LocalSystemNetwork implements IPersis
     private void initNodes() {
         String hash = SystemConfiguration.Build.getBuildHash();
         NetworkHash dbNetworkHash = db.networkHashDao().get();
-        if (dbNetworkHash == null || hash.equals(dbNetworkHash.hashValue)) {
+        if (dbNetworkHash == null || !hash.equals(dbNetworkHash.hashValue)) {
             NetworkHash networkHash = new NetworkHash();
             networkHash.hashValue = hash;
             db.networkHashDao().set(networkHash);
+            db.networkNodeDao().deleteAll();
         } else {
             List<String> nodesFromDb = db.networkNodeDao().getAllNodes()
                     .stream()

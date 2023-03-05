@@ -50,10 +50,8 @@ public class RearrangedAccumulatedEpisode {
                         data.computeIfAbsent(metricClassType, k -> {
                             Map<MetricGroupType, List<Double>> groupMap = new HashMap<>();
                             for (SensorAxisType sensorAxisType : sensorModel.getAxisList()) {
-                                for (MetricGroupType metricGroupType : MetricGroupType
-                                        .fromSensorAxisType(sensorAxisType)) {
-                                    groupMap.put(metricGroupType, new LinkedList<>());
-                                }
+                                groupMap.put(MetricGroupType.fromSensorAxisType(sensorAxisType),
+                                        new LinkedList<>());
                             }
                             return groupMap;
                         });
@@ -61,14 +59,10 @@ public class RearrangedAccumulatedEpisode {
 
                     Map<SensorAxisType, Double> axisValueMap = sensorModel.getAxisValueMap();
                     for (SensorAxisType sensorAxisType : axisValueMap.keySet()) {
-                        for (MetricGroupType metricGroupType : MetricGroupType
-                                .fromSensorAxisType(sensorAxisType)) {
-                            data
-                                    .get(metricClassType)
-                                    .get(metricGroupType)
-                                    .add(axisValueMap.get(sensorAxisType));
-                        }
-
+                        data
+                                .get(metricClassType)
+                                .get(MetricGroupType.fromSensorAxisType(sensorAxisType))
+                                .add(axisValueMap.get(sensorAxisType));
                     }
                 }
             }
