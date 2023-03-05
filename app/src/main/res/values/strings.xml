@@ -73,6 +73,7 @@
     <string name="button_leave">Leave</string>
     <string name="button_yes">Yes</string>
     <string name="button_no">No</string>
+    <string name="button_authenticate">Authenticate</string>
     <!-- | Playground. -->
     <string name="playground_radio_button_1">First radio button</string>
     <string name="playground_radio_button_2">Second radio button</string>
@@ -93,8 +94,10 @@
     <string name="dialog_exit_title">Exit</string>
     <string name="dialog_leave_playground_title">Leave playground</string>
     <string name="dialog_auth_title">Authentication</string>
+    <string name="dialog_auth_failed_tilte">Access denied</string>
     <!-- | Texts. -->
     <string name="dialog_exit_text">Are you sure you want to close the application?</string>
     <string name="dialog_leave_playground_text">Are you sure you want to leave the playground?</string>
     <string name="dialog_auth_text">Are you the owner of this device?</string>
+    <string name="dialog_auth_failed_text">The device is locked, authentication of the device owner is required!</string>
 </resources>
