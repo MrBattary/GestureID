@@ -7,6 +7,7 @@ import michael.linker.gestureid.config.system.SystemConfiguration;
 import michael.linker.gestureid.data.system.calculator.model.EpisodeMetrics;
 import michael.linker.gestureid.data.system.metric.Metric;
 import michael.linker.gestureid.data.system.metric.exception.MetricNotFoundException;
+import michael.linker.gestureid.data.system.metric.model.AddMetricModel;
 import michael.linker.gestureid.data.system.metric.model.GetMetricModel;
 import michael.linker.gestureid.data.system.metric.type.MetricClassType;
 import michael.linker.gestureid.data.system.metric.type.MetricGroupType;
@@ -26,7 +27,7 @@ public class LocalSystemNetwork implements ISystemNetwork {
         for (EpisodeMetrics networkMetrics : localNodesList) {
             if (isAcceptable(networkMetrics.getMetric(), metrics.getMetric())) {
                 if (SystemConfiguration.Build.Network.shouldUpdateOnAccept()) {
-                    // TODO: UPDATE ON ACCEPT THROUGH CONFIG
+                    updateMetrics(networkMetrics.getMetric(), metrics.getMetric());
                 }
                 return SystemNetworkResult.RECOGNIZED;
             }
@@ -34,24 +35,23 @@ public class LocalSystemNetwork implements ISystemNetwork {
         return SystemNetworkResult.NOT_RECOGNIZED;
     }
 
-    protected boolean isAcceptable(Metric<Double> providedMetrics, Metric<Double> comparedMetrics) {
-        for (MetricClassType metricClass : providedMetrics.getClasses()) {
-            for (MetricGroupType metricGroup : providedMetrics.getGroupsForClass(metricClass)) {
-                for (MetricType metric : providedMetrics.getMetricsForGroupAndClass(metricClass,
-                        metricGroup)) {
-                    GetMetricModel metricGetModel = new GetMetricModel(metricClass, metricGroup,
-                            metric);
+    protected boolean isAcceptable(Metric<Double> existMetrics, Metric<Double> comparedMetrics) {
+        for (MetricClassType metricClass : existMetrics.getClasses()) {
+            for (MetricGroupType metricGroup : existMetrics.getGroupsForClass(metricClass)) {
+                for (MetricType metric :
+                        existMetrics.getMetricsForGroupAndClass(metricClass, metricGroup)) {
+                    GetMetricModel metricGetModel =
+                            new GetMetricModel(metricClass, metricGroup, metric);
                     try {
                         Double comparedMetricValue = comparedMetrics.getMetric(metricGetModel);
-                        Double providedMetricValue = providedMetrics.getMetric(metricGetModel);
-                        if (comparedMetricValue.doubleValue()
-                                == providedMetricValue.doubleValue()) {
+                        Double existMetricValue = existMetrics.getMetric(metricGetModel);
+                        if (comparedMetricValue.doubleValue() == existMetricValue.doubleValue()) {
                             continue;
                         }
                         double providedMetricValueUpperBorder =
-                                generateBorder(providedMetricValue, true);
+                                generateBorder(existMetricValue, true);
                         double providedMetricValueLowerBorder =
-                                generateBorder(providedMetricValue, false);
+                                generateBorder(existMetricValue, false);
                         if (providedMetricValueLowerBorder > comparedMetricValue
                                 || comparedMetricValue > providedMetricValueUpperBorder) {
                             return false;
@@ -84,6 +84,25 @@ public class LocalSystemNetwork implements ISystemNetwork {
                 return metricValue * (1 - SPREAD);
             } else {
                 return metricValue * (1 + SPREAD);
+            }
+        }
+    }
+
+    private void updateMetrics(Metric<Double> existMetrics, Metric<Double> newMetric) {
+        for (MetricClassType metricClass : existMetrics.getClasses()) {
+            for (MetricGroupType metricGroup : existMetrics.getGroupsForClass(metricClass)) {
+                for (MetricType metric :
+                        existMetrics.getMetricsForGroupAndClass(metricClass, metricGroup)) {
+                    GetMetricModel metricGetModel =
+                            new GetMetricModel(metricClass, metricGroup, metric);
+
+                    Double newMetricValue = newMetric.getMetric(metricGetModel);
+                    Double existMetricValue = existMetrics.getMetric(metricGetModel);
+                    Double newAverageMetricValue = (newMetricValue + existMetricValue) / 2;
+
+                    existMetrics.putMetric(new AddMetricModel<>(
+                            metricClass, metricGroup, metric, newAverageMetricValue));
+                }
             }
         }
     }
