@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_navigation_playground"
-    app:startDestination="@id/navigation_playground">
+    app:startDestination="@id/navigation_playground_gate">
 
     <fragment
-        android:id="@+id/navigation_playground"
+        android:id="@+id/navigation_playground_gate"
         android:name="michael.linker.gestureid.ui.fragment.main.playground.gate.PlaygroundGateFragment"
         android:label="@string/navigation_title_playground_gate"
         tools:layout="@layout/fragment_playground_gate" />

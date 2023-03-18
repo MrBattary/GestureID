@@ -18,6 +18,11 @@ public class ActivityGate {
         ActivityGate.moveToActivity(activity, PlaygroundSettingsIntent.pack(settings, intent));
     }
 
+    public static void moveToTestActivity(final Activity activity) {
+        Intent intent = new Intent(activity, TestActivity.class);
+        ActivityGate.moveToActivity(activity, intent);
+    }
+
     /**
      * After executing the function, the activity will be closed, but the processes associated
      * with the App will remain in the system, such as connecting to the database and so on.

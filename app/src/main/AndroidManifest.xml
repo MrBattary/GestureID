@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GestureID">
         <activity
+            android:name=".ui.activity.TestActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.PlaygroundActivity"
             android:exported="false" />
         <activity

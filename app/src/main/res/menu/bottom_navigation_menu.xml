@@ -6,9 +6,9 @@
         android:title="@string/navigation_title_sensors" />
 
     <item
-        android:id="@+id/root_navigation_home"
-        android:icon="@drawable/ic_home"
-        android:title="@string/navigation_title_home" />
+        android:id="@+id/root_navigation_test"
+        android:icon="@drawable/ic_test"
+        android:title="@string/navigation_title_test" />
 
     <item
         android:id="@+id/root_navigation_playground"
