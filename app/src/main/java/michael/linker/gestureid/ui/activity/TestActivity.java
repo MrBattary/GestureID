@@ -12,7 +12,6 @@ import michael.linker.gestureid.config.event.EventAccumulatorConfiguration;
 import michael.linker.gestureid.config.sensor.SensorManagerConfiguration;
 import michael.linker.gestureid.config.system.SystemConfiguration;
 import michael.linker.gestureid.config.system.SystemGateConfiguration;
-import michael.linker.gestureid.config.system.SystemPersistentNetworkConfiguration;
 import michael.linker.gestureid.data.event.accumulator.mode.active.IActiveEventAccumulator;
 import michael.linker.gestureid.data.event.accumulator.mode.active.IActiveFlushableEventAccumulator;
 import michael.linker.gestureid.data.res.StringsProvider;
@@ -91,14 +90,11 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void initConfigurable() {
-        SystemPersistentNetworkConfiguration.setStorageType(
-                SystemConfiguration.Build.Network.getSystemPersistentNetworkTypeDuringTest()
-        );
-
         Configuration.updateConfiguration(
                 new ConfigurationChain(
                         EventAccumulatorConfiguration.Type.ACTIVE_FLUSHABLE,
-                        SystemConfiguration.Type.Status.ENABLED
+                        SystemConfiguration.Type.Status.ENABLED,
+                        SystemConfiguration.Build.Network.getPersistentNetworkTypeDuringTest()
                 ));
         systemGate = SystemGateConfiguration.getSystemGate();
         systemGate.getAuthRequiredLiveData().observe(this, isAuthRequired -> {
@@ -116,7 +112,6 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void disposeConfigurable() {
-        SystemPersistentNetworkConfiguration.resetStorageTypeFromConfiguration();
         activeEventAccumulator.unsubscribeAll();
         systemGate.shutdown();
         manager.destroy();

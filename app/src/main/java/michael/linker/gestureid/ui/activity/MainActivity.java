@@ -106,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
         Configuration.updateConfiguration(
                 new ConfigurationChain(
                         EventAccumulatorConfiguration.Type.ACTIVE_DISTRIBUTABLE,
-                        SystemConfiguration.Type.Status.DISABLED
+                        SystemConfiguration.Type.Status.DISABLED,
+                        SystemConfiguration.Build.Network.getPersistentNetworkType()
                 ));
         manager = SensorManagerConfiguration.getManager();
         manager.suppressRegistering();

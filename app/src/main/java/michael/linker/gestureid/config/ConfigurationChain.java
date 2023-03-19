@@ -12,8 +12,8 @@ public final class ConfigurationChain {
 
     public ConfigurationChain(
             EventAccumulatorConfiguration.Type eventAccumulatorType,
-            SystemConfiguration.Type.Status systemStatusType
-    ) {
+            SystemConfiguration.Type.Status systemStatusType,
+            SystemConfiguration.Type.PersistentNetwork persistentPersistentNetworkType) {
         currentConfigurationMap = new HashMap<>();
         currentConfigurationMap.put(ConfigurationType.EVENT_ACCUMULATOR,
                 eventAccumulatorType.toString());
@@ -24,6 +24,8 @@ public final class ConfigurationChain {
         currentConfigurationMap.put(ConfigurationType.SENSOR_PROVIDER, DEFAULT_TYPE);
         currentConfigurationMap.put(ConfigurationType.SENSOR_MANAGER, DEFAULT_TYPE);
         currentConfigurationMap.put(ConfigurationType.SYSTEM_GATE, systemStatusType.toString());
+        currentConfigurationMap.put(ConfigurationType.SYSTEM_PERSISTENT_NETWORK,
+                persistentPersistentNetworkType.toString());
     }
 
     public ConfigurationChain(Map<ConfigurationType, String> currentConfiguration) {

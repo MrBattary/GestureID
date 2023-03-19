@@ -1,32 +1,47 @@
 package michael.linker.gestureid.config.system;
 
+import michael.linker.gestureid.config.Configuration;
+import michael.linker.gestureid.config.ConfigurationType;
+import michael.linker.gestureid.config.IConfiguration;
+import michael.linker.gestureid.config.bean.ConfigurationBean;
+import michael.linker.gestureid.config.system.bean.SystemPersistentNetworkConfigurationBean;
 import michael.linker.gestureid.data.system.network.DatabaseSystemNetwork;
 import michael.linker.gestureid.data.system.network.IPersistentSystemNetwork;
 import michael.linker.gestureid.data.system.network.LocalSystemNetwork;
-import michael.linker.gestureid.data.system.network.type.SystemNetworkType;
 
 /**
  * Provides configuration of persistent network
  */
-public class SystemPersistentNetworkConfiguration {
-    private static SystemNetworkType storageType;
+public class SystemPersistentNetworkConfiguration implements IConfiguration {
+    private static IPersistentSystemNetwork dbSystemNetwork = null;
+    private static ConfigurationBean<IPersistentSystemNetwork>
+            persistentNetworkConfigurationBean = null;
 
-    static {
-        resetStorageTypeFromConfiguration();
+    public static IPersistentSystemNetwork getPersistentNetwork() {
+        if (persistentNetworkConfigurationBean == null) {
+            persistentNetworkConfigurationBean =
+                    new SystemPersistentNetworkConfigurationBean(createImplementation(
+                            SystemConfiguration.Build.Network.getPersistentNetworkType()));
+        }
+        return (IPersistentSystemNetwork) persistentNetworkConfigurationBean;
     }
 
-    public static void setStorageType(SystemNetworkType storageType) {
-        SystemPersistentNetworkConfiguration.storageType = storageType;
+    @Override
+    public void configure() {
+        persistentNetworkConfigurationBean =
+                new SystemPersistentNetworkConfigurationBean(createImplementation(
+                        SystemConfiguration.Type.PersistentNetwork.valueOf(Configuration.getConfiguration(
+                                ConfigurationType.SYSTEM_PERSISTENT_NETWORK))));
     }
 
-    public static void resetStorageTypeFromConfiguration() {
-        storageType = SystemConfiguration.Build.Network.getSystemPersistentNetworkType();
-    }
-
-    public static IPersistentSystemNetwork getFreshPersistentNetwork() {
-        switch (storageType) {
+    private static IPersistentSystemNetwork createImplementation(
+            SystemConfiguration.Type.PersistentNetwork persistentNetworkType) {
+        switch (persistentNetworkType) {
             case DATABASE:
-                return new DatabaseSystemNetwork();
+                if (dbSystemNetwork == null) {
+                    dbSystemNetwork = new DatabaseSystemNetwork();
+                }
+                return dbSystemNetwork;
             case LOCAL:
             default:
                 return new LocalSystemNetwork();

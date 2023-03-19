@@ -11,13 +11,16 @@ import michael.linker.gestureid.config.sensor.SensorsConfiguration;
 import michael.linker.gestureid.data.system.metric.type.MetricClassType;
 import michael.linker.gestureid.data.system.metric.type.MetricGroupType;
 import michael.linker.gestureid.data.system.metric.type.MetricType;
-import michael.linker.gestureid.data.system.network.type.SystemNetworkType;
 
 public final class SystemConfiguration {
     public static final class Type {
         public enum Status {
             ENABLED,
             DISABLED
+        }
+        public enum PersistentNetwork {
+            DATABASE,
+            LOCAL
         }
     }
 
@@ -263,12 +266,12 @@ public final class SystemConfiguration {
         }
 
         public static final class Network {
-            public static SystemNetworkType getSystemPersistentNetworkType() {
-                return BuildConfig.SYSTEM_PERSISITENT_NETWORK_TYPE;
+            public static Type.PersistentNetwork getPersistentNetworkType() {
+                return BuildConfig.PERSISITENT_NETWORK_TYPE;
             }
 
-            public static SystemNetworkType getSystemPersistentNetworkTypeDuringTest() {
-                return BuildConfig.SYSTEM_PERSISITENT_NETWORK_TYPE_DURING_TEST;
+            public static Type.PersistentNetwork getPersistentNetworkTypeDuringTest() {
+                return BuildConfig.PERSISITENT_NETWORK_TYPE_DURING_TEST;
             }
 
             public static int getNumberOfUnrecognizedEpisodes() {

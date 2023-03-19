@@ -136,7 +136,8 @@ public class PlaygroundActivity extends AppCompatActivity {
         Configuration.updateConfiguration(
                 new ConfigurationChain(
                         EventAccumulatorConfiguration.Type.ACTIVE_FLUSHABLE,
-                        SystemConfiguration.Type.Status.ENABLED
+                        SystemConfiguration.Type.Status.ENABLED,
+                        SystemConfiguration.Build.Network.getPersistentNetworkType()
                 ));
         systemGate = SystemGateConfiguration.getSystemGate();
         systemGate.getAuthRequiredLiveData().observe(this, isAuthRequired -> {

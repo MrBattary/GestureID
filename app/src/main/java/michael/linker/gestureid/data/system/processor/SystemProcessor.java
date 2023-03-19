@@ -24,7 +24,7 @@ public class SystemProcessor implements ISystemProcessor {
 
     public SystemProcessor() {
         systemCalculator = new SystemCalculator();
-        userModelNetwork = SystemPersistentNetworkConfiguration.getFreshPersistentNetwork();
+        userModelNetwork = SystemPersistentNetworkConfiguration.getPersistentNetwork();
         stashNetwork = new LocalSystemNetwork();
         unrecognizedEpisodesCounter = 0;
     }
