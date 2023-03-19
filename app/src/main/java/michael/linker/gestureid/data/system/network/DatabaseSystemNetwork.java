@@ -22,13 +22,14 @@ public class DatabaseSystemNetwork extends LocalSystemNetwork implements IPersis
     private final Gson gson;
 
     public DatabaseSystemNetwork() {
+        super();
         db = SystemNetworkDatabaseConfiguration.getDatabase();
         gson = new Gson();
         initNodes();
     }
 
     private void initNodes() {
-        Log.i(TAG, "Database system network started nodes initialization");
+        Log.i(TAG, "Database system network started the nodes initialization");
         String hash = SystemConfiguration.Build.getBuildHash();
         NetworkHash dbNetworkHash = db.networkHashDao().get();
         if (dbNetworkHash == null || !hash.equals(dbNetworkHash.hashValue)) {

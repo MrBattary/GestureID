@@ -24,6 +24,7 @@ public class LocalSystemNetwork implements ISystemNetwork, IPersistentSystemNetw
 
     public LocalSystemNetwork() {
         localNodesList = new LinkedList<>();
+        Log.w(TAG, "Local system network have no nodes to load from the persistent storage");
     }
 
     @Override

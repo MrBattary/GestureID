@@ -55,9 +55,7 @@ public class PlaygroundActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        activeEventAccumulator.unsubscribeAll();
-        systemGate.shutdown();
-        manager.destroy();
+        disposeConfigurable();
         super.onPause();
     }
 
@@ -157,5 +155,11 @@ public class PlaygroundActivity extends AppCompatActivity {
 
         manager = SensorManagerConfiguration.getManager();
         manager.unsuppressRegistering();
+    }
+
+    private void disposeConfigurable() {
+        activeEventAccumulator.unsubscribeAll();
+        systemGate.shutdown();
+        manager.destroy();
     }
 }
