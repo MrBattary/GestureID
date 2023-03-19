@@ -5,6 +5,7 @@ plugins {
 def EventAccumulatorOverflowStrategy = 'michael.linker.gestureid.data.event.accumulator.overflow.EventAccumulatorOverflowStrategy'
 def SensorDelayType = 'michael.linker.gestureid.core.sensor.sensor.type.SensorDelayType'
 def MetricType = 'michael.linker.gestureid.data.system.metric.type.MetricType'
+def SystemNetworkType = 'michael.linker.gestureid.data.system.network.type.SystemNetworkType'
 
 android {
     compileSdk 32
@@ -58,6 +59,8 @@ android {
         buildConfigField "${MetricType}[]", "GEO_ROTATION_VECTOR_Z", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
         buildConfigField "${MetricType}[]", "GEO_ROTATION_VECTOR_W", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
         /* Nodes network */
+        buildConfigField SystemNetworkType, "SYSTEM_PERSISITENT_NETWORK_TYPE", "${SystemNetworkType}.DATABASE"
+        buildConfigField SystemNetworkType, "SYSTEM_PERSISITENT_NETWORK_TYPE_DURING_TEST", "${SystemNetworkType}.LOCAL"
         buildConfigField "int", "NUMBER_OF_UNRECOGNIZED_EPISODES", "3"
         buildConfigField "double", "ACCEPTABLE_SPREAD", "0.2"
         buildConfigField "boolean", "SHOULD_UPDATE_ON_ACCEPT", "true"

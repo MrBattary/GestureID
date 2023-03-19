@@ -1,5 +1,7 @@
 package michael.linker.gestureid.data.system.network;
 
+import android.util.Log;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,7 +16,9 @@ import michael.linker.gestureid.data.system.metric.type.MetricGroupType;
 import michael.linker.gestureid.data.system.metric.type.MetricType;
 import michael.linker.gestureid.data.system.network.type.SystemNetworkResult;
 
-public class LocalSystemNetwork implements ISystemNetwork {
+public class LocalSystemNetwork implements ISystemNetwork, IPersistentSystemNetwork {
+    private static final String TAG = LocalSystemNetwork.class.getCanonicalName();
+
     private static final double SPREAD = SystemConfiguration.Build.Network.getAcceptableSpread();
     private final List<EpisodeMetrics> localNodesList;
 
@@ -120,5 +124,10 @@ public class LocalSystemNetwork implements ISystemNetwork {
     @Override
     public void purgeNodes() {
         localNodesList.clear();
+    }
+
+    @Override
+    public void persist() {
+        Log.w(TAG, "Local system network cant persist nodes to the storage!");
     }
 }

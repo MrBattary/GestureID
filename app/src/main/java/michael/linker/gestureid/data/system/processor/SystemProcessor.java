@@ -3,11 +3,11 @@ package michael.linker.gestureid.data.system.processor;
 import android.util.Log;
 
 import michael.linker.gestureid.config.system.SystemConfiguration;
+import michael.linker.gestureid.config.system.SystemPersistentNetworkConfiguration;
 import michael.linker.gestureid.data.event.accumulator.model.AccumulatedEpisode;
 import michael.linker.gestureid.data.system.calculator.ISystemCalculator;
 import michael.linker.gestureid.data.system.calculator.SystemCalculator;
 import michael.linker.gestureid.data.system.calculator.model.EpisodeMetrics;
-import michael.linker.gestureid.data.system.network.DatabaseSystemNetwork;
 import michael.linker.gestureid.data.system.network.IPersistentSystemNetwork;
 import michael.linker.gestureid.data.system.network.ISystemNetwork;
 import michael.linker.gestureid.data.system.network.LocalSystemNetwork;
@@ -24,7 +24,7 @@ public class SystemProcessor implements ISystemProcessor {
 
     public SystemProcessor() {
         systemCalculator = new SystemCalculator();
-        userModelNetwork = new DatabaseSystemNetwork();
+        userModelNetwork = SystemPersistentNetworkConfiguration.getFreshPersistentNetwork();
         stashNetwork = new LocalSystemNetwork();
         unrecognizedEpisodesCounter = 0;
     }

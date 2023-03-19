@@ -8,7 +8,7 @@ import michael.linker.gestureid.core.App;
 import michael.linker.gestureid.data.system.db.AppDatabase;
 
 
-public class SystemDatabaseConfiguration {
+public class SystemNetworkDatabaseConfiguration {
     private static final String DATABASE_NAME = "user-model-network";
     private static AppDatabase sDatabase;
 

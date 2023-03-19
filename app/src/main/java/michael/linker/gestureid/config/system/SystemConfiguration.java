@@ -11,6 +11,7 @@ import michael.linker.gestureid.config.sensor.SensorsConfiguration;
 import michael.linker.gestureid.data.system.metric.type.MetricClassType;
 import michael.linker.gestureid.data.system.metric.type.MetricGroupType;
 import michael.linker.gestureid.data.system.metric.type.MetricType;
+import michael.linker.gestureid.data.system.network.type.SystemNetworkType;
 
 public final class SystemConfiguration {
     public static final class Type {
@@ -262,6 +263,14 @@ public final class SystemConfiguration {
         }
 
         public static final class Network {
+            public static SystemNetworkType getSystemPersistentNetworkType() {
+                return BuildConfig.SYSTEM_PERSISITENT_NETWORK_TYPE;
+            }
+
+            public static SystemNetworkType getSystemPersistentNetworkTypeDuringTest() {
+                return BuildConfig.SYSTEM_PERSISITENT_NETWORK_TYPE_DURING_TEST;
+            }
+
             public static int getNumberOfUnrecognizedEpisodes() {
                 return BuildConfig.NUMBER_OF_UNRECOGNIZED_EPISODES;
             }
