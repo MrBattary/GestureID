@@ -37,6 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/test_end_description"
             android:layout_marginTop="@dimen/fragment_margin_horizontal"
-            android:text="@string/test_button_end" />
+            android:text="@string/button_test_end" />
     </RelativeLayout>
 </ScrollView>

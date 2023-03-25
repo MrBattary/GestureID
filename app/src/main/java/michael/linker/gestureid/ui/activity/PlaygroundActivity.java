@@ -116,7 +116,7 @@ public class PlaygroundActivity extends AppCompatActivity {
         blockDialog = new TwoChoicesDialog(
                 this,
                 new TwoChoicesDialogModel(
-                        StringsProvider.getString(R.string.dialog_auth_failed_tilte),
+                        StringsProvider.getString(R.string.dialog_auth_failed_title),
                         StringsProvider.getString(R.string.dialog_auth_failed_text),
                         StringsProvider.getString(R.string.button_authenticate),
                         StringsProvider.getString(R.string.button_exit)

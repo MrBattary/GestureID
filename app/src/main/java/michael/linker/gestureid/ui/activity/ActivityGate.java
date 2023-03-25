@@ -9,18 +9,18 @@ import michael.linker.gestureid.ui.activity.intent.playground.PlaygroundSettings
 public class ActivityGate {
     public static void moveToMainActivity(final Activity activity) {
         Intent intent = new Intent(activity, MainActivity.class);
-        ActivityGate.moveToActivity(activity, intent);
+        ActivityGate.moveToActivityWithoutHistory(activity, intent);
     }
 
     public static void moveToPlaygroundActivity(final Activity activity,
             PlaygroundSettingsParcelable settings) {
         Intent intent = new Intent(activity, PlaygroundActivity.class);
-        ActivityGate.moveToActivity(activity, PlaygroundSettingsIntent.pack(settings, intent));
+        ActivityGate.moveToActivityWithoutHistory(activity, PlaygroundSettingsIntent.pack(settings, intent));
     }
 
     public static void moveToTestActivity(final Activity activity) {
         Intent intent = new Intent(activity, TestActivity.class);
-        ActivityGate.moveToActivity(activity, intent);
+        ActivityGate.moveToActivityKeepHistory(activity, intent);
     }
 
     /**
@@ -44,9 +44,14 @@ public class ActivityGate {
         System.exit(0);
     }
 
-    private static void moveToActivity(final Activity activity, final Intent intent) {
+    private static void moveToActivityWithoutHistory(final Activity activity, final Intent intent) {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        activity.startActivity(intent);
+        activity.finish();
+    }
+
+    private static void moveToActivityKeepHistory(final Activity activity, final Intent intent) {
         activity.startActivity(intent);
         activity.finish();
     }

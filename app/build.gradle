@@ -60,10 +60,12 @@ android {
         buildConfigField "${MetricType}[]", "GEO_ROTATION_VECTOR_W", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
         /* Nodes network */
         buildConfigField PersistentNetworkType, "PERSISITENT_NETWORK_TYPE", "${PersistentNetworkType}.DATABASE"
-        buildConfigField PersistentNetworkType, "PERSISITENT_NETWORK_TYPE_DURING_TEST", "${PersistentNetworkType}.LOCAL"
+        buildConfigField PersistentNetworkType, "PERSISITENT_NETWORK_TYPE_DURING_TEST", "${PersistentNetworkType}.DATABASE"
         buildConfigField "int", "NUMBER_OF_UNRECOGNIZED_EPISODES", "3"
         buildConfigField "double", "ACCEPTABLE_SPREAD", "0.2"
         buildConfigField "boolean", "SHOULD_UPDATE_ON_ACCEPT", "true"
+        /* Test */
+        buildConfigField "String", "TEST_RESULT_FOLDER_PATH", "\"/Downloads\""
     }
 
     buildTypes {
