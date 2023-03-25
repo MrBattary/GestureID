@@ -31,7 +31,7 @@
                 android:layout_below="@id/test_end_heading"
                 android:layout_marginTop="@dimen/fragment_margin_vertical_small"
                 android:justificationMode="inter_word"
-                android:text="@string/test_begin_description"
+                android:text="@string/test_end_description"
                 android:textAppearance="?attr/textAppearanceBodyLarge" />
 
             <com.google.android.material.textview.MaterialTextView

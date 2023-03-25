@@ -10,15 +10,17 @@
     <string name="navigation_title_test_end">Test end</string>
 
     <!-- Development. -->
-    <string name="placeholder_sensor_name" translatable="false">Sensor</string>
-    <string name="placeholder_sensor_not_found" translatable="false">Sensor was not found</string>
-    <string name="placeholder_sensor_status" translatable="false">Status</string>
+    <string name="placeholder_sensor_name">Sensor</string>
+    <string name="placeholder_sensor_not_found">Sensor was not found</string>
+    <string name="placeholder_sensor_status">Status</string>
     <string name="placeholder_sensor_data" translatable="false">XX YY ZZ WW</string>
     <string name="placeholder_sensors_current_time" translatable="false">NNNNNNNNN</string>
 
     <!-- Texts. -->
-    <!-- | Home. -->
-    <string name="home_header">Greetings!</string>
+    <!-- | Test gate. -->
+    <string name="test_gate_header">Greetings!</string>
+    <string name="test_gate_description">As part of participating in the experiment, you need to pass a special test. During the test, data will be collected from motion sensors. No data other than data from the accelerometer, gyroscope and magnetometer will be collected.
+        \n\nIf you have already passed the test, please send a file with the data collected during the test to the organizer of the experiment.</string>
     <!-- | Sensors. -->
     <string name="sensors_time">Time:</string>
     <string name="sensor_info">Sensor info</string>
@@ -66,9 +68,21 @@
     <string name="playground_restricted_input_hint">Restricted input</string>
     <!-- | Test. -->
     <string name="test_begin_header">About test</string>
-    <string name="test_begin_description">Lorem ipsum</string>
+    <string name="test_begin_description">Thank you for taking the test!
+        \n\nYou have to complete a number of simple tasks to interact with a mobile device through interface elements.
+        \n\nAs mentioned earlier, while you are taking the test, the application will collect and process information from motion sensors.
+        \n\nThanks to the collected and processed information from the sensors of the mobile device, your personal and unique user model will be formed.
+        \n\nThe meaning of the experiment is precisely to find out how unique the user models are and what the effectiveness of the authentication method being developed will be.
+        \n\nWhile you were reading this text, the system was working and has already begun to form your unique model.
+        \n\nHowever, it needs more information, which it will receive while you complete the tasks.
+        \n\nCompleting tasks will not take much time, because the average time to complete all tasks takes about 5 minutes.
+        \n\n<b>Please note that during the test you need to pass at one time, without switching applications and without turning off the phone!</b> This is due to the fact that your user model changes throughout the all test and will be recorded only at the very end!
+        \n\nTo start the test, as well as to move on to subsequent tasks, please click \'next task\' button.</string>
     <string name="test_end_header">The test is completed</string>
-    <string name="test_end_description">Lorem ipsum</string>
+    <string name="test_end_description">The last task is to save the test results. Please click on the \'save test results\' button.
+        \n\nThe generated model will be saved to a plain text file, for which you can choose the name and folder in which it will be saved. If you have a desire, you can easily get acquainted with the contents of this file.
+        \n\nAfter the data is recorded in a file, please send the saved file to the organizers of the experiment.
+        \n\nThank you for passing the test!</string>
 
     <!-- Descriptions. -->
     <string name="content_description_recording_fab">Stop and continue recording</string>
@@ -84,6 +98,7 @@
     <string name="button_no">No</string>
     <string name="button_authenticate">Authenticate</string>
     <string name="button_next">Next</string>
+    <string name="button_try_again">Try again</string>
     <!-- | Home. -->
     <string name="button_home_test_start">Start test</string>
     <!-- | Playground. -->
@@ -102,8 +117,9 @@
     <string name="playground_button_text">Text button</string>
     <!-- | Test. -->
     <string name="button_test_start">Start test</string>
-    <string name="button_test_end">End test</string>
+    <string name="button_test_end">Save test results</string>
     <string name="button_test_to_home">To the home</string>
+    <string name="button_test_next_task">Next task</string>
 
     <!-- Dialogs. -->
     <!-- | Titles. -->
@@ -121,6 +137,6 @@
     <string name="dialog_auth_text">Are you the owner of this device?</string>
     <string name="dialog_auth_failed_text">The device is locked, authentication of the device owner is required!</string>
     <string name="dialog_interrupt_test_text">Are you sure you want to interrupt test? Your progress will be reset and the result will not be generated.</string>
-    <string name="dialog_test_result_writing_error_text">Sorry, but unfortunately we were unable to record the test results. Please contact the organizers of the experiment.</string>
-    <string name="dialog_test_result_writing_success_text"> Thank you for passing the test! Please do not forget to send the file you saved to the organizers of the experiment.</string>
+    <string name="dialog_test_result_writing_error_text">Sorry, but unfortunately we were unable to record the test results. Please try again or abandon test and contact the organizers of the experiment.</string>
+    <string name="dialog_test_result_writing_success_text"> The results have been recorded successfully! Please do not forget to send the file you saved to the organizers of the experiment.</string>
 </resources>

@@ -36,6 +36,8 @@ import michael.linker.gestureid.ui.activity.ActivityGate;
 import michael.linker.gestureid.ui.view.elementary.dialog.IDialog;
 import michael.linker.gestureid.ui.view.elementary.dialog.single.SingleChoiceDialogModel;
 import michael.linker.gestureid.ui.view.elementary.dialog.single.SingleChoiceInfoDialog;
+import michael.linker.gestureid.ui.view.elementary.dialog.two.TwoChoicesDialog;
+import michael.linker.gestureid.ui.view.elementary.dialog.two.TwoChoicesDialogModel;
 
 public class TestEndFragment extends Fragment {
     private static final String TAG =
@@ -125,12 +127,17 @@ public class TestEndFragment extends Fragment {
     }
 
     private void initDialogs() {
-        writingErrorDialog = new SingleChoiceInfoDialog(requireContext(),
-                new SingleChoiceDialogModel(
+        writingErrorDialog = new TwoChoicesDialog(requireContext(),
+                new TwoChoicesDialogModel(
                         StringsProvider.getString(R.string.dialog_error_title),
                         StringsProvider.getString(R.string.dialog_test_result_writing_error_text),
+                        StringsProvider.getString(R.string.button_try_again),
                         StringsProvider.getString(R.string.button_test_to_home)
                 ),
+                (dialogInterface, i) -> {
+                    writingErrorDialog.dismiss();
+                    createDocumentResultLauncher.launch(createDocumentIntent);
+                },
                 (dialogInterface, i) -> {
                     writingErrorDialog.dismiss();
                     ActivityGate.moveToMainActivity(requireActivity());
