@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -45,15 +46,16 @@ public class TestEndViewModel extends ViewModel {
     }
 
     public void writeDataFromNetworkToStream(ContentResolver contentResolver) throws IOException {
-        try (OutputStreamWriter bufferedOutputStreamWriter =
-                     new OutputStreamWriter(
+        try (PrintWriter printWriter =
+                     new PrintWriter(new OutputStreamWriter(
                              contentResolver.openOutputStream(filepath),
-                             StandardCharsets.UTF_8)) {
+                             StandardCharsets.UTF_8))) {
             List<EpisodeMetrics> nodes = persistentSystemNetwork.getNodes();
             for (EpisodeMetrics node : nodes) {
-                bufferedOutputStreamWriter.write(gson.toJson(node).toCharArray());
+                printWriter.write(gson.toJson(node).toCharArray());
+                printWriter.println();
             }
-            bufferedOutputStreamWriter.flush();
+            printWriter.flush();
         }
     }
 }
