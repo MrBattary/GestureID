@@ -111,6 +111,8 @@ dependencies {
     def apache_commons_collections = "4.4"
     def gson_version = "2.10"
     def guava = "31.1"
+    def rx_java = "3.1.5"
+    def rx_java_android = "3.0.2"
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
@@ -120,6 +122,9 @@ dependencies {
 
     implementation "com.google.guava:guava:$guava-android"
     implementation "com.google.code.gson:gson:$gson_version"
+
+    implementation "io.reactivex.rxjava3:rxjava:$rx_java"
+    implementation "io.reactivex.rxjava3:rxandroid:$rx_java_android"
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'

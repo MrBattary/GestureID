@@ -22,11 +22,13 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.button.MaterialButton;
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import michael.linker.gestureid.R;
 import michael.linker.gestureid.config.test.TestConfiguration;
 import michael.linker.gestureid.data.res.StringsProvider;
@@ -44,6 +46,7 @@ public class TestEndFragment extends Fragment {
     private final Intent createDocumentIntent = initCreateDocumentIntent();
 
     private MaterialButton endTestButton;
+    private ViewGroup writingProgressBar;
     private IDialog writingErrorDialog, writingSuccessDialog;
 
     private TestEndViewModel viewModel;
@@ -66,10 +69,54 @@ public class TestEndFragment extends Fragment {
         initFields(view);
         initDialogs();
         initButtons();
+
+        viewModel.getIsWritingAllowed().observe(getViewLifecycleOwner(), isWritingAllowed -> {
+            if (isWritingAllowed) {
+                Single.fromCallable(() -> {
+                            viewModel.writeDataFromNetworkToStream(
+                                    requireContext().getContentResolver());
+                            return true;
+                        })
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new SingleObserver<>() {
+                            @Override
+                            public void onSubscribe(
+                                    @io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                                showProgressBar();
+                            }
+
+                            @Override
+                            public void onSuccess(
+                                    @io.reactivex.rxjava3.annotations.NonNull Boolean isSuccess) {
+                                if (isSuccess) {
+                                    hideProgressBar();
+                                    writingSuccessDialog.show();
+                                }
+                            }
+
+                            @Override
+                            public void onError(
+                                    @io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                                hideProgressBar();
+                                Log.e(TAG,
+                                        "An error occurred during writing test results to the "
+                                                + "output file.",
+                                        e);
+                                writingErrorDialog.show();
+                            }
+                        });
+            } else {
+                hideProgressBar();
+                Log.e(TAG, "Failed to start recording test results due to user choice.");
+                writingErrorDialog.show();
+            }
+        });
     }
 
     private void initFields(final View view) {
         endTestButton = view.findViewById(R.id.test_end_finish_button);
+        writingProgressBar = view.findViewById(R.id.test_end_progress_bar);
     }
 
     private void initButtons() {
@@ -117,26 +164,18 @@ public class TestEndFragment extends Fragment {
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                        final Uri filepath = result.getData().getData();
-                        try (OutputStreamWriter bufferedOutputStreamWriter =
-                                     new OutputStreamWriter(
-                                             requireContext().getContentResolver()
-                                                     .openOutputStream(filepath),
-                                             StandardCharsets.UTF_8)) {
-                            viewModel.writeDataFromNetworkToStream(bufferedOutputStreamWriter);
-
-                            writingSuccessDialog.show();
-                        } catch (IOException e) {
-                            Log.e(TAG,
-                                    "An error occurred during writing test results to the output "
-                                            + "file.",
-                                    e);
-                            writingErrorDialog.show();
-                        }
+                        viewModel.allowWriting(result.getData().getData());
                     } else {
-                        Log.e(TAG, "Failed to start recording test results due to user choice.");
-                        writingErrorDialog.show();
+                        viewModel.restrictWriting();
                     }
                 });
+    }
+
+    private void showProgressBar() {
+        writingProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        writingProgressBar.setVisibility(View.GONE);
     }
 }

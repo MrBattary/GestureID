@@ -1,11 +1,17 @@
 package michael.linker.gestureid.ui.fragment.test.end;
 
+import android.content.ContentResolver;
+import android.net.Uri;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import michael.linker.gestureid.config.system.SystemPersistentNetworkConfiguration;
@@ -16,18 +22,38 @@ public class TestEndViewModel extends ViewModel {
     private final IPersistentSystemNetwork persistentSystemNetwork;
     private final Gson gson;
 
+    MutableLiveData<Boolean> isWritingAllowed;
+    private Uri filepath;
+
     public TestEndViewModel() {
         persistentSystemNetwork = SystemPersistentNetworkConfiguration.getPersistentNetwork();
         gson = new Gson();
+        isWritingAllowed = new MutableLiveData<>();
     }
 
+    public LiveData<Boolean> getIsWritingAllowed() {
+        return isWritingAllowed;
+    }
 
-    public void writeDataFromNetworkToStream(OutputStreamWriter outputStream) throws IOException {
-        List<EpisodeMetrics> nodes = persistentSystemNetwork.getNodes();
+    public void restrictWriting() {
+        isWritingAllowed.postValue(false);
+    }
 
-        for (EpisodeMetrics node : nodes) {
-            outputStream.write(gson.toJson(node).toCharArray());
-            outputStream.flush();
+    public void allowWriting(Uri filepath) {
+        this.filepath = filepath;
+        isWritingAllowed.postValue(true);
+    }
+
+    public void writeDataFromNetworkToStream(ContentResolver contentResolver) throws IOException {
+        try (OutputStreamWriter bufferedOutputStreamWriter =
+                     new OutputStreamWriter(
+                             contentResolver.openOutputStream(filepath),
+                             StandardCharsets.UTF_8)) {
+            List<EpisodeMetrics> nodes = persistentSystemNetwork.getNodes();
+            for (EpisodeMetrics node : nodes) {
+                bufferedOutputStreamWriter.write(gson.toJson(node).toCharArray());
+            }
+            bufferedOutputStreamWriter.flush();
         }
     }
 }
