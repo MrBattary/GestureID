@@ -90,7 +90,7 @@
     <string name="test_scroll_task_description">In this task you have to press all the buttons in a certain order.\nHowever, these buttons are quite far from each other, so you will have to swipe a little…\nAfter all the buttons are pressed, you can move on to the next task.</string>
     <string name="test_scroll_during_task_description">Scroll through and click the desired button</string>
     <string name="test_keyboard_task_description">In this task, you will need to click on the balls that appear as quickly as possible.\nImagine that you are working on a keyboard!\nAfter the counter reaches zero, you can move on to another task.</string>
-    <string name="test_keyboard_during_task_description">Click on the circles!</string>
+    <string name="test_keyboard_during_task_description">Click on the squares!\nSquares left:</string>
     <string name="test_swipe_task_1">Set slider to the max value</string>
     <string name="test_swipe_task_2">Set slider to the min value</string>
     <string name="test_swipe_task_3">Set slider to the middle</string>
