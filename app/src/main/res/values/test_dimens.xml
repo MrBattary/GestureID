@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="test_swipe_vertical_slider">400dp</dimen>
+    <dimen name="test_scroll_vertical_slider">400dp</dimen>
     <dimen name="test_rewind_block_intent">400dp</dimen>
 
     <integer name="test_click_row_weight">1</integer>

@@ -1,4 +1,4 @@
-package michael.linker.gestureid.ui.fragment.test.rewind;
+package michael.linker.gestureid.ui.fragment.test.scroll;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,12 +15,12 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import michael.linker.gestureid.R;
 
-public class TestRewindFragment extends Fragment {
+public class TestScrollFragment extends Fragment {
 
-    private TestRewindViewModel viewModel;
+    private TestScrollViewModel viewModel;
 
-    public static TestRewindFragment newInstance() {
-        return new TestRewindFragment();
+    public static TestScrollFragment newInstance() {
+        return new TestScrollFragment();
     }
 
     @Override
@@ -29,9 +29,9 @@ public class TestRewindFragment extends Fragment {
         NavController navController = NavHostFragment.findNavController(this);
         ViewModelStoreOwner viewModelStoreOwner = navController.getViewModelStoreOwner(
                 R.id.navigation_test);
-        viewModel = new ViewModelProvider(viewModelStoreOwner).get(TestRewindViewModel.class);
+        viewModel = new ViewModelProvider(viewModelStoreOwner).get(TestScrollViewModel.class);
 
-        return inflater.inflate(R.layout.fragment_test_rewind, container, false);
+        return inflater.inflate(R.layout.fragment_test_scroll, container, false);
     }
 
     @Override

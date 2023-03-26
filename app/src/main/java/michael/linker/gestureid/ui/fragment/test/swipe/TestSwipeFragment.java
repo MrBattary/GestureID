@@ -14,7 +14,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import michael.linker.gestureid.R;
-import michael.linker.gestureid.ui.fragment.test.rewind.TestRewindViewModel;
 
 public class TestSwipeFragment extends Fragment {
 

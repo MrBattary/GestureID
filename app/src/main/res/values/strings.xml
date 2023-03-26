@@ -87,7 +87,8 @@
     <string name="test_click_task_description">In this task, you have to click on the highlighted areas that will appear on the screen. Are you ready?</string>
     <string name="test_swipe_task_description">In this task, you will encounter sliders that you have to set to the desired position.\nAfter all the sliders are set to the desired position, you can move on to the next task.</string>
     <string name="test_swipe_during_task_description">Please set all sliders to the correct positions.\nAfter all the sliders are set to the desired position, you can move on to the next task.</string>
-    <string name="test_rewind_task_description">In this task you have to press all the buttons in a certain order.\nHowever, these buttons are quite far from each other, so you will have to swipe a little…\nAfter all the buttons are pressed, you can move on to the next task.</string>
+    <string name="test_scroll_task_description">In this task you have to press all the buttons in a certain order.\nHowever, these buttons are quite far from each other, so you will have to swipe a little…\nAfter all the buttons are pressed, you can move on to the next task.</string>
+    <string name="test_scroll_during_task_description">Scroll through and click the desired button</string>
     <string name="test_keyboard_task_description">In this task, you will need to click on the balls that appear as quickly as possible.\nImagine that you are working on a keyboard!\nAfter the counter reaches zero, you can move on to another task.</string>
     <string name="test_keyboard_during_task_description">Click on the circles!</string>
     <string name="test_swipe_task_1">Set slider to the max value</string>
@@ -96,6 +97,9 @@
     <string name="test_swipe_task_4">Set slider to the top</string>
     <string name="test_swipe_task_5">Set slider to the bottom</string>
     <string name="test_swipe_task_6">Set slider to the middle</string>
+    <string name="test_scroll_button_higher">The button is higher</string>
+    <string name="test_scroll_button_lower">The button is lower</string>
+    <string name="test_scroll_button_end">The next task button is at the bottom</string>
 
     <!-- Descriptions. -->
     <string name="content_description_recording_fab">Stop and continue recording</string>
@@ -134,6 +138,8 @@
     <string name="button_test_to_home">To the home</string>
     <string name="button_test_next_task">To the next task</string>
     <string name="button_test_start_task">Start task</string>
+    <string name="button_test_scroll_click_me_button">Click me!</string>
+    <string name="button_test_scroll_wrong_button">I\'m the wrong button</string>
 
     <!-- Dialogs. -->
     <!-- | Titles. -->
