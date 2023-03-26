@@ -1,13 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragment.test.swipe.TestSwipeFragment">
+    android:layout_height="match_parent">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/test_swipe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:padding="@dimen/fragment_content_margin_small"
+        tools:context=".ui.fragment.test.swipe.TestSwipeFragment">
 
-</FrameLayout>
+        <LinearLayout
+            android:id="@+id/test_swipe_sliders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/test_swipe_description">
+
+            <LinearLayout
+                android:id="@+id/test_swipe_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical"
+                android:orientation="vertical">
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/test_swipe_1_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                    android:justificationMode="inter_word"
+                    android:text="@string/test_swipe_task_1"
+                    android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/test_swipe_1_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:value="0.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="100.0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/test_swipe_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical"
+                android:orientation="vertical">
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/test_swipe_5_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                    android:justificationMode="inter_word"
+                    android:text="@string/test_swipe_task_5"
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/test_swipe_vertical_slider"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/test_swipe_5_slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:rotation="270"
+                        android:layout_gravity="center"
+                        android:value="100.0"
+                        android:valueFrom="0.0"
+                        android:valueTo="100.0" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/test_swipe_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical"
+                android:orientation="vertical">
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/test_swipe_2_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                    android:justificationMode="inter_word"
+                    android:text="@string/test_swipe_task_2"
+                    android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/test_swipe_2_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:value="100.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="100.0" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/test_swipe_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical"
+                android:orientation="vertical">
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/test_swipe_4_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                    android:justificationMode="inter_word"
+                    android:text="@string/test_swipe_task_4"
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/test_swipe_vertical_slider"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/test_swipe_4_slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:rotation="270"
+                        android:layout_gravity="center"
+                        android:value="0.0"
+                        android:valueFrom="0.0"
+                        android:valueTo="100.0" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/test_swipe_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical"
+                android:orientation="vertical">
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/test_swipe_3_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                    android:justificationMode="inter_word"
+                    android:text="@string/test_swipe_task_3"
+                    android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/test_swipe_3_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:value="10.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="100.0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/test_swipe_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical"
+                android:orientation="vertical">
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/test_swipe_6_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+                    android:justificationMode="inter_word"
+                    android:text="@string/test_swipe_task_6"
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/test_swipe_vertical_slider"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/test_swipe_6_slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:rotation="270"
+                        android:layout_gravity="center"
+                        android:value="20.0"
+                        android:valueFrom="0.0"
+                        android:valueTo="100.0" />
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/test_swipe_next_task_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/test_swipe_sliders"
+            android:layout_marginTop="@dimen/fragment_margin_vertical"
+            android:text="@string/button_test_next_task" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/test_swipe_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+            android:justificationMode="inter_word"
+            android:text="@string/test_swipe_during_task_description"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</ScrollView>
