@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="test_click_rows">5</integer>
+    <integer name="test_click_row_weight">1</integer>
+    <integer name="test_click_columns">3</integer>
+    <integer name="test_click_column_weight">1</integer>
+</resources>
