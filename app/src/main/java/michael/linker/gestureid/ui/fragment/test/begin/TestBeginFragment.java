@@ -42,6 +42,6 @@ public class TestBeginFragment extends Fragment {
         final NavController navController = Navigation.findNavController(view);
 
         nextTestStageButton.setOnClickListener(
-                l -> navController.navigate(R.id.navigation_action_test_begin_to_test_end));
+                l -> navController.navigate(R.id.navigation_action_test_begin_to_test_click));
     }
 }
