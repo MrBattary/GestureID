@@ -6,7 +6,10 @@
     <string name="navigation_title_playground_gate">Playground</string>
     <string name="navigation_title_playground">Playground</string>
     <string name="navigation_title_test_begin">Test begin</string>
-    <string name="navigation_title_test_first_stage">Test first stage</string>
+    <string name="navigation_title_test_click_task">Click task</string>
+    <string name="navigation_title_test_swipe_task">Swipe task</string>
+    <string name="navigation_title_test_scroll_task">Scroll task</string>
+    <string name="navigation_title_test_keyboard_task">Keyboard task</string>
     <string name="navigation_title_test_end">Test end</string>
 
     <!-- Development. -->
@@ -111,7 +114,7 @@
     <string name="button_exit">Exit</string>
     <string name="button_leave">Leave</string>
     <string name="button_interrupt">Interrupt</string>
-    <string name="button_yes">Yes</string>-+-
+    <string name="button_yes">Yes</string>
     <string name="button_no">No</string>
     <string name="button_authenticate">Authenticate</string>
     <string name="button_next">Next</string>
@@ -160,4 +163,5 @@
     <string name="dialog_interrupt_test_text">Are you sure you want to interrupt test? Your progress will be reset and the result will not be generated.</string>
     <string name="dialog_test_result_writing_error_text">Sorry, but unfortunately we were unable to record the test results. Please try again or abandon test and contact the organizers of the experiment.</string>
     <string name="dialog_test_result_writing_success_text"> The results have been recorded successfully! Please do not forget to send the file you saved to the organizers of the experiment.</string>
+    <string name="dialog_test_task_completed_successfully">The task has been completed successfully!</string>
 </resources>
