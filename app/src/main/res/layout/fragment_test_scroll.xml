@@ -96,22 +96,5 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/test_scroll_vertical_slider"
             android:text="@string/button_test_scroll_click_me_button" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/test_scroll_pointer_5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/test_scroll_vertical_slider"
-            android:justificationMode="inter_word"
-            android:text="@string/test_scroll_button_end"
-            android:textAlignment="center"
-            android:textAppearance="?attr/textAppearanceBodyLarge" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/test_scroll_next_task_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/fragment_margin_vertical"
-            android:text="@string/button_test_next_task" />
     </LinearLayout>
 </ScrollView>
