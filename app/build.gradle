@@ -66,7 +66,7 @@ android {
         buildConfigField "boolean", "SHOULD_UPDATE_ON_ACCEPT", "true"
         /* Test */
         buildConfigField "String", "TEST_RESULT_FOLDER_PATH", "\"/Downloads\""
-        buildConfigField "int[]", "TEST_CLICK_SEQUENCE", "{" + "7," + "3," + "8," + "11," + "2" + "}"
+        buildConfigField "int[]", "TEST_CLICK_SEQUENCE", "{" + "7" + "}"
     }
 
     buildTypes {
