@@ -30,5 +30,13 @@ public final class TestConfiguration {
                             .boxed()
                             .collect(Collectors.toList())));
         }
+
+        public static int getTestKeyboardStartNumberOfSquares() {
+            return BuildConfig.TEST_KEYBOARD_START_NUMBER_OF_SQUARES;
+        }
+
+        public static int getTestKeyboardSquaresOnTheScreen() {
+            return BuildConfig.TEST_KEYBOARD_SQUARES_ON_SCREEN;
+        }
     }
 }
