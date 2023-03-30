@@ -23,5 +23,12 @@ public final class TestConfiguration {
                             .boxed()
                             .collect(Collectors.toList())));
         }
+
+        public static Queue<Integer> getTestButtonScrollSequence() {
+            return new LinkedList<>(
+                    new ArrayList<>(Arrays.stream(BuildConfig.TEST_BUTTON_SCROLL_SEQUENCE)
+                            .boxed()
+                            .collect(Collectors.toList())));
+        }
     }
 }

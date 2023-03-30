@@ -101,9 +101,8 @@
     <string name="test_swipe_task_5">Set slider from 10% to 20%</string>
     <string name="test_swipe_task_6">Set slider greater than 75%</string>
     <string name="test_swipe_task_7">Set slider lower that 25%</string>
-    <string name="test_scroll_button_higher">The button is higher</string>
-    <string name="test_scroll_button_lower">The button is lower</string>
-    <string name="test_scroll_button_end">The next task button is at the bottom</string>
+    <string name="test_scroll_button_above">The button is above</string>
+    <string name="test_scroll_button_below">The button is below</string>
 
     <!-- Descriptions. -->
     <string name="content_description_recording_fab">Stop and continue recording</string>

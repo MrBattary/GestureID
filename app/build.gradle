@@ -67,6 +67,7 @@ android {
         /* Test */
         buildConfigField "String", "TEST_RESULT_FOLDER_PATH", "\"/Downloads\""
         buildConfigField "int[]", "TEST_CLICK_SEQUENCE", "{" + "7" + "}"
+        buildConfigField "int[]", "TEST_BUTTON_SCROLL_SEQUENCE", "{" + "0," + "3," + "1," + "4," + "2" + "}"
     }
 
     buildTypes {
