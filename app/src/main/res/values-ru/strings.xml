@@ -1,0 +1,166 @@
+<resources>
+    <!-- Navigation. -->
+    <string name="navigation_title_test">Тестирование</string>
+    <string name="navigation_title_sensors">Сенсоры</string>
+    <string name="navigation_title_playground_gate">Полигон</string>
+    <string name="navigation_title_playground">Полигон</string>
+    <string name="navigation_title_test_begin">Начало теста</string>
+    <string name="navigation_title_test_click_task">Задание нажатий</string>
+    <string name="navigation_title_test_swipe_task">Задание смахиваний</string>
+    <string name="navigation_title_test_scroll_task">Задание листания</string>
+    <string name="navigation_title_test_keyboard_task">Задание ввода</string>
+    <string name="navigation_title_test_end">Конец теста</string>
+
+    <!-- Development. -->
+    <string name="placeholder_sensor_name">Сенсор</string>
+    <string name="placeholder_sensor_not_found">Сенсор не был найден</string>
+    <string name="placeholder_sensor_status">Статус</string>
+    <string name="placeholder_sensor_data" translatable="false">XX YY ZZ WW</string>
+    <string name="placeholder_sensors_current_time" translatable="false">NNNNNNNNN</string>
+
+    <!-- Texts. -->
+    <!-- | Test gate. -->
+    <string name="test_gate_header">Здравствуйте!</string>
+    <string name="test_gate_description">В рамках участия в эксперименте Вам необходимо пройти специальный тест. Время прохождения теста система аутентификации будет работать в режиме обучения, непрерывно обрабатывая информацию поступающую с датчиков. Информация собирается системой только с датчиков движения таких как: гироскоп, акселерометр и магнитометр.
+        \n\nЕсли Вы уже прошли данный тест, пожалуйста отправьте файл с сохраненными результатами эксперимента организаторам.</string>
+    <!-- | Sensors. -->
+    <string name="sensors_time">Время:</string>
+    <string name="sensor_info">Информация о сенсоре</string>
+    <string name="sensor_info_not_available">Сенсор недоступен</string>
+    <string name="sensor_info_name">Имя: </string>
+    <string name="sensor_info_range">Разброс: </string>
+    <string name="sensor_info_resolution">Точность: </string>
+    <string name="sensor_info_power">Мощность: </string>
+    <string name="sensor_info_delay">Минимальная задержка: </string>
+    <string name="sensor_accelerometer">Акселерометр</string>
+    <string name="sensor_accelerometer_not_available">Акселерометр недоступен</string>
+    <string name="sensor_gyroscope">Гироскоп</string>
+    <string name="sensor_gyroscope_not_available">Гироскоп недоступен</string>
+    <string name="sensor_magnetometer">Магнитометр</string>
+    <string name="sensor_magnetometer_not_available">Магнитометр недоступен</string>
+    <string name="sensor_gravity">Гравитометр</string>
+    <string name="sensor_gravity_not_available">Гравитометр недоступен</string>
+    <string name="sensor_linear_acceleration">Датчик линейного ускорения</string>
+    <string name="sensor_linear_acceleration_not_available">Датчик линейного ускорения недоступен</string>
+    <string name="sensor_rotation_vector">Датчик поворота</string>
+    <string name="sensor_rotation_vector_not_available">Датчик поворота недоступен</string>
+    <string name="sensor_geo_rotation_vector">Геомагничтый датчик поворота</string>
+    <string name="sensor_geo_rotation_vector_not_available">Геомагничтый датчик поворота недоступен</string>
+    <!-- | Playground gate. -->
+    <string name="playground_gate_header">Полигон</string>
+    <string name="playground_gate_description">Полигон предназначен для обучения и тестирования системы аутентификации путем записи данных с сенсоров во время выполнения управляющих жестов и последующего анализа полученной информации.\nВ <b>режиме тренировки</b> поступающие данные просто записываются, без дополнительной проверки, что позволяет быстро создать или развить пользовательскую модель.\nВ <b>режиме контроля</b> система считывает данные жестов, анализирует их и, после успешной аутентификации, модифицирует пользовательскую модель.</string>
+    <string name="playground_gate_mode_training">Тренировка</string>
+    <string name="playground_gate_mode_control">Контроль</string>
+    <string name="playground_gate_mode_enter_button">Войти на полигон</string>
+    <!-- | Playground. -->
+    <string name="playground_header">Развлекайтесь!</string>
+    <string name="playground_chip_1">Первая фишка</string>
+    <string name="playground_chip_2">Вторая фишка</string>
+    <string name="playground_chip_3">Третяя фишка</string>
+    <string name="playground_chip_4">Четвертая фишка</string>
+    <string name="playground_chip_5">Пятая фишка</string>
+    <string name="playground_checkbox_1">Первый флажок</string>
+    <string name="playground_checkbox_2">Второй флажок</string>
+    <string name="playground_checkbox_3">Третий флажок</string>
+    <string name="playground_checkbox_4">Четвертый флажок</string>
+    <string name="playground_checkbox_5">Пятый флажок</string>
+    <string name="playground_input_hint">Обычный ввод</string>
+    <string name="playground_clear_input_hint">Пустой ввод</string>
+    <string name="playground_password_input_hint">Ввод пароля</string>
+    <string name="playground_restricted_input_hint">Ограниченный ввод</string>
+    <!-- | Test. -->
+    <string name="test_begin_header">Тестирование</string>
+    <string name="test_begin_description">Спасибо за то, что согласились принять участие в тесте!
+        \n\nВам предстоит выполнить ряд простых заданий, во время выполнения которых Вы будете взаимодействовать с мобильным устройством посредством элементов интерфейса.
+        \n\nКак упоминалось ранее, пока Вы проходите тест, система аутентификации будет собирать и обрабатывать информацию с датчиков движения.
+        \n\nВ результате сбора и обработки информации с датчиков мобильного устройства будет сформирована Ваша персональная и уникальная пользовательская модель.
+        \n\nСмысл эксперимента как раз и заключается в том, чтобы выяснить, насколько уникальны пользовательские модели и какова будет эффективность разрабатываемого метода аутентификации.
+        \n\nКстати, пока Вы читете этот текст, система уже ведет работу по формированию вашей уникальной модели.
+        \n\nОднако ей требуется больше информации, которую мы надеемся получить благодаря Вам по мере выполнения Вами заданий.
+        \n\nВсего в тесте 5 заданий выполнение которых в среднем занимает около 5 минут.
+        \n\n<b>Пожалуйста, обратите внимание, что выполнить все задания в тесте Вам нужно за один раз, не переключая приложение и не выключая телефон!</b> Это связано с тем, что Ваша пользовательская модель формируется на протяжении всего теста и будет завершена только в самом конце!
+        \n\nЧтобы начать тест, а также перейти к последующим заданиям, пожалуйста, нажмите на кнопку \'Cледующее задание\'.</string>
+    <string name="test_end_header">Тестирование завершено</string>
+    <string name="test_end_description">Вашей полседняя задача - сохранить результаты теста. Пожалуйста, нажмите на кнопку \'Сохранить результаты\'.
+        \n\nСгенерированная модель будет сохранена в обычный текстовый файл, для которого Вы можете выбрать имя и папку, в которую будут сохранены результаты. Если у Вас возникнет желание, Вы можете ознакомиться с содержимым этого файла.
+        \n\nПосле того, как данные будут записаны в файл, пожалуйста, отправьте сохраненный файл организаторам эксперимента.
+        \n\nСпасибо Вам за прохождение теста!</string>
+    <string name="test_next_task_restricted">Чтобы перейти к следующему заданию, пожалуйста, завершите это задание полностью!</string>
+    <string name="test_click_task_description">В этой задаче Вы должны будете нажимать на подсвеченные области, которые будут появятся на экране. Вы готовы?</string>
+    <string name="test_swipe_task_description">В этой задаче Вы столкнетесь с ползунками, которые вам нужно установить в нужное положение.\nПосле того, как все ползунки будут установлены в нужное положение, Вы сможете перейти к следующему заданию.</string>
+    <string name="test_swipe_during_task_description">Пожалуйста, установите все ползунки в правильные положения.</string>
+    <string name="test_scroll_task_description">В этом задании Вы должны нажать все кнопки в определенном порядке.\nОднако эти кнопки расположены довольно далеко друг от друга, поэтому вам придется немного полистать…\nПосле того, как все кнопки будут нажаты, Вы сможете перейти к следующему заданию.</string>
+    <string name="test_scroll_during_task_description">Листайте и найдите кнопку, которую можно нажать</string>
+    <string name="test_keyboard_task_description">В этом задании Вам нужно будет нажимать на появляющиеся прямоугольники в нижней части экрана как можно быстрее.\nПредставьте, что вы работаете на клавиатуре!\nПосле того, как счетчик достигнет нуля, Вы сможете перейти к следующему заданию.</string>
+    <string name="test_keyboard_during_task_description">Нажимайте на прямоугольники!\nОсталость:</string>
+    <string name="test_swipe_task_1">Установите ползунок в максимальное значение</string>
+    <string name="test_swipe_task_2">Установите ползунок в минимальное значение</string>
+    <string name="test_swipe_task_3">Установите ползунок примерно на середину</string>
+    <string name="test_swipe_task_4">Установите ползунки примерно на одинаковые значения</string>
+    <string name="test_swipe_task_5">Установите ползунок с 10% до 20%</string>
+    <string name="test_swipe_task_6">Установите ползунок на значение больше 75%</string>
+    <string name="test_swipe_task_7">Установите ползунок на значение меньше 25%</string>
+    <string name="test_scroll_button_above">Нужная кнопка находится <b>выше</b>!</string>
+    <string name="test_scroll_button_below">Нужная кнопка находится <b>ниже</b>!</string>
+
+    <!-- Descriptions. -->
+    <string name="content_description_recording_fab">Остановить и продолжить запись</string>
+
+    <!-- Buttons. -->
+    <!-- | General. -->
+    <string name="button_ok">ОК</string>
+    <string name="button_cancel">Отмена</string>
+    <string name="button_exit">Выйти</string>
+    <string name="button_leave">Покинуть</string>
+    <string name="button_interrupt">Прервать</string>
+    <string name="button_yes">Да</string>
+    <string name="button_no">Нет</string>
+    <string name="button_authenticate">Аутентифицироваться</string>
+    <string name="button_next">Далее</string>
+    <string name="button_try_again">Попробовать снова</string>
+    <!-- | Home. -->
+    <string name="button_home_test_start">Начать тестирвоание</string>
+    <!-- | Playground. -->
+    <string name="playground_radio_button_1">Первая радио кнопка</string>
+    <string name="playground_radio_button_2">Вторая радио кнопка</string>
+    <string name="playground_radio_button_3">Третья радио кнопка</string>
+    <string name="playground_radio_button_4">Четвертая радио кнопка</string>
+    <string name="playground_radio_button_5">Пятая радио кнопка</string>
+    <string name="playground_toggle_button_left">Лево</string>
+    <string name="playground_toggle_button_middle">Центр</string>
+    <string name="playground_toggle_button_right">Право</string>
+    <string name="playground_button_elevated">Приподнятая кнопка</string>
+    <string name="playground_button_filled">Заполненная кнопка</string>
+    <string name="playground_button_filled_tonal">Заполненная тональная кнопка</string>
+    <string name="playground_button_outlined">Выделенная кнопка</string>
+    <string name="playground_button_text">Текстовая кнопка</string>
+    <!-- | Test. -->
+    <string name="button_test_start">Начать тестирование</string>
+    <string name="button_test_end">Сохранить результаты</string>
+    <string name="button_test_to_home">Вернуться на главную</string>
+    <string name="button_test_next_task">Следующее задание</string>
+    <string name="button_test_start_task">Начать задание</string>
+    <string name="button_test_scroll_click_me_button">Нажми на меня!</string>
+    <string name="button_test_scroll_wrong_button">Меня не нажмешь</string>
+
+    <!-- Dialogs. -->
+    <!-- | Titles. -->
+    <string name="dialog_exit_title">Выход</string>
+    <string name="dialog_error_title">Ошибка</string>
+    <string name="dialog_success_title">Успех</string>
+    <string name="dialog_leave_playground_title">Покинуть полигон</string>
+    <string name="dialog_auth_title">Аутентификация</string>
+    <string name="dialog_auth_failed_title">Доступ запрещен</string>
+    <string name="dialog_interrupt_test_title">Прервать тест</string>
+    <string name="dialog_test_task_description_title">Описание задания</string>
+
+    <!-- | Texts. -->
+    <string name="dialog_exit_text">Вы уверены, что хотите закрыть приложение?</string>
+    <string name="dialog_leave_playground_text">Вы уверены, что хотите покинуть полигон?</string>
+    <string name="dialog_auth_text">Являетесь ли вы владельцем этого устройства?</string>
+    <string name="dialog_auth_failed_text">Устройство заблокировано, требуется аутентификация владельца устройства!</string>
+    <string name="dialog_interrupt_test_text">Вы уверены, что хотите прервать тест? Прогресс создания вашей персональной модели пользователя будет сброшен и его будет необходимо начать заново!</string>
+    <string name="dialog_test_result_writing_error_text">Извините, но, к сожалению, мы не смогли записать результаты теста. Пожалуйста, попробуйте еще раз или прервите тест и свяжитесь с организаторами эксперимента.</string>
+    <string name="dialog_test_result_writing_success_text">Результаты были успешно сохранены! Пожалуйста, не забудьте отправить сохраненный вами файл организаторам эксперимента.</string>
+    <string name="dialog_test_task_completed_successfully">Задание выполнено успешно!</string>
+</resources>
