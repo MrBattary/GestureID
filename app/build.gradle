@@ -71,9 +71,9 @@ android {
         /* | Scroll test: Set of numbers from 0 to 4 */
         buildConfigField "int[]", "TEST_BUTTON_SCROLL_SEQUENCE", "{" + "0," + "3," + "1," + "4," + "2" + "}"
         /* | Keyboard test: Any number from 0 */
-        buildConfigField "int", "TEST_KEYBOARD_START_NUMBER_OF_SQUARES", "3"
-        /* | Keyboard test: Any number from 0 to TEST_KEYBOARD_START_NUMBER_OF_SQUARES */
-        buildConfigField "int", "TEST_KEYBOARD_SQUARES_ON_SCREEN", "2"
+        buildConfigField "int", "TEST_KEYBOARD_NUMBER_OF_SQUARES", "100"
+        /* | Keyboard test: Any number from 1 to 55 */
+        buildConfigField "int", "TEST_KEYBOARD_SQUARES_ON_SCREEN", "5"
     }
 
     buildTypes {

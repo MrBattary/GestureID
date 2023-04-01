@@ -31,8 +31,8 @@ public final class TestConfiguration {
                             .collect(Collectors.toList())));
         }
 
-        public static int getTestKeyboardStartNumberOfSquares() {
-            return BuildConfig.TEST_KEYBOARD_START_NUMBER_OF_SQUARES;
+        public static int getTestKeyboardNumberOfSquares() {
+            return BuildConfig.TEST_KEYBOARD_NUMBER_OF_SQUARES;
         }
 
         public static int getTestKeyboardSquaresOnTheScreen() {
