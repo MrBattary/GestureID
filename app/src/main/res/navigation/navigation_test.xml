@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_test"
+    app:startDestination="@id/navigation_test_begin">
+
+    <fragment
+        android:id="@+id/navigation_test_begin"
+        android:name="michael.linker.gestureid.ui.fragment.test.begin.TestBeginFragment"
+        android:label="@string/navigation_title_test_begin"
+        tools:layout="@layout/fragment_test_begin">
+        <action
+            android:id="@+id/navigation_action_test_begin_to_test_click"
+            app:destination="@id/navigation_test_click"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_test"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_test_click"
+        android:name="michael.linker.gestureid.ui.fragment.test.click.TestClickFragment"
+        android:label="@string/navigation_title_test_click_task"
+        tools:layout="@layout/fragment_test_click">
+        <action
+            android:id="@+id/navigation_action_test_click_to_test_swipe"
+            app:destination="@id/navigation_test_swipe"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_test"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_test_swipe"
+        android:name="michael.linker.gestureid.ui.fragment.test.swipe.TestSwipeFragment"
+        android:label="@string/navigation_title_test_swipe_task"
+        tools:layout="@layout/fragment_test_swipe">
+        <action
+            android:id="@+id/navigation_action_test_swipe_to_test_scroll"
+            app:destination="@id/navigation_test_scroll"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_test"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_test_scroll"
+        android:name="michael.linker.gestureid.ui.fragment.test.scroll.TestScrollFragment"
+        android:label="@string/navigation_title_test_scroll_task"
+        tools:layout="@layout/fragment_test_scroll">
+        <action
+            android:id="@+id/navigation_action_test_scroll_to_test_keyboard"
+            app:destination="@id/navigation_test_keyboard"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_test"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_test_keyboard"
+        android:name="michael.linker.gestureid.ui.fragment.test.keyboard.TestKeyboardFragment"
+        android:label="@string/navigation_title_test_keyboard_task"
+        tools:layout="@layout/fragment_test_keyboard">
+        <action
+            android:id="@+id/navigation_action_test_keyboard_to_test_end"
+            app:destination="@id/navigation_test_end"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_test"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_test_end"
+        android:name="michael.linker.gestureid.ui.fragment.test.end.TestEndFragment"
+        android:label="@string/navigation_title_test_end"
+        tools:layout="@layout/fragment_test_end"/>
+
+</navigation>

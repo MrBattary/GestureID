@@ -33,7 +33,7 @@ public class PlaygroundActivity extends AppCompatActivity {
     private ISystemGate systemGate;
     private ISensorManager manager;
 
-    private IDialog leaveDialog, authStubDialog;
+    private IDialog leaveDialog, authStubDialog, blockDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +55,7 @@ public class PlaygroundActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        activeEventAccumulator.unsubscribeAll();
-        systemGate.shutdown();
-        manager.destroy();
+        disposeConfigurable();
         super.onPause();
     }
 
@@ -111,7 +109,25 @@ public class PlaygroundActivity extends AppCompatActivity {
                 },
                 (dialogInterface, i) -> {
                     leaveDialog.dismiss();
+                    blockDialog.show();
                     systemGate.notifyAboutAuthResult(SystemGateAuthResult.AUTH_FAILED);
+                }
+        );
+        blockDialog = new TwoChoicesDialog(
+                this,
+                new TwoChoicesDialogModel(
+                        StringsProvider.getString(R.string.dialog_auth_failed_title),
+                        StringsProvider.getString(R.string.dialog_auth_failed_text),
+                        StringsProvider.getString(R.string.button_authenticate),
+                        StringsProvider.getString(R.string.button_exit)
+                ),
+                (dialogInterface, i) -> {
+                    leaveDialog.dismiss();
+                    authStubDialog.show();
+                },
+                (dialogInterface, i) -> {
+                    leaveDialog.dismiss();
+                    ActivityGate.finishApplication(this);
                 }
         );
     }
@@ -120,7 +136,8 @@ public class PlaygroundActivity extends AppCompatActivity {
         Configuration.updateConfiguration(
                 new ConfigurationChain(
                         EventAccumulatorConfiguration.Type.ACTIVE_FLUSHABLE,
-                        SystemConfiguration.Type.Status.ENABLED
+                        SystemConfiguration.Type.Status.ENABLED,
+                        SystemConfiguration.Build.Network.getPersistentNetworkType()
                 ));
         systemGate = SystemGateConfiguration.getSystemGate();
         systemGate.getAuthRequiredLiveData().observe(this, isAuthRequired -> {
@@ -129,6 +146,7 @@ public class PlaygroundActivity extends AppCompatActivity {
                     systemGate.notifyAboutAuthResult(SystemGateAuthResult.AUTH_ACQUIRED);
                 } else {
                     authStubDialog.show();
+                    // TODO: Add a real auth via biometric auth (e.g. BiometricPrompt.Builder)
                 }
             }
         });
@@ -138,5 +156,11 @@ public class PlaygroundActivity extends AppCompatActivity {
 
         manager = SensorManagerConfiguration.getManager();
         manager.unsuppressRegistering();
+    }
+
+    private void disposeConfigurable() {
+        activeEventAccumulator.unsubscribeAll();
+        systemGate.shutdown();
+        manager.destroy();
     }
 }

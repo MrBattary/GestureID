@@ -9,6 +9,7 @@ public class PlaygroundSettingsParcelable implements Parcelable {
     private SystemMode mode;
 
     public PlaygroundSettingsParcelable() {
+        mode = SystemMode.CONTROL;
     }
 
     public PlaygroundSettingsParcelable(SystemMode mode) {

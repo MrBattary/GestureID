@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/test_begin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/fragment_content_margin_small"
+        tools:context=".ui.fragment.test.begin.TestBeginFragment">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/test_begin_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="@string/test_begin_header"
+            android:textAppearance="?attr/textAppearanceHeadlineLarge" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/test_begin_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/test_begin_heading"
+            android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+            android:justificationMode="inter_word"
+            android:text="@string/test_begin_description"
+            android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/test_begin_next_button"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/test_begin_description"
+            android:layout_marginTop="@dimen/fragment_margin_horizontal"
+            android:text="@string/button_test_next_task" />
+    </RelativeLayout>
+</ScrollView>

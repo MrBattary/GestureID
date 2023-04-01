@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/test_keyboard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.test.keyboard.TestKeyboardFragment">
+
+    <FrameLayout
+        android:id="@+id/test_keyboard_zone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"/>
+
+    <RelativeLayout
+        android:id="@+id/test_keyboard_info"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/test_keyboard_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:justificationMode="inter_word"
+            android:text="@string/test_keyboard_during_task_description"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceHeadlineMedium" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/test_keyboard_counter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/test_keyboard_description"
+            android:layout_centerInParent="true"
+            android:justificationMode="inter_word"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceHeadlineMedium" />
+    </RelativeLayout>
+</RelativeLayout>

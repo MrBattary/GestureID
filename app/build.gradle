@@ -4,6 +4,8 @@ plugins {
 
 def EventAccumulatorOverflowStrategy = 'michael.linker.gestureid.data.event.accumulator.overflow.EventAccumulatorOverflowStrategy'
 def SensorDelayType = 'michael.linker.gestureid.core.sensor.sensor.type.SensorDelayType'
+def MetricType = 'michael.linker.gestureid.data.system.metric.type.MetricType'
+def PersistentNetworkType = 'michael.linker.gestureid.config.system.SystemConfiguration.Type.PersistentNetwork'
 
 android {
     compileSdk 32
@@ -18,19 +20,63 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         /* Shared config */
-        /* Sensors */
-        buildConfigField "boolean", "DEACTIVATE_ACCELEROMETER", "false"
-        buildConfigField "boolean", "DEACTIVATE_GYROSCOPE", "false"
-        buildConfigField "boolean", "DEACTIVATE_MAGNETOMETER", "false"
-        buildConfigField "boolean", "DEACTIVATE_GRAVITY", "true"
-        buildConfigField "boolean", "DEACTIVATE_LINEAR_ACCELERATION", "true"
-        buildConfigField "boolean", "DEACTIVATE_ROTATION_VECTOR", "true"
-        buildConfigField "boolean", "DEACTIVATE_GEOMAGNETIC_ROTATION_VECTOR", "true"
         /* Listeners */
         buildConfigField "Integer", "SENSOR_DELAY", "${SensorDelayType}.GAME"
         /* Buffer */
         buildConfigField "int", "EVENT_ACCUMULATOR_MAX_SIZE", "1000"
         buildConfigField EventAccumulatorOverflowStrategy, "EVENT_ACCUMULATOR_OVERFLOW_STRATEGY", "${EventAccumulatorOverflowStrategy}.FLUSH_OLDEST"
+        /* Calculations */
+        /* - General */
+        buildConfigField "${MetricType}[]", "GENERAL_TIME", "{" + "${MetricType}.SPREAD_METRIC," + "}"
+        /* - Accelerometer */
+        buildConfigField "${MetricType}[]", "ACCELEROMETER_X", "{" + "${MetricType}.MIN_METRIC," + "${MetricType}.MAX_METRIC," + "${MetricType}.SPREAD_METRIC," + "}"
+        buildConfigField "${MetricType}[]", "ACCELEROMETER_Y", "{" + "${MetricType}.MIN_METRIC," + "${MetricType}.MAX_METRIC," + "${MetricType}.SPREAD_METRIC," + "}"
+        buildConfigField "${MetricType}[]", "ACCELEROMETER_Z", "{" + "${MetricType}.MIN_METRIC," + "${MetricType}.MAX_METRIC," + "${MetricType}.SPREAD_METRIC," + "}"
+        /* - Gyroscope */
+        buildConfigField "${MetricType}[]", "GYROSCOPE_X", "{" + "${MetricType}.MIN_METRIC," + "${MetricType}.MAX_METRIC," + "${MetricType}.SPREAD_METRIC," + "}"
+        buildConfigField "${MetricType}[]", "GYROSCOPE_Y", "{" + "${MetricType}.MIN_METRIC," + "${MetricType}.MAX_METRIC," + "${MetricType}.SPREAD_METRIC," + "}"
+        buildConfigField "${MetricType}[]", "GYROSCOPE_Z", "{" + "${MetricType}.MIN_METRIC," + "${MetricType}.MAX_METRIC," + "${MetricType}.SPREAD_METRIC," + "}"
+        /* - Magnetometer */
+        buildConfigField "${MetricType}[]", "MAGNETOMETER_X", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
+        buildConfigField "${MetricType}[]", "MAGNETOMETER_Y", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
+        buildConfigField "${MetricType}[]", "MAGNETOMETER_Z", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
+        /* - Gravity */
+        buildConfigField "${MetricType}[]", "GRAVITY_X", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
+        buildConfigField "${MetricType}[]", "GRAVITY_Y", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
+        buildConfigField "${MetricType}[]", "GRAVITY_Z", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
+        /* - Linear acceleration */
+        buildConfigField "${MetricType}[]", "LINEAR_ACCELERATION_X", "{" + "${MetricType}.MIN_METRIC," + "${MetricType}.MAX_METRIC," + "${MetricType}.SPREAD_METRIC," + "}"
+        buildConfigField "${MetricType}[]", "LINEAR_ACCELERATION_Y", "{" + "${MetricType}.MIN_METRIC," + "${MetricType}.MAX_METRIC," + "${MetricType}.SPREAD_METRIC," + "}"
+        buildConfigField "${MetricType}[]", "LINEAR_ACCELERATION_Z", "{" + "${MetricType}.MIN_METRIC," + "${MetricType}.MAX_METRIC," + "${MetricType}.SPREAD_METRIC," + "}"
+        /* - Rotation vector */
+        buildConfigField "${MetricType}[]", "ROTATION_VECTOR_X", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
+        buildConfigField "${MetricType}[]", "ROTATION_VECTOR_Y", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
+        buildConfigField "${MetricType}[]", "ROTATION_VECTOR_Z", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
+        buildConfigField "${MetricType}[]", "ROTATION_VECTOR_W", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
+        /* - Geo rotation vector */
+        buildConfigField "${MetricType}[]", "GEO_ROTATION_VECTOR_X", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
+        buildConfigField "${MetricType}[]", "GEO_ROTATION_VECTOR_Y", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
+        buildConfigField "${MetricType}[]", "GEO_ROTATION_VECTOR_Z", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
+        buildConfigField "${MetricType}[]", "GEO_ROTATION_VECTOR_W", "{" + "${MetricType}.ARITHMETIC_MEAN," + "}"
+        /* Nodes network */
+        buildConfigField PersistentNetworkType, "PERSISITENT_NETWORK_TYPE", "${PersistentNetworkType}.DATABASE"
+        buildConfigField PersistentNetworkType, "PERSISITENT_NETWORK_TYPE_DURING_TEST", "${PersistentNetworkType}.DATABASE"
+        buildConfigField "int", "NUMBER_OF_UNRECOGNIZED_EPISODES", "3"
+        buildConfigField "double", "ACCEPTABLE_SPREAD", "0.2"
+        buildConfigField "boolean", "SHOULD_UPDATE_ON_ACCEPT", "true"
+        /* Test */
+        buildConfigField "String", "TEST_RESULT_FOLDER_PATH", "\"/Downloads\""
+        /* | Click test: Array of numbers from 0 to 14 */
+        buildConfigField "int[]", "TEST_CLICK_SEQUENCE", "{"+ "7," + "2," + "12," + "8," + "0,"+
+                "14," + "2," + "6," + "5," + "9," + "11," + "4,"+ "13,"+ "3,"+ "10," + "3," +
+                "2," + "7," + "0," + "5," + "9," + "14," + "8,"+ "1," + "13," + "6," + "11," +
+                "4," + "12," + "7" + "}"
+        /* | Scroll test: Set of numbers from 0 to 4 */
+        buildConfigField "int[]", "TEST_BUTTON_SCROLL_SEQUENCE", "{" + "0," + "3," + "1," + "4," + "2" + "}"
+        /* | Keyboard test: Any number from 0 */
+        buildConfigField "int", "TEST_KEYBOARD_NUMBER_OF_SQUARES", "100"
+        /* | Keyboard test: Any number from 1 to 55 */
+        buildConfigField "int", "TEST_KEYBOARD_SQUARES_ON_SCREEN", "5"
     }
 
     buildTypes {
@@ -76,6 +122,8 @@ dependencies {
     def apache_commons_collections = "4.4"
     def gson_version = "2.10"
     def guava = "31.1"
+    def rx_java = "3.1.5"
+    def rx_java_android = "3.0.2"
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
@@ -85,6 +133,9 @@ dependencies {
 
     implementation "com.google.guava:guava:$guava-android"
     implementation "com.google.code.gson:gson:$gson_version"
+
+    implementation "io.reactivex.rxjava3:rxjava:$rx_java"
+    implementation "io.reactivex.rxjava3:rxandroid:$rx_java_android"
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'

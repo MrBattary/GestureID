@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_navigation_test"
+    app:startDestination="@id/navigation_test_gate">
+
+    <fragment
+        android:id="@+id/navigation_test_gate"
+        android:name="michael.linker.gestureid.ui.fragment.main.test.gate.TestGateFragment"
+        android:label="@string/navigation_title_test"
+        tools:layout="@layout/fragment_test_gate" />
+</navigation>

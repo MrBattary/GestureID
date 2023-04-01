@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/test_swipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/fragment_content_margin_small"
+        tools:context=".ui.fragment.test.swipe.TestSwipeFragment">
+
+        <LinearLayout
+            android:id="@+id/test_swipe_sliders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/test_swipe_description"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/test_swipe_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/test_swipe_1_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/test_swipe_1_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:clickable="false" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/test_swipe_1_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/test_swipe_1_checkbox"
+                        android:justificationMode="inter_word"
+                        android:text="@string/test_swipe_task_1"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+                </RelativeLayout>
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/test_swipe_1_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:value="0.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="100.0"
+                    app:labelBehavior="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/test_swipe_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/test_swipe_2_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/test_swipe_2_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:clickable="false" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/test_swipe_2_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/test_swipe_2_checkbox"
+                        android:justificationMode="inter_word"
+                        android:text="@string/test_swipe_task_2"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+                </RelativeLayout>
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/test_swipe_2_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:value="100.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="100.0"
+                    app:labelBehavior="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/test_swipe_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/test_swipe_3_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/test_swipe_3_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:clickable="false" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/test_swipe_3_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/test_swipe_3_checkbox"
+                        android:justificationMode="inter_word"
+                        android:text="@string/test_swipe_task_3"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+                </RelativeLayout>
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/test_swipe_3_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:value="10.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="100.0"
+                    app:labelBehavior="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/test_swipe_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/test_swipe_4_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/test_swipe_4_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:clickable="false" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/test_swipe_4_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/test_swipe_4_checkbox"
+                        android:justificationMode="inter_word"
+                        android:text="@string/test_swipe_task_4"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+                </RelativeLayout>
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/test_swipe_4_first_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:value="10.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="100.0" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/test_swipe_4_second_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:value="90.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="100.0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/test_swipe_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/test_swipe_5_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/test_swipe_5_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:clickable="false" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/test_swipe_5_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/test_swipe_5_checkbox"
+                        android:justificationMode="inter_word"
+                        android:text="@string/test_swipe_task_5"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+                </RelativeLayout>
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/test_swipe_5_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:value="70.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="100.0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/test_swipe_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/test_swipe_6_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/test_swipe_6_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:clickable="false" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/test_swipe_6_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/test_swipe_6_checkbox"
+                        android:justificationMode="inter_word"
+                        android:text="@string/test_swipe_task_6"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+                </RelativeLayout>
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/test_swipe_6_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:value="0.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="100.0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/test_swipe_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_margin_vertical"
+                android:clickable="false"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/test_swipe_7_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/test_swipe_7_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/test_swipe_7_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/test_swipe_7_checkbox"
+                        android:justificationMode="inter_word"
+                        android:text="@string/test_swipe_task_7"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+                </RelativeLayout>
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/test_swipe_7_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:value="100.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="100.0" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/test_swipe_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/fragment_margin_vertical_small"
+            android:justificationMode="inter_word"
+            android:text="@string/test_swipe_during_task_description"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</ScrollView>

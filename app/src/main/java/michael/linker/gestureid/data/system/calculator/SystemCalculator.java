@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
 
 import michael.linker.gestureid.config.system.SystemConfiguration;
 import michael.linker.gestureid.data.event.accumulator.model.AccumulatedEpisode;
@@ -41,14 +42,14 @@ public class SystemCalculator implements ISystemCalculator {
         Metric<Double> metric = new Metric<>();
 
         for (MetricClassType metricClass : requiredMetricClassSet) {
-            Set<MetricGroupType> requiredMetricGroupSet =
-                    SystemConfiguration.Build.Group.getMetricGroupForClass(metricClass);
+            Map<MetricGroupType, SortedSet<MetricType>> metricsOfClass =
+                    SystemConfiguration.Build.Metric.getMetricsForClass(metricClass);
 
-            for (MetricGroupType metricGroup : requiredMetricGroupSet) {
-                Set<MetricType> requiredMetricSet =
-                        SystemConfiguration.Build.Metric.getMetricForGroup(metricGroup);
+            for (MetricGroupType metricGroup : metricsOfClass.keySet()) {
+                SortedSet<MetricType> metricTypeSet = metricsOfClass.get(metricGroup);
+                assert metricTypeSet != null;
 
-                for (MetricType metricType : requiredMetricSet) {
+                for(MetricType metricType : metricTypeSet) {
                     Double metricValue = getMetricCalculator(metricType)
                             .calculate(rearrangedEpisode, metricClass, metricGroup);
                     metric.putMetric(

@@ -1,9 +1,12 @@
 package michael.linker.gestureid.config.system;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import michael.linker.gestureid.BuildConfig;
 import michael.linker.gestureid.config.sensor.SensorsConfiguration;
 import michael.linker.gestureid.data.system.metric.type.MetricClassType;
 import michael.linker.gestureid.data.system.metric.type.MetricGroupType;
@@ -15,23 +18,33 @@ public final class SystemConfiguration {
             ENABLED,
             DISABLED
         }
+        public enum PersistentNetwork {
+            DATABASE,
+            LOCAL
+        }
     }
 
     public static final class Build {
         public static String getBuildHash() {
             StringBuilder sb = new StringBuilder();
             for (MetricClassType classType : MetricClassType.values()) {
+
                 if (Class.isMetricClassRequired(classType)) {
                     sb.append(classType);
-                }
-                for (MetricGroupType groupType : Group.getMetricGroupForClass(classType)) {
-                    sb.append(groupType);
-                }
-            }
-            for (MetricGroupType groupType : MetricGroupType.values()) {
-                sb.append(groupType);
-                for (MetricType metricType : Metric.getMetricForGroup(groupType)) {
-                    sb.append(metricType);
+                    Map<MetricGroupType, SortedSet<MetricType>> metricsOfClass =
+                            Metric.getMetricsForClass(classType);
+                    SortedSet<MetricGroupType> metricGroupTypeSet = new TreeSet<>(
+                            metricsOfClass.keySet());
+
+                    for (MetricGroupType metricGroupType : metricGroupTypeSet) {
+                        sb.append(metricGroupType);
+                        SortedSet<MetricType> metricTypeSet = metricsOfClass.get(metricGroupType);
+                        assert metricTypeSet != null;
+
+                        for (MetricType metricType : metricTypeSet) {
+                            sb.append(metricType);
+                        }
+                    }
                 }
             }
             return sb.toString();
@@ -90,217 +103,187 @@ public final class SystemConfiguration {
             }
         }
 
-        public static final class Group {
-            private static final SortedSet<MetricGroupType> GENERAL_METRIC_CLASS_SET;
-            private static final SortedSet<MetricGroupType> ACCELEROMETER_METRIC_CLASS_SET;
-            private static final SortedSet<MetricGroupType> GYROSCOPE_METRIC_CLASS_SET;
-            private static final SortedSet<MetricGroupType> MAGNETOMETER_METRIC_CLASS_SET;
-            private static final SortedSet<MetricGroupType> GRAVITY_METRIC_CLASS_SET;
-            private static final SortedSet<MetricGroupType> LINEAR_ACCELERATION_METRIC_CLASS_SET;
-            private static final SortedSet<MetricGroupType> ROTATION_VECTOR_METRIC_CLASS_SET;
-            private static final SortedSet<MetricGroupType> GEO_ROTATION_VECTOR_METRIC_CLASS_SET;
-            private static final SortedSet<MetricGroupType> EMPTY_SET;
+        public static final class Metric {
+            private static final Map<MetricGroupType, SortedSet<MetricType>> generalMetrics,
+                    accelerometerMetrics, gyroscopeMetrics, magnetometerMetrics, gravityMetrics,
+                    linearAccelerationMetrics, rotationVectorMetrics, geoRotationVectorMetrics;
 
             static {
-                GENERAL_METRIC_CLASS_SET = new TreeSet<>(Set.of(MetricGroupType.TIME_METRIC_GROUP));
-                ACCELEROMETER_METRIC_CLASS_SET = new TreeSet<>(
-                        Set.of(MetricGroupType.AXIS_X_METRIC_GROUP,
-                                MetricGroupType.AXIS_Y_METRIC_GROUP,
-                                MetricGroupType.AXIS_Z_METRIC_GROUP));
-                GYROSCOPE_METRIC_CLASS_SET = new TreeSet<>(
-                        Set.of(MetricGroupType.AXIS_X_METRIC_GROUP,
-                                MetricGroupType.AXIS_Y_METRIC_GROUP,
-                                MetricGroupType.AXIS_Z_METRIC_GROUP));
-                MAGNETOMETER_METRIC_CLASS_SET = new TreeSet<>(
-                        Set.of(MetricGroupType.AXIS_STATIC_X_METRIC_GROUP,
-                                MetricGroupType.AXIS_STATIC_Y_METRIC_GROUP,
-                                MetricGroupType.AXIS_STATIC_Z_METRIC_GROUP));
-                GRAVITY_METRIC_CLASS_SET = new TreeSet<>(
-                        Set.of(MetricGroupType.AXIS_STATIC_X_METRIC_GROUP,
-                                MetricGroupType.AXIS_STATIC_Y_METRIC_GROUP,
-                                MetricGroupType.AXIS_STATIC_Z_METRIC_GROUP));
-                LINEAR_ACCELERATION_METRIC_CLASS_SET = new TreeSet<>(
-                        Set.of(MetricGroupType.AXIS_X_METRIC_GROUP,
-                                MetricGroupType.AXIS_Y_METRIC_GROUP,
-                                MetricGroupType.AXIS_Z_METRIC_GROUP));
-                ROTATION_VECTOR_METRIC_CLASS_SET = new TreeSet<>(
-                        Set.of(MetricGroupType.AXIS_STATIC_X_METRIC_GROUP,
-                                MetricGroupType.AXIS_STATIC_Y_METRIC_GROUP,
-                                MetricGroupType.AXIS_STATIC_Z_METRIC_GROUP,
-                                MetricGroupType.AXIS_STATIC_W_METRIC_GROUP));
-                GEO_ROTATION_VECTOR_METRIC_CLASS_SET = new TreeSet<>(
-                        Set.of(MetricGroupType.AXIS_STATIC_X_METRIC_GROUP,
-                                MetricGroupType.AXIS_STATIC_Y_METRIC_GROUP,
-                                MetricGroupType.AXIS_STATIC_Z_METRIC_GROUP,
-                                MetricGroupType.AXIS_STATIC_W_METRIC_GROUP));
-                EMPTY_SET = new TreeSet<>();
+                generalMetrics = Map.of(MetricGroupType.TIME_METRIC_GROUP, getGeneralMetrics());
+                accelerometerMetrics = Map.of(
+                        MetricGroupType.AXIS_X_METRIC_GROUP, getAccelerometerXMetrics(),
+                        MetricGroupType.AXIS_Y_METRIC_GROUP, getAccelerometerYMetrics(),
+                        MetricGroupType.AXIS_Z_METRIC_GROUP, getAccelerometerZMetrics());
+                gyroscopeMetrics = Map.of(
+                        MetricGroupType.AXIS_X_METRIC_GROUP, getGyroscopeXMetrics(),
+                        MetricGroupType.AXIS_Y_METRIC_GROUP, getGyroscopeYMetrics(),
+                        MetricGroupType.AXIS_Z_METRIC_GROUP, getGyroscopeZMetrics());
+                magnetometerMetrics = Map.of(
+                        MetricGroupType.AXIS_X_METRIC_GROUP, getMagnetometerXMetrics(),
+                        MetricGroupType.AXIS_Y_METRIC_GROUP, getMagnetometerYMetrics(),
+                        MetricGroupType.AXIS_Z_METRIC_GROUP, getMagnetometerZMetrics());
+                gravityMetrics = Map.of(
+                        MetricGroupType.AXIS_X_METRIC_GROUP, getGravityXMetrics(),
+                        MetricGroupType.AXIS_Y_METRIC_GROUP, getGravityYMetrics(),
+                        MetricGroupType.AXIS_Z_METRIC_GROUP, getGravityZMetrics());
+                linearAccelerationMetrics = Map.of(
+                        MetricGroupType.AXIS_X_METRIC_GROUP, getLinearAccelerationXMetrics(),
+                        MetricGroupType.AXIS_Y_METRIC_GROUP, getLinearAccelerationYMetrics(),
+                        MetricGroupType.AXIS_Z_METRIC_GROUP, getLinearAccelerationZMetrics());
+                rotationVectorMetrics = Map.of(
+                        MetricGroupType.AXIS_X_METRIC_GROUP, getRotationVectorXMetrics(),
+                        MetricGroupType.AXIS_Y_METRIC_GROUP, getRotationVectorYMetrics(),
+                        MetricGroupType.AXIS_Z_METRIC_GROUP, getRotationVectorZMetrics(),
+                        MetricGroupType.AXIS_W_METRIC_GROUP, getRotationVectorWMetrics());
+                geoRotationVectorMetrics = Map.of(
+                        MetricGroupType.AXIS_X_METRIC_GROUP, getGeoRotationVectorXMetrics(),
+                        MetricGroupType.AXIS_Y_METRIC_GROUP, getGeoRotationVectorYMetrics(),
+                        MetricGroupType.AXIS_Z_METRIC_GROUP, getGeoRotationVectorZMetrics(),
+                        MetricGroupType.AXIS_W_METRIC_GROUP,
+                        getGeoRotationVectorWMetrics());
+
             }
 
-            public static SortedSet<MetricGroupType> getMetricGroupForClass(
+            public static Map<MetricGroupType, SortedSet<MetricType>> getMetricsForClass(
                     MetricClassType classType) {
                 switch (classType) {
                     case GENERAL_METRIC_CLASS:
-                        return getMetricGroupForGeneralClass();
+                        return generalMetrics;
                     case ACCELEROMETER_METRIC_CLASS:
-                        return getMetricGroupForAccelerometerClass();
+                        return accelerometerMetrics;
                     case GYROSCOPE_METRIC_CLASS:
-                        return getMetricGroupForGyroscopeClass();
+                        return gyroscopeMetrics;
                     case MAGNETOMETER_METRIC_CLASS:
-                        return getMetricGroupForMagnetometerClass();
+                        return magnetometerMetrics;
                     case GRAVITY_METRIC_CLASS:
-                        return getMetricGroupForGravityClass();
+                        return gravityMetrics;
                     case LINEAR_ACCELERATION_METRIC_CLASS:
-                        return getMetricLinearAccelerationClass();
+                        return linearAccelerationMetrics;
                     case ROTATION_VECTOR_METRIC_CLASS:
-                        return getMetricGroupForRotationVectorClass();
+                        return rotationVectorMetrics;
                     case GEO_ROTATION_VECTOR_METRIC_CLASS:
-                        return getMetricGroupForGeoRotationVectorClass();
+                        return geoRotationVectorMetrics;
                     default:
-                        return EMPTY_SET;
+                        return new HashMap<>();
                 }
             }
 
-            public static SortedSet<MetricGroupType> getMetricGroupForGeneralClass() {
-                return GENERAL_METRIC_CLASS_SET;
+            public static SortedSet<MetricType> getGeneralMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.GENERAL_TIME));
             }
 
-            public static SortedSet<MetricGroupType> getMetricGroupForAccelerometerClass() {
-                return ACCELEROMETER_METRIC_CLASS_SET;
+            public static SortedSet<MetricType> getAccelerometerXMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.ACCELEROMETER_X));
             }
 
-            public static SortedSet<MetricGroupType> getMetricGroupForGyroscopeClass() {
-                return GYROSCOPE_METRIC_CLASS_SET;
+            public static SortedSet<MetricType> getAccelerometerYMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.ACCELEROMETER_Y));
             }
 
-
-            public static SortedSet<MetricGroupType> getMetricGroupForMagnetometerClass() {
-                return MAGNETOMETER_METRIC_CLASS_SET;
+            public static SortedSet<MetricType> getAccelerometerZMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.ACCELEROMETER_Z));
             }
 
-            public static SortedSet<MetricGroupType> getMetricGroupForGravityClass() {
-                return GRAVITY_METRIC_CLASS_SET;
+            public static SortedSet<MetricType> getGyroscopeXMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.GYROSCOPE_X));
             }
 
-            public static SortedSet<MetricGroupType> getMetricLinearAccelerationClass() {
-                return LINEAR_ACCELERATION_METRIC_CLASS_SET;
+            public static SortedSet<MetricType> getGyroscopeYMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.GYROSCOPE_Y));
             }
 
-            public static SortedSet<MetricGroupType> getMetricGroupForRotationVectorClass() {
-                return ROTATION_VECTOR_METRIC_CLASS_SET;
+            public static SortedSet<MetricType> getGyroscopeZMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.GYROSCOPE_Z));
             }
 
-            public static SortedSet<MetricGroupType> getMetricGroupForGeoRotationVectorClass() {
-                return GEO_ROTATION_VECTOR_METRIC_CLASS_SET;
-            }
-        }
-
-        public static final class Metric {
-            public static final SortedSet<MetricType> TIME_METRIC_GROUP_SET;
-            public static final SortedSet<MetricType> AXIS_X_METRIC_GROUP_SET;
-            public static final SortedSet<MetricType> AXIS_Y_METRIC_GROUP_SET;
-            public static final SortedSet<MetricType> AXIS_Z_METRIC_GROUP_SET;
-            public static final SortedSet<MetricType> AXIS_W_METRIC_GROUP_SET;
-            public static final SortedSet<MetricType> AXIS_STATIC_X_METRIC_GROUP_SET;
-            public static final SortedSet<MetricType> AXIS_STATIC_Y_METRIC_GROUP_SET;
-            public static final SortedSet<MetricType> AXIS_STATIC_Z_METRIC_GROUP_SET;
-            public static final SortedSet<MetricType> AXIS_STATIC_W_METRIC_GROUP_SET;
-            public static final SortedSet<MetricType> EMPTY_SET;
-
-            static {
-                TIME_METRIC_GROUP_SET = new TreeSet<>(Set.of(MetricType.SPREAD_METRIC));
-                AXIS_X_METRIC_GROUP_SET = new TreeSet<>(
-                        Set.of(MetricType.MIN_METRIC, MetricType.MAX_METRIC,
-                                MetricType.SPREAD_METRIC));
-                AXIS_Y_METRIC_GROUP_SET = new TreeSet<>(
-                        Set.of(MetricType.MIN_METRIC, MetricType.MAX_METRIC,
-                                MetricType.SPREAD_METRIC));
-                AXIS_Z_METRIC_GROUP_SET = new TreeSet<>(
-                        Set.of(MetricType.MIN_METRIC, MetricType.MAX_METRIC,
-                                MetricType.SPREAD_METRIC));
-                AXIS_W_METRIC_GROUP_SET = new TreeSet<>(
-                        Set.of(MetricType.MIN_METRIC, MetricType.MAX_METRIC,
-                                MetricType.SPREAD_METRIC));
-                AXIS_STATIC_X_METRIC_GROUP_SET = new TreeSet<>(Set.of(MetricType.ARITHMETIC_MEAN));
-                AXIS_STATIC_Y_METRIC_GROUP_SET = new TreeSet<>(Set.of(MetricType.ARITHMETIC_MEAN));
-                AXIS_STATIC_Z_METRIC_GROUP_SET = new TreeSet<>(Set.of(MetricType.ARITHMETIC_MEAN));
-                AXIS_STATIC_W_METRIC_GROUP_SET = new TreeSet<>(Set.of(MetricType.ARITHMETIC_MEAN));
-                EMPTY_SET = new TreeSet<>();
+            public static SortedSet<MetricType> getMagnetometerXMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.MAGNETOMETER_X));
             }
 
-
-            public static SortedSet<MetricType> getMetricForGroup(MetricGroupType metricGroupType) {
-                switch (metricGroupType) {
-                    case TIME_METRIC_GROUP:
-                        return getMetricForTimeGroup();
-                    case AXIS_X_METRIC_GROUP:
-                        return getMetricForAxisXGroup();
-                    case AXIS_Y_METRIC_GROUP:
-                        return getMetricForAxisYGroup();
-                    case AXIS_Z_METRIC_GROUP:
-                        return getMetricForAxisZGroup();
-                    case AXIS_W_METRIC_GROUP:
-                        return getMetricForAxisWGroup();
-                    case AXIS_STATIC_X_METRIC_GROUP:
-                        return getMetricForStaticAxisXGroup();
-                    case AXIS_STATIC_Y_METRIC_GROUP:
-                        return getMetricForStaticAxisYGroup();
-                    case AXIS_STATIC_Z_METRIC_GROUP:
-                        return getMetricForStaticAxisZGroup();
-                    case AXIS_STATIC_W_METRIC_GROUP:
-                        return getMetricForStaticAxisWGroup();
-                    default:
-                        return EMPTY_SET;
-                }
+            public static SortedSet<MetricType> getMagnetometerYMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.MAGNETOMETER_Y));
             }
 
-            public static SortedSet<MetricType> getMetricForTimeGroup() {
-                return TIME_METRIC_GROUP_SET;
+            public static SortedSet<MetricType> getMagnetometerZMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.MAGNETOMETER_Z));
             }
 
-            public static SortedSet<MetricType> getMetricForAxisXGroup() {
-                return AXIS_X_METRIC_GROUP_SET;
+            public static SortedSet<MetricType> getGravityXMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.GRAVITY_X));
             }
 
-            public static SortedSet<MetricType> getMetricForAxisYGroup() {
-                return AXIS_Y_METRIC_GROUP_SET;
+            public static SortedSet<MetricType> getGravityYMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.GRAVITY_Y));
             }
 
-            public static SortedSet<MetricType> getMetricForAxisZGroup() {
-                return AXIS_Z_METRIC_GROUP_SET;
+            public static SortedSet<MetricType> getGravityZMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.GRAVITY_Z));
             }
 
-            public static SortedSet<MetricType> getMetricForAxisWGroup() {
-                return AXIS_W_METRIC_GROUP_SET;
+            public static SortedSet<MetricType> getLinearAccelerationXMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.LINEAR_ACCELERATION_X));
             }
 
-            public static SortedSet<MetricType> getMetricForStaticAxisXGroup() {
-                return AXIS_STATIC_X_METRIC_GROUP_SET;
+            public static SortedSet<MetricType> getLinearAccelerationYMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.LINEAR_ACCELERATION_Y));
             }
 
-            public static SortedSet<MetricType> getMetricForStaticAxisYGroup() {
-                return AXIS_STATIC_Y_METRIC_GROUP_SET;
+            public static SortedSet<MetricType> getLinearAccelerationZMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.LINEAR_ACCELERATION_Z));
             }
 
-            public static SortedSet<MetricType> getMetricForStaticAxisZGroup() {
-                return AXIS_STATIC_Z_METRIC_GROUP_SET;
+            public static SortedSet<MetricType> getRotationVectorXMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.ROTATION_VECTOR_X));
             }
 
-            public static SortedSet<MetricType> getMetricForStaticAxisWGroup() {
-                return AXIS_STATIC_W_METRIC_GROUP_SET;
+            public static SortedSet<MetricType> getRotationVectorYMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.ROTATION_VECTOR_Y));
+            }
+
+            public static SortedSet<MetricType> getRotationVectorZMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.ROTATION_VECTOR_Z));
+            }
+
+            public static SortedSet<MetricType> getRotationVectorWMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.ROTATION_VECTOR_W));
+            }
+
+            public static SortedSet<MetricType> getGeoRotationVectorXMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.GEO_ROTATION_VECTOR_X));
+            }
+
+            public static SortedSet<MetricType> getGeoRotationVectorYMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.GEO_ROTATION_VECTOR_Y));
+            }
+
+            public static SortedSet<MetricType> getGeoRotationVectorZMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.GEO_ROTATION_VECTOR_Z));
+            }
+
+            public static SortedSet<MetricType> getGeoRotationVectorWMetrics() {
+                return new TreeSet<>(Set.of(BuildConfig.GEO_ROTATION_VECTOR_W));
             }
         }
 
         public static final class Network {
+            public static Type.PersistentNetwork getPersistentNetworkType() {
+                return BuildConfig.PERSISITENT_NETWORK_TYPE;
+            }
+
+            public static Type.PersistentNetwork getPersistentNetworkTypeDuringTest() {
+                return BuildConfig.PERSISITENT_NETWORK_TYPE_DURING_TEST;
+            }
+
             public static int getNumberOfUnrecognizedEpisodes() {
-                return 3;
+                return BuildConfig.NUMBER_OF_UNRECOGNIZED_EPISODES;
             }
 
             public static double getAcceptableSpread() {
-                return 0.2;
+                return BuildConfig.ACCEPTABLE_SPREAD;
             }
 
             public static boolean shouldUpdateOnAccept() {
-                return true;
+                return BuildConfig.SHOULD_UPDATE_ON_ACCEPT;
             }
         }
     }

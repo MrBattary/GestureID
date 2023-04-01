@@ -1,21 +1,29 @@
 <resources>
-    <string name="app_name">GestureID</string>
+    <string name="app_name" translatable="false">GestureID</string>
     <!-- Navigation. -->
-    <string name="navigation_title_home">Home</string>
+    <string name="navigation_title_test">Test</string>
     <string name="navigation_title_sensors">Sensors</string>
     <string name="navigation_title_playground_gate">Playground</string>
     <string name="navigation_title_playground">Playground</string>
+    <string name="navigation_title_test_begin">Test begin</string>
+    <string name="navigation_title_test_click_task">Click task</string>
+    <string name="navigation_title_test_swipe_task">Swipe task</string>
+    <string name="navigation_title_test_scroll_task">Scroll task</string>
+    <string name="navigation_title_test_keyboard_task">Keyboard task</string>
+    <string name="navigation_title_test_end">Test end</string>
 
     <!-- Development. -->
-    <string name="placeholder_sensor_name" translatable="false">Sensor</string>
-    <string name="placeholder_sensor_not_found" translatable="false">Sensor was not found</string>
-    <string name="placeholder_sensor_status" translatable="false">Status</string>
+    <string name="placeholder_sensor_name">Sensor</string>
+    <string name="placeholder_sensor_not_found">Sensor was not found</string>
+    <string name="placeholder_sensor_status">Status</string>
     <string name="placeholder_sensor_data" translatable="false">XX YY ZZ WW</string>
     <string name="placeholder_sensors_current_time" translatable="false">NNNNNNNNN</string>
 
     <!-- Texts. -->
-    <!-- | Sensors. -->
-    <string name="home_header">Greetings!</string>
+    <!-- | Test gate. -->
+    <string name="test_gate_header">Greetings!</string>
+    <string name="test_gate_description">As part of participating in the experiment, you need to pass a special test. During the test, data will be collected from motion sensors. No data other than data from the accelerometer, gyroscope and magnetometer will be collected.
+        \n\nIf you have already passed the test, please send a file with the data collected during the test to the organizer of the experiment.</string>
     <!-- | Sensors. -->
     <string name="sensors_time">Time:</string>
     <string name="sensor_info">Sensor info</string>
@@ -61,6 +69,40 @@
     <string name="playground_clear_input_hint">Clear input</string>
     <string name="playground_password_input_hint">Password input</string>
     <string name="playground_restricted_input_hint">Restricted input</string>
+    <!-- | Test. -->
+    <string name="test_begin_header">About test</string>
+    <string name="test_begin_description">Thank you for taking the test!
+        \n\nYou have to complete a number of simple tasks to interact with a mobile device through interface elements.
+        \n\nAs mentioned earlier, while you are taking the test, the application will collect and process information from motion sensors.
+        \n\nThanks to the collected and processed information from the sensors of the mobile device, your personal and unique user model will be formed.
+        \n\nThe meaning of the experiment is precisely to find out how unique the user models are and what the effectiveness of the authentication method being developed will be.
+        \n\nWhile you were reading this text, the system was working and has already begun to form your unique model.
+        \n\nHowever, it needs more information, which it will receive while you complete the tasks.
+        \n\nCompleting tasks will not take much time, because the average time to complete all tasks takes about 5 minutes.
+        \n\n<b>Please note that during the test you need to pass at one time, without switching applications and without turning off the phone!</b> This is due to the fact that your user model changes throughout the all test and will be recorded only at the very end!
+        \n\nTo start the test, as well as to move on to subsequent tasks, please click \'next task\' button.</string>
+    <string name="test_end_header">The test is completed</string>
+    <string name="test_end_description">The last task is to save the test results. Please click on the \'save test results\' button.
+        \n\nThe generated model will be saved to a plain text file, for which you can choose the name and folder in which it will be saved. If you have a desire, you can easily get acquainted with the contents of this file.
+        \n\nAfter the data is recorded in a file, please send the saved file to the organizers of the experiment.
+        \n\nThank you for passing the test!</string>
+    <string name="test_next_task_restricted">To proceed to the next task, please finish this task completely!</string>
+    <string name="test_click_task_description">In this task, you have to click on the highlighted areas that will appear on the screen. Are you ready?</string>
+    <string name="test_swipe_task_description">In this task, you will encounter sliders that you have to set to the desired position.\nAfter all the sliders are set to the desired position, you can move on to the next task.</string>
+    <string name="test_swipe_during_task_description">Please set all sliders to the correct positions.\nAfter all the sliders are set to the desired position, you can move on to the next task.</string>
+    <string name="test_scroll_task_description">In this task you have to press all the buttons in a certain order.\nHowever, these buttons are quite far from each other, so you will have to swipe a little…\nAfter all the buttons are pressed, you can move on to the next task.</string>
+    <string name="test_scroll_during_task_description">Scroll through and click the desired button</string>
+    <string name="test_keyboard_task_description">In this task, you will need to click on the squares that appear as quickly as possible.\nImagine that you are working on a keyboard!\nAfter the counter reaches zero, you can move on to another task.</string>
+    <string name="test_keyboard_during_task_description">Click on the squares!\nSquares left:</string>
+    <string name="test_swipe_task_1">Set slider to the max value</string>
+    <string name="test_swipe_task_2">Set slider to the min value</string>
+    <string name="test_swipe_task_3">Set slider to the middle</string>
+    <string name="test_swipe_task_4">Set sliders to the same values</string>
+    <string name="test_swipe_task_5">Set slider from 10% to 20%</string>
+    <string name="test_swipe_task_6">Set slider greater than 75%</string>
+    <string name="test_swipe_task_7">Set slider lower that 25%</string>
+    <string name="test_scroll_button_above">The button is above</string>
+    <string name="test_scroll_button_below">The button is below</string>
 
     <!-- Descriptions. -->
     <string name="content_description_recording_fab">Stop and continue recording</string>
@@ -71,8 +113,14 @@
     <string name="button_cancel">Cancel</string>
     <string name="button_exit">Exit</string>
     <string name="button_leave">Leave</string>
+    <string name="button_interrupt">Interrupt</string>
     <string name="button_yes">Yes</string>
     <string name="button_no">No</string>
+    <string name="button_authenticate">Authenticate</string>
+    <string name="button_next">Next</string>
+    <string name="button_try_again">Try again</string>
+    <!-- | Home. -->
+    <string name="button_home_test_start">Start test</string>
     <!-- | Playground. -->
     <string name="playground_radio_button_1">First radio button</string>
     <string name="playground_radio_button_2">Second radio button</string>
@@ -87,14 +135,33 @@
     <string name="playground_button_filled_tonal">Filled tonal button</string>
     <string name="playground_button_outlined">Outlined button</string>
     <string name="playground_button_text">Text button</string>
+    <!-- | Test. -->
+    <string name="button_test_start">Start test</string>
+    <string name="button_test_end">Save test results</string>
+    <string name="button_test_to_home">To the home</string>
+    <string name="button_test_next_task">To the next task</string>
+    <string name="button_test_start_task">Start task</string>
+    <string name="button_test_scroll_click_me_button">Click me!</string>
+    <string name="button_test_scroll_wrong_button">I\'m the wrong button</string>
 
     <!-- Dialogs. -->
     <!-- | Titles. -->
     <string name="dialog_exit_title">Exit</string>
+    <string name="dialog_error_title">Error</string>
+    <string name="dialog_success_title">Success</string>
     <string name="dialog_leave_playground_title">Leave playground</string>
     <string name="dialog_auth_title">Authentication</string>
+    <string name="dialog_auth_failed_title">Access denied</string>
+    <string name="dialog_interrupt_test_title">Interrupt test</string>
+    <string name="dialog_test_task_description_title">About task</string>
+
     <!-- | Texts. -->
     <string name="dialog_exit_text">Are you sure you want to close the application?</string>
     <string name="dialog_leave_playground_text">Are you sure you want to leave the playground?</string>
     <string name="dialog_auth_text">Are you the owner of this device?</string>
+    <string name="dialog_auth_failed_text">The device is locked, authentication of the device owner is required!</string>
+    <string name="dialog_interrupt_test_text">Are you sure you want to interrupt test? Your progress will be reset and the result will not be generated.</string>
+    <string name="dialog_test_result_writing_error_text">Sorry, but unfortunately we were unable to record the test results. Please try again or abandon test and contact the organizers of the experiment.</string>
+    <string name="dialog_test_result_writing_success_text"> The results have been recorded successfully! Please do not forget to send the file you saved to the organizers of the experiment.</string>
+    <string name="dialog_test_task_completed_successfully">The task has been completed successfully!</string>
 </resources>

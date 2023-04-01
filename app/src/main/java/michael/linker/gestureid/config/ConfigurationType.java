@@ -1,6 +1,7 @@
 package michael.linker.gestureid.config;
 
 public enum ConfigurationType {
+    SYSTEM_PERSISTENT_NETWORK,
     SYSTEM_GATE,
     EVENT_ACCUMULATOR,
     EVENT_SYNCHRONIZER,
