@@ -39,11 +39,15 @@ public class ActiveFlushableEventAccumulator extends ABaseActiveEventAccumulator
     @Override
     public void flush() {
         accumulationEnabled = false;
-        AccumulatedEpisode episode = new AccumulatedEpisode(new ArrayList<>(eventDeque));
-        eventDeque.clear();
-        for (IActiveEventAccumulatorListener listener : super.listenerSet) {
-            Log.i(TAG, "Accumulated episode flushed to the listener.");
-            listener.notifyAboutEpisode(episode);
+        if (!eventDeque.isEmpty()) {
+            AccumulatedEpisode episode = new AccumulatedEpisode(new ArrayList<>(eventDeque));
+            eventDeque.clear();
+            for (IActiveEventAccumulatorListener listener : super.listenerSet) {
+                Log.i(TAG, "Accumulated episode flushed to the listener.");
+                listener.notifyAboutEpisode(episode);
+            }
+        } else {
+            Log.w(TAG, "Accumulator is empty and cannot produce the AccumulatedEpisode!");
         }
     }
 
