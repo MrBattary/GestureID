@@ -49,7 +49,7 @@ public class SystemCalculator implements ISystemCalculator {
                 SortedSet<MetricType> metricTypeSet = metricsOfClass.get(metricGroup);
                 assert metricTypeSet != null;
 
-                for(MetricType metricType : metricTypeSet) {
+                for (MetricType metricType : metricTypeSet) {
                     Double metricValue = getMetricCalculator(metricType)
                             .calculate(rearrangedEpisode, metricClass, metricGroup);
                     metric.putMetric(
