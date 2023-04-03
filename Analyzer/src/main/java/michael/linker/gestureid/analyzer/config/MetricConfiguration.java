@@ -1,8 +1,10 @@
 package michael.linker.gestureid.analyzer.config;
 
+import michael.linker.gestureid.analyzer.config.properties.PropertiesProvider;
+
 public class MetricConfiguration {
     public static boolean isAccelerometerMetricClassRequired() {
-        return true;
+        return PropertiesProvider;
     }
 
     public static boolean isGyroscopeMetricClassRequired() {
