@@ -1,4 +1,4 @@
-package michael.linker.gestureid;
+package michael.linker.gestureid.analyzer;
 
 public class Main {
     public static void main(String[] args) {
