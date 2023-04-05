@@ -36,6 +36,14 @@ public class PropertiesProvider {
                 .collect(Collectors.toList());
     }
 
+    public static String getStringProperty(PropertiesKey key) throws PropertiesNotFoundException {
+        String string = PROPERTIES.getProperty(key.toString(), null);
+        if (string == null) {
+            throw new PropertiesNotFoundException(key.toString());
+        }
+        return string;
+    }
+
     public static Boolean getBooleanProperty(PropertiesKey key) throws PropertiesNotFoundException {
         String stringBool = PROPERTIES.getProperty(key.toString()).toLowerCase();
         if (!stringBool.equals(Boolean.FALSE.toString().toLowerCase()) &&
