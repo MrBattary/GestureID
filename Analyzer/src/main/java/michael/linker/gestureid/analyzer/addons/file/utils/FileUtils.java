@@ -1,6 +1,6 @@
-package michael.linker.gestureid.analyzer.file.utils;
+package michael.linker.gestureid.analyzer.addons.file.utils;
 
-import michael.linker.gestureid.analyzer.file.exception.FileNotDirectoryException;
+import michael.linker.gestureid.analyzer.addons.file.exception.FileNotDirectoryException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

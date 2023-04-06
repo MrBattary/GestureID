@@ -2,9 +2,9 @@ package michael.linker.gestureid.analyzer.user.model;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import michael.linker.gestureid.analyzer.file.input.IInputFile;
-import michael.linker.gestureid.analyzer.file.input.InputFile;
-import michael.linker.gestureid.analyzer.file.input.exception.InputFileReadingFailedException;
+import michael.linker.gestureid.analyzer.addons.file.input.IInputFile;
+import michael.linker.gestureid.analyzer.addons.file.input.InputFile;
+import michael.linker.gestureid.analyzer.addons.file.input.exception.InputFileReadingFailedException;
 import michael.linker.gestureid.analyzer.user.model.exception.UserModelCreationFailedException;
 import michael.linker.gestureid.analyzer.user.model.node.UserModelNode;
 import org.apache.logging.log4j.LogManager;

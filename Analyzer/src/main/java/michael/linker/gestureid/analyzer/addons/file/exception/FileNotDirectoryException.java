@@ -1,4 +1,4 @@
-package michael.linker.gestureid.analyzer.file.exception;
+package michael.linker.gestureid.analyzer.addons.file.exception;
 
 import java.nio.file.Path;
 

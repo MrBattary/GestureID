@@ -1,7 +1,7 @@
 package michael.linker.gestureid.analyzer.manager;
 
 import michael.linker.gestureid.analyzer.config.FileConfiguration;
-import michael.linker.gestureid.analyzer.file.utils.FileUtils;
+import michael.linker.gestureid.analyzer.addons.file.utils.FileUtils;
 import michael.linker.gestureid.analyzer.user.model.UserModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -1,6 +1,6 @@
-package michael.linker.gestureid.analyzer.file.input;
+package michael.linker.gestureid.analyzer.addons.file.input;
 
-import michael.linker.gestureid.analyzer.file.input.exception.InputFileReadingFailedException;
+import michael.linker.gestureid.analyzer.addons.file.input.exception.InputFileReadingFailedException;
 
 import java.io.IOException;
 import java.nio.file.Files;

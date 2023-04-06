@@ -1,4 +1,4 @@
-package michael.linker.gestureid.analyzer.file;
+package michael.linker.gestureid.analyzer.addons.file;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
