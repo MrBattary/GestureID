@@ -16,6 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <version.log4j>2.19.0</version.log4j>
+        <version.gson>2.10.1</version.gson>
         <version.jar>3.3.0</version.jar>
         <version.assembly>3.3.0</version.assembly>
     </properties>
@@ -30,6 +31,11 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>${version.log4j}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${version.gson}</version>
         </dependency>
     </dependencies>
 

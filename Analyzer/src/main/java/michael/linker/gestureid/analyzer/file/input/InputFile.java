@@ -5,6 +5,7 @@ import michael.linker.gestureid.analyzer.file.input.exception.InputFileReadingFa
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 public class InputFile implements IInputFile {
     private static final String READ_ALL_LINES_DELIMITER = "";
@@ -15,9 +16,9 @@ public class InputFile implements IInputFile {
     }
 
     @Override
-    public String readAllLines() throws InputFileReadingFailedException {
+    public List<String> readAllLines() throws InputFileReadingFailedException {
         try {
-            return String.join(READ_ALL_LINES_DELIMITER, Files.readAllLines(filePath, STANDARD_CHARSET));
+            return Files.readAllLines(filePath, STANDARD_CHARSET);
         } catch (IOException e) {
             throw new InputFileReadingFailedException(filePath, e);
         }
