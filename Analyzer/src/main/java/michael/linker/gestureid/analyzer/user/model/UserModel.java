@@ -7,12 +7,15 @@ import michael.linker.gestureid.analyzer.file.input.InputFile;
 import michael.linker.gestureid.analyzer.file.input.exception.InputFileReadingFailedException;
 import michael.linker.gestureid.analyzer.user.model.exception.UserModelCreationFailedException;
 import michael.linker.gestureid.analyzer.user.model.node.UserModelNode;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserModel {
+    private static final Logger log = LogManager.getLogger(UserModel.class);
     private final List<UserModelNode> userModelNodes;
 
     /**
@@ -30,6 +33,7 @@ public class UserModel {
                 UserModelNode node = gson.fromJson(nodeAsJson, UserModelNode.class);
                 userModelNodes.add(node);
             }
+            log.info("User model was built from the file " + modelPath.toString());
         } catch (InputFileReadingFailedException | JsonSyntaxException e) {
             throw new UserModelCreationFailedException(modelPath, e);
         }

@@ -27,6 +27,7 @@ public class FileUtils {
         Path directoryPath = Paths.get(pathToDirectory);
         if (Files.isDirectory(directoryPath)) {
             try (Stream<Path> paths = Files.walk(directoryPath)) {
+                log.info("File paths was found in the target directory " + pathToDirectory);
                 return paths.filter(Files::isRegularFile)
                         .collect(Collectors.toList());
             } catch (IOException e) {

@@ -14,5 +14,6 @@ public class Main {
         } catch (AnalysisManagerFailedException e) {
             log.error(e.getMessage(), e);
         }
+        log.info("Analysis of the user models is completed.");
     }
 }
