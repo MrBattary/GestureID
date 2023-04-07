@@ -6,7 +6,7 @@ import michael.linker.gestureid.analyzer.addons.table.pointer.ValuedTablePointer
 import java.util.Set;
 
 public interface ITable<R, C, V> {
-    V getValue(TablePointer<R, C> pointer);
+    V getValue(TablePointer<R, C> pointer) throws TableValueNotFoundException;
 
     void setValue(ValuedTablePointer<R, C, V> valuedPointer);
 
