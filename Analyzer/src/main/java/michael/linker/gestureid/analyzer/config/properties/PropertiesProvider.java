@@ -1,5 +1,7 @@
 package michael.linker.gestureid.analyzer.config.properties;
 
+import michael.linker.gestureid.analyzer.config.properties.exception.PropertiesNotFoundException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +31,20 @@ public class PropertiesProvider {
                 .map(id -> {
                     try {
                         return Long.valueOf(id);
+                    } catch (NumberFormatException e) {
+                        throw new PropertiesNotFoundException(key.toString(), e);
+                    }
+                })
+                .collect(Collectors.toList());
+    }
+
+    public static List<Double> getDoubleListProperty(PropertiesKey key) throws PropertiesNotFoundException {
+        List<String> stringList = new ArrayList<>(Arrays.asList(PROPERTIES.getProperty(key.toString())
+                .split(PROPERTIES_LIST_SPLITTER)));
+        return stringList.stream()
+                .map(id -> {
+                    try {
+                        return Double.valueOf(id);
                     } catch (NumberFormatException e) {
                         throw new PropertiesNotFoundException(key.toString(), e);
                     }

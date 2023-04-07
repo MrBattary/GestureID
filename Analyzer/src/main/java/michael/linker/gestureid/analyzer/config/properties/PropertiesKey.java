@@ -8,7 +8,8 @@ public enum PropertiesKey {
     IS_LINEAR_ACCELERATION_METRIC_CLASS_REQUIRED_KEY("analyzer.metric.class.isLinearAccelerationRequired"),
     IS_ROTATION_VECTOR_METRIC_CLASS_REQUIRED_KEY("analyzer.metric.class.isRotationVectorRequired"),
     IS_GEO_ROTATION_VECTOR_METRIC_CLASS_REQUIRED_KEY("analyzer.metric.class.isGeoRotationVectorRequired"),
-    RESULTS_SOURCE_DIRECTORY_PATH("analyzer.directory.source.path");
+    RESULTS_SOURCE_DIRECTORY_PATH("analyzer.directory.source.path"),
+    ANALYSIS_CALCULATION_DISPERSIONS("analyzer.calculation.dispersions");
 
     private final String propertyKey;
 

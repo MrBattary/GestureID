@@ -1,5 +1,7 @@
 package michael.linker.gestureid.analyzer.config.properties;
 
+import michael.linker.gestureid.analyzer.config.properties.exception.PropertiesNotAvailableException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;

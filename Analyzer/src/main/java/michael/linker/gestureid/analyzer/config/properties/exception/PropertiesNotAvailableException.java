@@ -1,4 +1,4 @@
-package michael.linker.gestureid.analyzer.config.properties;
+package michael.linker.gestureid.analyzer.config.properties.exception;
 
 public class PropertiesNotAvailableException extends RuntimeException {
     private static final String MSG = "The properties file is not available.";
