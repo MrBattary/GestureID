@@ -1,7 +1,9 @@
 package michael.linker.gestureid.analyzer.manager;
 
-import michael.linker.gestureid.analyzer.config.FileConfiguration;
 import michael.linker.gestureid.analyzer.addons.file.utils.FileUtils;
+import michael.linker.gestureid.analyzer.calculator.ICalculator;
+import michael.linker.gestureid.analyzer.calculator.dispersion.DispersionCalculator;
+import michael.linker.gestureid.analyzer.config.FileConfiguration;
 import michael.linker.gestureid.analyzer.user.model.UserModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,9 +14,12 @@ import java.util.List;
 
 public class AnalysisManager implements IAnalysisManager {
     private static final Logger log = LogManager.getLogger(AnalysisManager.class);
-    private List<UserModel> userModels;
+    private final List<ICalculator> calculators;
+    private final List<UserModel> userModels;
 
     public AnalysisManager() {
+        this.calculators = new ArrayList<>();
+        calculators.add(new DispersionCalculator());
         this.userModels = new ArrayList<>();
     }
 
@@ -23,7 +28,6 @@ public class AnalysisManager implements IAnalysisManager {
         try {
             loadSources();
             calculate();
-            writeResults();
         } catch (RuntimeException e) {
             throw new AnalysisManagerFailedException(e);
         }
@@ -40,11 +44,9 @@ public class AnalysisManager implements IAnalysisManager {
 
     private void calculate() throws RuntimeException {
         log.info("The calculation of values for user models has started.");
+        for(ICalculator calculator : calculators) {
+            calculator.calculate(userModels);
+        }
         log.info("The calculation of values for user models has ended.");
-    }
-
-    private void writeResults() throws RuntimeException {
-        log.info("The output of the calculation results has started.");
-        log.info("The output of the calculation results has ended.");
     }
 }
