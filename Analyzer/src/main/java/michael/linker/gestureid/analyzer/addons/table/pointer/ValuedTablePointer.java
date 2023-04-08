@@ -8,6 +8,11 @@ public class ValuedTablePointer<R, C, V> extends TablePointer<R, C> {
         this.value = value;
     }
 
+    public ValuedTablePointer(TablePointer<R, C> pointer, V value) {
+        super(pointer.getRow(), pointer.getColumn());
+        this.value = value;
+    }
+
     public V getValue() {
         return value;
     }

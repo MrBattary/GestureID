@@ -6,4 +6,8 @@ public class SquareTablePointer<K> extends TablePointer<K, K> {
     public SquareTablePointer(K row, K column) {
         super(row, column);
     }
+
+    public SquareTablePointer<K> getReversed() {
+        return new SquareTablePointer<>(getColumn(), getRow());
+    }
 }
