@@ -1,8 +1,10 @@
 package michael.linker.gestureid.analyzer.calculator.dispersion.result;
 
+import michael.linker.gestureid.analyzer.config.CalculationsConfiguration;
+
 public enum IntersectionType {
-    NORMAL("normal"),
-    FULL("full");
+    FIRST_MATCH(CalculationsConfiguration.getDispersionModeFirstMatch()),
+    FULL(CalculationsConfiguration.getDispersionModeFull());
 
     private final String type;
 

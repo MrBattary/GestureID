@@ -14,7 +14,7 @@ public class CalculatorUtils {
             throws FileCreationFaultException {
         String fileName = calculatorType.toString() +
                 additionalName +
-                Csv.getExtension();
+                FileConfiguration.getResultsDestinationFileExtension();
         Path filePath = FileUtils.createFile(FileConfiguration.getResultsDestinationDirectoryPath(), fileName);
         return new OutputFile(filePath);
     }

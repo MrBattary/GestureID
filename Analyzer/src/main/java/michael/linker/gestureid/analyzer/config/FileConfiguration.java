@@ -11,4 +11,8 @@ public class FileConfiguration {
     public static String getResultsDestinationDirectoryPath() {
         return PropertiesProvider.getStringProperty(PropertiesKey.RESULTS_DESTINATION_DIRECTORY_PATH);
     }
+
+    public static String getResultsDestinationFileExtension() {
+        return PropertiesProvider.getStringProperty(PropertiesKey.RESULTS_DESTINATION_FILE_EXTENSION);
+    }
 }

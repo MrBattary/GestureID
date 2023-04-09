@@ -9,6 +9,6 @@ public final class NormalIntersectionDispersionTable extends DispersionTable {
 
     @Override
     public IntersectionType getType() {
-        return IntersectionType.NORMAL;
+        return IntersectionType.FIRST_MATCH;
     }
 }

@@ -1,8 +1,10 @@
 package michael.linker.gestureid.analyzer.calculator;
 
+import michael.linker.gestureid.analyzer.config.CalculationsConfiguration;
+
 public enum CalculatorType {
-    INTERSECTION("intersection"),
-    AMOUNT("amount");
+    INTERSECTION(CalculationsConfiguration.getDispersionType()),
+    AMOUNT(CalculationsConfiguration.getAmountType());
 
     private final String type;
 

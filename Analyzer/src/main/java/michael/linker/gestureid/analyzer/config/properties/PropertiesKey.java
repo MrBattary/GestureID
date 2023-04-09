@@ -8,9 +8,15 @@ public enum PropertiesKey {
     IS_LINEAR_ACCELERATION_METRIC_CLASS_REQUIRED_KEY("analyzer.metric.class.isLinearAccelerationRequired"),
     IS_ROTATION_VECTOR_METRIC_CLASS_REQUIRED_KEY("analyzer.metric.class.isRotationVectorRequired"),
     IS_GEO_ROTATION_VECTOR_METRIC_CLASS_REQUIRED_KEY("analyzer.metric.class.isGeoRotationVectorRequired"),
-    RESULTS_SOURCE_DIRECTORY_PATH("analyzer.directory.source.path"),
-    RESULTS_DESTINATION_DIRECTORY_PATH("analyzer.directory.destination.path"),
-    ANALYSIS_CALCULATION_DISPERSIONS("analyzer.calculation.dispersions");
+    RESULTS_SOURCE_DIRECTORY_PATH("analyzer.source.directory.path"),
+    RESULTS_DESTINATION_DIRECTORY_PATH("analyzer.destination.directory.path"),
+    RESULTS_DESTINATION_FILE_EXTENSION("analyzer.destination.file.extension"),
+    USER_MODEL_MARK("analyzer.user.model.mark"),
+    ANALYSIS_CALCULATION_AMOUNT_TYPE("analyzer.calculation.amount.type"),
+    ANALYSIS_CALCULATION_DISPERSION_TYPE("analyzer.calculation.intersection.type"),
+    ANALYSIS_CALCULATION_DISPERSIONS("analyzer.calculation.intersection.dispersions"),
+    ANALYSIS_CALCULATION_DISPERSION_MODE_FIRST_MATCH("analyzer.calculation.intersection.mode.firstMatch"),
+    ANALYSIS_CALCULATION_DISPERSION_MODE_FULL("analyzer.calculation.intersection.mode.full");
 
     private final String propertyKey;
 
