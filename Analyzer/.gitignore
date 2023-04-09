@@ -3,8 +3,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### Test data from users ###
+### Application data ###
 data/
+result/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

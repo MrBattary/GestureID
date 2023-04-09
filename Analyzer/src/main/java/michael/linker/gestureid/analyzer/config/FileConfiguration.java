@@ -7,4 +7,8 @@ public class FileConfiguration {
     public static String getResultsSourceDirectoryPath() {
         return PropertiesProvider.getStringProperty(PropertiesKey.RESULTS_SOURCE_DIRECTORY_PATH);
     }
+
+    public static String getResultsDestinationDirectoryPath() {
+        return PropertiesProvider.getStringProperty(PropertiesKey.RESULTS_DESTINATION_DIRECTORY_PATH);
+    }
 }
