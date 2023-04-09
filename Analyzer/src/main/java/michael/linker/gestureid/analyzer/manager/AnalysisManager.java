@@ -27,6 +27,7 @@ public class AnalysisManager implements IAnalysisManager {
     public void analyze() throws AnalysisManagerFailedException {
         try {
             loadSources();
+            removePreviousResults();
             calculate();
         } catch (RuntimeException e) {
             throw new AnalysisManagerFailedException(e);
@@ -42,9 +43,15 @@ public class AnalysisManager implements IAnalysisManager {
         log.info("The loading of user models from files has ended.");
     }
 
+    private void removePreviousResults() throws RuntimeException {
+        String resultDirectoryPath = FileConfiguration.getResultsDestinationDirectoryPath();
+        FileUtils.deleteFolder(resultDirectoryPath);
+        log.info(String.format("The previous results from directory %s have been deleted.", resultDirectoryPath));
+    }
+
     private void calculate() throws RuntimeException {
         log.info("The calculation of values for user models has started.");
-        for(ICalculator calculator : calculators) {
+        for (ICalculator calculator : calculators) {
             calculator.calculate(userModels);
         }
         log.info("The calculation of values for user models has ended.");
