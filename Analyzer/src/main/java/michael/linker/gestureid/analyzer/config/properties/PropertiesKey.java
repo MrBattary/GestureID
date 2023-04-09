@@ -15,8 +15,10 @@ public enum PropertiesKey {
     ANALYSIS_CALCULATION_AMOUNT_TYPE("analyzer.calculation.amount.type"),
     ANALYSIS_CALCULATION_DISPERSION_TYPE("analyzer.calculation.intersection.type"),
     ANALYSIS_CALCULATION_DISPERSIONS("analyzer.calculation.intersection.dispersions"),
-    ANALYSIS_CALCULATION_DISPERSION_MODE_FIRST_MATCH("analyzer.calculation.intersection.mode.firstMatch"),
-    ANALYSIS_CALCULATION_DISPERSION_MODE_FULL("analyzer.calculation.intersection.mode.full");
+    ANALYSIS_CALCULATION_FAR_TYPE("analyzer.calculation.far.type"),
+    ANALYSIS_CALCULATION_FAR_DISPERSIONS("analyzer.calculation.far.dispersions"),
+    ANALYSIS_CALCULATION_INTERSECTOR_MODE_FIRST_MATCH("analyzer.calculation.intersector.mode.firstMatch"),
+    ANALYSIS_CALCULATION_INTERSECTOR_MODE_FULL("analyzer.calculation.intersector.mode.full");
 
     private final String propertyKey;
 

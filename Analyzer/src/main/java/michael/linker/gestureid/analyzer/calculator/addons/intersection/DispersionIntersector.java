@@ -1,4 +1,4 @@
-package michael.linker.gestureid.analyzer.calculator.dispersion;
+package michael.linker.gestureid.analyzer.calculator.addons.intersection;
 
 import michael.linker.gestureid.analyzer.metric.Metric;
 import michael.linker.gestureid.analyzer.metric.model.GetMetricModel;

@@ -1,6 +1,7 @@
-package michael.linker.gestureid.analyzer.calculator.dispersion.result;
+package michael.linker.gestureid.analyzer.calculator.dispersion.model;
 
 import michael.linker.gestureid.analyzer.addons.table.square.ISquareTable;
+import michael.linker.gestureid.analyzer.calculator.addons.intersection.model.IntersectionType;
 
 public abstract class DispersionTable {
     private final Double dispersion;

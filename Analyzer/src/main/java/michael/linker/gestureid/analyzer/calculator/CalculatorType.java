@@ -4,6 +4,7 @@ import michael.linker.gestureid.analyzer.config.CalculationsConfiguration;
 
 public enum CalculatorType {
     INTERSECTION(CalculationsConfiguration.getDispersionType()),
+    FAR(CalculationsConfiguration.getFarType()),
     AMOUNT(CalculationsConfiguration.getAmountType());
 
     private final String type;
