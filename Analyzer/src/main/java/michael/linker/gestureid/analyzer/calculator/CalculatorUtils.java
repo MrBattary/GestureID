@@ -13,7 +13,7 @@ public class CalculatorUtils {
     public static IOutputFile createCalculationResultFile(CalculatorType calculatorType, String additionalName)
             throws FileCreationFaultException {
         String fileName = calculatorType.toString() +
-                additionalName +
+                (additionalName == null ? "" : additionalName) +
                 FileConfiguration.getResultsDestinationFileExtension();
         Path filePath = FileUtils.createFile(FileConfiguration.getResultsDestinationDirectoryPath(), fileName);
         return new OutputFile(filePath);

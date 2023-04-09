@@ -2,6 +2,7 @@ package michael.linker.gestureid.analyzer.manager;
 
 import michael.linker.gestureid.analyzer.addons.file.utils.FileUtils;
 import michael.linker.gestureid.analyzer.calculator.ICalculator;
+import michael.linker.gestureid.analyzer.calculator.amount.AmountCalculator;
 import michael.linker.gestureid.analyzer.calculator.dispersion.DispersionCalculator;
 import michael.linker.gestureid.analyzer.config.FileConfiguration;
 import michael.linker.gestureid.analyzer.user.model.UserModel;
@@ -20,6 +21,7 @@ public class AnalysisManager implements IAnalysisManager {
     public AnalysisManager() {
         this.calculators = new ArrayList<>();
         calculators.add(new DispersionCalculator());
+        calculators.add(new AmountCalculator());
         this.userModels = new ArrayList<>();
     }
 

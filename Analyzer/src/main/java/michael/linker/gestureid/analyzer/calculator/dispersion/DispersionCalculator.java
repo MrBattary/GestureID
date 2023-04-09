@@ -143,9 +143,8 @@ public class DispersionCalculator implements ICalculator {
 
         Deque<String> firstRow = new LinkedList<>(resultTable.getTable().getColumns());
         firstRow.offerFirst(FIRST_COLUMN_FIRST_ROW);
-
         outputFile.writeLine(Csv.format(firstRow));
-        // TODO: Write to file
+
         for (String row : resultTable.getTable().getRows()) {
             Deque<String> rowValues = new LinkedList<>();
             rowValues.add(row);
