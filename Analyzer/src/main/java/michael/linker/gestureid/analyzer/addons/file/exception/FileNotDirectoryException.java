@@ -8,4 +8,8 @@ public class FileNotDirectoryException extends RuntimeException {
     public FileNotDirectoryException(Path directoryPath) {
         super(String.format(MSG, directoryPath));
     }
+
+    public FileNotDirectoryException(Path directoryPath, Throwable cause) {
+        super(String.format(MSG, directoryPath));
+    }
 }

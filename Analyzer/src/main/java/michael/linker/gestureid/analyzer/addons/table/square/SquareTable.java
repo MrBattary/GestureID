@@ -6,9 +6,7 @@ import michael.linker.gestureid.analyzer.addons.table.pointer.ValuedTablePointer
 import michael.linker.gestureid.analyzer.addons.table.square.pointer.SquareTablePointer;
 import michael.linker.gestureid.analyzer.addons.table.square.pointer.ValuedSquareTablePointer;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class SquareTable<K, V> implements ISquareTable<K, V> {
     private final Set<K> rowsAndColumns;
@@ -43,6 +41,15 @@ public class SquareTable<K, V> implements ISquareTable<K, V> {
     public void setValue(ValuedTablePointer<K, K, V> valuedPointer) {
         Map<K, V> row = table.get(valuedPointer.getRow());
         row.put(valuedPointer.getColumn(), valuedPointer.getValue());
+    }
+
+    @Override
+    public List<V> getValuesForRow(K row) throws TableValueNotFoundException {
+        List<V> rowValues = new ArrayList<>();
+        for (K column : getColumns()) {
+            rowValues.add(getValue(new SquareTablePointer<>(row, column)));
+        }
+        return rowValues;
     }
 
     @Override
