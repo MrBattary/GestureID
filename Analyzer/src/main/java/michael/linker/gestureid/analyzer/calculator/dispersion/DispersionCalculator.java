@@ -1,7 +1,9 @@
 package michael.linker.gestureid.analyzer.calculator.dispersion;
 
 import michael.linker.gestureid.analyzer.addons.csv.Csv;
+import michael.linker.gestureid.analyzer.addons.file.exception.FileCreationFaultException;
 import michael.linker.gestureid.analyzer.addons.file.output.IOutputFile;
+import michael.linker.gestureid.analyzer.addons.file.output.exception.OutputFileWritingFailedException;
 import michael.linker.gestureid.analyzer.addons.table.square.ISquareTable;
 import michael.linker.gestureid.analyzer.addons.table.square.SquareTable;
 import michael.linker.gestureid.analyzer.addons.table.square.pointer.SquareTablePointer;
@@ -30,20 +32,21 @@ public class DispersionCalculator implements ICalculator {
     private static final String DOT_OF_FLOATING_POINT_NUMBER = ".";
     private static final String FIRST_COLUMN_FIRST_ROW = "Model";
     private static final int TABLE_DEFAULT_VALUE = 0;
-    private List<UserModel> userModels;
 
     @Override
     public void calculate(List<UserModel> userModels) throws CalculatorFailedException {
         log.info("The calculation of dispersions has begun.");
-        this.userModels = userModels;
-
-        for (Double dispersion : CalculationsConfiguration.getDispersions()) {
-            DispersionTable intersectionTable = calculateIntersectionForDispersion(dispersion);
-            writeResults(intersectionTable);
-            DispersionTable allIntersectionTable = calculateFullIntersectionForDispersion(dispersion);
-            writeResults(allIntersectionTable);
+        try {
+            for (Double dispersion : CalculationsConfiguration.getDispersions()) {
+                DispersionTable intersectionTable = calculateIntersectionForDispersion(userModels, dispersion);
+                writeResults(intersectionTable);
+                DispersionTable fullIntersectionTable = calculateFullIntersectionForDispersion(userModels, dispersion);
+                writeResults(fullIntersectionTable);
+            }
+            log.info("The calculation of dispersions has ended.");
+        } catch (FileCreationFaultException | OutputFileWritingFailedException e) {
+            throw new CalculatorFailedException(e);
         }
-        log.info("The calculation of dispersions has ended.");
     }
 
     @Override
@@ -54,10 +57,11 @@ public class DispersionCalculator implements ICalculator {
     /**
      * Calculate number of intersections between user models.
      *
+     * @param userModels List of user models.
      * @param dispersion A floating-point number [0, 1).
      * @return Table with results and dispersion value.
      */
-    private DispersionTable calculateIntersectionForDispersion(Double dispersion) {
+    public DispersionTable calculateIntersectionForDispersion(List<UserModel> userModels, Double dispersion) {
         log.info("Models intersection are performed for the dispersion " + dispersion.toString());
         ISquareTable<String, Integer> intersectionTable = new SquareTable<>(
                 userModels
@@ -97,10 +101,11 @@ public class DispersionCalculator implements ICalculator {
     /**
      * Calculate number of all intersections between user models.
      *
+     * @param userModels List of user models.
      * @param dispersion A floating-point number [0, 1).
      * @return Table with results and dispersion value.
      */
-    private DispersionTable calculateFullIntersectionForDispersion(Double dispersion) {
+    public DispersionTable calculateFullIntersectionForDispersion(List<UserModel> userModels, Double dispersion) {
         log.info("All models intersection are performed for the dispersion " + dispersion.toString());
         ISquareTable<String, Integer> intersectionTable = new SquareTable<>(
                 userModels
@@ -137,7 +142,8 @@ public class DispersionCalculator implements ICalculator {
         return new FullIntersectionDispersionTable(dispersion, intersectionTable);
     }
 
-    private void writeResults(DispersionTable resultTable) throws RuntimeException {
+    private void writeResults(DispersionTable resultTable)
+            throws FileCreationFaultException, OutputFileWritingFailedException {
         IOutputFile outputFile = CalculatorUtils.createCalculationResultFile(CALCULATOR_TYPE,
                 resultTable.getType().toString() +
                         resultTable.getDispersion().toString().replace(DOT_OF_FLOATING_POINT_NUMBER, ""));

@@ -65,12 +65,14 @@ public class FileUtils {
 
     public static void deleteFolder(String pathToDirectory) throws FileNotDirectoryException {
         Path directoryPath = Paths.get(pathToDirectory);
-        try (Stream<Path> pathStream = Files.walk(directoryPath)) {
-            pathStream.sorted(Comparator.reverseOrder())
-                    .map(Path::toFile)
-                    .forEach(File::delete);
-        } catch (IOException e) {
-            throw new FileNotDirectoryException(directoryPath, e);
+        if(Files.exists(directoryPath)) {
+            try (Stream<Path> pathStream = Files.walk(directoryPath)) {
+                pathStream.sorted(Comparator.reverseOrder())
+                        .map(Path::toFile)
+                        .forEach(File::delete);
+            } catch (IOException e) {
+                throw new FileNotDirectoryException(directoryPath, e);
+            }
         }
     }
 }
