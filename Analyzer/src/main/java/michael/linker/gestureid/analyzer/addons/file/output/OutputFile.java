@@ -23,4 +23,9 @@ public class OutputFile implements IOutputFile {
             throw new OutputFileWritingFailedException(filePath, e);
         }
     }
+
+    @Override
+    public Path getPath() {
+        return filePath;
+    }
 }

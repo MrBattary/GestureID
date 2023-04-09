@@ -16,6 +16,9 @@ import java.util.List;
 
 public class UserModel {
     private static final Logger log = LogManager.getLogger(UserModel.class);
+    private static final String MODEL_MARK = "Model";
+    private static final int BEGIN_OF_FILENAME = 0;
+    private static final char FILENAME_EXTENSION_DOT = '.';
     private final String modelName;
     private final List<UserModelNode> userModelNodes;
 
@@ -34,8 +37,9 @@ public class UserModel {
                 UserModelNode node = gson.fromJson(nodeAsJson, UserModelNode.class);
                 userModelNodes.add(node);
             }
-            modelName = modelPath.getFileName().toString();
-            log.info("User model was built from the file " + modelPath);
+            String filename = modelPath.getFileName().toString();
+            modelName = MODEL_MARK + filename.substring(BEGIN_OF_FILENAME, filename.lastIndexOf(FILENAME_EXTENSION_DOT));
+            log.info(String.format("User model %1$s was built from the file %2$s", modelName, modelPath));
         } catch (InputFileReadingFailedException | JsonSyntaxException e) {
             throw new UserModelCreationFailedException(modelPath, e);
         }

@@ -1,26 +1,23 @@
 package michael.linker.gestureid.analyzer.calculator.dispersion;
 
-import michael.linker.gestureid.analyzer.addons.csv.CsvFormatter;
+import michael.linker.gestureid.analyzer.addons.csv.Csv;
 import michael.linker.gestureid.analyzer.addons.file.output.IOutputFile;
-import michael.linker.gestureid.analyzer.addons.file.output.OutputFile;
-import michael.linker.gestureid.analyzer.addons.file.utils.FileUtils;
 import michael.linker.gestureid.analyzer.addons.table.square.ISquareTable;
 import michael.linker.gestureid.analyzer.addons.table.square.SquareTable;
 import michael.linker.gestureid.analyzer.addons.table.square.pointer.SquareTablePointer;
 import michael.linker.gestureid.analyzer.addons.table.square.pointer.ValuedSquareTablePointer;
 import michael.linker.gestureid.analyzer.calculator.CalculatorFailedException;
 import michael.linker.gestureid.analyzer.calculator.CalculatorType;
+import michael.linker.gestureid.analyzer.calculator.CalculatorUtils;
 import michael.linker.gestureid.analyzer.calculator.ICalculator;
 import michael.linker.gestureid.analyzer.calculator.dispersion.result.DispersionTable;
 import michael.linker.gestureid.analyzer.calculator.dispersion.result.FullIntersectionDispersionTable;
 import michael.linker.gestureid.analyzer.calculator.dispersion.result.NormalIntersectionDispersionTable;
 import michael.linker.gestureid.analyzer.config.CalculationsConfiguration;
-import michael.linker.gestureid.analyzer.config.FileConfiguration;
 import michael.linker.gestureid.analyzer.user.model.UserModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.nio.file.Path;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,6 +26,7 @@ import java.util.stream.Collectors;
 public class DispersionCalculator implements ICalculator {
     private static final Logger log = LogManager.getLogger(DispersionCalculator.class);
     private static final CalculatorType CALCULATOR_TYPE = CalculatorType.INTERSECTION;
+    private static final String DOT_OF_FLOATING_POINT_NUMBER = ".";
     private static final String FIRST_COLUMN_FIRST_ROW = "Model";
     private static final int TABLE_DEFAULT_VALUE = 0;
     private List<UserModel> userModels;
@@ -139,14 +137,14 @@ public class DispersionCalculator implements ICalculator {
     }
 
     private void writeResults(DispersionTable resultTable) throws RuntimeException {
-        String fileName = CALCULATOR_TYPE + resultTable.getType().toString() + resultTable.getDispersion().toString();
-        Path filePath = FileUtils.createFile(FileConfiguration.getResultsDestinationDirectoryPath(), fileName);
-        IOutputFile outputFile = new OutputFile(filePath);
+        IOutputFile outputFile = CalculatorUtils.createCalculationResultFile(CALCULATOR_TYPE,
+                resultTable.getType().toString() +
+                        resultTable.getDispersion().toString().replace(DOT_OF_FLOATING_POINT_NUMBER, ""));
 
         Deque<String> firstRow = new LinkedList<>(resultTable.getTable().getColumns());
         firstRow.offerFirst(FIRST_COLUMN_FIRST_ROW);
 
-        outputFile.writeLine(CsvFormatter.format(firstRow));
+        outputFile.writeLine(Csv.format(firstRow));
         // TODO: Write to file
         for (String row : resultTable.getTable().getRows()) {
             Deque<String> rowValues = new LinkedList<>();
@@ -154,9 +152,9 @@ public class DispersionCalculator implements ICalculator {
             for (Integer rowValue : resultTable.getTable().getValuesForRow(row)) {
                 rowValues.add(rowValue.toString());
             }
-            outputFile.writeLine(CsvFormatter.format(rowValues));
+            outputFile.writeLine(Csv.format(rowValues));
         }
         log.info(String.format("The calculation results are recorded to %1$s for a dispersion of %2$s",
-                filePath, resultTable.getDispersion().toString()));
+                outputFile.getPath(), resultTable.getDispersion().toString()));
     }
 }

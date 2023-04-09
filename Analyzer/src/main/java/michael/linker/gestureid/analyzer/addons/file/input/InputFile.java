@@ -23,4 +23,9 @@ public class InputFile implements IInputFile {
             throw new InputFileReadingFailedException(filePath, e);
         }
     }
+
+    @Override
+    public Path getPath() {
+        return filePath;
+    }
 }
