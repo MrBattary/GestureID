@@ -286,5 +286,11 @@ public final class SystemConfiguration {
                 return BuildConfig.SHOULD_UPDATE_ON_ACCEPT;
             }
         }
+
+        public static final class Benchmark {
+            public static boolean shouldCalculateFrrBenchmark() {
+                return BuildConfig.SHOULD_CALCULATE_FRR_BENCHMARK;
+            }
+        }
     }
 }

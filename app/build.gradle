@@ -66,6 +66,8 @@ android {
         buildConfigField "boolean", "SHOULD_UPDATE_ON_ACCEPT", "true"
         /* Test */
         buildConfigField "String", "TEST_RESULT_FOLDER_PATH", "\"/Downloads\""
+        /* Benchmark */
+        buildConfigField "boolean", "SHOULD_CALCULATE_FRR_BENCHMARK", "true"
         /* | Click test: Array of numbers from 0 to 14 */
         buildConfigField "int[]", "TEST_CLICK_SEQUENCE", "{"+ "7," + "2," + "12," + "8," + "0,"+
                 "14," + "2," + "6," + "5," + "9," + "11," + "4,"+ "13,"+ "3,"+ "10," + "3," +

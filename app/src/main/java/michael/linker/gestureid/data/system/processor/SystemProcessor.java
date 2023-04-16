@@ -3,8 +3,10 @@ package michael.linker.gestureid.data.system.processor;
 import android.util.Log;
 
 import michael.linker.gestureid.config.system.SystemConfiguration;
+import michael.linker.gestureid.config.system.SystemFrrBenchmarkConfiguration;
 import michael.linker.gestureid.config.system.SystemPersistentNetworkConfiguration;
 import michael.linker.gestureid.data.event.accumulator.model.AccumulatedEpisode;
+import michael.linker.gestureid.data.system.benchmark.frr.IFrrBenchmark;
 import michael.linker.gestureid.data.system.calculator.ISystemCalculator;
 import michael.linker.gestureid.data.system.calculator.SystemCalculator;
 import michael.linker.gestureid.data.system.calculator.model.EpisodeMetrics;
@@ -20,12 +22,14 @@ public class SystemProcessor implements ISystemProcessor {
     private final ISystemCalculator systemCalculator;
     private final IPersistentSystemNetwork userModelNetwork;
     private final ISystemNetwork stashNetwork;
+    private final IFrrBenchmark frrBenchmark;
     private int unrecognizedEpisodesCounter;
 
     public SystemProcessor() {
         systemCalculator = new SystemCalculator();
         userModelNetwork = SystemPersistentNetworkConfiguration.getPersistentNetwork();
         stashNetwork = new LocalSystemNetwork();
+        frrBenchmark = SystemFrrBenchmarkConfiguration.getImplementation();
         unrecognizedEpisodesCounter = 0;
     }
 
@@ -41,6 +45,7 @@ public class SystemProcessor implements ISystemProcessor {
         SystemNetworkResult stashNetworkResult = stashNetwork.proceed(metrics);
         if (stashNetworkResult == SystemNetworkResult.RECOGNIZED) {
             Log.i(TAG, "The system processor recognized episode in the stash network.");
+            frrBenchmark.recordRejected();
             unrecognizedEpisodesCounter++;
             if (unrecognizedEpisodesCounter
                     >= SystemConfiguration.Build.Network.getNumberOfUnrecognizedEpisodes()) {
@@ -50,11 +55,13 @@ public class SystemProcessor implements ISystemProcessor {
             SystemNetworkResult userNetworkResult = userModelNetwork.proceed(metrics);
             if (userNetworkResult == SystemNetworkResult.RECOGNIZED) {
                 Log.i(TAG, "The system processor recognized episode in the user model network.");
+                frrBenchmark.recordAccepted();
                 flushUnrecognizedEpisodes();
                 unrecognizedEpisodesCounter = 0;
             } else {
                 Log.i(TAG, "The system processor did not recognize the episode "
                         + "in the user network model and created a node in the stash network.");
+                frrBenchmark.recordRejected();
                 stashNetwork.create(metrics);
                 unrecognizedEpisodesCounter++;
                 if (unrecognizedEpisodesCounter
