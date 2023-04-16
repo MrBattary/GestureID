@@ -9,7 +9,7 @@ import michael.linker.gestureid.data.system.benchmark.frr.IFrrBenchmark;
 public class SystemFrrBenchmarkConfiguration implements IConfiguration {
     private static ConfigurationBean<IFrrBenchmark> frrBenchmarkBean = null;
 
-    public static IFrrBenchmark getImplementation() {
+    public static IFrrBenchmark getFrrBenchmark() {
         if (frrBenchmarkBean == null) {
             frrBenchmarkBean = new SystemFrrBenchmarkBean(new FrrBenchmark());
         }

@@ -29,7 +29,7 @@ public class SystemProcessor implements ISystemProcessor {
         systemCalculator = new SystemCalculator();
         userModelNetwork = SystemPersistentNetworkConfiguration.getPersistentNetwork();
         stashNetwork = new LocalSystemNetwork();
-        frrBenchmark = SystemFrrBenchmarkConfiguration.getImplementation();
+        frrBenchmark = SystemFrrBenchmarkConfiguration.getFrrBenchmark();
         unrecognizedEpisodesCounter = 0;
     }
 

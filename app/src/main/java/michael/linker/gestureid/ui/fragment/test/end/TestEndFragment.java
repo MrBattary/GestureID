@@ -75,7 +75,7 @@ public class TestEndFragment extends Fragment {
         viewModel.getIsWritingAllowed().observe(getViewLifecycleOwner(), isWritingAllowed -> {
             if (isWritingAllowed) {
                 Single.fromCallable(() -> {
-                            viewModel.writeDataFromNetworkToStream(
+                            viewModel.writeDataToFileStream(
                                     requireContext().getContentResolver());
                             return true;
                         })

@@ -15,19 +15,23 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import michael.linker.gestureid.config.system.SystemFrrBenchmarkConfiguration;
 import michael.linker.gestureid.config.system.SystemPersistentNetworkConfiguration;
+import michael.linker.gestureid.data.system.benchmark.frr.IFrrBenchmark;
 import michael.linker.gestureid.data.system.calculator.model.EpisodeMetrics;
 import michael.linker.gestureid.data.system.network.IPersistentSystemNetwork;
 
 public class TestEndViewModel extends ViewModel {
     private final IPersistentSystemNetwork persistentSystemNetwork;
+    private final IFrrBenchmark frrBenchmark;
     private final Gson gson;
 
-    MutableLiveData<Boolean> isWritingAllowed;
+    private final MutableLiveData<Boolean> isWritingAllowed;
     private Uri filepath;
 
     public TestEndViewModel() {
         persistentSystemNetwork = SystemPersistentNetworkConfiguration.getPersistentNetwork();
+        frrBenchmark = SystemFrrBenchmarkConfiguration.getFrrBenchmark();
         gson = new Gson();
         isWritingAllowed = new MutableLiveData<>();
     }
@@ -45,17 +49,30 @@ public class TestEndViewModel extends ViewModel {
         isWritingAllowed.postValue(true);
     }
 
-    public void writeDataFromNetworkToStream(ContentResolver contentResolver) throws IOException {
+    public void writeDataToFileStream(ContentResolver contentResolver) throws IOException {
         try (PrintWriter printWriter =
                      new PrintWriter(new OutputStreamWriter(
                              contentResolver.openOutputStream(filepath),
                              StandardCharsets.UTF_8))) {
-            List<EpisodeMetrics> nodes = persistentSystemNetwork.getNodes();
-            for (EpisodeMetrics node : nodes) {
-                printWriter.write(gson.toJson(node).toCharArray());
-                printWriter.println();
-            }
-            printWriter.flush();
+            writeBenchmarkData(printWriter);
+            writeNetworkData(printWriter);
         }
+    }
+
+    private void writeBenchmarkData(PrintWriter printWriter) {
+        for (Double frr : frrBenchmark.getResults()) {
+            printWriter.write(frr.toString());
+            printWriter.println();
+        }
+        printWriter.flush();
+    }
+
+    private void writeNetworkData(PrintWriter printWriter) {
+        List<EpisodeMetrics> nodes = persistentSystemNetwork.getNodes();
+        for (EpisodeMetrics node : nodes) {
+            printWriter.write(gson.toJson(node).toCharArray());
+            printWriter.println();
+        }
+        printWriter.flush();
     }
 }
